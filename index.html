@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COMPANY BRAIN OS · 비즈니스 리더를 위한 AX 실행 가이드</title>
+<meta name="description" content="AX의 궁극 목표는 도구 도입이 아니라 COMPANY BRAIN OS 구축입니다. 진단·청사진·5단계 로드맵을 한 페이지에 펼친 인덱스.">
+<meta name="author" content="AI ROASTING">
+<meta name="theme-color" content="#0E3B2A">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="COMPANY BRAIN OS · 비즈니스 리더를 위한 AX 실행 가이드">
+<meta property="og:description" content="AX는 공사 과정이고, 도착지는 COMPANY BRAIN OS입니다. 조직의 의사결정·실행·학습이 운영체계처럼 돌아가는 상태를 5단계로 짓습니다.">
+<meta property="og:site_name" content="AI ROASTING">
+<meta property="og:locale" content="ko_KR">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="COMPANY BRAIN OS · 비즈니스 리더를 위한 AX 실행 가이드">
+<meta name="twitter:description" content="AI 도구를 사는 것이 아니라 회사의 두뇌를 짓는 일입니다. 5단계로 COMPANY BRAIN OS를 빌드업합니다.">
+
+<link rel="icon" type="image/png" href="assets/logos/logo1.png">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+/* ================== Index Page Local Styles (blueprint와 동일 시스템) ================== */
+
+:root {
+    --bp-grid: rgba(14, 59, 42, 0.06);
+    --bp-grid-strong: rgba(14, 59, 42, 0.12);
+    --bp-line: #0E3B2A;
+    --bp-ink: #0F1A16;
+    --bp-paper: #F7F5EF;
+    --bp-paper-2: #FBFAF6;
+    --bp-rule: #D6D2C5;
+    --bp-accent: #1B6E4F;
+    --bp-gold: #9A7B0A;
+    --bp-red: #8B2E1F;
+}
+
+html { scroll-behavior: smooth; }
+body {
+    background:
+        linear-gradient(var(--bp-grid) 1px, transparent 1px) 0 0 / 32px 32px,
+        linear-gradient(90deg, var(--bp-grid) 1px, transparent 1px) 0 0 / 32px 32px,
+        var(--bp-paper);
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    line-break: strict;
+}
+
+/* ===== Sheet wrapper ===== */
+.bp-sheet {
+    max-width: 1320px;
+    margin: 32px auto;
+    background: var(--bp-paper-2);
+    border: 1.5px solid var(--bp-line);
+    box-shadow: 0 1px 0 var(--bp-line), 0 24px 60px -30px rgba(6, 32, 24, 0.35);
+    position: relative;
+}
+.bp-sheet::before, .bp-sheet::after {
+    content: "";
+    position: absolute;
+    width: 16px; height: 16px;
+    border: 1px solid var(--bp-line);
+}
+.bp-sheet::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+.bp-sheet::after  { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
+/* ===== Title block (architect's stamp) ===== */
+.bp-titleblock {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(247, 245, 239, 0.72);
+    background: transparent;
+    position: relative;
+    overflow: hidden;
+}
+.bp-titleblock::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-titleblock > div {
+    padding: 16px 22px;
+    border-right: 1px solid rgba(247, 245, 239, 0.14);
+    position: relative;
+    z-index: 1;
+}
+.bp-titleblock > div:last-child { border-right: none; }
+.bp-titleblock .tb-label { display: block; font-size: 9.5px; opacity: 0.62; margin-bottom: 5px; letter-spacing: 0.14em; }
+.bp-titleblock .tb-value { font-size: 13px; color: var(--bp-paper); letter-spacing: 0.04em; font-weight: 600; }
+.bp-titleblock--single { grid-template-columns: 1fr; }
+.bp-titleblock--single > div { text-align: left; padding: 22px 56px; display: flex; align-items: center; gap: 8px; }
+.bp-titleblock--single .tb-value { font-size: 13px; letter-spacing: 0.22em; font-weight: 700; }
+.bp-titleblock .tb-logo { height: 16px; width: auto; display: block; flex-shrink: 0; filter: brightness(0) invert(1); }
+
+/* ===== Header wrapper (titleblock + hero, 한 덩어리 그라디언트) ===== */
+.bp-header {
+    position: relative;
+    overflow: hidden;
+    color: rgba(247, 245, 239, 0.88);
+    background:
+        radial-gradient(ellipse at 100% 0%, rgba(27, 110, 79, 0.45), transparent 55%),
+        linear-gradient(135deg, #062018 0%, #0A2E22 30%, #0E3B2A 65%, #14523B 100%);
+    border-bottom: 1.5px solid #062018;
+}
+.bp-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-header > * { position: relative; z-index: 1; }
+
+/* ===== Hero block ===== */
+.bp-hero {
+    padding: 32px 56px 56px;
+    position: relative;
+    background: transparent;
+}
+.bp-hero > * { position: relative; z-index: 1; }
+.bp-hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #8ED1AF;
+    margin-bottom: 14px;
+}
+.bp-hero h1 {
+    font-size: 52px;
+    line-height: 1.18;
+    margin: 0 0 15px;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    color: var(--bp-paper);
+}
+.bp-hero .bp-lead {
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(247, 245, 239, 0.78);
+    margin: 0;
+}
+.bp-hero .bp-summary {
+    margin-top: 36px;
+    padding: 22px 26px;
+    background: rgba(247, 245, 239, 0.06);
+    border-top: 1px solid rgba(247, 245, 239, 0.18);
+    border-bottom: 1px solid rgba(247, 245, 239, 0.18);
+    font-size: 14px;
+    line-height: 1.75;
+    color: rgba(247, 245, 239, 0.85);
+}
+.bp-hero .bp-summary strong { color: var(--bp-paper); }
+
+/* ===== Section submenu (sticky 바로가기) ===== */
+.bp-hero-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 12px 56px;
+    background: var(--bp-paper-2);
+    border-top: 1px solid var(--bp-line);
+    border-bottom: 1px solid var(--bp-line);
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    box-shadow: 0 2px 8px -4px rgba(6, 32, 24, 0.18);
+}
+.bp-hero-nav a {
+    flex: 1 1 0;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--bp-ink);
+    padding: 10px 16px;
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper);
+    text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    letter-spacing: -0.005em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bp-hero-nav a:hover {
+    background: var(--bp-line);
+    color: var(--bp-paper);
+    border-color: var(--bp-line);
+}
+.bp-hero-nav a.is-active {
+    background: var(--bp-line);
+    color: var(--bp-paper);
+    border-color: var(--bp-line);
+}
+
+/* ===== Section frame ===== */
+.bp-section {
+    padding: 56px 56px 64px;
+    border-bottom: 1.5px solid var(--bp-line);
+    position: relative;
+}
+.bp-section:last-of-type { border-bottom: none; }
+.bp-section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 36px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--bp-rule);
+}
+.bp-section-intro {
+    margin: 0 0 28px;
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+}
+.bp-section-num {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+.bp-section-title {
+    font-size: 30px;
+    margin: 0;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    font-weight: 700;
+    display: inline;
+    background-image: linear-gradient(180deg, transparent 58%, rgba(142, 209, 175, 0.45) 58%);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    padding: 0 2px;
+}
+.bp-section-meta {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    text-align: right;
+    line-height: 1.6;
+}
+
+/* ===== Stat strip (proof) ===== */
+.bp-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    margin: 28px 0 8px;
+}
+.bp-stat {
+    padding: 26px 24px;
+    border-right: 1px solid var(--bp-rule);
+    position: relative;
+    background: linear-gradient(160deg, rgba(27, 110, 79, 0.12) 0%, rgba(20, 82, 59, 0.05) 55%, rgba(247, 245, 239, 0) 100%);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+.bp-stat:last-child { border-right: none; }
+.bp-stat:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 32px -14px rgba(6, 32, 24, 0.40);
+    background: linear-gradient(160deg, rgba(27, 110, 79, 0.26) 0%, rgba(20, 82, 59, 0.12) 55%, rgba(247, 245, 239, 0) 100%);
+    z-index: 2;
+}
+.bp-stat-num {
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--bp-line);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+}
+.bp-stat-label {
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    font-family: var(--sans);
+}
+
+/* ===== Diagnosis gate cards (2개 링크) ===== */
+.bp-gate-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 12px;
+}
+a.bp-gate {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 14px;
+    padding: 26px 28px 24px;
+    border: 1.5px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    min-height: 220px;
+}
+a.bp-gate:hover {
+    background: rgba(14, 59, 42, 0.05);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px -16px rgba(6, 32, 24, 0.4);
+}
+.bp-gate-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--bp-rule);
+}
+.bp-gate-tag {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--bp-red);
+    font-weight: 700;
+    padding: 4px 10px;
+    border: 1px solid var(--bp-red);
+}
+.bp-gate-tag.is-step {
+    color: var(--bp-accent);
+    border-color: var(--bp-accent);
+}
+.bp-gate-index {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 600;
+}
+.bp-gate-title {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--bp-ink);
+    letter-spacing: -0.012em;
+    margin: 0;
+}
+.bp-gate-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+}
+.bp-gate-cta {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--bp-paper);
+    background: var(--bp-line);
+    padding: 12px 20px;
+    border: 1px solid var(--bp-line);
+    align-self: end;
+    justify-self: start;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+a.bp-gate:hover .bp-gate-cta {
+    background: var(--bp-accent);
+    border-color: var(--bp-accent);
+}
+
+/* ===== Roadmap (5단계 step rows) ===== */
+.bp-roadmap { margin-top: 12px; }
+.bp-step {
+    display: block;
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.2s ease;
+    padding: 26px 32px 0;
+}
+.bp-step + .bp-step { margin-top: 14px; }
+.bp-step:hover { background: rgba(14, 59, 42, 0.04); }
+.bp-step.heart { background: linear-gradient(180deg, rgba(154, 123, 10, 0.06), var(--bp-paper-2) 30%); }
+.bp-step.heart:hover { background: linear-gradient(180deg, rgba(154, 123, 10, 0.12), rgba(14, 59, 42, 0.04) 30%); }
+
+.bp-step-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+.bp-step-header .bp-step-title { margin: 0; }
+
+.bp-step-pill {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 8px 18px 8px 16px;
+    background: var(--bp-line);
+    color: var(--bp-paper);
+    border-radius: 999px;
+    font-family: var(--sans);
+    line-height: 1;
+    flex-shrink: 0;
+}
+.bp-step.heart .bp-step-pill { background: var(--bp-gold); }
+.bp-step-pill-label {
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    font-weight: 600;
+}
+.bp-step-pill-num {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.bp-step-body { padding: 0; }
+.bp-step-q {
+    font-size: 13px;
+    color: var(--bp-accent);
+    font-family: var(--sans);
+    font-weight: 600;
+    margin: 0 0 6px;
+    letter-spacing: 0.02em;
+}
+.bp-step-title {
+    font-size: 19px;
+    font-weight: 700;
+    margin: 0 0 12px;
+    color: var(--bp-ink);
+    letter-spacing: -0.01em;
+}
+.bp-step-title .heart-tag {
+    display: inline-block;
+    margin-left: 8px;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--bp-gold);
+    border: 1px solid var(--bp-gold);
+    padding: 2px 8px;
+    text-transform: uppercase;
+    vertical-align: middle;
+    font-weight: 700;
+}
+.bp-step-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0 0 14px;
+}
+.bp-step-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.bp-step-tag {
+    font-family: var(--sans);
+    font-size: 11px;
+    padding: 3px 9px;
+    border: 1px solid var(--bp-rule);
+    color: var(--ink-soft);
+    background: var(--bp-paper);
+    letter-spacing: 0.02em;
+}
+
+.bp-step-output {
+    margin: 24px -32px 0;
+    padding: 18px 32px 22px;
+    background: rgba(14, 59, 42, 0.035);
+    border-top: 1px solid var(--bp-rule);
+    font-size: 12.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+}
+.bp-step-output-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+/* ===== Sub-steps (한 단계 안의 여러 작업 링크) ===== */
+.bp-substeps {
+    margin-top: 16px;
+    border-top: 1px solid var(--bp-rule);
+}
+a.bp-substep {
+    display: grid;
+    grid-template-columns: 150px 1fr 24px;
+    align-items: center;
+    gap: 18px;
+    padding: 14px 4px;
+    border-bottom: 1px solid var(--bp-rule);
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.18s ease, padding 0.18s ease;
+}
+a.bp-substep:last-child { border-bottom: none; }
+a.bp-substep:hover {
+    background: rgba(14, 59, 42, 0.04);
+    padding-left: 10px;
+}
+.bp-substep-tag {
+    font-family: var(--sans);
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--bp-line);
+    letter-spacing: -0.005em;
+    border: 1px solid var(--bp-line);
+    padding: 5px 10px;
+    background: var(--bp-paper);
+    text-align: center;
+    white-space: nowrap;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+.bp-substep-desc {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+}
+.bp-substep-arrow {
+    font-family: var(--sans);
+    font-size: 16px;
+    color: var(--bp-accent);
+    font-weight: 700;
+    text-align: right;
+    transition: transform 0.18s ease;
+}
+a.bp-substep:hover .bp-substep-arrow {
+    transform: translateX(4px);
+}
+
+/* ===== Thesis (COMPANY BRAIN OS 명제 dark block) ===== */
+.bp-thesis-block {
+    border: 1.5px solid #062018;
+    padding: 36px 40px;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    color: rgba(247, 245, 239, 0.92);
+    position: relative;
+    overflow: hidden;
+}
+.bp-thesis-block::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-thesis-block > * { position: relative; z-index: 1; }
+.bp-thesis-eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(247, 245, 239, 0.6);
+    margin-bottom: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+.bp-thesis-eyebrow::before {
+    content: "";
+    width: 32px;
+    height: 1px;
+    background: rgba(247, 245, 239, 0.4);
+}
+.bp-thesis-quote {
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1.45;
+    letter-spacing: -0.012em;
+    color: var(--bp-paper);
+    margin: 0 0 20px;
+}
+.bp-thesis-quote em {
+    font-style: normal;
+    color: #E8D78B;
+    font-weight: 700;
+}
+.bp-thesis-body {
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: rgba(247, 245, 239, 0.78);
+    margin: 0;
+}
+
+/* ===== Closing footer ===== */
+.bp-footer {
+    padding: 36px 56px 44px;
+    background:
+        radial-gradient(ellipse at 0% 100%, rgba(27, 110, 79, 0.35), transparent 55%),
+        linear-gradient(110deg, #14523B 0%, #0E3B2A 35%, #0A2E22 70%, #062018 100%);
+    color: rgba(247, 245, 239, 0.92);
+    font-family: var(--sans);
+    font-size: 12.5px;
+    line-height: 1.7;
+    border-top: 1.5px solid #062018;
+    position: relative;
+    overflow: hidden;
+}
+.bp-footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-footer > * { position: relative; z-index: 1; }
+.bp-footer strong { color: var(--bp-paper); }
+.bp-footer a { color: var(--bp-paper); border-bottom-color: rgba(247,245,239,0.4); }
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+    .bp-hero { padding: 48px 32px; }
+    .bp-hero h1 { font-size: 38px; }
+    .bp-section { padding: 40px 32px; }
+    .bp-stats { grid-template-columns: repeat(2, 1fr); }
+    .bp-step { padding: 22px 24px 0; }
+    .bp-step-output { margin: 22px -24px 0; padding: 16px 24px 20px; }
+    .bp-gate-grid { grid-template-columns: 1fr; }
+    .bp-titleblock { grid-template-columns: repeat(3, 1fr); }
+    .bp-titleblock--single > div { padding: 16px 32px; }
+    .bp-hero-nav { padding: 10px 16px; flex-wrap: wrap; }
+    .bp-hero-nav a { font-size: 12px; padding: 8px 12px; flex: 1 1 calc(50% - 8px); }
+    .bp-thesis-block { padding: 28px 24px; }
+    .bp-thesis-quote { font-size: 20px; }
+    .bp-footer { padding: 32px; }
+}
+@media (max-width: 600px) {
+    .bp-sheet { margin: 12px; }
+    .bp-hero h1 { font-size: 30px; }
+    .bp-section-title { font-size: 24px; }
+    .bp-stats { grid-template-columns: 1fr; }
+    .bp-step { padding: 18px 18px 0; }
+    .bp-step-output { margin: 18px -18px 0; padding: 14px 18px 18px; }
+    .bp-titleblock { grid-template-columns: 1fr; }
+    a.bp-substep {
+        grid-template-columns: 1fr 20px;
+        gap: 6px 14px;
+    }
+    .bp-substep-tag { grid-column: 1 / -1; justify-self: start; }
+    .bp-substep-desc { grid-column: 1; }
+    .bp-substep-arrow { grid-column: 2; }
+}
+</style>
+</head>
+<body>
+
+<div class="bp-sheet">
+
+    <!-- ========= HEADER (title bar + hero, 한 덩어리 그라디언트) ========= -->
+    <div class="bp-header">
+
+    <!-- ========= TITLE BLOCK (architect's stamp) ========= -->
+    <div class="bp-titleblock bp-titleblock--single">
+        <div>
+            <img class="tb-logo" src="assets/logos/logo1-transparent.png" alt="AI ROASTING">
+            <span class="tb-value">AI ROASTING · AX GUIDE TO COMPANY BRAIN OS</span>
+        </div>
+    </div>
+
+    <!-- ========= HERO ========= -->
+    <section class="bp-hero">
+        <div class="bp-hero-eyebrow">궁극적 목표: COMPANY BRAIN OS 구축</div>
+        <h1>비즈니스 리더를 위한 AX 가이드</h1>
+        <p class="bp-lead">같은 AI를 써도 3년 뒤 재무 성과는 4~5배 벌어지며, 차이는 회사가 결정·실행·학습하는 운영체계를 새로 깐 5%에 있습니다.</p>
+        <div class="bp-summary">
+            <strong>이 가이드의 궁극 목표는 COMPANY BRAIN OS 구축입니다.</strong> COMPANY BRAIN OS는 회사의 암묵지가 구조화된 지식으로 저장되고, 그 위에서 에이전트가 일하며, 사람과 함께 돌아가는 운영체계입니다. AX는 COMPANY BRAIN OS를 만드는 과정이고, 이어지는 진단과 5단계 로드맵은 그 실행 순서입니다.
+        </div>
+    </section>
+
+    </div><!-- /.bp-header -->
+
+    <!-- ========= STICKY NAV ========= -->
+    <nav class="bp-hero-nav" aria-label="단계 바로가기">
+        <a href="#diagnosis">진단</a>
+        <a href="#step-1">1단계</a>
+        <a href="#step-2">2단계</a>
+        <a href="#step-3">3단계</a>
+        <a href="#step-4">4단계</a>
+        <a href="#step-5">5단계</a>
+    </nav>
+
+    <!-- ========= PROOF · 현 시장 상태 ========= -->
+    <section class="bp-section" id="proof">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">"AI를 쓴다"는 더 이상 차별점이 아닙니다</h2>
+            </div>
+            <div class="bp-section-meta">McKinsey · State of AI 2025<br>BCG · Build for the Future 2025</div>
+        </div>
+
+        <p class="bp-section-intro">차별점은 도구 위에 회사의 두뇌를 새로 깔았는가에 있습니다. COMPANY BRAIN OS가 있는 회사는 결정·실행·학습이 운영체계처럼 돌고, 없는 회사는 같은 도구를 깔아도 같은 자리에서 다시 멈춥니다.</p>
+
+        <div class="bp-stats">
+            <div class="bp-stat">
+                <div class="bp-stat-num">4×</div>
+                <div class="bp-stat-label">고성과 5% 그룹의 3년 총주주수익률 격차 (후발주자 대비)</div>
+            </div>
+            <div class="bp-stat">
+                <div class="bp-stat-num">5×</div>
+                <div class="bp-stat-label">AI 준비 기업의 매출 증가 (별도 분석 기준)</div>
+            </div>
+            <div class="bp-stat">
+                <div class="bp-stat-num">3×</div>
+                <div class="bp-stat-label">같은 그룹의 비용 절감 폭</div>
+            </div>
+            <div class="bp-stat">
+                <div class="bp-stat-num">70%</div>
+                <div class="bp-stat-label">AX 투입 자원 중 사람·프로세스 비중 (10-20-70 법칙)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= DIAGNOSIS · 진단 2개 링크 ========= -->
+    <section class="bp-section" id="diagnosis">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">먼저, 현재 위치부터 <span style="color: var(--bp-accent);">진단</span>합니다</h2>
+            </div>
+            <div class="bp-section-meta">6개 영역 24문항으로 진단</div>
+        </div>
+
+        <p class="bp-section-intro">본격적인 로드맵에 들어가기 전, COMPANY BRAIN OS를 어떤 원칙으로 만들어갈지 정리하고 우리 조직의 두뇌가 그 원칙 대비 어디에 서 있는지 점수로 측정합니다.</p>
+
+        <div class="bp-gate-grid">
+
+            <a class="bp-gate" href="blueprint.html" aria-label="AX 추진 원칙으로 이동">
+                <div class="bp-gate-head">
+                    <span class="bp-gate-index">Blueprint</span>
+                </div>
+                <div>
+                    <h3 class="bp-gate-title">AX 추진 원칙</h3>
+                    <p class="bp-gate-desc">도착지인 COMPANY BRAIN OS의 구조, 흔히 빠지는 다섯 함정, 그리고 그 두뇌를 짓는 다섯 가지 원칙을 한 장의 청사진으로 펼칩니다.</p>
+                </div>
+                <span class="bp-gate-cta">청사진 보기 →</span>
+            </a>
+
+            <a class="bp-gate" href="diagnosis.html" aria-label="현재 수준 진단으로 이동">
+                <div class="bp-gate-head">
+                    <span class="bp-gate-index">Diagnosis</span>
+                </div>
+                <div>
+                    <h3 class="bp-gate-title">현재 수준 진단</h3>
+                    <p class="bp-gate-desc">전략·인재·운영모델·기술·데이터·도입 6축 × 24문항으로 우리 조직의 BRAIN OS 성숙도를 5단계로 측정하고, 가장 비어 있는 두 축을 도출합니다.</p>
+                </div>
+                <span class="bp-gate-cta">진단 시작 →</span>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- ========= ROADMAP · 5단계 ========= -->
+    <section class="bp-section" id="roadmap">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">5단계 로드맵 · COMPANY BRAIN OS 빌드업</h2>
+            </div>
+            <div class="bp-section-meta">각 단계가 BRAIN OS의 한 층을 쌓습니다</div>
+        </div>
+
+        <p class="bp-section-intro">COMPANY BRAIN OS는 한 번에 깔리지 않습니다. 운영 주체부터 첫 모듈, 우선 적재 자산, 전사 확장, 지속 운영까지 다섯 층을 차례로 쌓아 올립니다. 각 단계의 산출물이 다음 단계의 입력값이 되어 두뇌가 매 분기 두꺼워집니다.</p>
+
+        <div class="bp-roadmap">
+
+            <div class="bp-step" id="step-1">
+                <div class="bp-step-header">
+                    <div class="bp-step-pill">
+                        <span class="bp-step-pill-label">Step</span>
+                        <span class="bp-step-pill-num">1</span>
+                    </div>
+                    <h3 class="bp-step-title">AX TF 세팅 <span class="heart-tag" style="color: var(--bp-accent); border-color: var(--bp-accent);">COMPANY BRAIN OS · 운영 주체</span></h3>
+                </div>
+                <div class="bp-step-body">
+                    <p class="bp-step-q">이 두뇌를 지을 사람은 누구이고, 조직은 준비됐는가</p>
+                    <p class="bp-step-desc">경영진 직속 하이브리드 TF를 구성해 6개월 운영 계획·90일 부트캠프·해커톤으로 회사의 첫 챔피언을 양성합니다. COMPANY BRAIN OS의 첫 운영 주체가 여기서 만들어집니다.</p>
+                    <div class="bp-substeps">
+                        <a class="bp-substep" href="organization.html">
+                            <span class="bp-substep-tag">조직 세팅</span>
+                            <span class="bp-substep-desc">AX를 실행할 사람들을 먼저 한자리에 모읍니다</span>
+                            <span class="bp-substep-arrow">→</span>
+                        </a>
+                        <a class="bp-substep" href="operations.html">
+                            <span class="bp-substep-tag">운영 계획 수립</span>
+                            <span class="bp-substep-desc">TF의 6개월을 한 장의 운영 계획으로 확정합니다</span>
+                            <span class="bp-substep-arrow">→</span>
+                        </a>
+                        <a class="bp-substep" href="capability.html">
+                            <span class="bp-substep-tag">AI 부트캠프</span>
+                            <span class="bp-substep-desc">90일 부트캠프와 해커톤으로 AX 챔피언을 만듭니다</span>
+                            <span class="bp-substep-arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="bp-step-output">
+                    <div class="bp-step-output-label">BRAIN OS 적재 산출물</div>
+                    스폰서·TF·6개월 운영 계획·90일 부트캠프 결과가 BRAIN OS의 운영 주체 층으로 자리잡고, 다음 단계의 입력값이 됩니다.
+                </div>
+            </div>
+
+            <div class="bp-step" id="step-2">
+                <div class="bp-step-header">
+                    <div class="bp-step-pill">
+                        <span class="bp-step-pill-label">Step</span>
+                        <span class="bp-step-pill-num">2</span>
+                    </div>
+                    <h3 class="bp-step-title">파일럿 실행 <span class="heart-tag" style="color: var(--bp-accent); border-color: var(--bp-accent);">COMPANY BRAIN OS · 첫 모듈</span></h3>
+                </div>
+                <div class="bp-step-body">
+                    <p class="bp-step-q">검증도 안 된 AI를 어떻게 믿고 맡길 것인가</p>
+                    <p class="bp-step-desc">책상 분석을 멈추고 후보 업무를 한 번 돌려본 뒤, 그 결과물을 다음 단계가 쓸 현장 데이터로 정리합니다. COMPANY BRAIN OS의 첫 동작 모듈이 이 자리에서 검증됩니다.</p>
+                    <div class="bp-substeps">
+                        <a class="bp-substep" href="pilot.html">
+                            <span class="bp-substep-tag">대상 선정과 실행</span>
+                            <span class="bp-substep-desc">책상에서의 분석을 멈추고 손으로 한 번 돌려봅니다</span>
+                            <span class="bp-substep-arrow">→</span>
+                        </a>
+                        <a class="bp-substep" href="insights.html">
+                            <span class="bp-substep-tag">핵심 시사점 도출</span>
+                            <span class="bp-substep-desc">파일럿이 남긴 현장 데이터를 다음 단계 입력값으로 정리합니다</span>
+                            <span class="bp-substep-arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="bp-step-output">
+                    <div class="bp-step-output-label">BRAIN OS 적재 산출물</div>
+                    가능성이 보이는 후보군과 현장 데이터가 BRAIN OS의 첫 모듈 후보 목록으로 정리되고, 3단계의 입력값이 됩니다.
+                </div>
+            </div>
+
+            <div class="bp-step" id="step-3">
+                <div class="bp-step-header">
+                    <div class="bp-step-pill">
+                        <span class="bp-step-pill-label">Step</span>
+                        <span class="bp-step-pill-num">3</span>
+                    </div>
+                    <h3 class="bp-step-title">과제 우선순위화 <span class="heart-tag" style="color: var(--bp-accent); border-color: var(--bp-accent);">COMPANY BRAIN OS · 우선 적재 자산</span></h3>
+                </div>
+                <div class="bp-step-body">
+                    <p class="bp-step-q">탐색에서 배운 걸로, BRAIN OS에 무엇을 먼저 적재할 것인가</p>
+                    <p class="bp-step-desc">2단계 파일럿이 남긴 현장 데이터를 입력값으로, 후보 풀을 빅 베팅 3~5개로 압축합니다. 두 축(전략 기여도·실현 가능성)에 합의하고, 미시 엔진 7문항으로 해부한 뒤, D·R·I 비율을 의도적으로 섞어 포트폴리오를 만듭니다.</p>
+                    <div class="bp-substeps">
+                        <a class="bp-substep" href="criteria.html">
+                            <span class="bp-substep-tag">우선순위 기준 설정</span>
+                            <span class="bp-substep-desc">두 축과 제약 조건을 먼저 합의합니다</span>
+                            <span class="bp-substep-arrow">→</span>
+                        </a>
+                        <a class="bp-substep" href="evaluation.html">
+                            <span class="bp-substep-tag">후보 평가</span>
+                            <span class="bp-substep-desc">미시 엔진 7문항과 DRI 매트릭스로 해부하고 점수를 매깁니다</span>
+                            <span class="bp-substep-arrow">→</span>
+                        </a>
+                        <a class="bp-substep" href="bets.html">
+                            <span class="bp-substep-tag">빅 베팅 선정</span>
+                            <span class="bp-substep-desc">3~5개로 압축하고 KPI와 책임자를 못 박습니다</span>
+                            <span class="bp-substep-arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="bp-step-output">
+                    <div class="bp-step-output-label">BRAIN OS 적재 산출물</div>
+                    BRAIN OS의 첫 회 우선 적재 자산이 될 빅 베팅 3~5건 + 베팅별 KPI·책임자 + 인계 패키지가 4·5단계의 입력값이 됩니다.
+                </div>
+            </div>
+
+            <div class="bp-step heart" id="step-4">
+                <div class="bp-step-header">
+                    <div class="bp-step-pill">
+                        <span class="bp-step-pill-label">Step</span>
+                        <span class="bp-step-pill-num">4</span>
+                    </div>
+                    <h3 class="bp-step-title">업무 방식 재설계 <span class="heart-tag">COMPANY BRAIN OS · 전사 확장</span></h3>
+                </div>
+                <div class="bp-step-body">
+                    <p class="bp-step-q">파일럿 한 건의 두뇌를 어떻게 전사 BRAIN OS로 확장할 것인가</p>
+                    <p class="bp-step-desc">알고리즘 10%, 데이터·기술 20%, 사람·프로세스·문화 70%. 부분 자동화가 아니라 가치 창출 전 단계를 열어놓고 끝에서 끝까지 워크플로우를 다시 그립니다. 한 업무를 해부했던 미시 엔진을 전사 지식 구조와 협업 모델로 확장하는 자리, BRAIN OS의 심장이 뛰기 시작하는 자리입니다.</p>
+                    <div class="bp-substeps">
+                        <a class="bp-substep" href="resource.html">
+                            <span class="bp-substep-tag">자원 재배분</span>
+                            <span class="bp-substep-desc">10-20-70으로 투입을 뒤집어 70%를 사람·프로세스에 다시 겁니다</span>
+                            <span class="bp-substep-arrow">→</span>
+                        </a>
+                        <a class="bp-substep" href="ax-canvas.html">
+                            <span class="bp-substep-tag">AX 캔버스</span>
+                            <span class="bp-substep-desc">한 직무를 10칸으로 해부해 사람과 에이전트의 자리를 한 장에 그립니다</span>
+                            <span class="bp-substep-arrow">→</span>
+                        </a>
+                        <a class="bp-substep" href="reshape.html">
+                            <span class="bp-substep-tag">업무 재설계</span>
+                            <span class="bp-substep-desc">끝에서 끝까지 흐름을 다시 그리고 4D를 전사 공통 언어로 세웁니다</span>
+                            <span class="bp-substep-arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="bp-step-output">
+                    <div class="bp-step-output-label">BRAIN OS 적재 산출물</div>
+                    파일럿 단위가 아닌 워크플로우 단위의 전사 재설계 청사진. BRAIN OS가 전사 단위로 처음 작동하는 시점입니다.
+                </div>
+            </div>
+
+            <div class="bp-step" id="step-5">
+                <div class="bp-step-header">
+                    <div class="bp-step-pill">
+                        <span class="bp-step-pill-label">Step</span>
+                        <span class="bp-step-pill-num">5</span>
+                    </div>
+                    <h3 class="bp-step-title">AI 네이티브 컴퍼니 <span class="heart-tag" style="color: var(--bp-accent); border-color: var(--bp-accent);">COMPANY BRAIN OS · 지속 운영</span></h3>
+                </div>
+                <div class="bp-step-body">
+                    <p class="bp-step-q">AI를 회사가 쓰는 도구가 아니라 회사가 그 위에서 돌아가는 운영체계로 다루는가</p>
+                    <p class="bp-step-desc">YC·a16z·맥킨지·BCG가 모두 가리키는 도착지입니다. 회사 전체가 닫힌 루프로 돌고 질의 가능해지며, 사람은 스펙을 쓰고 에이전트가 산출물을 찍어내는 AI 소프트웨어 팩토리가 돌아갑니다. 직원은 빌더·DRI·AI 파운더 세 아키타입으로 재정렬되고, 확장 단위는 헤드카운트가 아니라 토큰이 됩니다.</p>
+                    <div class="bp-substeps">
+                        <a class="bp-substep" href="ainative.html">
+                            <span class="bp-substep-tag">AI 네이티브의 모습</span>
+                            <span class="bp-substep-desc">도구 vs 운영체계 비교와 세 가지 모습으로 도착지를 정의합니다</span>
+                            <span class="bp-substep-arrow">→</span>
+                        </a>
+                        <a class="bp-substep" href="brainos.html">
+                            <span class="bp-substep-tag">BRAIN OS 완성도</span>
+                            <span class="bp-substep-desc">다섯 층 빌드업과 자산 축적 4단계 순환, 지속 운영 세 인프라를 그립니다</span>
+                            <span class="bp-substep-arrow">→</span>
+                        </a>
+                        <a class="bp-substep" href="perpetual.html">
+                            <span class="bp-substep-tag">지속 운영과 출발선</span>
+                            <span class="bp-substep-desc">세 함정 진단과 임원의 다섯 점검표, 전체 참고 자료를 모았습니다</span>
+                            <span class="bp-substep-arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="bp-step-output">
+                    <div class="bp-step-output-label">BRAIN OS 적재 산출물</div>
+                    자산 축적 4단계 순환으로 매 분기 더 유능해지는 COMPANY BRAIN OS.
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ========= THESIS · COMPANY BRAIN OS 명제 ========= -->
+    <section class="bp-section" id="thesis">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">이 가이드의 고유 목표</h2>
+            </div>
+            <div class="bp-section-meta">COMPANY BRAIN OS · 회사의 두뇌를 짓는 운영체계</div>
+        </div>
+
+        <div class="bp-thesis-block">
+            <div class="bp-thesis-eyebrow">COMPANY BRAIN OS · 회사의 두뇌를 짓는 운영체계</div>
+            <p class="bp-thesis-quote">AX의 진짜 자산은 'AI 도구'가 아니라 <em>COMPANY BRAIN OS</em>입니다.</p>
+            <p class="bp-thesis-quote">우리 회사의 암묵지를 구조화된 지식으로 저장하고, 그 위에서 에이전트가 일하고, 사람과 에이전트가 함께 도는 협업 루프를 운영체계처럼 깔아 두는 것,<br><br>그것만이 복제 불가능한 자산입니다.</p>
+            <p class="bp-thesis-body">COMPANY BRAIN OS는 한 번에 깔리지 않고 5단계로 빌드업됩니다. 1단계는 운영 주체를 세우고, 2단계는 첫 모듈을 검증하고, 3단계는 우선 적재 자산을 결정하고, 4단계는 전사로 확장하고, 5단계는 지속 운영 상태로 만듭니다. 한 사이클을 돌릴 때마다 두뇌는 두꺼워지고, 도구만 도입한 조직과의 격차는 복리로 벌어집니다.</p>
+        </div>
+    </section>
+
+    <!-- ========= REFS · 참고 자료 ========= -->
+    <section class="bp-section" id="refs">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">참고 자료</h2>
+            </div>
+            <div class="bp-section-meta">5단계 본문 외 부록 · 임원이 자주 묻는 질문</div>
+        </div>
+
+        <div class="bp-substeps">
+            <a class="bp-substep" href="ai-services.html">
+                <span class="bp-substep-tag">AI 서비스 선택</span>
+                <span class="bp-substep-desc">ChatGPT·Claude·Gemini 빅3 비교, OpenRouter로 저가 모델 활용, 자체 LLM 검토 시점, Enterprise 요금제와 클라우드 직접 호출까지 한 페이지로 정리했습니다</span>
+                <span class="bp-substep-arrow">→</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ========= FOOTER ========= -->
+    <footer class="bp-footer">
+        <p style="margin:0 0 10px;"><strong>본 가이드는 경영진의 의사결정용입니다.</strong> McKinsey(State of AI 2025, Rewired), BCG(Build for the Future 2025, AI Radar 2026), Bain, PwC, KPMG, Deloitte 등 글로벌 컨설팅펌의 2025~2026년 AI 보고서와 Anthropic AI Fluency(4D, Skill)를 COMPANY BRAIN OS 빌드업 구조로 엮어 만든 본 가이드의 독자 방법론입니다. 미시 엔진(10문항)과 자산 축적 4단계 순환은 BRAIN OS를 짓는 두 개의 작업 도구입니다.</p>
+        <p style="margin:0; opacity:0.85;">구체적인 투자나 법률 판단은 전문가의 검토를 함께 받기를 권합니다. © 2026 AI ROASTING</p>
+    </footer>
+
+</div>
+
+<script>
+// Sub-menu 클릭 시 sticky nav 높이만큼 오프셋을 적용해 정확한 위치로 스크롤
+(function () {
+    const nav = document.querySelector('.bp-hero-nav');
+    if (!nav) return;
+    const links = nav.querySelectorAll('a[href^="#"]');
+
+    function scrollToTarget(target) {
+        const navHeight = nav.getBoundingClientRect().height;
+        // 섹션 제목·단계 제목 위치를 우선 잡아 sticky nav 바로 아래에 정렬.
+        // 그 위쪽(이전 섹션 경계선·여백)은 nav 뒤로 숨김.
+        const titleEl = target.querySelector('.bp-section-title, .bp-step-q, .bp-step-title');
+        const titleRect = (titleEl || target).getBoundingClientRect();
+        const gap = 32;
+        const top = titleRect.top + window.pageYOffset - navHeight - gap;
+        window.scrollTo({ top, behavior: 'smooth' });
+    }
+
+    links.forEach(link => {
+        link.addEventListener('click', e => {
+            const id = link.getAttribute('href').slice(1);
+            const target = document.getElementById(id);
+            if (!target) return;
+            e.preventDefault();
+            scrollToTarget(target);
+            history.pushState(null, '', '#' + id);
+        });
+    });
+
+    // 페이지 진입 시 해시가 있으면 동일하게 보정
+    if (window.location.hash) {
+        const target = document.getElementById(window.location.hash.slice(1));
+        if (target) {
+            window.requestAnimationFrame(() => scrollToTarget(target));
+        }
+    }
+})();
+
+// Scroll spy: 스크롤 위치에 따라 sticky nav의 해당 메뉴를 강조
+(function () {
+    const navLinks = Array.from(document.querySelectorAll('.bp-hero-nav a'));
+    const sections = navLinks
+        .map(link => document.querySelector(link.getAttribute('href')))
+        .filter(Boolean);
+
+    if (!sections.length) return;
+
+    function setActive(id) {
+        navLinks.forEach(link => {
+            link.classList.toggle('is-active', link.getAttribute('href') === '#' + id);
+        });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        const visible = entries
+            .filter(e => e.isIntersecting)
+            .map(e => e.target);
+
+        if (visible.length === 0) return;
+
+        visible.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+        setActive(visible[0].id);
+    }, {
+        rootMargin: '-90px 0px -55% 0px',
+        threshold: 0
+    });
+
+    sections.forEach(s => observer.observe(s));
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+.page.execution {
+  --track-primary: var(--execution-primary);
+  --track-primary-light: var(--execution-primary-light);
+}
+.page.execution .page-title-bar { border-left: 6px solid var(--execution-primary); }
+.page.execution .page-title-bar .track-label { color: var(--execution-primary); }
+.page.execution a.cross-link { color: var(--execution-primary); border-bottom: 1px solid currentColor; }
+
+/* 직군 카드 (exec-1 전용) */
+.role-card {
+  background: var(--nm-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--nm-shadow-sm);
+}
+.role-card h3 { color: var(--execution-primary); margin-bottom: var(--space-3); }
+.role-card .workflows { display: flex; flex-direction: column; gap: var(--space-3); margin-top: var(--space-4); }
+.role-card .workflow { font-size: var(--fs-sm); padding: var(--space-2) 0; border-top: 1px dashed rgba(0,0,0,0.08); }

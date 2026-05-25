@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B-4-2 업무 재설계 · 워크플로우를 끝에서 끝까지 다시 그립니다</title>
+<meta name="description" content="AX 4단계 업무 방식 재설계의 두 번째 작업. 부분 자동화의 한계를 넘어 워크플로우를 끝에서 끝까지 다시 그리고, 4D를 전사 공통 언어로 세웁니다.">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+/* ================== B-4-2 Reshape Page Local Styles ================== */
+/* resource.html · pilot.html과 동일한 bp-* 시각 토큰을 그대로 차용합니다. */
+
+:root {
+    --bp-grid: rgba(14, 59, 42, 0.06);
+    --bp-grid-strong: rgba(14, 59, 42, 0.12);
+    --bp-line: #0E3B2A;
+    --bp-ink: #0F1A16;
+    --bp-paper: #F7F5EF;
+    --bp-paper-2: #FBFAF6;
+    --bp-rule: #D6D2C5;
+    --bp-accent: #1B6E4F;
+    --bp-gold: #9A7B0A;
+    --bp-red: #8B2E1F;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 50px; }
+body {
+    background:
+        linear-gradient(var(--bp-grid) 1px, transparent 1px) 0 0 / 32px 32px,
+        linear-gradient(90deg, var(--bp-grid) 1px, transparent 1px) 0 0 / 32px 32px,
+        var(--bp-paper);
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    line-break: strict;
+}
+
+/* ===== Sheet wrapper ===== */
+.bp-sheet {
+    max-width: 1320px;
+    margin: 32px auto;
+    background: var(--bp-paper-2);
+    border: 1.5px solid var(--bp-line);
+    box-shadow: 0 1px 0 var(--bp-line), 0 24px 60px -30px rgba(6, 32, 24, 0.35);
+    position: relative;
+}
+.bp-sheet::before, .bp-sheet::after {
+    content: "";
+    position: absolute;
+    width: 16px; height: 16px;
+    border: 1px solid var(--bp-line);
+}
+.bp-sheet::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+.bp-sheet::after  { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
+/* ===== Step navigation ===== */
+.bp-stepnav {
+    padding: 36px 56px 28px;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1.5px solid #062018;
+}
+.bp-stepnav::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+}
+.bp-step {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid rgba(247, 245, 239, 0.55);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--sans);
+    font-size: 11.5px;
+    font-weight: 600;
+    color: rgba(247, 245, 239, 0.85);
+    letter-spacing: 0.02em;
+    position: relative;
+    transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+.bp-step.active {
+    background: var(--bp-paper);
+    color: var(--bp-ink);
+    border-color: var(--bp-paper);
+    font-weight: 700;
+}
+.bp-step + .bp-step { margin-left: 24px; }
+.bp-step + .bp-step::before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    width: 24px;
+    height: 1px;
+    background: rgba(247, 245, 239, 0.4);
+    transform: translateY(-50%);
+}
+.bp-back {
+    display: block;
+    text-align: center;
+    margin-top: 18px;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: rgba(247, 245, 239, 0.78);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: color .15s ease, letter-spacing .15s ease;
+    position: relative;
+    z-index: 1;
+}
+.bp-back:hover { color: var(--bp-paper); letter-spacing: 0.08em; }
+
+.bp-substeps {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+.bp-substeps a, .bp-substeps span {
+    border: 1px solid rgba(247, 245, 239, 0.28);
+    background: transparent;
+    padding: 12px 24px;
+    color: rgba(247, 245, 239, 0.75);
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: background .18s ease, border-color .18s ease, color .18s ease;
+    min-width: 180px;
+    text-align: center;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.bp-substeps a:hover {
+    background: rgba(247, 245, 239, 0.08);
+    border-color: rgba(247, 245, 239, 0.6);
+    color: var(--bp-paper);
+}
+.bp-substeps span {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+.bp-substeps a.active {
+    background: linear-gradient(180deg, #14523B 0%, #0E3B2A 100%);
+    color: var(--bp-paper);
+    border: 1.5px solid var(--bp-paper);
+    font-weight: 700;
+    box-shadow:
+        0 0 0 4px rgba(14, 59, 42, 0.55),
+        0 8px 20px -8px rgba(6, 32, 24, 0.7);
+    transform: translateY(-1px);
+    cursor: default;
+    pointer-events: none;
+}
+
+@media (max-width: 600px) {
+    .bp-stepnav { padding: 24px 16px 20px; }
+    .bp-step { width: 26px; height: 26px; font-size: 10px; }
+    .bp-step + .bp-step { margin-left: 16px; }
+    .bp-step + .bp-step::before { width: 16px; }
+    .bp-substeps { gap: 8px; }
+    .bp-substeps a, .bp-substeps span { min-width: 0; flex: 1 1 auto; padding: 10px 14px; font-size: 12px; }
+}
+
+/* ===== Hero block ===== */
+.bp-hero {
+    padding: 64px 56px 56px;
+    border-bottom: 1.5px solid var(--bp-line);
+    position: relative;
+    background:
+        radial-gradient(ellipse at top right, rgba(154, 123, 10, 0.07), transparent 60%),
+        var(--bp-paper-2);
+}
+.bp-hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    margin-bottom: 18px;
+}
+.bp-hero h1 {
+    font-size: 52px;
+    line-height: 1.18;
+    margin: 0 0 22px;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+}
+.bp-hero .bp-lead {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+}
+.bp-hero .bp-summary {
+    margin-top: 36px;
+    padding: 22px 26px;
+    background: rgba(14, 59, 42, 0.04);
+    border-top: 1px solid var(--bp-rule);
+    border-bottom: 1px solid var(--bp-rule);
+    font-size: 14px;
+    line-height: 1.75;
+}
+.bp-hero .bp-summary strong { color: var(--bp-line); }
+
+/* ===== Section submenu ===== */
+.bp-hero-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 12px 56px;
+    background: var(--bp-paper-2);
+    border-top: 1px solid var(--bp-line);
+    border-bottom: 1px solid var(--bp-line);
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    box-shadow: 0 2px 8px -4px rgba(6, 32, 24, 0.18);
+}
+.bp-hero-nav a {
+    flex: 1 1 0;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--bp-ink);
+    padding: 10px 16px;
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper);
+    text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    letter-spacing: -0.005em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bp-hero-nav a:hover { background: var(--bp-line); color: var(--bp-paper); }
+.bp-hero-nav a.active {
+    background: var(--bp-line);
+    color: var(--bp-paper);
+    border-color: var(--bp-line);
+    box-shadow: inset 0 -3px 0 var(--bp-accent);
+}
+
+/* ===== Section frame ===== */
+.bp-section {
+    padding: 56px 56px 64px;
+    border-bottom: 1.5px solid var(--bp-line);
+    position: relative;
+}
+.bp-section:last-of-type { border-bottom: none; }
+.bp-section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 36px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--bp-rule);
+}
+.bp-section-title {
+    font-size: 30px;
+    margin: 0;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    font-weight: 700;
+}
+.bp-section-meta {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    text-align: right;
+    line-height: 1.6;
+}
+.bp-section-intro {
+    margin: 0 0 28px;
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+}
+
+/* ===== 끝-to-끝 흐름 ===== */
+.bp-flow {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    padding: 28px 32px 32px;
+}
+.bp-flow-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin-bottom: 0;
+}
+.bp-flow-col {
+    border: 1px solid var(--bp-rule);
+    padding: 20px 22px;
+    background: var(--bp-paper);
+}
+.bp-flow-col.bad { background: rgba(139, 46, 31, 0.03); border-color: rgba(139, 46, 31, 0.3); }
+.bp-flow-col.good { background: rgba(27, 110, 79, 0.05); border-color: rgba(27, 110, 79, 0.35); border-left: none; }
+.bp-flow-col h4 {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+}
+.bp-flow-col.bad h4 { color: var(--bp-red); }
+.bp-flow-col.good h4 { color: var(--bp-line); }
+.bp-flow-chain {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+.bp-flow-chain .node {
+    padding: 6px 10px;
+    border: 1px solid var(--bp-rule);
+    background: var(--bp-paper-2);
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--bp-ink);
+    letter-spacing: -0.005em;
+}
+.bp-flow-chain .node.auto { background: var(--bp-line); color: var(--bp-paper); border-color: var(--bp-line); }
+.bp-flow-chain .node.broken { background: rgba(139, 46, 31, 0.1); border-color: rgba(139, 46, 31, 0.5); color: var(--bp-red); text-decoration: line-through; }
+.bp-flow-chain .arrow { font-family: var(--sans); font-size: 13px; color: var(--ink-mute); font-weight: 600; }
+.bp-flow-col p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+}
+.bp-flow-col p strong { color: var(--bp-ink); }
+
+/* ===== 4D 카드 ===== */
+.bp-fourd {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-fourd-cell {
+    padding: 26px 22px 28px;
+    border-right: 1px solid var(--bp-rule);
+    transition: background .25s ease, transform .25s ease, box-shadow .25s ease;
+    position: relative;
+}
+.bp-fourd-cell:last-child { border-right: none; }
+.bp-fourd-cell:hover {
+    background: rgba(27, 110, 79, 0.06);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px -10px rgba(6, 32, 24, 0.25);
+    z-index: 2;
+}
+.bp-fourd-letter {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.2em;
+    margin-bottom: 8px;
+}
+.bp-fourd-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    margin-bottom: 12px;
+    letter-spacing: -0.005em;
+}
+.bp-fourd-desc {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+}
+.bp-fourd-ask {
+    padding-top: 12px;
+    border-top: 1px solid var(--bp-rule);
+    font-family: var(--sans);
+    font-size: 11.5px;
+    line-height: 1.6;
+    color: var(--bp-line);
+    font-weight: 600;
+    letter-spacing: 0.005em;
+}
+
+/* ===== 미시 엔진 확장 표 ===== */
+.bp-bridge {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-bridge-head {
+    display: grid;
+    grid-template-columns: 150px 1fr 60px 1fr;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+    position: relative;
+}
+.bp-bridge-head::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-bridge-head > div {
+    padding: 14px 18px;
+    font-family: var(--sans);
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-right: 1px solid rgba(247, 245, 239, 0.14);
+    position: relative;
+    z-index: 1;
+}
+.bp-bridge-head > div:last-child { border-right: none; }
+.bp-bridge-head .arrow { text-align: center; }
+.bp-bridge-row {
+    display: grid;
+    grid-template-columns: 150px 1fr 60px 1fr;
+    border-top: 1px solid var(--bp-rule);
+}
+.bp-bridge-row > div {
+    padding: 18px 18px;
+    font-size: 13.5px;
+    line-height: 1.7;
+    border-right: 1px solid var(--bp-rule);
+    color: var(--bp-ink);
+}
+.bp-bridge-row > div:last-child { border-right: none; }
+.bp-bridge-row .area {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--bp-line);
+    letter-spacing: 0.06em;
+    background: rgba(14, 59, 42, 0.04);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.bp-bridge-row .area .sub {
+    display: block;
+    margin-top: 4px;
+    font-size: 10.5px;
+    color: var(--ink-mute);
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+.bp-bridge-row .arrow {
+    text-align: center;
+    color: var(--bp-accent);
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bp-bridge-row .scaled { background: rgba(27, 110, 79, 0.05); }
+.bp-bridge-row .scaled strong { color: var(--bp-line); }
+
+/* ===== Antipattern table ===== */
+.bp-anti {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-anti-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(139, 46, 31, 0.35), transparent 60%),
+        linear-gradient(90deg, #2A0E0A 0%, #4A1A12 50%, #5C2218 100%);
+    color: var(--bp-paper);
+    position: relative;
+}
+.bp-anti-head > div {
+    padding: 14px 20px;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-right: 1px solid rgba(247, 245, 239, 0.14);
+    text-align: center;
+}
+.bp-anti-head > div:last-child { border-right: none; }
+.bp-anti-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--bp-rule);
+}
+.bp-anti-row > div {
+    padding: 18px 22px;
+    font-size: 14px;
+    line-height: 1.7;
+    border-right: 1px solid var(--bp-rule);
+    color: var(--ink-soft);
+}
+.bp-anti-row > div:last-child { border-right: none; }
+.bp-anti-row .bad { background: rgba(139, 46, 31, 0.04); }
+.bp-anti-row .bad strong { color: var(--bp-red); }
+.bp-anti-row .good { background: rgba(14, 59, 42, 0.04); }
+.bp-anti-row .good strong { color: var(--bp-line); }
+
+/* ===== Handoff box ===== */
+.bp-handoff {
+    margin-top: 28px;
+    padding: 24px 28px;
+    background: rgba(14, 59, 42, 0.05);
+    border-top: 1px solid var(--bp-line);
+    border-bottom: 1px solid var(--bp-line);
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--bp-ink);
+}
+.bp-handoff strong { color: var(--bp-line); }
+.bp-handoff .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+/* ===== Output checklist ===== */
+.bp-output {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-output-row {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--bp-rule);
+    align-items: flex-start;
+    gap: 18px;
+}
+.bp-output-row:last-child { border-bottom: none; }
+.bp-output-num {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.12em;
+    padding-top: 2px;
+}
+.bp-output-body h4 {
+    font-size: 15.5px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    margin: 0 0 6px;
+    letter-spacing: -0.005em;
+}
+.bp-output-body p {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+}
+.bp-output-body p strong { color: var(--bp-line); }
+
+/* ===== References table ===== */
+.bp-refs {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-refs-head {
+    display: grid;
+    grid-template-columns: 150px 1.1fr 1.4fr;
+    background: rgba(14, 59, 42, 0.06);
+    border-bottom: 1px solid var(--bp-line);
+}
+.bp-refs-head > div {
+    padding: 12px 18px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--bp-line);
+    border-right: 1px solid var(--bp-rule);
+}
+.bp-refs-head > div:last-child { border-right: none; }
+.bp-refs-row {
+    display: grid;
+    grid-template-columns: 150px 1.1fr 1.4fr;
+    border-top: 1px solid var(--bp-rule);
+}
+.bp-refs-row:first-of-type { border-top: none; }
+.bp-refs-row > div {
+    padding: 16px 18px;
+    font-size: 13px;
+    line-height: 1.65;
+    border-right: 1px solid var(--bp-rule);
+    color: var(--ink-soft);
+}
+.bp-refs-row > div:last-child { border-right: none; }
+.bp-refs-row .kind {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    font-weight: 700;
+    background: rgba(14, 59, 42, 0.03);
+    display: flex;
+    align-items: center;
+}
+.bp-refs-row .source { color: var(--bp-ink); }
+.bp-refs-row .source strong { color: var(--bp-line); font-weight: 700; }
+.bp-refs-row .source .sub {
+    display: block;
+    font-size: 11.5px;
+    color: var(--ink-mute);
+    margin-top: 4px;
+    letter-spacing: 0.02em;
+    font-family: var(--sans);
+}
+
+/* ===== Closing footer ===== */
+.bp-footer {
+    padding: 36px 56px 44px;
+    background:
+        radial-gradient(ellipse at 0% 100%, rgba(27, 110, 79, 0.35), transparent 55%),
+        linear-gradient(110deg, #14523B 0%, #0E3B2A 35%, #0A2E22 70%, #062018 100%);
+    color: rgba(247, 245, 239, 0.92);
+    font-family: var(--sans);
+    font-size: 12.5px;
+    line-height: 1.7;
+    border-top: 1.5px solid #062018;
+    position: relative;
+    overflow: hidden;
+}
+.bp-footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-footer > * { position: relative; z-index: 1; }
+.bp-footer strong { color: var(--bp-paper); }
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+    .bp-hero { padding: 48px 32px; }
+    .bp-hero h1 { font-size: 38px; }
+    .bp-section { padding: 40px 32px; }
+    .bp-fourd { grid-template-columns: repeat(2, 1fr); }
+    .bp-fourd-cell:nth-child(2n) { border-right: none; }
+    .bp-fourd-cell:nth-child(-n+2) { border-bottom: 1px solid var(--bp-rule); }
+    .bp-bridge-head, .bp-bridge-row { grid-template-columns: 110px 1fr 40px 1fr; }
+    .bp-flow-row { grid-template-columns: 1fr; }
+    .bp-flow-col.good { border-left: 1px solid rgba(27, 110, 79, 0.35); border-top: none; }
+    .bp-footer { padding: 32px; }
+}
+@media (max-width: 600px) {
+    .bp-sheet { margin: 12px; }
+    .bp-hero h1 { font-size: 28px; }
+    .bp-section-title { font-size: 22px; }
+    .bp-fourd { grid-template-columns: 1fr; }
+    .bp-fourd-cell { border-right: none; border-bottom: 1px solid var(--bp-rule); }
+    .bp-fourd-cell:last-child { border-bottom: none; }
+    .bp-bridge-head, .bp-bridge-row { grid-template-columns: 1fr; }
+    .bp-bridge-row > div { border-right: none; border-bottom: 1px solid var(--bp-rule); }
+    .bp-bridge-row > div:last-child { border-bottom: none; }
+    .bp-bridge-row .arrow { padding: 8px; }
+    .bp-anti-head, .bp-anti-row { grid-template-columns: 1fr; }
+    .bp-output-row { grid-template-columns: 1fr; gap: 6px; }
+    .bp-refs-head, .bp-refs-row { grid-template-columns: 1fr; }
+    .bp-refs-row > div { border-right: none; border-bottom: 1px solid var(--bp-rule); }
+    .bp-refs-row > div:last-child { border-bottom: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="bp-sheet">
+
+
+    <!-- ========= BRAND BAR ========= -->
+    <a class="bp-brandbar" href="index.html" aria-label="목차로 이동">
+        <img class="bb-logo" src="assets/logos/logo1-transparent.png" alt="AI ROASTING">
+        <span>AI ROASTING · AX GUIDE TO COMPANY BRAIN OS</span>
+    </a>
+
+    <!-- ========= STEP NAVIGATION ========= -->
+    <nav class="bp-stepnav" aria-label="전체 단계">
+        <ol class="bp-steps">
+            <li class="bp-step"><a href="blueprint.html">진단</a></li>
+            <li class="bp-step"><a href="organization.html">1</a></li>
+            <li class="bp-step"><a href="pilot.html">2</a></li>
+            <li class="bp-step"><a href="criteria.html">3</a></li>
+            <li class="bp-step active" aria-current="step"><a href="resource.html">4</a></li>
+            <li class="bp-step"><a href="ainative.html">5</a></li>
+        </ol>
+        <a class="bp-back" href="index.html">← 목록으로</a>
+        <div class="bp-substeps" aria-label="4단계 업무 방식 재설계 페이지">
+            <a href="resource.html">자원 재배분</a>
+            <a href="ax-canvas.html">AX 캔버스</a>
+            <a href="reshape.html" class="active" aria-current="page">업무 재설계</a>
+        </div>
+    </nav>
+
+    <!-- ========= HERO ========= -->
+    <section class="bp-hero">
+        <div class="bp-hero-eyebrow">Step 4 · 두 번째 작업 · 업무를 다시 그립니다 · BRAIN OS 전사 확장</div>
+        <h1>자원을 다시 걸었으면, 다음은 일을 다시 그려 COMPANY BRAIN OS를 전사로 확장할 차례입니다.</h1>
+        <p class="bp-lead">빅 베팅 워크플로우를 가치 사슬 단위로 다시 그려, 미시 엔진을 전사로 확장하고 BRAIN OS를 처음으로 전사 단위에서 작동시킵니다.</p>
+        <div class="bp-summary">
+            <strong>이 페이지의 결론은 두 갈래입니다.</strong> 첫째, 워크플로우 자체를 끝에서 끝까지 다시 그립니다. 사람의 자리, 에이전트의 자리, 권한과 결재 라인, 산출 양식이 한 도면에서 같이 움직여야 흐름이 새로 짜집니다. 둘째, 4D(위임·설명·분별·성실)를 전사 공통 언어로 세웁니다. 70퍼센트의 "사람" 영역이 슬로건이 아니라 매일의 행동이 되는 자리가 여기입니다. 두 갈래가 만나는 자리에서 미시 엔진이 전사 자산으로 확장되고, COMPANY BRAIN OS의 자산 축적 4단계 순환에서 자산화와 검증이 처음으로 본격적으로 돌기 시작합니다.
+        </div>
+    </section>
+
+    <nav class="bp-hero-nav" aria-label="섹션 바로가기">
+        <a href="#why">부분 자동화의 한계</a>
+        <a href="#flow">끝에서 끝까지 재설계</a>
+        <a href="#fourd">4D 전사 표준</a>
+        <a href="#micro">미시 엔진의 전사 확장</a>
+        <a href="#pitfalls">경계할 함정</a>
+        <a href="#output">산출물과 인계</a>
+    </nav>
+
+    <!-- ========= 1. 부분 자동화의 한계 ========= -->
+    <section class="bp-section" id="why">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">왜 업무 자체를 다시 그려야 하는가</h2>
+            </div>
+            <div class="bp-section-meta">부분 자동화의 함정</div>
+        </div>
+
+        <p class="bp-section-intro">대부분의 회사가 가장 눈에 띄는 한 단계에 AI를 붙이는 데서 멈춥니다. 보고서 초안 작성, 회의록 요약, 견적 분류 같은 단계가 빨라지고, 그 결과가 임원 보고에 올라갑니다. 그러나 인접 단계의 권한·결재 라인·산출 양식은 손대지 않습니다. 사이클 타임은 거의 줄지 않고, 절약된 시간은 다음 결재 대기열에서 소진됩니다.</p>
+
+        <div class="bp-handoff">
+            <div class="tag">왜 한 단계만 빨라지면 의미가 없는가</div>
+            <strong>일의 가치는 가장 느린 단계가 정합니다.</strong> 다섯 단계로 이루어진 업무에서 한 단계만 절반으로 줄여도, 다른 네 단계가 그대로면 전체 사이클은 거의 비슷한 시간이 걸립니다. 게다가 빨라진 단계의 산출량이 늘면 인접 단계에 정체가 옵니다. "AI를 도입했는데 왜 빨라진 게 없냐"는 임원의 질문이 이 자리에서 나옵니다. 4단계 두 번째 작업은 한 단계가 아니라 가치 사슬 전체를 한 도면에서 같이 다시 그리는 일입니다.
+        </div>
+    </section>
+
+    <!-- ========= 2. 끝에서 끝까지 재설계 ========= -->
+    <section class="bp-section" id="flow">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">끝에서 끝까지 흐름 재설계</h2>
+            </div>
+            <div class="bp-section-meta">부분 자동화 · 가치 사슬 단위 재설계 비교</div>
+        </div>
+
+        <p class="bp-section-intro">아래는 5단계짜리 업무에 AI를 붙이는 두 가지 방식입니다. 좌측은 한 단계만 자동화한 모습, 우측은 흐름 자체를 다시 그린 모습입니다. 같은 도구를 써도 결과의 폭이 크게 벌어지는 자리가 여기입니다.</p>
+
+        <div class="bp-flow">
+            <div class="bp-flow-row">
+                <div class="bp-flow-col bad">
+                    <h4>부분 자동화 · 같은 벽에 다시 부딪힙니다</h4>
+                    <div class="bp-flow-chain">
+                        <span class="node">접수</span>
+                        <span class="arrow">→</span>
+                        <span class="node auto">분류 AI</span>
+                        <span class="arrow">→</span>
+                        <span class="node broken">검토 정체</span>
+                        <span class="arrow">→</span>
+                        <span class="node">승인</span>
+                        <span class="arrow">→</span>
+                        <span class="node">통보</span>
+                    </div>
+                    <p>분류 단계만 AI로 빨라졌습니다. 검토를 맡은 사람의 권한, 결재 라인, 통보 양식은 그대로입니다. <strong>병목은 분류에서 검토로 옮겨 갈 뿐이고, 전체 사이클 타임은 거의 줄지 않습니다.</strong></p>
+                </div>
+                <div class="bp-flow-col good">
+                    <h4>끝에서 끝까지 재설계 · 흐름이 새로 짜입니다</h4>
+                    <div class="bp-flow-chain">
+                        <span class="node auto">접수+분류 통합</span>
+                        <span class="arrow">→</span>
+                        <span class="node auto">초안+근거 묶음</span>
+                        <span class="arrow">→</span>
+                        <span class="node">사람의 한 번 판단</span>
+                        <span class="arrow">→</span>
+                        <span class="node auto">통보+학습 적재</span>
+                    </div>
+                    <p>다섯 단계가 네 단계로 줄어듭니다. 사람의 자리는 한 군데로 모이고, 그 한 자리에 판단의 무게가 실립니다. <strong>권한·결재 라인·산출 양식이 같이 바뀌어야 흐름이 새로 짜집니다.</strong> 자동화가 아니라 재설계라는 단어가 정확합니다.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bp-handoff" style="margin-top: 28px;">
+            <div class="tag">재설계의 세 가지 동시 변경</div>
+            끝에서 끝까지의 재설계는 세 가지가 같이 움직여야 비로소 작동합니다. 첫째, <strong>권한 재정의</strong>입니다. 누가 어디까지 결정하고, 어디서 결재가 끝나는지를 새로 그립니다. 둘째, <strong>산출 양식 재정의</strong>입니다. 사람이 마지막에 한 번 보는 화면의 형식이 달라져야 판단의 질도 달라집니다. 셋째, <strong>책임 경계 재정의</strong>입니다. AI 산출물의 책임을 누가 지는지, 사고가 났을 때 어디까지 거슬러 올라가는지를 같은 도면에 표시합니다.
+        </div>
+    </section>
+
+    <!-- ========= 3. 4D 전사 표준 ========= -->
+    <section class="bp-section" id="fourd">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">재설계된 흐름을 매일 굴리는 공통 언어: 4D</h2>
+            </div>
+            <div class="bp-section-meta">위임 · 설명 · 분별 · 성실</div>
+        </div>
+
+        <p class="bp-section-intro">새로 그린 워크플로우가 매일 작동하려면 직원 한 사람 한 사람이 같은 기준으로 AI와 일해야 합니다. 그 공통 언어가 4D입니다. Anthropic이 AI Fluency로 정리한 위임(Delegation)·설명(Description)·분별(Discernment)·성실(Diligence) 네 글자를 전사 표준으로 세웁니다. 자원 재배분에서 잡아 둔 70퍼센트의 "사람" 영역이 슬로건이 아니라 일상 행동이 되는 자리가 여기입니다.</p>
+
+        <div class="bp-fourd">
+            <div class="bp-fourd-cell">
+                <div class="bp-fourd-letter">D · DELEGATION</div>
+                <div class="bp-fourd-name">위임</div>
+                <div class="bp-fourd-desc">어떤 일을 AI에 맡길지, 어떤 일은 사람이 끝까지 들어야 할지의 경계를 정합니다. 위임 폭은 작업의 위험과 검증 비용에 따라 달라집니다.</div>
+                <div class="bp-fourd-ask">매일 묻는 질문 · "이 작업은 AI에 어디까지 맡길 수 있는가?"</div>
+            </div>
+            <div class="bp-fourd-cell">
+                <div class="bp-fourd-letter">D · DESCRIPTION</div>
+                <div class="bp-fourd-name">설명</div>
+                <div class="bp-fourd-desc">맡길 일을 AI가 알아들을 수 있도록 정확히 풀어 씁니다. 맥락, 입력, 제약, 산출 형식. 설명의 품질이 결과의 품질을 정합니다.</div>
+                <div class="bp-fourd-ask">매일 묻는 질문 · "이 지시문이 다른 사람이 봐도 같은 결과를 내게 쓰여 있는가?"</div>
+            </div>
+            <div class="bp-fourd-cell">
+                <div class="bp-fourd-letter">D · DISCERNMENT</div>
+                <div class="bp-fourd-name">분별</div>
+                <div class="bp-fourd-desc">AI가 만들어 낸 결과를 받아들이기 전에 한 번 더 가른다는 뜻입니다. 매끄러운 문장은 사실의 신호가 아니라 패턴 일치의 신호입니다. 출처·근거·예외 사례를 같이 봅니다.</div>
+                <div class="bp-fourd-ask">매일 묻는 질문 · "이 답을 그대로 내보내면 회사가 책임질 수 있는가?"</div>
+            </div>
+            <div class="bp-fourd-cell">
+                <div class="bp-fourd-letter">D · DILIGENCE</div>
+                <div class="bp-fourd-name">성실</div>
+                <div class="bp-fourd-desc">AI가 빨라진 만큼 절약된 시간을 더 높은 가치의 일에 다시 붓는 태도입니다. 시간이 절약되었다는 사실과 그 시간이 재투자되었다는 사실은 다른 두 가지입니다.</div>
+                <div class="bp-fourd-ask">매일 묻는 질문 · "이번 주 AI로 절약한 시간을 어디에 다시 썼는가?"</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= 4. 미시 엔진의 전사 확장 ========= -->
+    <section class="bp-section" id="micro">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">미시 엔진이 전사로 확장되는 자리</h2>
+            </div>
+            <div class="bp-section-meta">미시 엔진 · 자산 축적 4단계 순환의 자산화·검증 작동점</div>
+        </div>
+
+        <p class="bp-section-intro">3단계까지 미시 엔진은 업무 한 건을 해부하는 도구로 호출됐습니다. 4단계의 두 번째 작업에서 이 엔진의 핵심 두 가지가 전사 자산으로 자라납니다. What 영역의 "암묵지의 Mark-down화"는 전사 지식 구조화 체계로, Why 영역의 "사람·에이전트 협업"은 전사 협업 모델로 확장됩니다. 이 두 확장이 자리잡는 순간, COMPANY BRAIN OS의 자산 축적 4단계 순환에서 자산화(에이전트 만들기)와 검증(루프 닫기)이 처음으로 본격적으로 돌기 시작합니다.</p>
+
+        <div class="bp-bridge">
+            <div class="bp-bridge-head">
+                <div>미시 엔진</div>
+                <div>업무 단위 (3단계까지)</div>
+                <div class="arrow">→</div>
+                <div>전사 자산 (4단계 이후)</div>
+            </div>
+            <div class="bp-bridge-row">
+                <div class="area">What 영역<span class="sub">암묵지 구조화</span></div>
+                <div>한 업무의 용어·맥락·규칙·행동(Terminology · Context · Rule · Action)을 한 장의 마크다운으로 정리합니다. 미시 엔진 7문항 가운데 What 축이 이 묶음을 만들어 냅니다.</div>
+                <div class="arrow">↦</div>
+                <div class="scaled"><strong>전사 지식 구조화 체계.</strong> 부서별로 흩어진 암묵지가 같은 양식의 마크다운 묶음으로 모입니다. 그 묶음이 곧 사내 에이전트가 학습하고 호출하는 지식 베이스가 됩니다. 자산 축적 4단계 순환의 구조화 산출물이 한 업무가 아니라 회사 전체로 쌓이는 자리, COMPANY BRAIN OS의 지식층입니다.</div>
+            </div>
+            <div class="bp-bridge-row">
+                <div class="area">Why 영역<span class="sub">사람·에이전트 협업</span></div>
+                <div>한 업무 안에서 사람과 에이전트가 어떻게 역할을 나누고 검증할지를 정의합니다. Meta Harness는 이 협업의 미시 설계도입니다.</div>
+                <div class="arrow">↦</div>
+                <div class="scaled"><strong>전사 협업 모델.</strong> 사람과 에이전트가 회사 전반의 워크플로우에서 어떤 자리에 서고, 누가 어떤 결정에 책임을 지는지가 한 장의 운영 그림으로 정리됩니다. 자산 축적 4단계 순환의 자산화(에이전트 만들기)와 검증(루프 닫기)이 이 그림 위에서 작동하며, COMPANY BRAIN OS의 협업층이 자리잡습니다.</div>
+            </div>
+        </div>
+
+        <div class="bp-handoff" style="margin-top: 28px;">
+            <div class="tag">AX 특화 결론 · 왜 일반 컨설팅 가이드와 다른가</div>
+            <strong>맥킨지·BCG의 4단계 권고는 자원 재배분과 워크플로우 재설계까지 도달합니다.</strong> 본 가이드의 4단계는 거기서 한 걸음 더 나아가, 미시 엔진과 자산 축적 4단계 순환을 함께 끼워 두어 COMPANY BRAIN OS의 빌드업으로 묶습니다. 자원과 업무를 다시 그리는 데서 끝나면 다음 분기 똑같은 일을 한 번 더 해야 합니다. 미시 엔진과 BRAIN OS가 같이 돌면, 한 번 그린 자산이 다음 워크플로우 재설계의 입력값이 되고, 그 다음 분기에는 같은 일에 절반의 공수만 듭니다. 이 복리 효과가 5퍼센트의 4배 성과 격차를 설명하는 자리입니다.
+        </div>
+    </section>
+
+    <!-- ========= 5. 함정 ========= -->
+    <section class="bp-section" id="pitfalls">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">업무 재설계에서 흔히 빠지는 함정</h2>
+            </div>
+            <div class="bp-section-meta">부분 자동화 · 슬로건 4D · 권한 정체</div>
+        </div>
+
+        <p class="bp-section-intro">아래 세 가지는 업무 재설계를 시작한 회사 거의 모두가 한 번씩 만나는 함정입니다. 좌측은 흔히 나타나는 모습, 우측은 그 자리를 다르게 푸는 방법입니다.</p>
+
+        <div class="bp-anti">
+            <div class="bp-anti-head">
+                <div>흔히 나타나는 함정</div>
+                <div>대응 방향</div>
+            </div>
+            <div class="bp-anti-row">
+                <div class="bad"><strong>"한 단계만 자동화하고 끝냅니다."</strong> 가장 눈에 띄는 한 단계에 AI를 붙입니다. 인접 단계의 권한·결재·산출 양식은 손대지 않습니다. 사이클 타임은 거의 줄지 않고, 절약된 시간은 다음 결재 대기열에서 소진됩니다.</div>
+                <div class="good"><strong>가치 사슬의 끝에서 끝까지를 한 장의 그림으로 먼저 그립니다.</strong> 그 그림에 권한·결재·산출 양식 변경이 같이 표시되어야 비로소 재설계입니다. 부분 자동화 요청이 올라오면 "이 변경이 인접 단계 어디에 영향을 주는가"를 먼저 묻습니다.</div>
+            </div>
+            <div class="bp-anti-row">
+                <div class="bad"><strong>"4D를 슬로건으로만 답니다."</strong> 회의실 벽에 위임·설명·분별·성실 네 글자를 붙이고 끝냅니다. 실제 업무 평가와 인센티브는 4D와 무관하게 작년 양식 그대로 돌아갑니다. 직원이 매일 따르는 기준은 슬로건이 아니라 평가 기준입니다.</div>
+                <div class="good"><strong>4D를 평가 항목과 회고 양식에 박아 둡니다.</strong> 분기 평가 항목에 "위임 폭의 적정성", "설명 품질", "분별 사례", "절약 시간 재투자 사례"를 한 줄씩 넣습니다. 사이클 회고에서 4D 가운데 어느 글자가 약했는지를 매번 짚습니다.</div>
+            </div>
+            <div class="bp-anti-row">
+                <div class="bad"><strong>"권한은 그대로 둔 채 도구만 바꿉니다."</strong> 새 워크플로우 도면을 그려도 결재 라인과 권한은 작년 조직도 그대로입니다. 사람의 자리가 한 군데로 모이지 않고, 결정의 무게가 분산되어 흐름이 다시 늘어집니다.</div>
+                <div class="good"><strong>재설계 도면에 권한 변경 표를 같이 붙입니다.</strong> "누가 어떤 결정을 어디까지" 한 줄씩 적습니다. 권한 변경이 같이 가지 않는 도면은 임원 결재 단계에서 반려합니다. 권한이 같이 가야 흐름이 같이 갑니다.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= 6. 산출물과 5단계 인계 ========= -->
+    <section class="bp-section" id="output">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">이 페이지가 남기는 산출물과 5단계 인계</h2>
+            </div>
+            <div class="bp-section-meta">재설계 청사진 · 4D 교육 체계</div>
+        </div>
+
+        <p class="bp-section-intro">업무 재설계 작업이 끝나면 두 가지가 손에 들립니다. 한 가지는 도면, 한 가지는 교육 체계입니다. 앞 페이지에서 만든 예산 재배분과 책임자 매핑까지 합쳐 세 가지가 모이면 5단계 운영 내재화로 인계됩니다.</p>
+
+        <div class="bp-output">
+            <div class="bp-output-row">
+                <div class="bp-output-num">산출 1</div>
+                <div class="bp-output-body">
+                    <h4>재설계된 핵심 워크플로우 청사진</h4>
+                    <p>3단계에서 고른 빅 베팅 3~5건의 워크플로우가 끝에서 끝까지 다시 그려진 한 장입니다. 사람의 자리와 에이전트의 자리, 권한과 결재 라인, 산출 양식, 사이클 타임 변화를 같은 도면에 담습니다. <strong>부서가 아니라 가치 사슬 단위로 그립니다.</strong></p>
+                </div>
+            </div>
+            <div class="bp-output-row">
+                <div class="bp-output-num">산출 2</div>
+                <div class="bp-output-body">
+                    <h4>전사 4D 역량 교육 체계</h4>
+                    <p>위임·설명·분별·성실을 직무별로 풀어 둔 교육 체계입니다. 한 번 듣고 끝나는 세션이 아니라, <strong>분기마다 사례를 갱신하는 살아있는 커리큘럼</strong>으로 운영합니다. 인사 평가 항목과 한 줄씩 연결되어 있어야 슬로건이 아니라 일상 행동이 됩니다.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bp-handoff" style="margin-top: 28px;">
+            <div class="tag">다음 단계로 인계</div>
+            앞 페이지의 산출(예산 재배분 + 책임자 매핑)에 이 페이지의 두 산출(워크플로우 청사진 + 4D 교육 체계)을 더해 네 가지가 모이면 5단계 <strong>운영 내재화</strong>로 넘어갑니다. 다음 단계의 임원 질문은 한 줄입니다. "이걸 어떻게 일회성이 아니라 지속적으로 만드나?" 5단계는 4단계가 만든 재설계 청사진을 살아있는 플랫폼으로 굳히고, 에이전트 운영모델과 거버넌스 인프라를 그 위에 얹습니다. 그 결과로 COMPANY BRAIN OS의 자산 축적 4단계 순환이 분기마다 한 바퀴씩 돌면서 조직 지식 자산이 복리로 쌓이는 구조가 완성됩니다.
+        </div>
+    </section>
+
+    <!-- ========= 7. 참고 자료 ========= -->
+    <section class="bp-section" id="refs">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">참고 자료</h2>
+            </div>
+            <div class="bp-section-meta">컨설팅펌 · 빅테크 · AX 고유 방법론</div>
+        </div>
+
+        <p class="bp-section-intro">업무 재설계와 4D 전사 표준은 다음 자료의 공통 결론과 본 가이드의 고유 방법론(COMPANY BRAIN OS, 미시 엔진, 자산 축적 4단계 순환, Meta Harness)을 한 자리에 묶은 것입니다. 끝에서 끝까지 재설계는 컨설팅펌의 합의에서, 4D는 Anthropic AI Fluency에서, 미시 엔진 전사 확장과 자산화·검증 작동은 본 가이드의 고유 명제에서 가져왔습니다.</p>
+
+        <div class="bp-refs">
+            <div class="bp-refs-head">
+                <div>구분</div>
+                <div>출처</div>
+                <div>참고 항목</div>
+            </div>
+            <div class="bp-refs-row">
+                <div class="kind">컨설팅펌</div>
+                <div class="source">
+                    <strong>McKinsey</strong>, The State of AI / Rewired
+                    <span class="sub">McKinsey &amp; Co., 2025 · 2023</span>
+                </div>
+                <div>업무 재설계 깊이와 고성과 격차의 상관 관계. "확장의 벽" 진단, 가치 사슬 단위 재설계의 효과 사례.</div>
+            </div>
+            <div class="bp-refs-row">
+                <div class="kind">컨설팅펌</div>
+                <div class="source">
+                    <strong>BCG</strong>, Build for the Future / AI Radar
+                    <span class="sub">BCG, 2025 · 2026</span>
+                </div>
+                <div>"AI 도입과 전환의 구분" 원칙. 부분 자동화의 한계를 넘는 끝에서 끝까지 재설계의 정의.</div>
+            </div>
+            <div class="bp-refs-row">
+                <div class="kind">컨설팅펌</div>
+                <div class="source">
+                    <strong>Bain &amp; Company</strong>, Technology Report
+                    <span class="sub">Bain, 2024</span>
+                </div>
+                <div>AI 고성과 그룹과 일반 그룹의 차이가 워크플로우 재설계 깊이에 있다는 분석. 부분 자동화의 한계 사례.</div>
+            </div>
+            <div class="bp-refs-row">
+                <div class="kind">컨설팅펌</div>
+                <div class="source">
+                    <strong>PwC</strong>, Agent OS
+                    <span class="sub">PwC, 2025</span>
+                </div>
+                <div>에이전트 운영 모델의 구조, 사람·에이전트 협업 설계의 실무 패턴. 권한·결재 라인 변경 사례.</div>
+            </div>
+            <div class="bp-refs-row">
+                <div class="kind">빅테크 · 모델사</div>
+                <div class="source">
+                    <strong>Anthropic</strong>, AI Fluency Framework
+                    <span class="sub">anthropic.com, 2025</span>
+                </div>
+                <div>4D 공통 언어(위임 · 설명 · 분별 · 성실)의 원형. 본 가이드는 이 네 글자를 전사 평가·회고 양식과 연결합니다.</div>
+            </div>
+            <div class="bp-refs-row">
+                <div class="kind">빅테크 · 모델사</div>
+                <div class="source">
+                    <strong>Anthropic</strong>, Building Effective Agents · Skills
+                    <span class="sub">anthropic.com, 2024 · 2025</span>
+                </div>
+                <div>에이전트의 능력 영역과 한계 영역 구분, Skill 형식의 지식 구조화. 본 가이드의 "암묵지의 Mark-down화"와 연결됩니다.</div>
+            </div>
+            <div class="bp-refs-row">
+                <div class="kind">고유 방법론</div>
+                <div class="source">
+                    <strong>본 가이드</strong>, COMPANY BRAIN OS · 미시 엔진 · 자산 축적 4단계 순환 · 5-Color Harness
+                    <span class="sub">본 가이드의 C·D 영역</span>
+                </div>
+                <div>업무 단위 미시 엔진(상단 7문항·하단 3문항), 자산 축적 4단계 순환(추출·구조화·자산화·검증), 사람·에이전트 협업 모델(Meta Harness)이 COMPANY BRAIN OS를 짓는 작업 도구로 묶여 있습니다.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= FOOTER ========= -->
+    <footer class="bp-footer">
+        <p style="margin:0 0 10px; font-size:11.5px; opacity:0.78;">* 이 페이지는 AX 4단계 업무 방식 재설계의 두 번째 작업, 업무 재설계(B-4-2)를 다룹니다. 앞 페이지는 자원 재배분(B-4-1)이며, 두 페이지의 산출물이 합쳐져 5단계 운영 내재화로 인계됩니다.</p>
+        <p style="margin:0 0 10px;"><strong>참고 자료.</strong> McKinsey(The State of AI 2025, Rewired), BCG(Build for the Future 2025, AI Radar 2026), Bain(Technology Report 2024), PwC(Agent OS), Anthropic(AI Fluency, Building Effective Agents, Skills). 워크플로우 재설계의 정확한 적용 강도는 산업과 회사 성숙도에 따라 조정합니다.</p>
+        <p style="margin:0 0 10px; opacity:0.85;">재설계된 워크플로우를 실제로 굴리기 전, 사내 법무·정보보안·인사 부서의 검토를 함께 거칩니다. 권한 변경과 결재 라인 조정은 동시 변경 폭이 크기 때문에, 한 가치 사슬씩 단계별로 도입하기를 권합니다.</p>
+        <p style="margin:22px 0 0; padding-top:18px; border-top:1px solid rgba(247,245,239,0.18); font-size:11.5px; opacity:0.7; letter-spacing:0.04em;">&copy; 2026 AI ROASTING. All rights reserved.</p>
+    </footer>
+
+</div>
+
+<script>
+(function() {
+    'use strict';
+    var navLinks = document.querySelectorAll('.bp-hero-nav a');
+    if (!navLinks.length) return;
+
+    var linkMap = {};
+    var sectionIds = [];
+    navLinks.forEach(function(link) {
+        var id = (link.getAttribute('href') || '').replace('#', '');
+        if (!id) return;
+        var el = document.getElementById(id);
+        if (!el) return;
+        linkMap[id] = { link: link, el: el };
+        sectionIds.push(id);
+    });
+    if (!sectionIds.length) return;
+
+    function setActive(id) {
+        sectionIds.forEach(function(k) {
+            if (k === id) linkMap[k].link.classList.add('active');
+            else linkMap[k].link.classList.remove('active');
+        });
+    }
+
+    function update() {
+        var nav = document.querySelector('.bp-hero-nav');
+        var navH = nav ? nav.offsetHeight : 0;
+        var trigger = navH + 60;
+        var currentId = null;
+        for (var i = 0; i < sectionIds.length; i++) {
+            var rect = linkMap[sectionIds[i]].el.getBoundingClientRect();
+            if (rect.top <= trigger) currentId = sectionIds[i];
+            else break;
+        }
+        setActive(currentId);
+    }
+
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(function() {
+            update();
+            ticking = false;
+        });
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1979 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AX 역량 진단 · 6영역 24문항 자가진단</title>
+<meta name="description" content="McKinsey·BCG·Bain·PwC·KPMG·Deloitte 6사 프레임워크에서 공통으로 추출한 6영역 AX 역량 자가진단. 24문항을 1~5점으로 채점해 우리 회사의 위치를 잰다.">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+/* ================== Diagnosis Page Local Styles ================== */
+/* blueprint.html과 동일한 bp-* 토큰을 그대로 차용합니다. */
+
+:root {
+    --bp-grid: rgba(14, 59, 42, 0.06);
+    --bp-grid-strong: rgba(14, 59, 42, 0.12);
+    --bp-line: #0E3B2A;
+    --bp-ink: #0F1A16;
+    --bp-paper: #F7F5EF;
+    --bp-paper-2: #FBFAF6;
+    --bp-rule: #D6D2C5;
+    --bp-accent: #1B6E4F;
+    --bp-gold: #9A7B0A;
+    --bp-red: #8B2E1F;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 50px; }
+body {
+    background:
+        linear-gradient(var(--bp-grid) 1px, transparent 1px) 0 0 / 32px 32px,
+        linear-gradient(90deg, var(--bp-grid) 1px, transparent 1px) 0 0 / 32px 32px,
+        var(--bp-paper);
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    line-break: strict;
+}
+
+/* ===== Section submenu (sticky 바로가기) ===== */
+.bp-hero-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 12px 56px;
+    background: var(--bp-paper-2);
+    border-top: 1px solid var(--bp-line);
+    border-bottom: 1px solid var(--bp-line);
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    box-shadow: 0 2px 8px -4px rgba(6, 32, 24, 0.18);
+}
+.bp-hero-nav a {
+    flex: 1 1 0;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--bp-ink);
+    padding: 10px 16px;
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper);
+    text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    letter-spacing: -0.005em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bp-hero-nav a:hover { background: var(--bp-line); color: var(--bp-paper); }
+.bp-hero-nav a.active {
+    background: var(--bp-line);
+    color: var(--bp-paper);
+    border-color: var(--bp-line);
+    box-shadow: inset 0 -3px 0 var(--bp-accent);
+}
+
+/* ===== Sheet wrapper ===== */
+.bp-sheet {
+    max-width: 1320px;
+    margin: 32px auto;
+    background: var(--bp-paper-2);
+    border: 1.5px solid var(--bp-line);
+    box-shadow: 0 1px 0 var(--bp-line), 0 24px 60px -30px rgba(6, 32, 24, 0.35);
+    position: relative;
+}
+.bp-sheet::before, .bp-sheet::after {
+    content: "";
+    position: absolute;
+    width: 16px; height: 16px;
+    border: 1px solid var(--bp-line);
+}
+.bp-sheet::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+.bp-sheet::after  { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
+/* ===== Step navigation (replaces title block) ===== */
+.bp-stepnav {
+    padding: 36px 56px 28px;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1.5px solid #062018;
+}
+.bp-stepnav::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+}
+.bp-step {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid rgba(247, 245, 239, 0.55);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--sans);
+    font-size: 11.5px;
+    font-weight: 600;
+    color: rgba(247, 245, 239, 0.85);
+    letter-spacing: 0.02em;
+    position: relative;
+    transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+.bp-step.active {
+    background: var(--bp-paper);
+    color: var(--bp-ink);
+    border-color: var(--bp-paper);
+    font-weight: 700;
+}
+.bp-step + .bp-step { margin-left: 24px; }
+.bp-step + .bp-step::before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    width: 24px;
+    height: 1px;
+    background: rgba(247, 245, 239, 0.4);
+    transform: translateY(-50%);
+}
+.bp-back {
+    display: block;
+    text-align: center;
+    margin-top: 18px;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: rgba(247, 245, 239, 0.78);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: color .15s ease, letter-spacing .15s ease;
+    position: relative;
+    z-index: 1;
+}
+.bp-back:hover { color: var(--bp-paper); letter-spacing: 0.08em; }
+
+.bp-substeps {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+.bp-substeps a {
+    border: 1px solid rgba(247, 245, 239, 0.28);
+    background: transparent;
+    padding: 12px 24px;
+    color: rgba(247, 245, 239, 0.75);
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: background .18s ease, border-color .18s ease, color .18s ease;
+    min-width: 220px;
+    text-align: center;
+    position: relative;
+}
+.bp-substeps a:hover {
+    background: rgba(247, 245, 239, 0.08);
+    border-color: rgba(247, 245, 239, 0.6);
+    color: var(--bp-paper);
+}
+.bp-substeps a.active {
+    background: linear-gradient(180deg, #14523B 0%, #0E3B2A 100%);
+    color: var(--bp-paper);
+    border: 1.5px solid var(--bp-paper);
+    font-weight: 700;
+    box-shadow:
+        0 0 0 4px rgba(14, 59, 42, 0.55),
+        0 8px 20px -8px rgba(6, 32, 24, 0.7);
+    transform: translateY(-1px);
+    cursor: default;
+    pointer-events: none;
+}
+
+@media (max-width: 600px) {
+    .bp-stepnav { padding: 24px 16px 20px; }
+    .bp-step { width: 26px; height: 26px; font-size: 10px; }
+    .bp-step + .bp-step { margin-left: 16px; }
+    .bp-step + .bp-step::before { width: 16px; }
+    .bp-substeps { gap: 8px; }
+    .bp-substeps a { min-width: 0; flex: 1 1 auto; padding: 10px 14px; font-size: 12px; }
+}
+
+/* ===== Title block ===== */
+.bp-titleblock {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: 1.5px solid #062018;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(247, 245, 239, 0.72);
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    position: relative;
+    overflow: hidden;
+}
+.bp-titleblock::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-titleblock > div {
+    padding: 16px 22px;
+    border-right: 1px solid rgba(247, 245, 239, 0.14);
+    position: relative;
+    z-index: 1;
+}
+.bp-titleblock > div:last-child { border-right: none; }
+.bp-titleblock .tb-label { display: block; font-size: 9.5px; opacity: 0.62; margin-bottom: 5px; letter-spacing: 0.14em; }
+.bp-titleblock .tb-value { font-size: 13px; color: var(--bp-paper); letter-spacing: 0.04em; font-weight: 600; }
+
+/* ===== Hero block ===== */
+.bp-hero {
+    padding: 64px 56px 56px;
+    border-bottom: 1.5px solid var(--bp-line);
+    position: relative;
+    background:
+        radial-gradient(ellipse at top right, rgba(27, 110, 79, 0.06), transparent 60%),
+        var(--bp-paper-2);
+}
+.bp-hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    margin-bottom: 18px;
+}
+.bp-hero h1 {
+    font-size: 52px;
+    line-height: 1.18;
+    margin: 0 0 22px;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+}
+.bp-hero .bp-lead {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+}
+.bp-hero .bp-summary {
+    margin-top: 36px;
+    padding: 22px 26px;
+    background: rgba(14, 59, 42, 0.04);
+    border-top: 1px solid var(--bp-rule);
+    border-bottom: 1px solid var(--bp-rule);
+    font-size: 14px;
+    line-height: 1.75;
+}
+.bp-hero .bp-summary strong { color: var(--bp-line); }
+
+/* ===== Section frame ===== */
+.bp-section {
+    padding: 56px 56px 64px;
+    border-bottom: 1.5px solid var(--bp-line);
+    position: relative;
+}
+.bp-section:last-of-type { border-bottom: none; }
+.bp-section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 36px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--bp-rule);
+}
+.bp-section-intro {
+    margin: 0 0 28px;
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+}
+.bp-section-title {
+    font-size: 30px;
+    margin: 0;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    font-weight: 700;
+}
+.bp-section-meta {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    text-align: right;
+    line-height: 1.6;
+}
+
+/* ===== Consulting firms framework table ===== */
+.bp-firms {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-firms-head {
+    display: grid;
+    grid-template-columns: 140px 1fr 1.6fr;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+    position: relative;
+}
+.bp-firms-head::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-firms-head > div {
+    padding: 14px 20px;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-right: 1px solid rgba(247, 245, 239, 0.14);
+    position: relative;
+    z-index: 1;
+}
+.bp-firms-head > div:last-child { border-right: none; }
+.bp-firms-row {
+    display: grid;
+    grid-template-columns: 140px 1fr 1.6fr;
+    border-top: 1px solid var(--bp-rule);
+}
+.bp-firms-row > div {
+    padding: 14px 20px;
+    font-size: 13.5px;
+    line-height: 1.65;
+    border-right: 1px solid var(--bp-rule);
+}
+.bp-firms-row > div:last-child { border-right: none; }
+.bp-firms-name {
+    font-family: var(--sans);
+    font-weight: 700;
+    color: var(--bp-line);
+    letter-spacing: 0.04em;
+    background: rgba(14, 59, 42, 0.03);
+}
+.bp-firms-doc { color: var(--bp-ink); font-weight: 500; }
+.bp-firms-doc .sub {
+    display: block;
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--ink-mute);
+    margin-top: 2px;
+    letter-spacing: 0.02em;
+}
+.bp-firms-doc a {
+    color: var(--bp-line);
+    border-bottom: 1px dotted var(--bp-line);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color .15s ease, border-color .15s ease;
+}
+.bp-firms-doc a:hover { color: var(--bp-accent); border-bottom-color: var(--bp-accent); }
+.bp-firms-axes { color: var(--ink-soft); }
+
+/* ===== Common dimensions strip ===== */
+.bp-dims {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    margin-top: 16px;
+}
+.bp-dim-cell {
+    padding: 22px 18px 24px;
+    border-right: 1px solid var(--bp-rule);
+    text-align: center;
+    background: var(--bp-paper-2);
+    transition: background .25s ease, transform .25s ease, box-shadow .25s ease;
+    position: relative;
+    cursor: default;
+}
+.bp-dim-cell:last-child { border-right: none; }
+.bp-dim-cell:hover {
+    background: rgba(27, 110, 79, 0.06);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px -10px rgba(6, 32, 24, 0.25);
+    z-index: 2;
+}
+.bp-dim-cell .bp-dim-num { transition: color .25s ease, letter-spacing .25s ease; }
+.bp-dim-cell:hover .bp-dim-num { color: var(--bp-line); letter-spacing: 0.24em; }
+.bp-dim-cell .bp-dim-name { transition: color .25s ease; }
+.bp-dim-cell:hover .bp-dim-name { color: var(--bp-line); }
+.bp-dim-num {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--bp-accent);
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+.bp-dim-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    margin-bottom: 8px;
+    letter-spacing: -0.005em;
+}
+.bp-dim-desc {
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+}
+
+/* ===== Diagnostic question block ===== */
+.bp-diag {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    margin-bottom: 18px;
+}
+.bp-diag-head {
+    display: grid;
+    grid-template-columns: 110px 1fr 120px;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--bp-rule);
+    background: rgba(14, 59, 42, 0.04);
+    gap: 18px;
+    align-items: baseline;
+}
+.bp-diag-tag {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    font-weight: 700;
+    line-height: 1.6;
+}
+.bp-diag-title {
+    font-size: 19px;
+    color: var(--bp-ink);
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+}
+.bp-diag-title .sub {
+    display: block;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: var(--ink-mute);
+    margin-top: 4px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+}
+.bp-diag-score {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    text-align: right;
+    line-height: 1.4;
+}
+.bp-diag-score .now {
+    display: block;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--bp-line);
+    letter-spacing: -0.02em;
+    margin-top: 4px;
+}
+.bp-diag-body { padding: 8px 24px 18px; }
+.bp-q {
+    padding: 18px 0;
+    border-bottom: 1px dashed var(--bp-rule);
+    display: grid;
+    grid-template-columns: 1fr 540px;
+    gap: 22px;
+    align-items: center;
+}
+.bp-q:last-child { border-bottom: none; }
+.bp-q-text {
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--bp-ink);
+}
+.bp-q-num {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.1em;
+    margin-right: 8px;
+}
+.bp-scale {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+}
+.bp-scale label {
+    border: 1px solid var(--bp-rule);
+    background: var(--bp-paper);
+    padding: 10px 6px;
+    text-align: center;
+    cursor: pointer;
+    font-family: var(--sans);
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+    transition: background .15s ease, border-color .15s ease, color .15s ease;
+    user-select: none;
+}
+.bp-scale label .num {
+    display: block;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    margin-bottom: 2px;
+    letter-spacing: -0.01em;
+}
+.bp-scale label:hover { border-color: var(--bp-line); background: rgba(14, 59, 42, 0.04); }
+.bp-scale input { display: none; }
+.bp-scale input:checked + label {
+    background: var(--bp-line);
+    border-color: var(--bp-line);
+    color: var(--bp-paper);
+}
+.bp-scale input:checked + label .num { color: var(--bp-paper); }
+
+/* ===== Result block ===== */
+.bp-result {
+    border: 1.5px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-result-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+    position: relative;
+    overflow: hidden;
+}
+.bp-result-head::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-result-head > div {
+    padding: 22px 26px;
+    border-right: 1px solid rgba(247, 245, 239, 0.14);
+    position: relative;
+    z-index: 1;
+}
+.bp-result-head > div:last-child { border-right: none; }
+.bp-result-head .label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.72;
+    margin-bottom: 8px;
+}
+.bp-result-head .value {
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+.bp-result-head .sub {
+    font-family: var(--sans);
+    font-size: 12.5px;
+    margin-top: 6px;
+    opacity: 0.82;
+    letter-spacing: 0.02em;
+}
+
+/* Dimension score table */
+.bp-result-body { padding: 28px 32px 32px; }
+.bp-radar-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    align-items: stretch;
+}
+.bp-radar {
+    border: 1px solid var(--bp-rule);
+    background: var(--bp-paper);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 360px;
+}
+.bp-radar svg { width: 100%; height: auto; max-width: 360px; display: block; }
+
+.bp-dim-scores {
+    border: 1px solid var(--bp-rule);
+    background: var(--bp-paper);
+}
+.bp-dim-score-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 56px;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--bp-rule);
+}
+.bp-dim-score-row:last-child { border-bottom: none; }
+.bp-dim-score-row { position: relative; }
+.bp-dim-score-row.weak { background: rgba(154, 123, 10, 0.06); }
+.bp-dim-score-row.weak .bp-dim-score-label::after {
+    content: "취약";
+    display: inline-block;
+    margin-left: 8px;
+    padding: 1px 6px;
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--bp-gold);
+    background: rgba(154, 123, 10, 0.12);
+    border: 1px solid var(--bp-gold);
+    letter-spacing: 0.08em;
+    vertical-align: middle;
+}
+.bp-dim-score-label {
+    font-family: var(--sans);
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--bp-ink);
+    letter-spacing: 0.005em;
+    white-space: nowrap;
+}
+.bp-dim-score-track {
+    position: relative;
+    height: 18px;
+    background: rgba(14, 59, 42, 0.05);
+    border: 1px solid var(--bp-rule);
+}
+.bp-dim-score-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #1B6E4F 0%, #14523B 100%);
+    transition: width .35s ease;
+}
+.bp-dim-score-row.weak .bp-dim-score-fill {
+    background: linear-gradient(90deg, #C0991A 0%, #9A7B0A 100%);
+}
+.bp-dim-score-value {
+    font-family: var(--sans);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--bp-line);
+    text-align: right;
+    letter-spacing: -0.02em;
+}
+.bp-dim-score-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 14px 18px 16px;
+    border-top: 2px solid var(--bp-line);
+    background: rgba(14, 59, 42, 0.05);
+}
+.bp-dim-score-total-label {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+.bp-dim-score-total-value {
+    font-family: var(--sans);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--bp-line);
+    letter-spacing: -0.02em;
+}
+
+/* Level ladder */
+.bp-ladder {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    margin-top: 24px;
+}
+.bp-ladder-cell {
+    padding: 18px 16px 20px;
+    border-right: 1px solid var(--bp-rule);
+    background: var(--bp-paper-2);
+    transition: background .25s ease;
+}
+.bp-ladder-cell:last-child { border-right: none; }
+.bp-ladder-cell.active {
+    background: linear-gradient(180deg, rgba(14, 59, 42, 0.22) 0%, rgba(27, 110, 79, 0.18) 100%);
+    box-shadow: inset 0 4px 0 var(--bp-line), inset 0 -4px 0 var(--bp-line);
+}
+.bp-ladder-cell.active .bp-ladder-num,
+.bp-ladder-cell.active .bp-ladder-name,
+.bp-ladder-cell.active .bp-ladder-range,
+.bp-ladder-cell.active .bp-ladder-desc { color: var(--bp-ink); }
+.bp-ladder-cell.active .bp-ladder-num { color: var(--bp-line); font-weight: 700; }
+.bp-ladder-num {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+.bp-ladder-cell.active .bp-ladder-num { color: var(--bp-line); }
+.bp-ladder-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    margin-bottom: 6px;
+    letter-spacing: -0.005em;
+}
+.bp-ladder-range {
+    font-family: var(--sans);
+    font-size: 11.5px;
+    color: var(--ink-mute);
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+}
+.bp-ladder-desc {
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+}
+
+/* Guide cards */
+.bp-guide-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
+}
+.bp-guide {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    padding: 24px 26px;
+}
+.bp-guide-tag {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+.bp-guide h4 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    margin: 0 0 14px;
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--bp-rule);
+}
+.bp-guide ol, .bp-guide ul {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+}
+.bp-guide ol li, .bp-guide ul li { margin-bottom: 6px; }
+.bp-guide ol li:last-child, .bp-guide ul li:last-child { margin-bottom: 0; }
+.bp-guide strong { color: var(--bp-ink); }
+
+/* Actions bar */
+.bp-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+}
+.bp-btn {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper);
+    padding: 12px 22px;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--bp-ink);
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: background .15s ease, color .15s ease;
+}
+.bp-btn:hover { background: var(--bp-line); color: var(--bp-paper); }
+.bp-btn.primary { background: var(--bp-line); color: var(--bp-paper); }
+.bp-btn.primary:hover { background: var(--bp-accent); border-color: var(--bp-accent); }
+
+/* Empty state for result */
+.bp-result.empty .bp-result-head .value { font-size: 22px; opacity: 0.6; }
+.bp-result.empty .bp-result-body { opacity: 0.55; }
+
+/* Chart caption */
+.bp-chart-caption {
+    margin-top: 20px;
+    padding-top: 14px;
+    border-top: 1px solid var(--bp-rule);
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink-mute);
+    line-height: 1.7;
+}
+
+/* ===== Closing footer ===== */
+.bp-footer {
+    padding: 36px 56px 44px;
+    background:
+        radial-gradient(ellipse at 0% 100%, rgba(27, 110, 79, 0.35), transparent 55%),
+        linear-gradient(110deg, #14523B 0%, #0E3B2A 35%, #0A2E22 70%, #062018 100%);
+    color: rgba(247, 245, 239, 0.92);
+    font-family: var(--sans);
+    font-size: 12.5px;
+    line-height: 1.7;
+    border-top: 1.5px solid #062018;
+    position: relative;
+    overflow: hidden;
+}
+.bp-footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-footer > * { position: relative; z-index: 1; }
+.bp-footer strong { color: var(--bp-paper); }
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+    .bp-hero { padding: 48px 32px; }
+    .bp-hero h1 { font-size: 38px; }
+    .bp-section { padding: 40px 32px; }
+    .bp-firms-head, .bp-firms-row { grid-template-columns: 120px 1fr 1.2fr; }
+    .bp-dims { grid-template-columns: repeat(3, 1fr); }
+    .bp-dim-cell:nth-child(3) { border-right: none; }
+    .bp-dim-cell:nth-child(-n+3) { border-bottom: 1px solid var(--bp-rule); }
+    .bp-q { grid-template-columns: 1fr; gap: 12px; }
+    .bp-radar-wrap { grid-template-columns: 1fr; }
+    .bp-ladder { grid-template-columns: 1fr 1fr; }
+    .bp-ladder-cell { border-right: 1px solid var(--bp-rule); border-bottom: 1px solid var(--bp-rule); }
+    .bp-guide-grid { grid-template-columns: 1fr; }
+    .bp-footer { padding: 32px; }
+}
+@media (max-width: 600px) {
+    .bp-sheet { margin: 12px; }
+    .bp-hero h1 { font-size: 28px; }
+    .bp-section-title { font-size: 22px; }
+    .bp-firms-head, .bp-firms-row { grid-template-columns: 1fr; }
+    .bp-dims { grid-template-columns: 1fr; }
+    .bp-result-head { grid-template-columns: 1fr; }
+    .bp-result-head > div { border-right: none; border-bottom: 1px solid rgba(247, 245, 239, 0.14); }
+    .bp-scale { grid-template-columns: repeat(5, 1fr); }
+    .bp-scale label { font-size: 10.5px; padding: 8px 2px; }
+    .bp-scale label .num { font-size: 15px; }
+    .bp-diag-head { grid-template-columns: 1fr; gap: 8px; }
+    .bp-diag-score { text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<div class="bp-sheet">
+
+
+    <!-- ========= BRAND BAR ========= -->
+    <a class="bp-brandbar" href="index.html" aria-label="목차로 이동">
+        <img class="bb-logo" src="assets/logos/logo1-transparent.png" alt="AI ROASTING">
+        <span>AI ROASTING · AX GUIDE TO COMPANY BRAIN OS</span>
+    </a>
+
+    <!-- ========= STEP NAVIGATION ========= -->
+    <nav class="bp-stepnav" aria-label="전체 단계">
+        <ol class="bp-steps">
+            <li class="bp-step active" aria-current="step"><a href="blueprint.html">진단</a></li>
+            <li class="bp-step"><a href="organization.html">1</a></li>
+            <li class="bp-step"><a href="pilot.html">2</a></li>
+            <li class="bp-step"><a href="criteria.html">3</a></li>
+            <li class="bp-step"><a href="resource.html">4</a></li>
+            <li class="bp-step"><a href="ainative.html">5</a></li>
+        </ol>
+        <a class="bp-back" href="index.html">← 목록으로</a>
+        <div class="bp-substeps" aria-label="진단 단계 페이지">
+            <a href="blueprint.html">AX 추진 원칙</a>
+            <a href="diagnosis.html" class="active" aria-current="page">현재 수준 진단</a>
+        </div>
+    </nav>
+
+    <!-- ========= HERO ========= -->
+    <section class="bp-hero">
+        <div class="bp-hero-eyebrow">Diagnosis · COMPANY BRAIN OS 결손 진단</div>
+        <h1>AX를 추진하기 전,<br>우리 조직의 두뇌가 어느 지점에 있는지부터 진단합니다.</h1>
+        <p class="bp-lead">여섯 영역 24개 질문으로 30분 안에 COMPANY BRAIN OS의 어느 층이 비어 있는지를 점수로 확인하고 다음 행동을 정합니다.</p>
+        <div class="bp-summary">
+            <strong>사용 방법은 단순합니다.</strong> 각 문항을 1점(전혀 아니다)에서 5점(완전히 그렇다)으로 매깁니다. 24문항을 모두 응답하면 영역별 평균과 총점, 5단계 성숙도, 가장 약한 두 영역이 자동으로 정리됩니다. 입력값은 본 브라우저에만 저장되며 외부로 전송되지 않습니다.
+        </div>
+    </section>
+
+    <nav class="bp-hero-nav" aria-label="섹션 바로가기">
+        <a href="#common">AX 6대 영역</a>
+        <a href="#questions">24문항 진단</a>
+        <a href="#result">결과와 가이드</a>
+        <a href="#firms">컨설팅펌 참고자료</a>
+    </nav>
+
+    <!-- ========= 1. 공통 6영역 ========= -->
+    <section class="bp-section" id="common">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">AX 6대 영역</h2>
+            </div>
+            <div class="bp-section-meta">각 영역에 4문항씩 · 총 24문항 · 1점에서 5점 척도</div>
+        </div>
+
+        <p style="margin:0 0 20px; font-size:15px; color: var(--ink-soft); line-height:1.75;">여섯 영역은 서로 독립이 아니라 맞물려 움직입니다. 한 영역이 무너지면 나머지 다섯도 함께 흔들립니다. 진단에 앞서 각 영역이 어떤 질문에 답하는지 먼저 확인합니다.</p>
+
+        <div class="bp-dims">
+            <div class="bp-dim-cell">
+                <div class="bp-dim-num">D° 1</div>
+                <div class="bp-dim-name">전략</div>
+                <div class="bp-dim-desc">AI가 전략의 한가운데에 자리하고, CEO가 직접 책임지고 있습니까?</div>
+            </div>
+            <div class="bp-dim-cell">
+                <div class="bp-dim-num">D° 2</div>
+                <div class="bp-dim-name">인재와 문화</div>
+                <div class="bp-dim-desc">전 직원이 AI와 협업하는 공통 언어와 역량을 갖추고 있습니까?</div>
+            </div>
+            <div class="bp-dim-cell">
+                <div class="bp-dim-num">D° 3</div>
+                <div class="bp-dim-name">운영모델과 프로세스</div>
+                <div class="bp-dim-desc">핵심 워크플로우를 AI 전제로 재설계했습니까, 아니면 부분 자동화에 머물고 있습니까?</div>
+            </div>
+            <div class="bp-dim-cell">
+                <div class="bp-dim-num">D° 4</div>
+                <div class="bp-dim-name">데이터</div>
+                <div class="bp-dim-desc">AI가 활용할 수 있는 데이터가 갖춰져 있고, 출처 추적과 품질 관리가 작동하고 있습니까?</div>
+            </div>
+            <div class="bp-dim-cell">
+                <div class="bp-dim-num">D° 5</div>
+                <div class="bp-dim-name">AI 도구</div>
+                <div class="bp-dim-desc">모델, API, 에이전트, 보안, 비용이 단일 플랫폼 위에서 통합 운영되고 있습니까?</div>
+            </div>
+            <div class="bp-dim-cell">
+                <div class="bp-dim-num">D° 6</div>
+                <div class="bp-dim-name">거버넌스와 책임</div>
+                <div class="bp-dim-desc">사고 발생 전에 위험 매트릭스가 마련되어 있고, 사고 발생 시 추적이 가능합니까?</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= 3. 24문항 진단 ========= -->
+    <section class="bp-section" id="questions">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">24문항 진단</h2>
+            </div>
+            <div class="bp-section-meta">1점 전혀 아니다 · 2점 아니다 · 3점 보통이다 · 4점 그렇다 · 5점 완전히 그렇다</div>
+        </div>
+
+        <p style="margin:0 0 28px; font-size:15px; color: var(--ink-soft); line-height:1.75;">각 문항에 솔직하게 답합니다. "그렇게 됐으면 좋겠다"가 아니라 "지금 실제로 그러한가"를 기준으로 매깁니다. 점수가 낮게 나와도 괜찮습니다. 본 진단의 목적은 약한 영역을 정확히 짚어내는 데 있습니다.</p>
+
+        <form id="diagForm">
+
+            <!-- 영역 1. 전략 -->
+            <div class="bp-diag" data-dim="strategy">
+                <div class="bp-diag-head">
+                    <div class="bp-diag-tag">D° 1<br>전략</div>
+                    <div class="bp-diag-title">AI가 전략의 한가운데에 있는가
+                        <span class="sub">McKinsey Rewired · Bain Ambition · BCG AI Radar 공통 영역</span>
+                    </div>
+                    <div class="bp-diag-score">영역 평균<span class="now" data-dim-score="strategy">—</span></div>
+                </div>
+                <div class="bp-diag-body">
+                    <div class="bp-q" data-q="s1">
+                        <div class="bp-q-text"><span class="bp-q-num">Q01</span>우리 회사에는 향후 3년 안에 AI가 매출과 영업이익에 어떤 형태로 기여할지 한 장으로 정리된 청사진이 있고, 경영진이 같은 그림을 공유합니다.</div>
+                        <div class="bp-scale">
+                            <input type="radio" name="s1" value="1" id="s1-1"><label for="s1-1"><span class="num">1</span>전혀</label>
+                            <input type="radio" name="s1" value="2" id="s1-2"><label for="s1-2"><span class="num">2</span>아니다</label>
+                            <input type="radio" name="s1" value="3" id="s1-3"><label for="s1-3"><span class="num">3</span>보통</label>
+                            <input type="radio" name="s1" value="4" id="s1-4"><label for="s1-4"><span class="num">4</span>그렇다</label>
+                            <input type="radio" name="s1" value="5" id="s1-5"><label for="s1-5"><span class="num">5</span>완전히</label>
+                        </div>
+                    </div>
+                    <div class="bp-q" data-q="s2">
+                        <div class="bp-q-text"><span class="bp-q-num">Q02</span>AI 의사결정의 최종 권한이 CEO 본인에게 있고, IT 부서나 디지털 본부 단독 어젠다로 다뤄지지 않습니다.</div>
+                        <div class="bp-scale">
+                            <input type="radio" name="s2" value="1" id="s2-1"><label for="s2-1"><span class="num">1</span>전혀</label>
+                            <input type="radio" name="s2" value="2" id="s2-2"><label for="s2-2"><span class="num">2</span>아니다</label>
+                            <input type="radio" name="s2" value="3" id="s2-3"><label for="s2-3"><span class="num">3</span>보통</label>
+                            <input type="radio" name="s2" value="4" id="s2-4"><label for="s2-4"><span class="num">4</span>그렇다</label>
+                            <input type="radio" name="s2" value="5" id="s2-5"><label for="s2-5"><span class="num">5</span>완전히</label>
+                        </div>
+                    </div>
+                    <div class="bp-q" data-q="s3">
+                        <div class="bp-q-text"><span class="bp-q-num">Q03</span>분산된 PoC가 아니라 회사의 가치 창출에 직결되는 빅 베팅 3에서 5건에 자원이 집중되어 있고, 나머지는 의도적으로 보류합니다.</div>
+                        <div class="bp-scale">
+                            <input type="radio" name="s3" value="1" id="s3-1"><label for="s3-1"><span class="num">1</span>전혀</label>
+                            <input type="radio" name="s3" value="2" id="s3-2"><label for="s3-2"><span class="num">2</span>아니다</label>
+                            <input type="radio" name="s3" value="3" id="s3-3"><label for="s3-3"><span class="num">3</span>보통</label>
+                            <input type="radio" name="s3" value="4" id="s3-4"><label for="s3-4"><span class="num">4</span>그렇다</label>
+                            <input type="radio" name="s3" value="5" id="s3-5"><label for="s3-5"><span class="num">5</span>완전히</label>
+                        </div>
+                    </div>
+                    <div class="bp-q" data-q="s4">
+                        <div class="bp-q-text"><span class="bp-q-num">Q04</span>AI 투자 ROI 지표가 전사 KPI와 연결되어 있고, "단기 ROI가 잡히지 않더라도 지속한다"는 결정이 임원회의 기록에 남아 있습니다.</div>
+                        <div class="bp-scale">
+                            <input type="radio" name="s4" value="1" id="s4-1"><label for="s4-1"><span class="num">1</span>전혀</label>
+                            <input type="radio" name="s4" value="2" id="s4-2"><label for="s4-2"><span class="num">2</span>아니다</label>
+                            <input type="radio" name="s4" value="3" id="s4-3"><label for="s4-3"><span class="num">3</span>보통</label>
+                            <input type="radio" name="s4" value="4" id="s4-4"><label for="s4-4"><span class="num">4</span>그렇다</label>
+                            <input type="radio" name="s4" value="5" id="s4-5"><label for="s4-5"><span class="num">5</span>완전히</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 영역 2. 인재와 문화 -->
+            <div class="bp-diag" data-dim="people">
+                <div class="bp-diag-head">
+                    <div class="bp-diag-tag">D° 2<br>인재와 문화</div>
+                    <div class="bp-diag-title">전 직원이 AI와 같이 일하는 법을 배웠는가
+                        <span class="sub">McKinsey 70 % 사람 투자 · KPMG 인재와 문화 · Deloitte People &amp; Culture</span>
+                    </div>
+                    <div class="bp-diag-score">영역 평균<span class="now" data-dim-score="people">—</span></div>
+                </div>
+                <div class="bp-diag-body">
+                    <div class="bp-q" data-q="p1">
+                        <div class="bp-q-text"><span class="bp-q-num">Q05</span>경영진과 TF는 도구 사용법이 아니라 위임, 설명, 분별, 성실 같은 협업 역량을 같은 어휘로 익혔습니다.</div>
+                        <div class="bp-scale">
+                            <input type="radio" name="p1" value="1" id="p1-1"><label for="p1-1"><span class="num">1</span>전혀</label>
+                            <input type="radio" name="p1" value="2" id="p1-2"><label for="p1-2"><span class="num">2</span>아니다</label>
+                            <input type="radio" name="p1" value="3" id="p1-3"><label for="p1-3"><span class="num">3</span>보통</label>
+                            <input type="radio" name="p1" value="4" id="p1-4"><label for="p1-4"><span class="num">4</span>그렇다</label>
+                            <input type="radio" name="p1" value="5" id="p1-5"><label for="p1-5"><span class="num">5</span>완전히</label>
+                        </div>
+                    </div>
+                    <div class="bp-q" data-q="p2">
+                        <div class="bp-q-text"><span class="bp-q-num">Q06</span>전 직원이 자기 업무에서 AI를 안전하게 쓰는 기본 교육을 이수했고, 라이선스 비용보다 교육 비용이 크거나 같은 수준입니다.</div>
+                        <div class="bp-scale">
+                            <input type="radio" name="p2" value="1" id="p2-1"><label for="p2-1"><span class="num">1</span>전혀</label>
+                            <input type="radio" name="p2" value="2" id="p2-2"><label for="p2-2"><span class="num">2</span>아니다</label>
+                            <input type="radio" name="p2" value="3" id="p2-3"><label for="p2-3"><span class="num">3</span>보통</label>
+                            <input type="radio" name="p2" value="4" id="p2-4"><label for="p2-4"><span class="num">4</span>그렇다</label>
+                            <input type="radio" name="p2" value="5" id="p2-5"><label for="p2-5"><span class="num">5</span>완전히</label>
+                        </div>
+                    </div>
+                    <div class="bp-q" data-q="p3">
+                        <div class="bp-q-text"><span class="bp-q-num">Q07</span>AI 도입으로 절감된 시간이 더 가치 있는 업무로 이동하는지 추적되며, 시간 비효율을 막는 별도 장치가 작동합니다.</div>
+                        <div class="bp-scale">
+                            <input type="radio" name="p3" value="1" id="p3-1"><label for="p3-1"><span class="num">1</span>전혀</label>
+                            <input type="radio" name="p3" value="2" id="p3-2"><label for="p3-2"><span class="num">2</span>아니다</label>
+                            <input type="radio" name="p3" value="3" id="p3-3"><label for="p3-3"><span class="num">3</span>보통</label>
+                            <input type="radio" name="p3" value="4" id="p3-4"><label for="p3-4"><span class="num">4</span>그렇다</label>
+                            <input type="radio" name="p3" value="5" id="p3-5"><label for="p3-5"><span class="num">5</span>완전히</label>
+                        </div>
+                    </div>
+                    <div class="bp-q" data-q="p4">
+                        <div class="bp-q-text"><span class="bp-q-num">Q08</span>현장에서 올라온 AI 활용 아이디어가 정기적으로 발굴되며, 도메인 전문가와 기술 인력이 짝을 이뤄 협업하는 구조가 자리잡았습니다.</div>
+                        <div class="bp-scale">
+                            <input type="radio" name="p4" value="1" id="p4-1"><label for="p4-1"><span class="num">1</span>전혀</label>
+                            <input type="radio" name="p4" value="2" id="p4-2"><label for="p4-2"><span class="num">2</span>아니다</label>
+                            <input type="radio" name="p4" value="3" id="p4-3"><label for="p4-3"><span class="num">3</span>보통</label>
+                            <input type="radio" name="p4" value="4" id="p4-4"><label for="p4-4"><span class="num">4</span>그렇다</label>
+                            <input type="radio" name="p4" value="5" id="p4-5"><label for="p4-5"><span class="num">5</span>완전히</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 영역 3. 운영모델과 프로세스 -->
+            <div class="bp-diag" data-dim="process">
+                <div class="bp-diag-head">
+                    <div class="bp-diag-tag">D° 3<br>운영모델과 프로세스</div>
+                    <div class="bp-diag-title">핵심 워크플로우를 AI 전제로 다시 짰는가
+                        <span class="sub">BCG 10-20-70 · McKinsey Reshape · Deloitte Workflow</span>
+                    </div>
+                    <div class="bp-diag-score">영역 평균<span class="now" data-dim-score="process">—</span></div>
+                </div>
+                <div class="bp-diag-body">
+                    <div class="bp-q" data-q="o1">
+                        <div class="bp-q-text"><span class="bp-q-num">Q09</span>적어도 하나 이상의 핵심 워크플로우가 끝에서 끝까지 AI를 전제로 다시 그려졌고, 부분 자동화에 머물지 않습니다.</div>
+                        <div class="bp-scale">
+                            <input type="radio" name="o1" value="1" id="o1-1"><label for="o1-1"><span class="num">1</span>전혀</label>
+                            <input type="radio" name="o1" value="2" id="o1-2"><label for="o1-2"><span class="num">2</span>아니다</label>
+                            <input type="radio" name="o1" value="3" id="o1-3"><label for="o1-3"><span class="num">3</span>보통</label>
+                            <input type="radio" name="o1" value="4" id="o1-4"><label for="o1-4"><span class="num">4</span>그렇다</label>
+                            <input type="radio" name="o1" value="5" id="o1-5"><label for="o1-5"><span class="num">5</span>완전히</label>
+                        </div>
+                    </div>
+                    <div class="bp-q" data-q="o2">
+                        <div class="bp-q-text"><span class="bp-q-num">Q10</span>예산과 인력의 약 70%가 알고리즘이나 기술이 아니라 사람과 프로세스 재설계에 배분되어 있습니다.</div>
+                        <div class="bp-scale">
+                            <input type="radio" name="o2" value="1" id="o2-1"><label for="o2-1"><span class="num">1</span>전혀</label>
+                            <input type="radio" name="o2" value="2" id="o2-2"><label for="o2-2"><span class="num">2</span>아니다</label>
+                            <input type="radio" name="o2" value="3" id="o2-3"><label for="o2-3"><span class="num">3</span>보통</label>
+                            <input type="radio" name="o2" value="4" id="o2-4"><label for="o2-4"><span class="num">4</span>그렇다</label>
+                            <input type="radio" name="o2" value="5" id="o2-5"><label for="o2-5"><span class="num">5</span>완전히</label>
+                        </div>
+                    </div>
+                    <div class="bp-q" data-q="o3">
+                        <div class="bp-q-text"><span class="bp-q-num">Q11</span>파일럿에서 검증된 AI 활용이 전사 표준 절차로 등재되어, 담당자가 바뀌어도 같은 절차가 유지됩니다.</div>
+                        <div class="bp-scale">
+                            <input type="radio" name="o3" value="1" id="o3-1"><label for="o3-1"><span class="num">1</span>전혀</label>
+                            <input type="radio" name="o3" value="2" id="o3-2"><label for="o3-2"><span class="num">2</span>아니다</label>
+                            <input type="radio" name="o3" value="3" id="o3-3"><label for="o3-3"><span class="num">3</span>보통</label>
+                            <input type="radio" name="o3" value="4" id="o3-4"><label for="o3-4"><span class="num">4</span>그렇다</label>
+                            <input type="radio" name="o3" value="5" id="o3-5"><label for="o3-5"><span class="num">5</span>완전히</label>
+                        </div>
+                    </div>
+                    <div class="bp-q" data-q="o4">
+                        <div class="bp-q-text"><span class="bp-q-num">Q12</span>업무 종류에 따라 AI 결과의 검증 강도가 다르게 설계되어 있고, 어디까지 인간이 키를 쥐는지에 대한 규칙이 명문화되어 있습니다.</div>
+                        <div class="bp-scale">
+                            <input type="radio" name="o4" value="1" id="o4-1"><label for="o4-1"><span class="num">1</span>전혀</label>
+                            <input type="radio" name="o4" value="2" id="o4-2"><label for="o4-2"><span class="num">2</span>아니다</label>
+                            <input type="radio" name="o4" value="3" id="o4-3"><label for="o4-3"><span class="num">3</span>보통</label>
+                            <input type="radio" name="o4" value="4" id="o4-4"><label for="o4-4"><span class="num">4</span>그렇다</label>
+                            <input type="radio" name="o4" value="5" id="o4-5"><label for="o4-5"><span class="num">5</span>완전히</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 영역 4. 데이터 -->
+            <div class="bp-diag" data-dim="data">
+                <div class="bp-diag-head">
+                    <div class="bp-diag-tag">D° 4<br>데이터</div>
+                    <div class="bp-diag-title">AI가 쓸 수 있는 형태의 데이터가 있는가
+                        <span class="sub">Bain Data Foundation · KPMG Data · McKinsey Data</span>
+                    </div>
+                    <div class="bp-diag-score">영역 평균<span class="now" data-dim-score="data">—</span></div>
+                </div>
+                <div class="bp-diag-body">
+                    <div class="bp-q" data-q="d1">
+                        <div class="bp-q-text"><span class="bp-q-num">Q13</span>핵심 빅 베팅에 필요한 사내 데이터(고객, 제품, 운영 기록)가 검색과 인용이 가능한 형태로 정리되어 있습니다.</div>
+                        <div class="bp-scale">
+                            <input type="radio" name="d1" value="1" id="d1-1"><label for="d1-1"><span class="num">1</span>전혀</label>
+                            <input type="radio" name="d1" value="2" id="d1-2"><label for="d1-2"><span class="num">2</span>아니다</label>
+                            <input type="radio" name="d1" value="3" id="d1-3"><label for="d1-3"><span class="num">3</span>보통</label>
+                            <input type="radio" name="d1" value="4" id="d1-4"><label for="d1-4"><span class="num">4</span>그렇다</label>
+                            <input type="radio" name="d1" value="5" id="d1-5"><label for="d1-5"><span class="num">5</span>완전히</label>
+                        </div>
+                    </div>
+                    <div class="bp-q" data-q="d2">
+                        <div class="bp-q-text"><span class="bp-q-num">Q14</span>현장의 암묵지(베테랑이 머릿속으로 처리하는 기준)가 문서, 룰, 액션 단위로 구조화되어 AI가 참조할 수 있는 형태로 축적되고 있습니다.</div>
+                        <div class="bp-scale">
+                            <input type="radio" name="d2" value="1" id="d2-1"><label for="d2-1"><span class="num">1</span>전혀</label>
+                            <input type="radio" name="d2" value="2" id="d2-2"><label for="d2-2"><span class="num">2</span>아니다</label>
+                            <input type="radio" name="d2" value="3" id="d2-3"><label for="d2-3"><span class="num">3</span>보통</label>
+                            <input type="radio" name="d2" value="4" id="d2-4"><label for="d2-4"><span class="num">4</span>그렇다</label>
+                            <input type="radio" name="d2" value="5" id="d2-5"><label for="d2-5"><span class="num">5</span>완전히</label>
+                        </div>
+                    </div>
+                    <div class="bp-q" data-q="d3">
+                        <div class="bp-q-text"><span class="bp-q-num">Q15</span>AI 답변이 어떤 데이터를 근거로 했는지 출처가 추적되며, 사실 검증이 필요한 업무에서는 출처 표기가 강제됩니다.</div>
+                        <div class="bp-scale">
+                            <input type="radio" name="d3" value="1" id="d3-1"><label for="d3-1"><span class="num">1</span>전혀</label>
+                            <input type="radio" name="d3" value="2" id="d3-2"><label for="d3-2"><span class="num">2</span>아니다</label>
+                            <input type="radio" name="d3" value="3" id="d3-3"><label for="d3-3"><span class="num">3</span>보통</label>
+                            <input type="radio" name="d3" value="4" id="d3-4"><label for="d3-4"><span class="num">4</span>그렇다</label>
+                            <input type="radio" name="d3" value="5" id="d3-5"><label for="d3-5"><span class="num">5</span>완전히</label>
+                        </div>
+                    </div>
+                    <div class="bp-q" data-q="d4">
+                        <div class="bp-q-text"><span class="bp-q-num">Q16</span>개인정보와 영업 비밀이 포함된 데이터를 어떤 모델에 어디까지 보낼 수 있는지 매트릭스가 게시되어 있고, 직원이 이를 자기 일처럼 인식합니다.</div>
+                        <div class="bp-scale">
+                            <input type="radio" name="d4" value="1" id="d4-1"><label for="d4-1"><span class="num">1</span>전혀</label>
+                            <input type="radio" name="d4" value="2" id="d4-2"><label for="d4-2"><span class="num">2</span>아니다</label>
+                            <input type="radio" name="d4" value="3" id="d4-3"><label for="d4-3"><span class="num">3</span>보통</label>
+                            <input type="radio" name="d4" value="4" id="d4-4"><label for="d4-4"><span class="num">4</span>그렇다</label>
+                            <input type="radio" name="d4" value="5" id="d4-5"><label for="d4-5"><span class="num">5</span>완전히</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 영역 5. AI 도구 -->
+            <div class="bp-diag" data-dim="tech">
+                <div class="bp-diag-head">
+                    <div class="bp-diag-tag">D° 5<br>AI 도구</div>
+                    <div class="bp-diag-title">에이전트가 안전하게 부서 경계를 넘는가
+                        <span class="sub">PwC Agent OS · BCG Tech Platform · McKinsey Technology</span>
+                    </div>
+                    <div class="bp-diag-score">영역 평균<span class="now" data-dim-score="tech">—</span></div>
+                </div>
+                <div class="bp-diag-body">
+                    <div class="bp-q" data-q="t1">
+                        <div class="bp-q-text"><span class="bp-q-num">Q17</span>모델 호출, 보안 통제, 비용 관리, 로그가 통합된 회사 영역의 AI 플랫폼이 있고, 부서마다 따로 계약한 도구들이 난립하지 않습니다.</div>
+                        <div class="bp-scale">
+                            <input type="radio" name="t1" value="1" id="t1-1"><label for="t1-1"><span class="num">1</span>전혀</label>
+                            <input type="radio" name="t1" value="2" id="t1-2"><label for="t1-2"><span class="num">2</span>아니다</label>
+                            <input type="radio" name="t1" value="3" id="t1-3"><label for="t1-3"><span class="num">3</span>보통</label>
+                            <input type="radio" name="t1" value="4" id="t1-4"><label for="t1-4"><span class="num">4</span>그렇다</label>
+                            <input type="radio" name="t1" value="5" id="t1-5"><label for="t1-5"><span class="num">5</span>완전히</label>
+                        </div>
+                    </div>
+                    <div class="bp-q" data-q="t2">
+                        <div class="bp-q-text"><span class="bp-q-num">Q18</span>한 작업에 여러 AI 에이전트가 이어서 호출되는 경우, 그 흐름이 한 곳에서 설계되고 관측됩니다.</div>
+                        <div class="bp-scale">
+                            <input type="radio" name="t2" value="1" id="t2-1"><label for="t2-1"><span class="num">1</span>전혀</label>
+                            <input type="radio" name="t2" value="2" id="t2-2"><label for="t2-2"><span class="num">2</span>아니다</label>
+                            <input type="radio" name="t2" value="3" id="t2-3"><label for="t2-3"><span class="num">3</span>보통</label>
+                            <input type="radio" name="t2" value="4" id="t2-4"><label for="t2-4"><span class="num">4</span>그렇다</label>
+                            <input type="radio" name="t2" value="5" id="t2-5"><label for="t2-5"><span class="num">5</span>완전히</label>
+                        </div>
+                    </div>
+                    <div class="bp-q" data-q="t3">
+                        <div class="bp-q-text"><span class="bp-q-num">Q19</span>모델과 외부 API 변경이 발생해도 사내 워크플로우가 쉽게 갈아탈 수 있도록 추상화 계층이 마련되어 있습니다.</div>
+                        <div class="bp-scale">
+                            <input type="radio" name="t3" value="1" id="t3-1"><label for="t3-1"><span class="num">1</span>전혀</label>
+                            <input type="radio" name="t3" value="2" id="t3-2"><label for="t3-2"><span class="num">2</span>아니다</label>
+                            <input type="radio" name="t3" value="3" id="t3-3"><label for="t3-3"><span class="num">3</span>보통</label>
+                            <input type="radio" name="t3" value="4" id="t3-4"><label for="t3-4"><span class="num">4</span>그렇다</label>
+                            <input type="radio" name="t3" value="5" id="t3-5"><label for="t3-5"><span class="num">5</span>완전히</label>
+                        </div>
+                    </div>
+                    <div class="bp-q" data-q="t4">
+                        <div class="bp-q-text"><span class="bp-q-num">Q20</span>월별 토큰 사용량과 비용이 부서별로 추적되어, 어떤 use case가 어떤 비용을 만드는지 임원이 한 화면에서 봅니다.</div>
+                        <div class="bp-scale">
+                            <input type="radio" name="t4" value="1" id="t4-1"><label for="t4-1"><span class="num">1</span>전혀</label>
+                            <input type="radio" name="t4" value="2" id="t4-2"><label for="t4-2"><span class="num">2</span>아니다</label>
+                            <input type="radio" name="t4" value="3" id="t4-3"><label for="t4-3"><span class="num">3</span>보통</label>
+                            <input type="radio" name="t4" value="4" id="t4-4"><label for="t4-4"><span class="num">4</span>그렇다</label>
+                            <input type="radio" name="t4" value="5" id="t4-5"><label for="t4-5"><span class="num">5</span>완전히</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 영역 6. 거버넌스와 책임 -->
+            <div class="bp-diag" data-dim="governance">
+                <div class="bp-diag-head">
+                    <div class="bp-diag-tag">D° 6<br>거버넌스와 책임</div>
+                    <div class="bp-diag-title">사고가 나기 전에 명확한 AI 사용 규칙을 만들었는가
+                        <span class="sub">PwC Responsible AI · KPMG Trusted AI · Deloitte Risk</span>
+                    </div>
+                    <div class="bp-diag-score">영역 평균<span class="now" data-dim-score="governance">—</span></div>
+                </div>
+                <div class="bp-diag-body">
+                    <div class="bp-q" data-q="g1">
+                        <div class="bp-q-text"><span class="bp-q-num">Q21</span>AI 사용 가이드라인이 사고가 터진 뒤가 아니라, 도입 첫 주에 발표됐고 정기적으로 갱신됩니다.</div>
+                        <div class="bp-scale">
+                            <input type="radio" name="g1" value="1" id="g1-1"><label for="g1-1"><span class="num">1</span>전혀</label>
+                            <input type="radio" name="g1" value="2" id="g1-2"><label for="g1-2"><span class="num">2</span>아니다</label>
+                            <input type="radio" name="g1" value="3" id="g1-3"><label for="g1-3"><span class="num">3</span>보통</label>
+                            <input type="radio" name="g1" value="4" id="g1-4"><label for="g1-4"><span class="num">4</span>그렇다</label>
+                            <input type="radio" name="g1" value="5" id="g1-5"><label for="g1-5"><span class="num">5</span>완전히</label>
+                        </div>
+                    </div>
+                    <div class="bp-q" data-q="g2">
+                        <div class="bp-q-text"><span class="bp-q-num">Q22</span>편향, 환각, 개인정보, 저작권, 보안 같은 위험을 점검하는 책임자가 명시되어 있고, 정기적으로 회의 안건에 오릅니다.</div>
+                        <div class="bp-scale">
+                            <input type="radio" name="g2" value="1" id="g2-1"><label for="g2-1"><span class="num">1</span>전혀</label>
+                            <input type="radio" name="g2" value="2" id="g2-2"><label for="g2-2"><span class="num">2</span>아니다</label>
+                            <input type="radio" name="g2" value="3" id="g2-3"><label for="g2-3"><span class="num">3</span>보통</label>
+                            <input type="radio" name="g2" value="4" id="g2-4"><label for="g2-4"><span class="num">4</span>그렇다</label>
+                            <input type="radio" name="g2" value="5" id="g2-5"><label for="g2-5"><span class="num">5</span>완전히</label>
+                        </div>
+                    </div>
+                    <div class="bp-q" data-q="g3">
+                        <div class="bp-q-text"><span class="bp-q-num">Q23</span>AI가 만든 산출물의 사용 이력이 로그로 남아, 사고가 발생했을 때 원인을 추적할 수 있습니다.</div>
+                        <div class="bp-scale">
+                            <input type="radio" name="g3" value="1" id="g3-1"><label for="g3-1"><span class="num">1</span>전혀</label>
+                            <input type="radio" name="g3" value="2" id="g3-2"><label for="g3-2"><span class="num">2</span>아니다</label>
+                            <input type="radio" name="g3" value="3" id="g3-3"><label for="g3-3"><span class="num">3</span>보통</label>
+                            <input type="radio" name="g3" value="4" id="g3-4"><label for="g3-4"><span class="num">4</span>그렇다</label>
+                            <input type="radio" name="g3" value="5" id="g3-5"><label for="g3-5"><span class="num">5</span>완전히</label>
+                        </div>
+                    </div>
+                    <div class="bp-q" data-q="g4">
+                        <div class="bp-q-text"><span class="bp-q-num">Q24</span>외부 규제(국내 AI 기본법, EU AI Act, 산업별 가이드)의 변화가 정기적으로 모니터링되고, 사내 정책에 반영되는 절차가 있습니다.</div>
+                        <div class="bp-scale">
+                            <input type="radio" name="g4" value="1" id="g4-1"><label for="g4-1"><span class="num">1</span>전혀</label>
+                            <input type="radio" name="g4" value="2" id="g4-2"><label for="g4-2"><span class="num">2</span>아니다</label>
+                            <input type="radio" name="g4" value="3" id="g4-3"><label for="g4-3"><span class="num">3</span>보통</label>
+                            <input type="radio" name="g4" value="4" id="g4-4"><label for="g4-4"><span class="num">4</span>그렇다</label>
+                            <input type="radio" name="g4" value="5" id="g4-5"><label for="g4-5"><span class="num">5</span>완전히</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bp-actions">
+                <button type="button" class="bp-btn" id="resetBtn">초기화</button>
+                <button type="button" class="bp-btn" id="saveBtn">로컬에 저장</button>
+                <button type="button" class="bp-btn primary" id="scrollResultBtn">결과 보기</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- ========= 4. 결과와 가이드 ========= -->
+    <section class="bp-section" id="result">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">결과와 가이드</h2>
+            </div>
+            <div class="bp-section-meta">총점 24 ~ 120 · 5단계 성숙도 · 취약 영역 2개 자동 식별</div>
+        </div>
+
+        <div class="bp-result empty" id="resultBlock">
+            <div class="bp-result-head">
+                <div>
+                    <div class="label">총점</div>
+                    <div class="value" id="totalScore">진단 미완료</div>
+                    <div class="sub" id="totalSub">24문항을 모두 채워 주세요.</div>
+                </div>
+                <div>
+                    <div class="label">성숙도 단계</div>
+                    <div class="value" id="levelName">—</div>
+                    <div class="sub" id="levelSub">레벨이 자동으로 표시됩니다.</div>
+                </div>
+                <div>
+                    <div class="label">취약 영역</div>
+                    <div class="value" id="weakAxes" style="font-size:22px; line-height:1.3;">—</div>
+                    <div class="sub" id="weakSub">두 영역이 다음 행동의 출발점입니다.</div>
+                </div>
+            </div>
+
+            <div class="bp-result-body">
+                <div class="bp-radar-wrap">
+                    <div class="bp-radar">
+                        <svg viewBox="0 0 360 360" id="radarSvg" aria-label="6영역 레이더 차트">
+                            <g id="radarGrid" stroke="#D6D2C5" fill="none" stroke-width="1"></g>
+                            <g id="radarAxes" stroke="#D6D2C5" stroke-width="1"></g>
+                            <polygon id="radarShape" fill="rgba(27, 110, 79, 0.22)" stroke="#0E3B2A" stroke-width="2"></polygon>
+                            <g id="radarLabels" font-family="'Pretendard Variable', 'Inter', sans-serif" font-size="12" fill="#0F1A16" font-weight="600"></g>
+                        </svg>
+                    </div>
+
+                    <div class="bp-dim-scores" id="dimScoresList">
+                        <div class="bp-dim-score-row" data-row="strategy">
+                            <div class="bp-dim-score-label">전략</div>
+                            <div class="bp-dim-score-track"><div class="bp-dim-score-fill" style="width: 0%;"></div></div>
+                            <div class="bp-dim-score-value">—</div>
+                        </div>
+                        <div class="bp-dim-score-row" data-row="people">
+                            <div class="bp-dim-score-label">인재와 문화</div>
+                            <div class="bp-dim-score-track"><div class="bp-dim-score-fill" style="width: 0%;"></div></div>
+                            <div class="bp-dim-score-value">—</div>
+                        </div>
+                        <div class="bp-dim-score-row" data-row="process">
+                            <div class="bp-dim-score-label">운영모델 프로세스</div>
+                            <div class="bp-dim-score-track"><div class="bp-dim-score-fill" style="width: 0%;"></div></div>
+                            <div class="bp-dim-score-value">—</div>
+                        </div>
+                        <div class="bp-dim-score-row" data-row="data">
+                            <div class="bp-dim-score-label">데이터</div>
+                            <div class="bp-dim-score-track"><div class="bp-dim-score-fill" style="width: 0%;"></div></div>
+                            <div class="bp-dim-score-value">—</div>
+                        </div>
+                        <div class="bp-dim-score-row" data-row="tech">
+                            <div class="bp-dim-score-label">AI 도구</div>
+                            <div class="bp-dim-score-track"><div class="bp-dim-score-fill" style="width: 0%;"></div></div>
+                            <div class="bp-dim-score-value">—</div>
+                        </div>
+                        <div class="bp-dim-score-row" data-row="governance">
+                            <div class="bp-dim-score-label">거버넌스 책임</div>
+                            <div class="bp-dim-score-track"><div class="bp-dim-score-fill" style="width: 0%;"></div></div>
+                            <div class="bp-dim-score-value">—</div>
+                        </div>
+                        <div class="bp-dim-score-total">
+                            <div class="bp-dim-score-total-label">총점</div>
+                            <div class="bp-dim-score-total-value" id="totalScoreInline">— / 120점</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bp-ladder" id="levelLadder">
+                    <div class="bp-ladder-cell" data-level="1">
+                        <div class="bp-ladder-num">Lv 1</div>
+                        <div class="bp-ladder-name">AI-Unaware</div>
+                        <div class="bp-ladder-range">24 ~ 43점</div>
+                        <div class="bp-ladder-desc">개인 단위 실험만 산발적으로 진행되며, 전사 수준의 청사진과 가이드가 모두 부재합니다.</div>
+                    </div>
+                    <div class="bp-ladder-cell" data-level="2">
+                        <div class="bp-ladder-num">Lv 2</div>
+                        <div class="bp-ladder-name">AI-Curious</div>
+                        <div class="bp-ladder-range">44 ~ 62점</div>
+                        <div class="bp-ladder-desc">PoC가 여러 부서에서 시작됐으나 우선순위가 없어, 성과가 분산되고 가시화되지 않습니다.</div>
+                    </div>
+                    <div class="bp-ladder-cell" data-level="3">
+                        <div class="bp-ladder-num">Lv 3</div>
+                        <div class="bp-ladder-name">AI-Aware</div>
+                        <div class="bp-ladder-range">63 ~ 81점</div>
+                        <div class="bp-ladder-desc">청사진과 빅 베팅이 정의됐고 기본 교육이 돌고 있으나, 운영모델 재설계가 아직 본격화되지 않았습니다.</div>
+                    </div>
+                    <div class="bp-ladder-cell" data-level="4">
+                        <div class="bp-ladder-num">Lv 4</div>
+                        <div class="bp-ladder-name">AI-Capable</div>
+                        <div class="bp-ladder-range">82 ~ 100점</div>
+                        <div class="bp-ladder-desc">핵심 워크플로우 한두 개가 AI 전제로 재설계되어 작동하며, 거버넌스와 측정이 자리잡았습니다.</div>
+                    </div>
+                    <div class="bp-ladder-cell" data-level="5">
+                        <div class="bp-ladder-num">Lv 5</div>
+                        <div class="bp-ladder-name">AI-Native</div>
+                        <div class="bp-ladder-range">101 ~ 120점</div>
+                        <div class="bp-ladder-desc">여러 에이전트가 부서를 가로지르고, 사람·프로세스·기술·데이터·거버넌스가 한 시스템으로 운영됩니다.</div>
+                    </div>
+                </div>
+
+                <div class="bp-guide-grid" id="guideGrid">
+                    <div class="bp-guide">
+                        <div class="bp-guide-tag">Guide · 이번 단계</div>
+                        <h4 id="guideStageTitle">진단을 먼저 완료해 주세요</h4>
+                        <ol id="guideStageList">
+                            <li>24문항을 모두 채우면, 현재 단계에 맞는 다음 행동 3가지가 여기에 표시됩니다.</li>
+                        </ol>
+                    </div>
+                    <div class="bp-guide">
+                        <div class="bp-guide-tag">Guide · 취약 영역 처방</div>
+                        <h4 id="guideAxisTitle">취약 영역이 식별되면 처방이 나옵니다</h4>
+                        <ul id="guideAxisList">
+                            <li>가장 약한 두 영역이 다음 단계의 출발점입니다. 해당 영역에 자원을 우선 배분합니다.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bp-actions">
+                    <button type="button" class="bp-btn" id="copyBtn">결과를 클립보드로 복사</button>
+                    <button type="button" class="bp-btn" id="downloadBtn">텍스트 파일로 내보내기</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= 5. 컨설팅펌 참고자료 ========= -->
+    <section class="bp-section" id="firms">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">컨설팅펌 AX 진단 프레임워크</h2>
+            </div>
+            <div class="bp-section-meta">McKinsey · Bain · BCG · PwC · KPMG · Deloitte</div>
+        </div>
+
+        <p style="margin:0 0 24px; font-size:15px; color: var(--ink-soft); line-height:1.75;">2023년부터 2026년 사이 6대 컨설팅사가 발표한 AI 역량 진단 프레임워크는 이름과 강조점이 다를 뿐 골격은 같습니다. 공통적으로 위에서 진단한 AX 6대 영역으로 수렴합니다.</p>
+
+        <div class="bp-firms">
+            <div class="bp-firms-head">
+                <div>컨설팅사</div>
+                <div>대표 프레임워크</div>
+                <div>핵심 영역</div>
+            </div>
+
+            <div class="bp-firms-row">
+                <div class="bp-firms-name">McKinsey</div>
+                <div class="bp-firms-doc"><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank" rel="noopener">Rewired · The State of AI 2025</a><span class="sub">2023년 단행본, 2025년 11월 연차조사</span></div>
+                <div class="bp-firms-axes">전략 로드맵, 인재, 운영모델, 기술, 데이터, 도입 변화관리. AI 고성과 그룹(6%)을 가르는 변수로 "운영모델 재설계"와 "70% 사람·프로세스 투자"를 지목합니다.</div>
+            </div>
+
+            <div class="bp-firms-row">
+                <div class="bp-firms-name">Bain</div>
+                <div class="bp-firms-doc"><a href="https://www.bain.com/insights/building-the-ai-ready-enterprise/" target="_blank" rel="noopener">AI-Ready Enterprise</a><span class="sub">2024 Technology Report</span></div>
+                <div class="bp-firms-axes">야망(Ambition), 역량(Capabilities), 인재와 운영모델, 기술 기반, 데이터 기반, 책임 있는 AI. CEO 후원이 강한 조직과 그렇지 못한 조직의 성과 격차가 크다는 점을 강조합니다.</div>
+            </div>
+
+            <div class="bp-firms-row">
+                <div class="bp-firms-name">BCG</div>
+                <div class="bp-firms-doc"><a href="https://media-publications.bcg.com/The-Widening-AI-Value-Gap-October-2025.pdf" target="_blank" rel="noopener">Build for the Future · AI Radar 2026</a><span class="sub">2025년 9월·2026년 1월</span></div>
+                <div class="bp-firms-axes">전략, 프로세스, 기술 플랫폼, 인재, 데이터, 거버넌스. 자원 배분의 10-20-70 법칙(알고리즘 10, 기술 20, 사람과 프로세스 70)이 가장 자주 인용됩니다.</div>
+            </div>
+
+            <div class="bp-firms-row">
+                <div class="bp-firms-name">PwC</div>
+                <div class="bp-firms-doc"><a href="https://www.pwc.com/us/en/services/ai/agent-os.html" target="_blank" rel="noopener">Agent OS · Responsible AI Framework</a><span class="sub">2024 Global CEO Survey 연계</span></div>
+                <div class="bp-firms-axes">비즈니스 전략, 기술 인프라, 워크포스 준비도, 신뢰와 책임 AI(10개 위험 영역), 거버넌스, 가치 실현. 에이전트가 부서 경계를 넘어 작동하는 운영체계(Agent OS)를 별도 영역으로 분리합니다.</div>
+            </div>
+
+            <div class="bp-firms-row">
+                <div class="bp-firms-name">KPMG</div>
+                <div class="bp-firms-doc"><a href="https://kpmg.com/xx/en/what-we-do/services/ai/trusted-ai-framework.html" target="_blank" rel="noopener">AI Maturity Index · Trusted AI</a><span class="sub">2024 Generative AI Survey</span></div>
+                <div class="bp-firms-axes">전략과 거버넌스, 인재와 문화, 데이터, 프로세스, 기술, 리스크와 윤리. 신뢰 가능한 AI(Trusted AI) 10개 기둥으로 거버넌스 영역을 세분화하는 점이 특징입니다.</div>
+            </div>
+
+            <div class="bp-firms-row">
+                <div class="bp-firms-name">Deloitte</div>
+                <div class="bp-firms-doc"><a href="https://www2.deloitte.com/us/en/pages/consulting/articles/state-of-generative-ai-in-enterprise.html" target="_blank" rel="noopener">State of Generative AI in the Enterprise</a><span class="sub">2024 분기 리포트 시리즈</span></div>
+                <div class="bp-firms-axes">전략, 프로세스와 워크플로우, 인재와 문화, 데이터와 기술, 리스크와 거버넌스, 성과 측정. 분기마다 "스케일이 막히는 지점"을 추적해 운영모델 변수의 비중을 높입니다.</div>
+            </div>
+        </div>
+
+        <div class="bp-chart-caption">
+            각 컨설팅펌이 강조하는 단어는 다릅니다. 그러나 본질은 결국 같은 여섯 영역으로 수렴합니다. 본 진단은 그 공통 골격을 따릅니다.
+        </div>
+    </section>
+
+    <!-- ========= FOOTER ========= -->
+    <footer class="bp-footer">
+        <p style="margin:0 0 10px; font-size:11.5px; opacity:0.78;">* 본 진단은 6개 컨설팅사의 공개 프레임워크에서 공통 영역을 추출해 24문항으로 재구성한 자가진단입니다. 진단 결과는 의사결정의 출발점일 뿐 결론이 아니며, 실제 투자 결정은 사내 데이터와 외부 검토를 거쳐 내려야 합니다.</p>
+        <p style="margin:0 0 10px;"><strong>입력값은 이 브라우저에만 저장됩니다.</strong> 외부 서버로 전송하지 않으며, 다른 사람과 비교가 필요하면 "결과를 클립보드로 복사" 또는 "텍스트 파일로 내보내기" 버튼을 눌러 직접 공유합니다.</p>
+        <p style="margin:0; opacity:0.85;">참고 자료. McKinsey(Rewired 2023, State of AI 2025), BCG(Build for the Future 2025, AI Radar 2026), Bain(Technology Report 2024), PwC(Agent OS, Responsible AI), KPMG(Trusted AI 10 Pillars), Deloitte(State of Generative AI in the Enterprise). 각 사의 원문 강조점이 다르나, 진단 영역은 본 가이드의 6영역으로 정렬했습니다.</p>
+        <p style="margin:22px 0 0; padding-top:18px; border-top:1px solid rgba(247,245,239,0.18); font-size:11.5px; opacity:0.7; letter-spacing:0.04em;">&copy; 2026 AI ROASTING. All rights reserved.</p>
+    </footer>
+
+</div>
+
+<script>
+(function() {
+    'use strict';
+
+    var STORAGE_KEY = 'ax-diagnosis-v1';
+
+    var DIMENSIONS = [
+        { key: 'strategy',  name: '전략',              short: '전략',              questions: ['s1','s2','s3','s4'] },
+        { key: 'people',    name: '인재와 문화',       short: '인재·문화',         questions: ['p1','p2','p3','p4'] },
+        { key: 'process',   name: '운영모델과 프로세스', short: '운영·프로세스',     questions: ['o1','o2','o3','o4'] },
+        { key: 'data',      name: '데이터',            short: '데이터',            questions: ['d1','d2','d3','d4'] },
+        { key: 'tech',      name: 'AI 도구',           short: 'AI 도구',           questions: ['t1','t2','t3','t4'] },
+        { key: 'governance',name: '거버넌스와 책임',   short: '거버넌스',          questions: ['g1','g2','g3','g4'] }
+    ];
+
+    var LEVELS = [
+        { id: 1, min: 24,  max: 43,  name: 'AI-Unaware',  stage: '시작 전 단계',
+          actions: [
+              '<strong>경영진 정렬 회의</strong>를 첫 행동으로 잡습니다. AI 도구 선정보다 "왜 AX인가"를 한 페이지로 합의합니다.',
+              '<strong>도메인 전문가 두 명과 기술 인력 한 명</strong>으로 임시 TF를 꾸려, 자사 핵심 워크플로우 한 개를 칠판에 분해해 봅니다.',
+              '<strong>외부 사례 학습 워크숍</strong>을 한 차례 엽니다. 동종 업계 두 곳의 AX 사례를 같이 읽고 우리에게 적용 가능한 지점을 두세 개 추립니다.'
+          ] },
+        { id: 2, min: 44, max: 62, name: 'AI-Curious', stage: '실험 분산 단계',
+          actions: [
+              '난립한 PoC 가운데 <strong>회사 KPI에 가장 가깝게 닿는 3건</strong>만 남기고 나머지는 의도적으로 보류합니다.',
+              '<strong>TF에 경영진 스폰서를 직접 연결</strong>합니다. 보고선이 IT 부서 안에 머물러 있다면 한 단계 위로 끌어올립니다.',
+              '<strong>전 직원 4D 기초 교육</strong>(위임·설명·분별·성실)을 6주 안에 마칩니다. 도구 사용법보다 협업 어휘를 먼저 심습니다.'
+          ] },
+        { id: 3, min: 63, max: 81, name: 'AI-Aware', stage: '청사진 확정 단계',
+          actions: [
+              '<strong>빅 베팅 3에서 5건에 자원의 70%를 사람·프로세스</strong>로 배분합니다. 라이선스 예산보다 교육·재설계 예산이 커야 합니다.',
+              '<strong>위임·성실 루프</strong>로 신뢰 검증을 정착시킵니다. 과거 데이터로 AI를 시험하고, 검증된 작업만 위임 영역으로 확장합니다.',
+              '<strong>데이터 출처 표기와 사용 매트릭스</strong>를 사내 위키 1면에 게시합니다. 사고 전에 규칙이 보이도록 합니다.'
+          ] },
+        { id: 4, min: 82, max: 100, name: 'AI-Capable', stage: '확장 직전 단계',
+          actions: [
+              '<strong>핵심 워크플로우의 끝에서 끝까지</strong> AI 전제로 재설계합니다. 부분 자동화에서 멈추면 다음 단계로 넘어가지 못합니다.',
+              '<strong>에이전트 운영모델</strong>을 설계합니다. 한 작업에 여러 에이전트가 이어서 호출되는 흐름을 한 곳에서 관측합니다.',
+              '<strong>측정 대시보드</strong>를 임원회의 정기 안건으로 등재합니다. AI가 영업이익의 몇 %를 창출하는지 매월 확인합니다.'
+          ] },
+        { id: 5, min: 101, max: 120, name: 'AI-Native', stage: '내재화 단계',
+          actions: [
+              '<strong>다음 빅 베팅 후보</strong>를 발굴합니다. 한 번 자리잡은 워크플로우는 6개월마다 재설계 여부를 점검합니다.',
+              '<strong>거버넌스를 외부 표준</strong>(국내 AI 기본법, EU AI Act, 산업별 가이드)에 맞춰 정기적으로 갱신합니다.',
+              '<strong>학습 자산</strong>(COMPANY BRAIN OS 워크시트, Skill, 프롬프트 라이브러리)을 회사의 정식 IP로 등재하고, 신규 입사자 온보딩에 포함합니다.'
+          ] }
+    ];
+
+    var AXIS_GUIDES = {
+        strategy: '청사진 한 장과 빅 베팅 3에서 5건을 정의합니다. CEO 직속 어젠다로 격상하고, 단기 ROI가 잡히지 않더라도 멈추지 않는다는 결정을 임원회의 기록에 남깁니다.',
+        people: '라이선스 예산보다 교육과 업스킬링 예산을 더 키웁니다. 위임·설명·분별·성실의 4D를 전사 공통 언어로 정착시키고, 절감된 시간이 더 가치 있는 업무로 이동했는지 분기마다 확인합니다.',
+        process: '핵심 워크플로우 하나를 골라 끝에서 끝까지 AI 전제로 다시 그립니다. 부분 자동화를 멈추고, 예산과 인력의 약 70%를 알고리즘이 아니라 사람과 프로세스 재설계에 씁니다.',
+        tech: '사내 AI 플랫폼을 한 곳에 모읍니다. 모델 호출, 보안 통제, 비용 추적, 로그를 통합하고, 부서별로 흩어진 도구 계약을 정리합니다. 추상화 계층을 두어 모델 교체 비용을 낮춥니다.',
+        data: '빅 베팅에 필요한 사내 데이터부터 정리합니다. 베테랑의 암묵지를 문서·룰·액션 단위로 구조화하고, AI가 인용 가능한 형태로 축적합니다. 출처 표기와 데이터 사용 매트릭스를 함께 깔아 둡니다.',
+        governance: '사고 발생 전에 가이드라인을 게시합니다. 위험 점검 책임자를 명시하고, 임원회의 정기 안건으로 등재합니다. 국내 AI 기본법과 EU AI Act 같은 외부 규제 변화를 사내 정책에 반영하는 절차를 명문화합니다.'
+    };
+
+    var form = document.getElementById('diagForm');
+    var resultBlock = document.getElementById('resultBlock');
+
+    function getScores() {
+        var dimScores = {};
+        var totalAnswered = 0;
+        var totalSum = 0;
+        DIMENSIONS.forEach(function(d) {
+            var sum = 0;
+            var answered = 0;
+            d.questions.forEach(function(q) {
+                var picked = form.querySelector('input[name="' + q + '"]:checked');
+                if (picked) {
+                    sum += parseInt(picked.value, 10);
+                    answered++;
+                    totalAnswered++;
+                    totalSum += parseInt(picked.value, 10);
+                }
+            });
+            dimScores[d.key] = {
+                sum: sum,
+                answered: answered,
+                avg: answered > 0 ? (sum / answered) : 0
+            };
+        });
+        return {
+            dims: dimScores,
+            totalSum: totalSum,
+            totalAnswered: totalAnswered,
+            complete: totalAnswered === 24
+        };
+    }
+
+    function classifyLevel(total) {
+        for (var i = 0; i < LEVELS.length; i++) {
+            if (total >= LEVELS[i].min && total <= LEVELS[i].max) return LEVELS[i];
+        }
+        return LEVELS[0];
+    }
+
+    function findWeakAxes(dims) {
+        var arr = DIMENSIONS.map(function(d) {
+            return { key: d.key, name: d.name, short: d.short, avg: dims[d.key].avg };
+        });
+        arr.sort(function(a, b) { return a.avg - b.avg; });
+        return arr.slice(0, 2);
+    }
+
+    function renderRadar(dims) {
+        var svg = document.getElementById('radarSvg');
+        var cx = 180, cy = 180, rMax = 130;
+        var n = DIMENSIONS.length;
+
+        var grid = document.getElementById('radarGrid');
+        var axes = document.getElementById('radarAxes');
+        var labels = document.getElementById('radarLabels');
+        var shape = document.getElementById('radarShape');
+        grid.innerHTML = '';
+        axes.innerHTML = '';
+        labels.innerHTML = '';
+
+        for (var step = 1; step <= 5; step++) {
+            var pts = [];
+            for (var i = 0; i < n; i++) {
+                var angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+                var r = (rMax * step) / 5;
+                pts.push((cx + r * Math.cos(angle)).toFixed(1) + ',' + (cy + r * Math.sin(angle)).toFixed(1));
+            }
+            var poly = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+            poly.setAttribute('points', pts.join(' '));
+            poly.setAttribute('fill', 'none');
+            poly.setAttribute('stroke', step === 5 ? '#0E3B2A' : '#D6D2C5');
+            poly.setAttribute('stroke-width', step === 5 ? '1.2' : '1');
+            grid.appendChild(poly);
+        }
+
+        for (var i = 0; i < n; i++) {
+            var angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+            var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            line.setAttribute('x1', cx);
+            line.setAttribute('y1', cy);
+            line.setAttribute('x2', cx + rMax * Math.cos(angle));
+            line.setAttribute('y2', cy + rMax * Math.sin(angle));
+            line.setAttribute('stroke', '#D6D2C5');
+            axes.appendChild(line);
+
+            var labelR = rMax + 22;
+            var lx = cx + labelR * Math.cos(angle);
+            var ly = cy + labelR * Math.sin(angle);
+            var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            text.setAttribute('x', lx);
+            text.setAttribute('y', ly);
+            text.setAttribute('text-anchor', 'middle');
+            text.setAttribute('dominant-baseline', 'middle');
+            text.textContent = DIMENSIONS[i].short;
+            labels.appendChild(text);
+        }
+
+        var shapePts = [];
+        for (var i = 0; i < n; i++) {
+            var angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+            var avg = dims[DIMENSIONS[i].key].avg || 0;
+            var r = (rMax * avg) / 5;
+            shapePts.push((cx + r * Math.cos(angle)).toFixed(1) + ',' + (cy + r * Math.sin(angle)).toFixed(1));
+        }
+        shape.setAttribute('points', shapePts.join(' '));
+    }
+
+    function render() {
+        var s = getScores();
+
+        DIMENSIONS.forEach(function(d) {
+            var el = form.querySelector('[data-dim-score="' + d.key + '"]');
+            if (el) el.textContent = s.dims[d.key].answered > 0 ? s.dims[d.key].avg.toFixed(2) : '—';
+        });
+
+        DIMENSIONS.forEach(function(d) {
+            var row = document.querySelector('[data-row="' + d.key + '"]');
+            if (!row) return;
+            var fill = row.querySelector('.bp-dim-score-fill');
+            var val  = row.querySelector('.bp-dim-score-value');
+            var pct = (s.dims[d.key].sum / 20) * 100;
+            fill.style.width = pct + '%';
+            val.textContent = s.dims[d.key].answered > 0 ? (s.dims[d.key].sum + ' / 20') : '—';
+            row.classList.remove('weak');
+        });
+
+        renderRadar(s.dims);
+
+        var totalEl = document.getElementById('totalScore');
+        var totalSubEl = document.getElementById('totalSub');
+        var totalInlineEl = document.getElementById('totalScoreInline');
+        var levelNameEl = document.getElementById('levelName');
+        var levelSubEl = document.getElementById('levelSub');
+        var weakEl = document.getElementById('weakAxes');
+        var weakSubEl = document.getElementById('weakSub');
+        var ladder = document.getElementById('levelLadder');
+
+        Array.prototype.forEach.call(ladder.querySelectorAll('.bp-ladder-cell'), function(c) { c.classList.remove('active'); });
+
+        if (!s.complete) {
+            resultBlock.classList.add('empty');
+            totalEl.textContent = s.totalAnswered + ' / 24 문항';
+            totalSubEl.textContent = '24문항을 모두 채우면 결과가 자동으로 정리됩니다.';
+            if (totalInlineEl) totalInlineEl.textContent = s.totalSum + '점 / 120점';
+            levelNameEl.textContent = '—';
+            levelSubEl.textContent = '레벨이 자동으로 표시됩니다.';
+            weakEl.textContent = '—';
+            weakSubEl.textContent = '두 영역이 다음 행동의 출발점입니다.';
+            renderGuide(null, null);
+            return;
+        }
+
+        resultBlock.classList.remove('empty');
+        var level = classifyLevel(s.totalSum);
+        var weak = findWeakAxes(s.dims);
+
+        totalEl.textContent = s.totalSum + ' / 120';
+        totalSubEl.textContent = '24문항 평균 ' + (s.totalSum / 24).toFixed(2) + '점';
+        if (totalInlineEl) totalInlineEl.textContent = s.totalSum + '점 / 120점';
+        levelNameEl.textContent = 'Lv ' + level.id + ' · ' + level.name;
+        levelSubEl.textContent = level.stage + ' (' + level.min + '~' + level.max + '점)';
+        weakEl.textContent = weak[0].name + ' · ' + weak[1].name;
+        weakSubEl.textContent = '두 영역에 자원을 우선 배분합니다.';
+
+        weak.forEach(function(w) {
+            var row = document.querySelector('[data-row="' + w.key + '"]');
+            if (row) row.classList.add('weak');
+        });
+
+        var levelCell = ladder.querySelector('.bp-ladder-cell[data-level="' + level.id + '"]');
+        if (levelCell) levelCell.classList.add('active');
+
+        renderGuide(level, weak);
+    }
+
+    function renderGuide(level, weak) {
+        var stageTitle = document.getElementById('guideStageTitle');
+        var stageList = document.getElementById('guideStageList');
+        var axisTitle = document.getElementById('guideAxisTitle');
+        var axisList = document.getElementById('guideAxisList');
+
+        if (!level || !weak) {
+            stageTitle.textContent = '진단을 먼저 완료해 주세요';
+            stageList.innerHTML = '<li>24문항을 모두 채우면, 현재 단계에 맞는 다음 행동 3가지가 여기에 표시됩니다.</li>';
+            axisTitle.textContent = '취약 영역이 식별되면 처방이 나옵니다';
+            axisList.innerHTML = '<li>가장 약한 두 영역이 다음 단계의 출발점입니다. 해당 영역에 자원을 우선 배분합니다.</li>';
+            return;
+        }
+
+        stageTitle.textContent = 'Lv ' + level.id + ' · ' + level.name + ' 단계의 다음 행동';
+        stageList.innerHTML = level.actions.map(function(a) { return '<li>' + a + '</li>'; }).join('');
+
+        axisTitle.textContent = '취약 영역 처방: ' + weak[0].name + ' · ' + weak[1].name;
+        axisList.innerHTML = weak.map(function(w) {
+            return '<li><strong>' + w.name + ' (' + w.avg.toFixed(2) + '점).</strong> ' + AXIS_GUIDES[w.key] + '</li>';
+        }).join('');
+    }
+
+    function saveLocal() {
+        var data = {};
+        DIMENSIONS.forEach(function(d) {
+            d.questions.forEach(function(q) {
+                var picked = form.querySelector('input[name="' + q + '"]:checked');
+                if (picked) data[q] = picked.value;
+            });
+        });
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify({ saved: new Date().toISOString(), data: data }));
+        } catch (e) {}
+    }
+
+    function loadLocal() {
+        try {
+            var raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return;
+            var parsed = JSON.parse(raw);
+            if (!parsed || !parsed.data) return;
+            Object.keys(parsed.data).forEach(function(q) {
+                var el = form.querySelector('input[name="' + q + '"][value="' + parsed.data[q] + '"]');
+                if (el) el.checked = true;
+            });
+        } catch (e) {}
+    }
+
+    function buildSummaryText() {
+        var s = getScores();
+        var lines = [];
+        lines.push('AX 역량 자가진단 결과');
+        lines.push('생성 시각. ' + new Date().toLocaleString('ko-KR'));
+        lines.push('');
+        if (s.complete) {
+            var lv = classifyLevel(s.totalSum);
+            var weak = findWeakAxes(s.dims);
+            lines.push('총점. ' + s.totalSum + ' / 120 (평균 ' + (s.totalSum / 24).toFixed(2) + ')');
+            lines.push('성숙도. Lv ' + lv.id + ' ' + lv.name + ' (' + lv.stage + ')');
+            lines.push('가장 약한 두 영역. ' + weak[0].name + ', ' + weak[1].name);
+            lines.push('');
+            lines.push('영역별 점수');
+            DIMENSIONS.forEach(function(d) {
+                lines.push('- ' + d.name + '. ' + s.dims[d.key].sum + ' / 20 (평균 ' + s.dims[d.key].avg.toFixed(2) + ')');
+            });
+        } else {
+            lines.push('미완료. ' + s.totalAnswered + ' / 24 문항 응답');
+        }
+        return lines.join('\n');
+    }
+
+    form.addEventListener('change', function() {
+        render();
+        saveLocal();
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', function() {
+        if (!confirm('모든 응답을 지웁니다. 계속할까요?')) return;
+        form.reset();
+        try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+        render();
+    });
+
+    document.getElementById('saveBtn').addEventListener('click', function() {
+        saveLocal();
+        this.textContent = '저장됨';
+        var self = this;
+        setTimeout(function() { self.textContent = '로컬에 저장'; }, 1400);
+    });
+
+    document.getElementById('scrollResultBtn').addEventListener('click', function() {
+        document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    document.getElementById('copyBtn').addEventListener('click', function() {
+        var text = buildSummaryText();
+        var self = this;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(function() {
+                self.textContent = '복사됨';
+                setTimeout(function() { self.textContent = '결과를 클립보드로 복사'; }, 1400);
+            });
+        } else {
+            var ta = document.createElement('textarea');
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy'); } catch (e) {}
+            document.body.removeChild(ta);
+            self.textContent = '복사됨';
+            setTimeout(function() { self.textContent = '결과를 클립보드로 복사'; }, 1400);
+        }
+    });
+
+    document.getElementById('downloadBtn').addEventListener('click', function() {
+        var text = buildSummaryText();
+        var blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        var stamp = new Date().toISOString().slice(0, 10);
+        a.download = 'ax-diagnosis-' + stamp + '.txt';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    });
+
+    loadLocal();
+    render();
+})();
+
+(function() {
+    'use strict';
+    var navLinks = document.querySelectorAll('.bp-hero-nav a');
+    if (!navLinks.length) return;
+
+    var linkMap = {};
+    var sectionIds = [];
+    navLinks.forEach(function(link) {
+        var id = (link.getAttribute('href') || '').replace('#', '');
+        if (!id) return;
+        var el = document.getElementById(id);
+        if (!el) return;
+        linkMap[id] = { link: link, el: el };
+        sectionIds.push(id);
+    });
+    if (!sectionIds.length) return;
+
+    function setActive(id) {
+        sectionIds.forEach(function(k) {
+            if (k === id) linkMap[k].link.classList.add('active');
+            else linkMap[k].link.classList.remove('active');
+        });
+    }
+
+    function update() {
+        var nav = document.querySelector('.bp-hero-nav');
+        var navH = nav ? nav.offsetHeight : 0;
+        var trigger = navH + 60;
+        var currentId = null;
+        for (var i = 0; i < sectionIds.length; i++) {
+            var rect = linkMap[sectionIds[i]].el.getBoundingClientRect();
+            if (rect.top <= trigger) currentId = sectionIds[i];
+            else break;
+        }
+        setActive(currentId);
+    }
+
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(function() {
+            update();
+            ticking = false;
+        });
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+})();
+</script>
+
+</body>
+</html>

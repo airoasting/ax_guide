@@ -1,0 +1,61 @@
+:root {
+  /* 베이스 (참고 사이트 계승) */
+  --nm-bg: #EDE8DF;
+  --nm-dark: #C8C3BA;
+  --nm-light: #FFFFFF;
+  --nm-shadow: 8px 8px 18px var(--nm-dark), -8px -8px 18px var(--nm-light);
+  --nm-shadow-sm: 5px 5px 10px var(--nm-dark), -5px -5px 10px var(--nm-light);
+  --nm-inset: inset 5px 5px 10px var(--nm-dark), inset -5px -5px 10px var(--nm-light);
+
+  /* 트랙 컬러 */
+  --strategy-primary: #1E3A8A;
+  --strategy-primary-light: #3B5BB5;
+  --execution-primary: #D97757;
+  --execution-primary-light: #E58E72;
+
+  /* 텍스트 */
+  --text-primary: #3A3530;
+  --text-secondary: #6B655E;
+  --text-tertiary: #999492;
+  --text-on-dark: #FFFFFF;
+
+  /* 의미 */
+  --color-success: #2E8B2E;
+  --color-warning: #C99412;
+  --color-danger: #A33246;
+  --color-neutral: #8A8F99;
+
+  /* 간격 */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* 반경 */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 100px;
+
+  /* 폰트 크기 */
+  --fs-hero: 49px;
+  --fs-h1: 32px;
+  --fs-h2: 21px;
+  --fs-h3: 17px;
+  --fs-body: 15px;
+  --fs-sm: 13px;
+  --fs-xs: 12px;
+
+  /* 컨테이너 */
+  --container-max: 1280px;
+  --container-pad: 44px;
+
+  /* z-index */
+  --z-nav: 100;
+  --z-modal: 1000;
+}

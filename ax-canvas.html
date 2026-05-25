@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B-4-2 AX 캔버스 · 한 직무를 10칸으로 해부합니다</title>
+<meta name="description" content="AX 4단계 업무 방식 재설계의 두 번째 작업. 한 직무를 10칸으로 해부하고 암묵지의 Mark-down화(T·C·R·A)와 Human-Agent Team(Meta Harness)을 한 장에 그립니다.">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+/* ================== B-4-AX-Canvas Page Local Styles ================== */
+/* resource.html · reshape.html과 동일한 bp-* 시각 토큰을 그대로 차용합니다. */
+
+:root {
+    --bp-grid: rgba(14, 59, 42, 0.06);
+    --bp-grid-strong: rgba(14, 59, 42, 0.12);
+    --bp-line: #0E3B2A;
+    --bp-ink: #0F1A16;
+    --bp-paper: #F7F5EF;
+    --bp-paper-2: #FBFAF6;
+    --bp-rule: #D6D2C5;
+    --bp-accent: #1B6E4F;
+    --bp-gold: #9A7B0A;
+    --bp-red: #8B2E1F;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 50px; }
+body {
+    background:
+        linear-gradient(var(--bp-grid) 1px, transparent 1px) 0 0 / 32px 32px,
+        linear-gradient(90deg, var(--bp-grid) 1px, transparent 1px) 0 0 / 32px 32px,
+        var(--bp-paper);
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    line-break: strict;
+}
+
+/* ===== Sheet wrapper ===== */
+.bp-sheet {
+    max-width: 1320px;
+    margin: 32px auto;
+    background: var(--bp-paper-2);
+    border: 1.5px solid var(--bp-line);
+    box-shadow: 0 1px 0 var(--bp-line), 0 24px 60px -30px rgba(6, 32, 24, 0.35);
+    position: relative;
+}
+.bp-sheet::before, .bp-sheet::after {
+    content: "";
+    position: absolute;
+    width: 16px; height: 16px;
+    border: 1px solid var(--bp-line);
+}
+.bp-sheet::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+.bp-sheet::after  { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
+/* ===== Step navigation ===== */
+.bp-stepnav {
+    padding: 36px 56px 28px;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1.5px solid #062018;
+}
+.bp-stepnav::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+}
+.bp-step {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid rgba(247, 245, 239, 0.55);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--sans);
+    font-size: 11.5px;
+    font-weight: 600;
+    color: rgba(247, 245, 239, 0.85);
+    letter-spacing: 0.02em;
+    position: relative;
+    transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+.bp-step.active {
+    background: var(--bp-paper);
+    color: var(--bp-ink);
+    border-color: var(--bp-paper);
+    font-weight: 700;
+}
+.bp-step + .bp-step { margin-left: 24px; }
+.bp-step + .bp-step::before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    width: 24px;
+    height: 1px;
+    background: rgba(247, 245, 239, 0.4);
+    transform: translateY(-50%);
+}
+.bp-back {
+    display: block;
+    text-align: center;
+    margin-top: 18px;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: rgba(247, 245, 239, 0.78);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: color .15s ease, letter-spacing .15s ease;
+    position: relative;
+    z-index: 1;
+}
+.bp-back:hover { color: var(--bp-paper); letter-spacing: 0.08em; }
+
+.bp-substeps {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+.bp-substeps a, .bp-substeps span {
+    border: 1px solid rgba(247, 245, 239, 0.28);
+    background: transparent;
+    padding: 12px 24px;
+    color: rgba(247, 245, 239, 0.75);
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: background .18s ease, border-color .18s ease, color .18s ease;
+    min-width: 180px;
+    text-align: center;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.bp-substeps a:hover {
+    background: rgba(247, 245, 239, 0.08);
+    border-color: rgba(247, 245, 239, 0.6);
+    color: var(--bp-paper);
+}
+.bp-substeps a.active {
+    background: linear-gradient(180deg, #14523B 0%, #0E3B2A 100%);
+    color: var(--bp-paper);
+    border: 1.5px solid var(--bp-paper);
+    font-weight: 700;
+    box-shadow:
+        0 0 0 4px rgba(14, 59, 42, 0.55),
+        0 8px 20px -8px rgba(6, 32, 24, 0.7);
+    transform: translateY(-1px);
+    cursor: default;
+    pointer-events: none;
+}
+
+@media (max-width: 600px) {
+    .bp-stepnav { padding: 24px 16px 20px; }
+    .bp-step { width: 26px; height: 26px; font-size: 10px; }
+    .bp-step + .bp-step { margin-left: 16px; }
+    .bp-step + .bp-step::before { width: 16px; }
+    .bp-substeps { gap: 8px; }
+    .bp-substeps a, .bp-substeps span { min-width: 0; flex: 1 1 auto; padding: 10px 14px; font-size: 12px; }
+}
+
+/* ===== Hero block ===== */
+.bp-hero {
+    padding: 64px 56px 56px;
+    border-bottom: 1.5px solid var(--bp-line);
+    position: relative;
+    background:
+        radial-gradient(ellipse at top right, rgba(154, 123, 10, 0.07), transparent 60%),
+        var(--bp-paper-2);
+}
+.bp-hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    margin-bottom: 18px;
+}
+.bp-hero h1 {
+    font-size: 52px;
+    line-height: 1.18;
+    margin: 0 0 22px;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+}
+.bp-hero .bp-lead {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+}
+.bp-hero .bp-summary {
+    margin-top: 36px;
+    padding: 22px 26px;
+    background: rgba(14, 59, 42, 0.04);
+    border-top: 1px solid var(--bp-rule);
+    border-bottom: 1px solid var(--bp-rule);
+    font-size: 14px;
+    line-height: 1.75;
+}
+.bp-hero .bp-summary strong { color: var(--bp-line); }
+
+/* ===== Section submenu ===== */
+.bp-hero-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 12px 56px;
+    background: var(--bp-paper-2);
+    border-top: 1px solid var(--bp-line);
+    border-bottom: 1px solid var(--bp-line);
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    box-shadow: 0 2px 8px -4px rgba(6, 32, 24, 0.18);
+}
+.bp-hero-nav a {
+    flex: 1 1 0;
+    font-family: var(--sans);
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--bp-ink);
+    padding: 10px 14px;
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper);
+    text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    letter-spacing: -0.005em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bp-hero-nav a:hover { background: var(--bp-line); color: var(--bp-paper); }
+.bp-hero-nav a.active {
+    background: var(--bp-line);
+    color: var(--bp-paper);
+    border-color: var(--bp-line);
+    box-shadow: inset 0 -3px 0 var(--bp-accent);
+}
+
+/* ===== Section frame ===== */
+.bp-section {
+    padding: 56px 56px 64px;
+    border-bottom: 1.5px solid var(--bp-line);
+    position: relative;
+}
+.bp-section:last-of-type { border-bottom: none; }
+.bp-section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 36px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--bp-rule);
+}
+.bp-section-title {
+    font-size: 30px;
+    margin: 0;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    font-weight: 700;
+}
+.bp-section-meta {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    text-align: right;
+    line-height: 1.6;
+}
+.bp-section-intro {
+    margin: 0 0 28px;
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+}
+
+/* ===== Canvas Map (10칸 다이어그램) ===== */
+.bp-canvas {
+    border: 1.5px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    padding: 36px 32px 32px;
+    position: relative;
+}
+.bp-canvas-axis {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-bottom: 18px;
+}
+.bp-canvas-axis > div {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--bp-line);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--bp-line);
+}
+.bp-canvas-axis .axis-sub {
+    display: block;
+    margin-top: 4px;
+    font-size: 10.5px;
+    color: var(--ink-mute);
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: none;
+}
+.bp-canvas-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    align-items: stretch;
+}
+.bp-cell {
+    border: 1px solid var(--bp-rule);
+    background: var(--bp-paper);
+    padding: 20px 16px 22px;
+    min-height: 180px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.bp-cell.center {
+    background: var(--bp-line);
+    color: var(--bp-paper);
+    border-color: var(--bp-line);
+    box-shadow: 0 4px 14px -6px rgba(6, 32, 24, 0.5);
+}
+.bp-cell.center .cell-num { color: rgba(247, 245, 239, 0.7); }
+.bp-cell.center .cell-name { color: var(--bp-paper); }
+.bp-cell.center .cell-desc { color: rgba(247, 245, 239, 0.78); }
+.bp-cell .cell-num {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.14em;
+    margin-bottom: 6px;
+}
+.bp-cell .cell-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    letter-spacing: -0.005em;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+.bp-cell .cell-desc {
+    font-size: 12px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin-top: auto;
+}
+.bp-canvas-bottom {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-top: 14px;
+}
+.bp-canvas-bottom .bp-cell:nth-child(1) { grid-column: 1 / 4; }
+.bp-canvas-bottom .bp-cell:nth-child(2) { grid-column: 4; }
+.bp-canvas-bottom .bp-cell:nth-child(3) { grid-column: 5 / 8; }
+.bp-canvas-bottom .bp-cell { min-height: 160px; }
+.bp-cell.bridge {
+    background: rgba(154, 123, 10, 0.06);
+    border-color: var(--bp-gold);
+}
+.bp-cell.bridge .cell-num { color: var(--bp-gold); }
+.bp-canvas + .bp-canvas { margin-top: 28px; }
+.bp-canvas-caption {
+    margin: 28px 0 12px;
+    text-align: center;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+}
+.bp-canvas-caption::before,
+.bp-canvas-caption::after {
+    content: "";
+    display: inline-block;
+    width: 28px;
+    height: 1px;
+    background: var(--bp-rule);
+    vertical-align: middle;
+    margin: 0 14px;
+}
+
+/* Overlay variant · 작성 규약을 셀 위에 반투명으로 얹습니다 */
+.bp-canvas-grid.with-overlay {
+    position: relative;
+}
+.bp-canvas-grid.with-overlay .bp-cell.dimmed {
+    opacity: 0.85;
+    filter: saturate(0.85);
+}
+.bp-overlay-label {
+    background: rgba(247, 245, 239, 0.82);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border: 2px solid var(--bp-line);
+    padding: 22px 26px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 12px 32px -10px rgba(6, 32, 24, 0.45);
+    z-index: 5;
+    align-self: stretch;
+    justify-self: stretch;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+}
+.bp-overlay-label .ov-tag {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+.bp-overlay-label .ov-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    letter-spacing: -0.012em;
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+.bp-overlay-label .ov-formula {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+}
+.bp-overlay-label.left { grid-row: 1 / 3; grid-column: 1 / 4; }
+.bp-overlay-label.right { grid-row: 1 / 3; grid-column: 5 / 8; }
+
+/* "좁은 의미의 AX" 빨간 점선 박스 · 1번 + 5번을 묶습니다 */
+.bp-narrow-ax {
+    grid-row: 1;
+    grid-column: 4 / 6;
+    border: 2px dashed var(--bp-red);
+    pointer-events: none;
+    position: relative;
+    z-index: 4;
+    margin: -8px;
+    border-radius: 3px;
+}
+.bp-narrow-ax::after {
+    content: "좁은 의미의 AX";
+    position: absolute;
+    right: 14px;
+    bottom: -14px;
+    background: var(--bp-paper-2);
+    color: var(--bp-red);
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    padding: 4px 12px;
+    border: 1.5px solid var(--bp-red);
+    white-space: nowrap;
+}
+
+/* ===== TCRA 4단 표 ===== */
+.bp-tcra {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-tcra-row {
+    display: grid;
+    grid-template-columns: 180px 1.2fr 1.6fr;
+    border-bottom: 1px solid var(--bp-rule);
+}
+.bp-tcra-row:last-child { border-bottom: none; }
+.bp-tcra-row > div {
+    padding: 20px 22px;
+    border-right: 1px solid var(--bp-rule);
+}
+.bp-tcra-row > div:last-child { border-right: none; }
+.bp-tcra-row .stage {
+    background: rgba(14, 59, 42, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.bp-tcra-row .stage-letter {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.2em;
+    margin-bottom: 6px;
+}
+.bp-tcra-row .stage-name {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    letter-spacing: -0.005em;
+    margin-bottom: 4px;
+}
+.bp-tcra-row .stage-kor {
+    font-size: 12px;
+    color: var(--ink-mute);
+    font-family: var(--sans);
+    letter-spacing: 0.04em;
+}
+.bp-tcra-row .what {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--bp-ink);
+}
+.bp-tcra-row .what strong { color: var(--bp-line); }
+.bp-tcra-row .example {
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    background: rgba(154, 123, 10, 0.04);
+}
+.bp-tcra-row .example .ex-tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--bp-gold);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+/* ===== Harness 표 ===== */
+.bp-harness {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-harness-col {
+    padding: 26px 28px 28px;
+    border-right: 1px solid var(--bp-rule);
+    background: var(--bp-paper-2);
+}
+.bp-harness-col:last-child { border-right: none; }
+.bp-harness-col.human { background: rgba(14, 59, 42, 0.04); }
+.bp-harness-col.ai { background: rgba(27, 110, 79, 0.06); }
+.bp-harness-tag {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--bp-line);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+.bp-harness-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    letter-spacing: -0.005em;
+    margin-bottom: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--bp-rule);
+}
+.bp-harness-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.bp-harness-list li {
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--bp-rule);
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--bp-ink);
+}
+.bp-harness-list li:last-child { border-bottom: none; }
+.bp-harness-list li strong {
+    display: block;
+    font-family: var(--sans);
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+}
+
+.bp-meta-merge {
+    margin-top: 0;
+    padding: 24px 28px;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+    border: 1.5px solid #062018;
+    border-top: none;
+    position: relative;
+    overflow: hidden;
+}
+.bp-meta-merge::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-meta-merge > * { position: relative; z-index: 1; }
+.bp-meta-merge .merge-tag {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 700;
+    color: rgba(247, 245, 239, 0.7);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+.bp-meta-merge .merge-formula {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--bp-paper);
+    letter-spacing: -0.005em;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+.bp-meta-merge .merge-formula em {
+    font-style: normal;
+    color: #E8D78B;
+    font-weight: 700;
+}
+.bp-meta-merge .merge-body {
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: rgba(247, 245, 239, 0.85);
+    margin: 0;
+}
+
+/* ===== 8번 매핑 표 ===== */
+.bp-bridge8 {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-bridge8-head {
+    display: grid;
+    grid-template-columns: 1.1fr 80px 1.1fr;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+    position: relative;
+}
+.bp-bridge8-head::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-bridge8-head > div {
+    padding: 14px 20px;
+    font-family: var(--sans);
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-right: 1px solid rgba(247, 245, 239, 0.14);
+    position: relative;
+    z-index: 1;
+}
+.bp-bridge8-head > div:last-child { border-right: none; }
+.bp-bridge8-head .arrow { text-align: center; }
+.bp-bridge8-row {
+    display: grid;
+    grid-template-columns: 1.1fr 80px 1.1fr;
+    border-top: 1px solid var(--bp-rule);
+}
+.bp-bridge8-row > div {
+    padding: 18px 20px;
+    font-size: 13.5px;
+    line-height: 1.7;
+    border-right: 1px solid var(--bp-rule);
+    color: var(--bp-ink);
+}
+.bp-bridge8-row > div:last-child { border-right: none; }
+.bp-bridge8-row .arrow {
+    text-align: center;
+    color: var(--bp-accent);
+    font-family: var(--sans);
+    font-size: 20px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(14, 59, 42, 0.04);
+}
+.bp-bridge8-row .ai { background: rgba(27, 110, 79, 0.04); }
+.bp-bridge8-row strong { color: var(--bp-line); }
+
+/* ===== 9·10번 카드 ===== */
+.bp-guard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+.bp-guard-card {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    padding: 26px 28px 28px;
+    position: relative;
+}
+.bp-guard-card .gc-num {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.2em;
+    margin-bottom: 8px;
+}
+.bp-guard-card .gc-title {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    letter-spacing: -0.005em;
+    margin-bottom: 8px;
+}
+.bp-guard-card .gc-q {
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: var(--bp-accent);
+    font-weight: 600;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--bp-rule);
+    letter-spacing: 0.02em;
+}
+.bp-guard-card .gc-body {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0 0 14px;
+}
+.bp-guard-card .gc-body strong { color: var(--bp-ink); }
+.bp-guard-card .gc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.bp-guard-card .gc-list li {
+    padding: 8px 0 8px 18px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    border-top: 1px dashed var(--bp-rule);
+    position: relative;
+}
+.bp-guard-card .gc-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 16px;
+    width: 8px;
+    height: 1px;
+    background: var(--bp-accent);
+}
+.bp-guard-card .gc-list li:first-child { border-top: none; }
+
+/* ===== 채우는 순서 ===== */
+.bp-order {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-order-row {
+    display: grid;
+    grid-template-columns: 60px 1fr 1fr;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--bp-rule);
+    gap: 18px;
+}
+.bp-order-row:last-child { border-bottom: none; }
+.bp-order-num {
+    font-family: var(--sans);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--bp-line);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    padding-top: 4px;
+}
+.bp-order-body h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    margin: 0 0 6px;
+    letter-spacing: -0.005em;
+}
+.bp-order-body p {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin: 0;
+}
+.bp-order-fail {
+    font-size: 12.5px;
+    line-height: 1.65;
+    color: var(--bp-red);
+    background: rgba(139, 46, 31, 0.04);
+    padding: 14px 16px;
+    border: 1px solid rgba(139, 46, 31, 0.25);
+}
+.bp-order-fail .fail-tag {
+    display: block;
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+/* ===== Handoff box ===== */
+.bp-handoff {
+    margin-top: 28px;
+    padding: 24px 28px;
+    background: rgba(14, 59, 42, 0.05);
+    border-top: 1px solid var(--bp-line);
+    border-bottom: 1px solid var(--bp-line);
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--bp-ink);
+}
+.bp-handoff strong { color: var(--bp-line); }
+.bp-handoff .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+/* ===== Output checklist ===== */
+.bp-output {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-output-row {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--bp-rule);
+    align-items: flex-start;
+    gap: 18px;
+}
+.bp-output-row:last-child { border-bottom: none; }
+.bp-output-num {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.12em;
+    padding-top: 2px;
+}
+.bp-output-body h4 {
+    font-size: 15.5px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    margin: 0 0 6px;
+    letter-spacing: -0.005em;
+}
+.bp-output-body p {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+}
+.bp-output-body p strong { color: var(--bp-line); }
+
+/* ===== Closing footer ===== */
+.bp-footer {
+    padding: 36px 56px 44px;
+    background:
+        radial-gradient(ellipse at 0% 100%, rgba(27, 110, 79, 0.35), transparent 55%),
+        linear-gradient(110deg, #14523B 0%, #0E3B2A 35%, #0A2E22 70%, #062018 100%);
+    color: rgba(247, 245, 239, 0.92);
+    font-family: var(--sans);
+    font-size: 12.5px;
+    line-height: 1.7;
+    border-top: 1.5px solid #062018;
+    position: relative;
+    overflow: hidden;
+}
+.bp-footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-footer > * { position: relative; z-index: 1; }
+.bp-footer strong { color: var(--bp-paper); }
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+    .bp-hero { padding: 48px 32px; }
+    .bp-hero h1 { font-size: 38px; }
+    .bp-section { padding: 40px 32px; }
+    .bp-canvas-grid { grid-template-columns: repeat(3, 1fr); }
+    .bp-canvas-bottom { grid-template-columns: 1fr; }
+    .bp-canvas-axis { grid-template-columns: 1fr; gap: 12px; }
+    /* 오버레이 캔버스는 좁은 화면에서도 셀을 덮습니다 */
+    .bp-canvas-grid.with-overlay { grid-template-columns: repeat(7, 1fr); gap: 6px; }
+    .bp-canvas-grid.with-overlay .bp-cell {
+        min-height: 100px;
+        padding: 10px 8px;
+    }
+    .bp-canvas-grid.with-overlay .bp-cell .cell-name { font-size: 11px; }
+    .bp-canvas-grid.with-overlay .bp-cell .cell-desc { font-size: 10px; }
+    .bp-overlay-label { padding: 18px 18px; }
+    .bp-overlay-label .ov-title { font-size: 19px; }
+    .bp-overlay-label .ov-formula { font-size: 11.5px; }
+    /* 3열 그리드에서 1번(HTML 4번째)과 5번(HTML 5번째)은 행 2의 1·2열입니다 */
+    .bp-narrow-ax { grid-row: 2; grid-column: 1 / 3; }
+    .bp-tcra-row { grid-template-columns: 140px 1fr; }
+    .bp-tcra-row .example { grid-column: 1 / -1; border-right: none; border-top: 1px solid var(--bp-rule); }
+    .bp-harness { grid-template-columns: 1fr; }
+    .bp-harness-col { border-right: none; border-bottom: 1px solid var(--bp-rule); }
+    .bp-bridge8-head, .bp-bridge8-row { grid-template-columns: 1fr 50px 1fr; }
+    .bp-guard { grid-template-columns: 1fr; }
+    .bp-order-row { grid-template-columns: 40px 1fr; }
+    .bp-order-fail { grid-column: 1 / -1; }
+    .bp-footer { padding: 32px; }
+}
+@media (max-width: 600px) {
+    .bp-sheet { margin: 12px; }
+    .bp-hero h1 { font-size: 28px; }
+    .bp-section-title { font-size: 22px; }
+    .bp-canvas-grid { grid-template-columns: 1fr; }
+    /* 오버레이 캔버스는 좁은 화면에서도 7칸 유지하고 셀을 덮습니다 */
+    .bp-canvas-grid.with-overlay { grid-template-columns: repeat(7, 1fr); gap: 4px; }
+    .bp-canvas-grid.with-overlay .bp-cell { min-height: 80px; padding: 8px 4px; }
+    .bp-canvas-grid.with-overlay .bp-cell .cell-num { font-size: 9px; margin-bottom: 4px; }
+    .bp-canvas-grid.with-overlay .bp-cell .cell-name { font-size: 10px; line-height: 1.2; margin-bottom: 4px; }
+    .bp-canvas-grid.with-overlay .bp-cell .cell-desc { display: none; }
+    .bp-overlay-label { padding: 14px 12px; }
+    .bp-overlay-label .ov-tag { font-size: 9px; letter-spacing: 0.14em; margin-bottom: 6px; }
+    .bp-overlay-label .ov-title { font-size: 16px; margin-bottom: 8px; }
+    .bp-overlay-label .ov-formula { font-size: 10.5px; }
+    /* 1열 그리드에서 1번은 행 4, 5번은 행 5에 자리합니다 */
+    .bp-narrow-ax { grid-row: 4 / 6; grid-column: 1; margin: -4px; }
+    .bp-narrow-ax::after { right: 8px; bottom: 6px; font-size: 10px; padding: 3px 8px; }
+    .bp-tcra-row { grid-template-columns: 1fr; }
+    .bp-tcra-row > div { border-right: none; border-bottom: 1px solid var(--bp-rule); }
+    .bp-bridge8-head, .bp-bridge8-row { grid-template-columns: 1fr; }
+    .bp-bridge8-head > div, .bp-bridge8-row > div { border-right: none; border-bottom: 1px solid rgba(247,245,239,0.14); }
+    .bp-bridge8-row .arrow { padding: 8px; }
+    .bp-output-row { grid-template-columns: 1fr; gap: 6px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bp-sheet">
+
+    <!-- ========= BRAND BAR ========= -->
+    <a class="bp-brandbar" href="index.html" aria-label="목차로 이동">
+        <img class="bb-logo" src="assets/logos/logo1-transparent.png" alt="AI ROASTING">
+        <span>AI ROASTING · AX GUIDE TO COMPANY BRAIN OS</span>
+    </a>
+
+    <!-- ========= STEP NAVIGATION ========= -->
+    <nav class="bp-stepnav" aria-label="전체 단계">
+        <ol class="bp-steps">
+            <li class="bp-step"><a href="blueprint.html">진단</a></li>
+            <li class="bp-step"><a href="organization.html">1</a></li>
+            <li class="bp-step"><a href="pilot.html">2</a></li>
+            <li class="bp-step"><a href="criteria.html">3</a></li>
+            <li class="bp-step active" aria-current="step"><a href="resource.html">4</a></li>
+            <li class="bp-step"><a href="ainative.html">5</a></li>
+        </ol>
+        <a class="bp-back" href="index.html">← 목록으로</a>
+        <div class="bp-substeps" aria-label="4단계 업무 방식 재설계 페이지">
+            <a href="resource.html">자원 재배분</a>
+            <a href="ax-canvas.html" class="active" aria-current="page">AX 캔버스</a>
+            <a href="reshape.html">업무 재설계</a>
+        </div>
+    </nav>
+
+    <!-- ========= HERO ========= -->
+    <section class="bp-hero">
+        <div class="bp-hero-eyebrow">Step 4 · 두 번째 작업 · 직무를 10칸으로 해부합니다 · BRAIN OS 전사 확장</div>
+        <h1>한 직무를 10칸으로 해부해, 사람과 에이전트의 자리를 한 장에 그립니다.</h1>
+        <p class="bp-lead">AX 캔버스는 직무를 10칸 프레임으로 해부해 인간과 에이전트의 역할 분담을 한 장에 그리는 표준 양식입니다.</p>
+        <div class="bp-summary">
+            <strong>좌측은 업무 구조, 우측은 인간·에이전트의 역할 분담입니다.</strong> 좌측 2·3·4번을 T·C·R·A 마크다운으로 정리하고, 우측 5·6·7번을 Human Harness와 AI Harness로 정의해 Meta Harness 한 장으로 통합합니다. 8번은 두 영역을 연결하는 기술 매핑, 9·10번은 통제 기준과 다음 사이클의 입력입니다.
+        </div>
+    </section>
+
+    <nav class="bp-hero-nav" aria-label="섹션 바로가기">
+        <a href="#why">왜 직무 단위인가</a>
+        <a href="#map">AX 캔버스</a>
+        <a href="#tcra">암묵지 Mark-down화</a>
+        <a href="#harness">Human-Agent Team</a>
+        <a href="#guard">가드레일과 성장</a>
+        <a href="#order">작성 순서</a>
+    </nav>
+
+    <!-- ========= 1. 왜 직무 단위인가 ========= -->
+    <section class="bp-section" id="why">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">왜 한 직무를 10칸으로 해부하는가</h2>
+            </div>
+            <div class="bp-section-meta">캔버스의 위치와 단위</div>
+        </div>
+
+        <p class="bp-section-intro">3단계까지는 후보 베팅을 점수로 선별했습니다. 4단계는 분석 단위가 다릅니다. 베팅을 실행하려면 해당 직무를 끝에서 끝까지 분해해야 합니다.</p>
+
+        <div class="bp-handoff">
+            <div class="tag">캔버스가 답하는 한 가지 질문</div>
+            <strong>"이 직무가 창출하는 가치는 무엇이며, 인간과 에이전트가 어떻게 함께 그 가치를 만들 것인가."</strong> 1번 핵심 가치, 좌측 2·3·4번 업무 구조, 우측 5·6·7번 역할 분담, 8번 기술 매핑, 9·10번 통제와 재투입. 동일한 양식이 직무 단위로 누적되어 전사 지식 자산이 됩니다.
+        </div>
+    </section>
+
+    <!-- ========= 2. AX 캔버스 한눈에 보기 ========= -->
+    <section class="bp-section" id="map">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">AX 캔버스 한눈에 보기</h2>
+            </div>
+            <div class="bp-section-meta">중심 1번 · What 2·3·4 · Why 5·6·7 · 8 · 9·10</div>
+        </div>
+
+        <p class="bp-section-intro">윗줄 일곱 칸은 현황 진단, 아랫줄 세 칸은 AI 전환 실행입니다. 좌우 축은 업무 구조(What)와 AI 전환(Why). 1번과 5번을 점선으로 묶은 자리가 "좁은 의미의 AX"입니다.</p>
+
+        <div class="bp-canvas" aria-label="AX 캔버스 10칸 지도">
+            <div class="bp-canvas-axis">
+                <div>업무 구조 (What)<span class="axis-sub">현황 진단 · 좌측 3칸</span></div>
+                <div>AI 전환 (Why)<span class="axis-sub">현황 진단 · 우측 3칸</span></div>
+            </div>
+
+            <div class="bp-canvas-grid">
+                <div class="bp-cell" style="grid-row: 1; grid-column: 1;">
+                    <div class="cell-num">04</div>
+                    <div class="cell-name">업무 입출력 구조</div>
+                    <div class="cell-desc">각 업무별 필요 정보와 결과물은 무엇인가</div>
+                </div>
+                <div class="bp-cell" style="grid-row: 1; grid-column: 2;">
+                    <div class="cell-num">03</div>
+                    <div class="cell-name">시간 배분 현황</div>
+                    <div class="cell-desc">각 업무에 실제로 얼마나 시간이 투입되는가</div>
+                </div>
+                <div class="bp-cell" style="grid-row: 1; grid-column: 3;">
+                    <div class="cell-num">02</div>
+                    <div class="cell-name">핵심 업무 목록</div>
+                    <div class="cell-desc">해당 역할은 어떤 업무들을 수행하는가</div>
+                </div>
+                <div class="bp-cell center" style="grid-row: 1; grid-column: 4;">
+                    <div class="cell-num">01 · 중심</div>
+                    <div class="cell-name">업무 역할 정의</div>
+                    <div class="cell-desc">이 업무가 조직에 창출하는 핵심 가치는 무엇인가</div>
+                </div>
+                <div class="bp-cell" style="grid-row: 1; grid-column: 5;">
+                    <div class="cell-num">05</div>
+                    <div class="cell-name">AI 대체 가능성</div>
+                    <div class="cell-desc">어떤 업무를 AI가 대신할 수 있는가</div>
+                </div>
+                <div class="bp-cell" style="grid-row: 1; grid-column: 6;">
+                    <div class="cell-num">06</div>
+                    <div class="cell-name">협업 구조</div>
+                    <div class="cell-desc">누구와 어떻게 협력하며 정보는 어떻게 흐르는가</div>
+                </div>
+                <div class="bp-cell" style="grid-row: 1; grid-column: 7;">
+                    <div class="cell-num">07</div>
+                    <div class="cell-name">성과 기준</div>
+                    <div class="cell-desc">이 업무의 성공은 무엇으로 측정되는가</div>
+                </div>
+                <div class="bp-narrow-ax" aria-hidden="true"></div>
+            </div>
+
+            <div class="bp-canvas-bottom">
+                <div class="bp-cell">
+                    <div class="cell-num">09</div>
+                    <div class="cell-name">AI 가드레일</div>
+                    <div class="cell-desc">책임자는 누구이며 보안·통제를 어떻게 할 것인가</div>
+                </div>
+                <div class="bp-cell bridge">
+                    <div class="cell-num">08</div>
+                    <div class="cell-name">AI 기술 매핑</div>
+                    <div class="cell-desc">이 업무에 어떤 AI 기술을 연결할 것인가</div>
+                </div>
+                <div class="bp-cell">
+                    <div class="cell-num">10</div>
+                    <div class="cell-name">성장 방향</div>
+                    <div class="cell-desc">AI가 반복 업무를 자동화하면 담당자는 무엇에 집중할 것인가</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="bp-canvas-caption">같은 10칸 위에 작성 규약 두 장을 얹습니다</div>
+
+        <div class="bp-canvas" aria-label="AX 캔버스 10칸 · 작성 규약 오버레이">
+            <div class="bp-canvas-axis">
+                <div>업무 구조 (What)<span class="axis-sub">암묵지의 Mark-down화 영역</span></div>
+                <div>AI 전환 (Why)<span class="axis-sub">Human-Agent Team 영역</span></div>
+            </div>
+
+            <div class="bp-canvas-grid with-overlay">
+                <div class="bp-cell dimmed" style="grid-row: 1; grid-column: 1;">
+                    <div class="cell-num">04</div>
+                    <div class="cell-name">업무 입출력 구조</div>
+                    <div class="cell-desc">각 업무별 필요 정보와 결과물은 무엇인가</div>
+                </div>
+                <div class="bp-cell dimmed" style="grid-row: 1; grid-column: 2;">
+                    <div class="cell-num">03</div>
+                    <div class="cell-name">시간 배분 현황</div>
+                    <div class="cell-desc">각 업무에 실제로 얼마나 시간이 투입되는가</div>
+                </div>
+                <div class="bp-cell dimmed" style="grid-row: 1; grid-column: 3;">
+                    <div class="cell-num">02</div>
+                    <div class="cell-name">핵심 업무 목록</div>
+                    <div class="cell-desc">해당 역할은 어떤 업무들을 수행하는가</div>
+                </div>
+                <div class="bp-cell center" style="grid-row: 1; grid-column: 4;">
+                    <div class="cell-num">01 · 중심</div>
+                    <div class="cell-name">업무 역할 정의</div>
+                    <div class="cell-desc">이 업무가 조직에 창출하는 핵심 가치는 무엇인가</div>
+                </div>
+                <div class="bp-cell dimmed" style="grid-row: 1; grid-column: 5;">
+                    <div class="cell-num">05</div>
+                    <div class="cell-name">AI 대체 가능성</div>
+                    <div class="cell-desc">어떤 업무를 AI가 대신할 수 있는가</div>
+                </div>
+                <div class="bp-cell dimmed" style="grid-row: 1; grid-column: 6;">
+                    <div class="cell-num">06</div>
+                    <div class="cell-name">협업 구조</div>
+                    <div class="cell-desc">누구와 어떻게 협력하며 정보는 어떻게 흐르는가</div>
+                </div>
+                <div class="bp-cell dimmed" style="grid-row: 1; grid-column: 7;">
+                    <div class="cell-num">07</div>
+                    <div class="cell-name">성과 기준</div>
+                    <div class="cell-desc">이 업무의 성공은 무엇으로 측정되는가</div>
+                </div>
+
+                <div class="bp-cell dimmed" style="grid-row: 2; grid-column: 1 / 4;">
+                    <div class="cell-num">09</div>
+                    <div class="cell-name">AI 가드레일</div>
+                    <div class="cell-desc">책임자는 누구이며 보안·통제를 어떻게 할 것인가</div>
+                </div>
+                <div class="bp-cell bridge" style="grid-row: 2; grid-column: 4;">
+                    <div class="cell-num">08</div>
+                    <div class="cell-name">AI 기술 매핑</div>
+                    <div class="cell-desc">이 업무에 어떤 AI 기술을 연결할 것인가</div>
+                </div>
+                <div class="bp-cell dimmed" style="grid-row: 2; grid-column: 5 / 8;">
+                    <div class="cell-num">10</div>
+                    <div class="cell-name">성장 방향</div>
+                    <div class="cell-desc">AI가 반복 업무를 자동화하면 담당자는 무엇에 집중할 것인가</div>
+                </div>
+
+                <div class="bp-overlay-label left">
+                    <div class="ov-tag">좌측 레이어 · What 작성 규약</div>
+                    <div class="ov-title">암묵지의 Mark-down화</div>
+                    <div class="ov-formula">Terminology → Context → Rule → Action</div>
+                </div>
+                <div class="bp-overlay-label right">
+                    <div class="ov-tag">우측 레이어 · Why 작성 규약</div>
+                    <div class="ov-title">Human-Agent Team</div>
+                    <div class="ov-formula">Human Harness + AI Harness = Meta Harness</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bp-handoff" style="margin-top: 28px;">
+            <div class="tag">캔버스를 읽는 두 가지 시선</div>
+            <strong>좌우는 일의 모양과 분업</strong>, <strong>위아래는 진단과 실행</strong>. 위 일곱 칸이 안 채워지면 아래 세 칸은 작동하지 않습니다.
+        </div>
+    </section>
+
+    <!-- ========= 3. 좌측 · 암묵지의 Mark-down화 ========= -->
+    <section class="bp-section" id="tcra">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">좌측 · 암묵지의 Mark-down화</h2>
+            </div>
+            <div class="bp-section-meta">2·3·4번 · Terminology → Context → Rule → Action</div>
+        </div>
+
+        <p class="bp-section-intro">좌측 세 칸은 개인에게 축적된 암묵지를 형식지로 전환하는 영역입니다. T·C·R·A 네 계층으로 구조화해야 에이전트가 학습·호출할 수 있습니다.</p>
+
+        <div class="bp-tcra">
+            <div class="bp-tcra-row">
+                <div class="stage">
+                    <div class="stage-letter">T</div>
+                    <div class="stage-name">Terminology</div>
+                    <div class="stage-kor">용어</div>
+                </div>
+                <div class="what">
+                    <strong>핵심 용어를 단일 정의로 표준화합니다.</strong> 직무 내 핵심 용어 10~20개를 한 줄 정의로 정렬합니다. 에이전트가 학습할 1차 입력값입니다.
+                </div>
+                <div class="example">
+                    <span class="ex-tag">예시 · 게스코리아 CS</span>
+                    채널 = 자사몰·무신사·백화점몰 · 택 = 상품 라벨 · 핏 불만 = 사이즈 부적합 클레임 · 정형 = 채널·기한·표준 응대로 처리 가능한 문의 · 비정형 = 어조와 재량이 필요한 문의
+                </div>
+            </div>
+            <div class="bp-tcra-row">
+                <div class="stage">
+                    <div class="stage-letter">C</div>
+                    <div class="stage-name">Context</div>
+                    <div class="stage-kor">맥락</div>
+                </div>
+                <div class="what">
+                    <strong>그 단어가 작동하는 배경 조건을 적습니다.</strong> 정책·기한·채널 차이·계약 조건처럼 사람은 당연하게 알지만 에이전트는 모르는 정보입니다.
+                </div>
+                <div class="example">
+                    <span class="ex-tag">예시 · 게스코리아 CS</span>
+                    구매 14일 이내·택 미제거 시 반품 가능. 채널마다 환불 주체와 기간이 다름. 무신사는 D+3 자동 환불, 백화점몰은 매장 회수 후 환불.
+                </div>
+            </div>
+            <div class="bp-tcra-row">
+                <div class="stage">
+                    <div class="stage-letter">R</div>
+                    <div class="stage-name">Rule</div>
+                    <div class="stage-kor">규칙</div>
+                </div>
+                <div class="what">
+                    <strong>의사결정 기준을 라인 단위로 정의합니다.</strong> "특정 조건 시 특정 행동" 형식. 신규 인력과 에이전트가 동일한 기준으로 운영되는 토대입니다.
+                </div>
+                <div class="example">
+                    <span class="ex-tag">예시 · 게스코리아 CS</span>
+                    ① 채널을 먼저 확인한다 ② 택·기한을 점검한다 ③ 핏 불만은 사이즈 재추천을 우선한다 ④ 단순 변심은 왕복 배송비를 고지한다 ⑤ 까다로운 어조 신호가 잡히면 규정 원문을 또박또박 읽어준다
+                </div>
+            </div>
+            <div class="bp-tcra-row">
+                <div class="stage">
+                    <div class="stage-letter">A</div>
+                    <div class="stage-name">Action</div>
+                    <div class="stage-kor">행동</div>
+                </div>
+                <div class="what">
+                    <strong>규칙을 끝에서 끝까지 이은 행동 흐름입니다.</strong> 첫 입력부터 마지막 산출까지 화살표로 잇습니다. 8번이 이 화살표의 어느 칸을 잡을지를 정합니다.
+                </div>
+                <div class="example">
+                    <span class="ex-tag">예시 · 게스코리아 CS</span>
+                    채널 확인 → 주문 조회 → 사유 분류 → (핏)재추천 / (변심)배송비 안내 → 접수 → 처리 결과 알림
+                </div>
+            </div>
+        </div>
+
+        <div class="bp-handoff" style="margin-top: 28px;">
+            <div class="tag">마크다운을 채택하는 이유</div>
+            <strong>에이전트가 호출 가능한 최소 단위가 마크다운 포맷이기 때문입니다.</strong> Anthropic Skill, Custom GPT, 사내 RAG 모두 마크다운을 1차 입력으로 활용합니다. T·C·R·A 네 계층이 SKILL.md 한 건의 산출물로 직결됩니다.
+        </div>
+    </section>
+
+    <!-- ========= 4. 우측 · Human-Agent Team ========= -->
+    <section class="bp-section" id="harness">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">우측 · Human-Agent Team</h2>
+            </div>
+            <div class="bp-section-meta">5·6·7번 · Human Harness + AI Harness = Meta Harness</div>
+        </div>
+
+        <p class="bp-section-intro">우측 세 칸은 역할 분담을 정의합니다. 5번 AI 대체 범위, 6번 협업 구조, 7번 성과 기준. 세 칸을 개별 작성하지 않고, 인간 영역과 에이전트 영역을 각각 묶어 정의한 후 Meta Harness 한 장으로 통합합니다.</p>
+
+        <div class="bp-harness">
+            <div class="bp-harness-col human">
+                <div class="bp-harness-tag">Human Harness · 인간 영역</div>
+                <div class="bp-harness-title">인간이 최종 책임을 갖는 의사결정과 검증 항목입니다.</div>
+                <ul class="bp-harness-list">
+                    <li>
+                        <strong>판단 기준</strong>
+                        에이전트 산출물 수용 전 적용할 분별 기준. 4D의 분별(Discernment) 영역입니다.
+                    </li>
+                    <li>
+                        <strong>최종 결재선</strong>
+                        어떤 의사결정이 사람의 결재로 종결되는지. 1단계 결재인지 2단계 결재인지 명시합니다.
+                    </li>
+                    <li>
+                        <strong>실패 시 책임</strong>
+                        사고가 났을 때 거슬러 올라갈 사람을 한 줄로. 부서가 아니라 이름으로 적습니다.
+                    </li>
+                    <li>
+                        <strong>예외 대응</strong>
+                        규정 바깥 사례를 어떻게 받아들일지. 사람의 재량 한도를 어디까지 둘지.
+                    </li>
+                </ul>
+            </div>
+            <div class="bp-harness-col ai">
+                <div class="bp-harness-tag">AI Harness · 에이전트 영역</div>
+                <div class="bp-harness-title">에이전트가 위임받아 자율 수행하는 업무 항목입니다.</div>
+                <ul class="bp-harness-list">
+                    <li>
+                        <strong>위임 범위</strong>
+                        T·C·R·A 워크플로우 중 에이전트가 수행할 구간 정의. 4D의 위임(Delegation) 영역입니다.
+                    </li>
+                    <li>
+                        <strong>호출 도구</strong>
+                        쓰는 모델·Skill·외부 API·사내 시스템 권한. 8번 매핑과 연결됩니다.
+                    </li>
+                    <li>
+                        <strong>입출력 형식</strong>
+                        입력과 출력 형식을 표준화합니다. 형식이 불안정하면 분별 비용이 매번 발생합니다.
+                    </li>
+                    <li>
+                        <strong>실패 신호</strong>
+                        못 하는 사례를 어떻게 신호로 받을지. 다음 사이클의 T·R 추출 대상이 됩니다.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="bp-meta-merge">
+            <div class="merge-tag">Meta Harness · 한 장으로 합치기</div>
+            <p class="merge-formula">인간과 에이전트의 협업 운영 모델을 한 장에 통합한 산출물. <em>Human Harness + AI Harness = Meta Harness.</em></p>
+            <p class="merge-body">인간의 결재 라인과 에이전트의 위임 범위가 동일 문서에서 정합성을 가져야 합니다. 이 산출물이 6번(협업 구조)이며, 7번(성과 기준)으로 측정합니다. 5번(AI 대체 가능성)은 양측의 비율을 결정하는 입력 변수입니다.</p>
+        </div>
+    </section>
+
+    <!-- ========= 6. 9·10번 가드레일과 성장 방향 ========= -->
+    <section class="bp-section" id="guard">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">9·10번 · 가드레일과 성장 방향</h2>
+            </div>
+            <div class="bp-section-meta">캔버스의 통제 항목과 다음 사이클 입력</div>
+        </div>
+
+        <p class="bp-section-intro">아랫줄 두 칸이 캔버스를 운영 가능한 상태로 완성합니다. 9번은 사고 발생 시 책임 라인, 10번은 절감 시간의 재투입 경로. 비어 있으면 캔버스는 일회성 산출물에 그칩니다.</p>
+
+        <div class="bp-guard">
+            <div class="bp-guard-card">
+                <div class="gc-num">09 · 가드레일</div>
+                <div class="gc-title">AI 가드레일</div>
+                <div class="gc-q">책임자는 누구이며 보안·통제를 어떻게 할 것인가</div>
+                <p class="gc-body">에이전트 운영 전 사전 정의가 필요한 통제 항목입니다. <strong>책임자와 통제 정책이 동시에 정의되어야 합니다.</strong> 둘 중 하나라도 누락되면 운영 단계에서 중단됩니다.</p>
+                <ul class="gc-list">
+                    <li>책임자 한 명. 사람 이름으로 적습니다.</li>
+                    <li>데이터 권한 범위. 접근 시스템과 외부 송신 한도.</li>
+                    <li>실패 통보 절차. 누구에게 몇 분 안에 알리는가.</li>
+                    <li>롤백 기준. 자동 호출을 멈추는 오답 임곗값.</li>
+                </ul>
+            </div>
+            <div class="bp-guard-card">
+                <div class="gc-num">10 · 성장 방향</div>
+                <div class="gc-title">성장 방향</div>
+                <div class="gc-q">AI가 반복 업무를 자동화하면 담당자는 무엇에 집중할 것인가</div>
+                <p class="gc-body">에이전트가 정형 업무를 가져가면 사람의 시간이 비게 됩니다. <strong>그 시간을 어디에 쓸지 미리 정해두지 않으면, 결국 잡다한 회의와 결재 처리에 다시 묻힙니다.</strong> 4D의 성실 영역이 적용됩니다.</p>
+                <ul class="gc-list">
+                    <li>새 책임 영역. 더 높은 가치의 일이 무엇인지.</li>
+                    <li>학습·재배치 신호. 절약된 시간이 흐를 경로.</li>
+                    <li>다음 캔버스 입력. 에이전트가 못 한 사례 모음.</li>
+                    <li>성과 재정의. 7번 기준을 어떻게 갱신할지.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= 7. 채우는 순서와 함정 ========= -->
+    <section class="bp-section" id="order">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">채우는 순서와 흔히 빠지는 함정</h2>
+            </div>
+            <div class="bp-section-meta">1 → 2·3·4 → 5·6·7 → 8 → 9·10</div>
+        </div>
+
+        <p class="bp-section-intro">10칸은 순서가 있습니다. 1번 → 좌측 → 우측 → 8번 → 9·10번. 순서를 바꾸면 같은 칸을 두 번 채우게 됩니다.</p>
+
+        <div class="bp-order">
+            <div class="bp-order-row">
+                <div class="bp-order-num">1</div>
+                <div class="bp-order-body">
+                    <h4>1번을 단일 문장으로 정의합니다</h4>
+                    <p>"이 업무가 창출하는 핵심 가치는 무엇인가." 한 문장이 확정되어야 좌우 6칸이 동일한 축으로 정렬됩니다.</p>
+                </div>
+                <div class="bp-order-fail">
+                    <span class="fail-tag">실패 싸인</span>
+                    "여러 가치를 만드는 종합 역할" 같은 무난한 문장. 어디가 비었는지 가려지지 않습니다.
+                </div>
+            </div>
+            <div class="bp-order-row">
+                <div class="bp-order-num">2</div>
+                <div class="bp-order-body">
+                    <h4>좌측 2·3·4번을 순차 정의합니다 · T·C·R·A 구조</h4>
+                    <p>2번 업무 목록 → 3번 시간 배분 → 4번 입출력. 동일 표를 T·C·R·A 네 계층으로 재구성하면 좌측 정의가 완성됩니다.</p>
+                </div>
+                <div class="bp-order-fail">
+                    <span class="fail-tag">실패 싸인</span>
+                    시간 배분 칸이 비었습니다. 정형·비정형이 안 갈리면 5번이 짐작으로 채워집니다.
+                </div>
+            </div>
+            <div class="bp-order-row">
+                <div class="bp-order-num">3</div>
+                <div class="bp-order-body">
+                    <h4>우측 5·6·7번을 순차 정의합니다 · Human → AI → Meta 통합</h4>
+                    <p>5번 AI 대체 비율 → 6번 Human·AI Harness 분리 정의 → 7번 성과 기준이 반영된 Meta Harness 통합 산출.</p>
+                </div>
+                <div class="bp-order-fail">
+                    <span class="fail-tag">실패 싸인</span>
+                    Human과 AI 사이 결재선·형식이 어긋났습니다. 다음 페이지에서 권한 표를 새로 그려야 합니다.
+                </div>
+            </div>
+            <div class="bp-order-row">
+                <div class="bp-order-num">4</div>
+                <div class="bp-order-body">
+                    <h4>8번 매핑표를 그립니다 · 좌측 Action ↔ 우측 호출 도구</h4>
+                    <p>두 레이어를 1:1로 잇는 표 한 장. 비는 자리에 별표를 달아 둡니다.</p>
+                </div>
+                <div class="bp-order-fail">
+                    <span class="fail-tag">실패 싸인</span>
+                    매핑표가 100% 채워졌습니다. 직무의 핵심 가치를 식별하지 못한 지표입니다. 1번 정의를 재검토합니다.
+                </div>
+            </div>
+            <div class="bp-order-row">
+                <div class="bp-order-num">5</div>
+                <div class="bp-order-body">
+                    <h4>9·10번을 마지막에 확정합니다 · 가드레일과 성장 방향</h4>
+                    <p>9번은 책임자와 통제 정책 두 줄, 10번은 신규 책임 영역과 다음 입력 두 줄. 두 칸을 확정해야 캔버스가 다음 사이클의 입력 자산으로 전환됩니다.</p>
+                </div>
+                <div class="bp-order-fail">
+                    <span class="fail-tag">실패 싸인</span>
+                    책임자가 부서명으로 기재되어 있습니다. 사고 발생 시 책임 소재 확인이 지연되며, 그동안 에이전트는 계속 가동됩니다.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= FOOTER ========= -->
+    <footer class="bp-footer">
+        <p style="margin:0 0 10px; font-size:11.5px; opacity:0.78;">* 이 페이지는 AX 4단계 업무 방식 재설계의 두 번째 작업, AX 캔버스를 다룹니다. 앞 페이지는 자원 재배분, 다음 페이지는 업무 재설계이며, 세 페이지의 산출물이 합쳐져 5단계 운영 내재화로 인계됩니다.</p>
+        <p style="margin:0 0 10px;"><strong>참고 자료.</strong> 본 가이드의 미시 엔진 10문항(C 영역), 자산 축적 4단계 순환의 추출·구조화·자산화 단계(D 영역), Anthropic AI Fluency의 4D(위임·설명·분별·성실)와 Skill 형식. 캔버스 양식은 미시 엔진의 직무 버전이며, T·C·R·A 마크다운과 Meta Harness는 본 가이드의 고유 작업 양식입니다.</p>
+        <p style="margin:0 0 10px; opacity:0.85;">실제 직무에 캔버스를 적용하기 전, 사내 법무·정보보안·인사 부서의 검토를 함께 거칩니다. 권한·결재선 변경은 다음 페이지(업무 재설계)에서 가치 사슬 단위로 한 번 더 확인됩니다.</p>
+        <p style="margin:22px 0 0; padding-top:18px; border-top:1px solid rgba(247,245,239,0.18); font-size:11.5px; opacity:0.7; letter-spacing:0.04em;">&copy; 2026 AI ROASTING. All rights reserved.</p>
+    </footer>
+
+</div>
+
+<script>
+(function() {
+    'use strict';
+    var navLinks = document.querySelectorAll('.bp-hero-nav a');
+    if (!navLinks.length) return;
+
+    var linkMap = {};
+    var sectionIds = [];
+    navLinks.forEach(function(link) {
+        var id = (link.getAttribute('href') || '').replace('#', '');
+        if (!id) return;
+        var el = document.getElementById(id);
+        if (!el) return;
+        linkMap[id] = { link: link, el: el };
+        sectionIds.push(id);
+    });
+    if (!sectionIds.length) return;
+
+    function setActive(id) {
+        sectionIds.forEach(function(k) {
+            if (k === id) linkMap[k].link.classList.add('active');
+            else linkMap[k].link.classList.remove('active');
+        });
+    }
+
+    function update() {
+        var nav = document.querySelector('.bp-hero-nav');
+        var navH = nav ? nav.offsetHeight : 0;
+        var trigger = navH + 60;
+        var currentId = null;
+        for (var i = 0; i < sectionIds.length; i++) {
+            var rect = linkMap[sectionIds[i]].el.getBoundingClientRect();
+            if (rect.top <= trigger) currentId = sectionIds[i];
+            else break;
+        }
+        setActive(currentId);
+    }
+
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(function() {
+            update();
+            ticking = false;
+        });
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+})();
+</script>
+
+</body>
+</html>

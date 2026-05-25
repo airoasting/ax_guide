@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B-1-2 운영 계획 수립 · TF의 6개월을 어떻게 굴릴 것인가</title>
+<meta name="description" content="AX 1단계 추진체계 구축의 두 번째 작업. TF의 6개월 운영 마일스톤과 LLM 표준 모델 선택을 한자리에서 결정합니다. 즉흥 실행과 운영 계획을 가르는 기준, 월별 산출물, 회의체 운영 리듬, 모델 후보 비교까지 다룹니다.">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+/* ================== B-1-2 Operations Page Local Styles ================== */
+/* organization.html과 동일한 bp-* 시각 토큰을 그대로 차용합니다. */
+
+:root {
+    --bp-grid: rgba(14, 59, 42, 0.06);
+    --bp-grid-strong: rgba(14, 59, 42, 0.12);
+    --bp-line: #0E3B2A;
+    --bp-ink: #0F1A16;
+    --bp-paper: #F7F5EF;
+    --bp-paper-2: #FBFAF6;
+    --bp-rule: #D6D2C5;
+    --bp-accent: #1B6E4F;
+    --bp-gold: #9A7B0A;
+    --bp-red: #8B2E1F;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 50px; }
+body {
+    background:
+        linear-gradient(var(--bp-grid) 1px, transparent 1px) 0 0 / 32px 32px,
+        linear-gradient(90deg, var(--bp-grid) 1px, transparent 1px) 0 0 / 32px 32px,
+        var(--bp-paper);
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    line-break: strict;
+}
+
+/* ===== Sheet wrapper ===== */
+.bp-sheet {
+    max-width: 1320px;
+    margin: 32px auto;
+    background: var(--bp-paper-2);
+    border: 1.5px solid var(--bp-line);
+    box-shadow: 0 1px 0 var(--bp-line), 0 24px 60px -30px rgba(6, 32, 24, 0.35);
+    position: relative;
+}
+.bp-sheet::before, .bp-sheet::after {
+    content: "";
+    position: absolute;
+    width: 16px; height: 16px;
+    border: 1px solid var(--bp-line);
+}
+.bp-sheet::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+.bp-sheet::after  { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
+/* ===== Step navigation ===== */
+.bp-stepnav {
+    padding: 36px 56px 28px;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1.5px solid #062018;
+}
+.bp-stepnav::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+}
+.bp-step {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid rgba(247, 245, 239, 0.55);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--sans);
+    font-size: 11.5px;
+    font-weight: 600;
+    color: rgba(247, 245, 239, 0.85);
+    letter-spacing: 0.02em;
+    position: relative;
+    transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+.bp-step.active {
+    background: var(--bp-paper);
+    color: var(--bp-ink);
+    border-color: var(--bp-paper);
+    font-weight: 700;
+}
+.bp-step + .bp-step { margin-left: 24px; }
+.bp-step + .bp-step::before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    width: 24px;
+    height: 1px;
+    background: rgba(247, 245, 239, 0.4);
+    transform: translateY(-50%);
+}
+.bp-back {
+    display: block;
+    text-align: center;
+    margin-top: 18px;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: rgba(247, 245, 239, 0.78);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: color .15s ease, letter-spacing .15s ease;
+    position: relative;
+    z-index: 1;
+}
+.bp-back:hover { color: var(--bp-paper); letter-spacing: 0.08em; }
+
+.bp-substeps {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+.bp-substeps a, .bp-substeps span {
+    border: 1px solid rgba(247, 245, 239, 0.28);
+    background: transparent;
+    padding: 12px 24px;
+    color: rgba(247, 245, 239, 0.75);
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: background .18s ease, border-color .18s ease, color .18s ease;
+    min-width: 200px;
+    text-align: center;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.bp-substeps a:hover {
+    background: rgba(247, 245, 239, 0.08);
+    border-color: rgba(247, 245, 239, 0.6);
+    color: var(--bp-paper);
+}
+.bp-substeps span {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+.bp-substeps a.active {
+    background: linear-gradient(180deg, #14523B 0%, #0E3B2A 100%);
+    color: var(--bp-paper);
+    border: 1.5px solid var(--bp-paper);
+    font-weight: 700;
+    box-shadow:
+        0 0 0 4px rgba(14, 59, 42, 0.55),
+        0 8px 20px -8px rgba(6, 32, 24, 0.7);
+    transform: translateY(-1px);
+    cursor: default;
+    pointer-events: none;
+}
+
+@media (max-width: 600px) {
+    .bp-stepnav { padding: 24px 16px 20px; }
+    .bp-step { width: 26px; height: 26px; font-size: 10px; }
+    .bp-step + .bp-step { margin-left: 16px; }
+    .bp-step + .bp-step::before { width: 16px; }
+    .bp-substeps { gap: 8px; }
+    .bp-substeps a, .bp-substeps span { min-width: 0; flex: 1 1 auto; padding: 10px 14px; font-size: 12px; }
+}
+
+/* ===== Hero block ===== */
+.bp-hero {
+    padding: 64px 56px 56px;
+    border-bottom: 1.5px solid var(--bp-line);
+    position: relative;
+    background:
+        radial-gradient(ellipse at top right, rgba(27, 110, 79, 0.06), transparent 60%),
+        var(--bp-paper-2);
+}
+.bp-hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    margin-bottom: 18px;
+}
+.bp-hero h1 {
+    font-size: 52px;
+    line-height: 1.18;
+    margin: 0 0 22px;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+}
+.bp-hero .bp-lead {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+}
+.bp-hero .bp-summary {
+    margin-top: 36px;
+    padding: 22px 26px;
+    background: rgba(14, 59, 42, 0.04);
+    border-top: 1px solid var(--bp-rule);
+    border-bottom: 1px solid var(--bp-rule);
+    font-size: 14px;
+    line-height: 1.75;
+}
+.bp-hero .bp-summary strong { color: var(--bp-line); }
+
+/* ===== Section submenu ===== */
+.bp-hero-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 12px 56px;
+    background: var(--bp-paper-2);
+    border-top: 1px solid var(--bp-line);
+    border-bottom: 1px solid var(--bp-line);
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    box-shadow: 0 2px 8px -4px rgba(6, 32, 24, 0.18);
+}
+.bp-hero-nav a {
+    flex: 1 1 0;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--bp-ink);
+    padding: 10px 16px;
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper);
+    text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    letter-spacing: -0.005em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bp-hero-nav a:hover { background: var(--bp-line); color: var(--bp-paper); }
+.bp-hero-nav a.active {
+    background: var(--bp-line);
+    color: var(--bp-paper);
+    border-color: var(--bp-line);
+    box-shadow: inset 0 -3px 0 var(--bp-accent);
+}
+
+/* ===== Section frame ===== */
+.bp-section {
+    padding: 56px 56px 64px;
+    border-bottom: 1.5px solid var(--bp-line);
+    position: relative;
+}
+.bp-section:last-of-type { border-bottom: none; }
+.bp-section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 36px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--bp-rule);
+}
+.bp-section-title {
+    font-size: 30px;
+    margin: 0;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    font-weight: 700;
+}
+.bp-section-meta {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    text-align: right;
+    line-height: 1.6;
+}
+.bp-section-intro {
+    margin: 0 0 28px;
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+}
+
+/* ===== Compare table ===== */
+.bp-compare {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-compare-head {
+    display: grid;
+    grid-template-columns: 160px 1fr 1fr;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+    position: relative;
+}
+.bp-compare-head::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-compare-head > div {
+    padding: 14px 20px;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-right: 1px solid rgba(247, 245, 239, 0.14);
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+.bp-compare-head > div:last-child { border-right: none; }
+.bp-compare-head .pick {
+    color: #FFE9A8;
+    letter-spacing: 0.12em;
+}
+.bp-compare-head .pick::after {
+    content: "추천";
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #0E3B2A;
+    background: #FFE9A8;
+    border: 1px solid #FFE9A8;
+    letter-spacing: 0.08em;
+}
+.bp-compare-row {
+    display: grid;
+    grid-template-columns: 160px 1fr 1fr;
+    border-top: 1px solid var(--bp-rule);
+}
+.bp-compare-row > div {
+    padding: 16px 20px;
+    font-size: 14px;
+    line-height: 1.7;
+    border-right: 1px solid var(--bp-rule);
+    color: var(--bp-ink);
+}
+.bp-compare-row > div:last-child { border-right: none; }
+.bp-compare-head > div:first-child { text-align: center; }
+.bp-compare-row .label {
+    font-family: var(--sans);
+    font-weight: 700;
+    color: var(--bp-line);
+    letter-spacing: 0.04em;
+    background: rgba(14, 59, 42, 0.03);
+    font-size: 13px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bp-compare-row .preferred {
+    background: rgba(27, 110, 79, 0.05);
+    color: var(--bp-ink);
+}
+.bp-compare-row .preferred strong { color: var(--bp-line); }
+
+/* ===== 6-month milestone timeline ===== */
+.bp-timeline {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-tl-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    border-bottom: 1px solid var(--bp-rule);
+    align-items: stretch;
+}
+.bp-tl-row:last-child { border-bottom: none; }
+.bp-tl-head {
+    padding: 26px 24px;
+    background: rgba(14, 59, 42, 0.04);
+    border-right: 1px solid var(--bp-rule);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.bp-tl-head .month {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+.bp-tl-head .theme {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--bp-line);
+    letter-spacing: -0.005em;
+    line-height: 1.35;
+}
+.bp-tl-body {
+    padding: 26px 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+.bp-tl-body .col h5 {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+}
+.bp-tl-body .col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.bp-tl-body .col li {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    padding-left: 14px;
+    position: relative;
+    margin-bottom: 6px;
+}
+.bp-tl-body .col li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 6px;
+    height: 1px;
+    background: var(--bp-accent);
+}
+.bp-tl-body .col li strong { color: var(--bp-ink); }
+
+/* ===== LLM criteria cards (3-up) ===== */
+.bp-principles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-principle {
+    padding: 28px 26px 30px;
+    border-right: 1px solid var(--bp-rule);
+    background: var(--bp-paper-2);
+    transition: background .25s ease, transform .25s ease, box-shadow .25s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.bp-principle:last-child { border-right: none; }
+.bp-principle:hover {
+    background: rgba(27, 110, 79, 0.06);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px -10px rgba(6, 32, 24, 0.25);
+    z-index: 2;
+}
+.bp-principle-num {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--bp-accent);
+    font-weight: 700;
+    margin-bottom: 10px;
+    transition: color .25s ease, letter-spacing .25s ease;
+}
+.bp-principle:hover .bp-principle-num { color: var(--bp-line); letter-spacing: 0.24em; }
+.bp-principle-name {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    margin-bottom: 14px;
+    letter-spacing: -0.005em;
+    line-height: 1.35;
+}
+.bp-principle-body {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+    flex: 1;
+}
+.bp-principle-body strong { color: var(--bp-ink); }
+.bp-principle-evidence {
+    padding-top: 16px;
+    border-top: 1px solid var(--bp-rule);
+    margin-top: auto;
+    font-family: var(--sans);
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--ink-mute);
+    letter-spacing: 0.005em;
+}
+.bp-principle-evidence b {
+    display: block;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+/* ===== LLM model matrix ===== */
+.bp-matrix {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    overflow-x: auto;
+}
+.bp-matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+.bp-matrix-table thead {
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+}
+.bp-matrix-table th {
+    padding: 14px 16px;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-align: left;
+    border-right: 1px solid rgba(247, 245, 239, 0.14);
+}
+.bp-matrix-table th:last-child { border-right: none; }
+.bp-matrix-table tbody tr { border-top: 1px solid var(--bp-rule); }
+.bp-matrix-table td {
+    padding: 16px;
+    line-height: 1.7;
+    color: var(--bp-ink);
+    border-right: 1px solid var(--bp-rule);
+    vertical-align: top;
+}
+.bp-matrix-table td:last-child { border-right: none; }
+.bp-matrix-table td.name {
+    font-family: var(--sans);
+    font-weight: 700;
+    color: var(--bp-line);
+    letter-spacing: 0.01em;
+    width: 160px;
+}
+.bp-matrix-table td.name .vendor {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-mute);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+.bp-matrix-table td.strength { color: var(--ink-soft); }
+.bp-matrix-table td.watch { color: var(--ink-soft); }
+.bp-matrix-table td.fit { background: rgba(14, 59, 42, 0.04); }
+.bp-matrix-table td.fit strong { color: var(--bp-line); }
+
+/* ===== Composition diagram (운영 리듬) ===== */
+.bp-comp-diagram {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    padding: 32px 36px 36px;
+}
+.bp-comp-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px dashed var(--bp-rule);
+    align-items: flex-start;
+}
+.bp-comp-row:last-child { border-bottom: none; }
+.bp-comp-tier {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding-top: 4px;
+}
+.bp-comp-detail h4 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    margin: 0 0 8px;
+    letter-spacing: -0.005em;
+}
+.bp-comp-detail p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    margin: 0 0 8px;
+}
+.bp-comp-detail p strong { color: var(--bp-ink); }
+.bp-comp-detail .roles {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.bp-comp-detail .role-chip {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--bp-line);
+    background: rgba(14, 59, 42, 0.06);
+    border: 1px solid var(--bp-rule);
+    padding: 5px 11px;
+    letter-spacing: 0.01em;
+}
+
+/* ===== Antipattern table ===== */
+.bp-anti {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-anti-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(139, 46, 31, 0.35), transparent 60%),
+        linear-gradient(90deg, #2A0E0A 0%, #4A1A12 50%, #5C2218 100%);
+    color: var(--bp-paper);
+    position: relative;
+}
+.bp-anti-head > div {
+    padding: 14px 20px;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-right: 1px solid rgba(247, 245, 239, 0.14);
+    text-align: center;
+}
+.bp-anti-head > div:last-child { border-right: none; }
+.bp-anti-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--bp-rule);
+}
+.bp-anti-row > div {
+    padding: 18px 22px;
+    font-size: 14px;
+    line-height: 1.7;
+    border-right: 1px solid var(--bp-rule);
+    color: var(--ink-soft);
+}
+.bp-anti-row > div:last-child { border-right: none; }
+.bp-anti-row .bad { background: rgba(139, 46, 31, 0.04); }
+.bp-anti-row .bad strong { color: var(--bp-red); }
+.bp-anti-row .good { background: rgba(14, 59, 42, 0.04); }
+.bp-anti-row .good strong { color: var(--bp-line); }
+
+/* ===== Closing footer ===== */
+.bp-footer {
+    padding: 36px 56px 44px;
+    background:
+        radial-gradient(ellipse at 0% 100%, rgba(27, 110, 79, 0.35), transparent 55%),
+        linear-gradient(110deg, #14523B 0%, #0E3B2A 35%, #0A2E22 70%, #062018 100%);
+    color: rgba(247, 245, 239, 0.92);
+    font-family: var(--sans);
+    font-size: 12.5px;
+    line-height: 1.7;
+    border-top: 1.5px solid #062018;
+    position: relative;
+    overflow: hidden;
+}
+.bp-footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-footer > * { position: relative; z-index: 1; }
+.bp-footer strong { color: var(--bp-paper); }
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+    .bp-hero { padding: 48px 32px; }
+    .bp-hero h1 { font-size: 38px; }
+    .bp-section { padding: 40px 32px; }
+    .bp-compare-head, .bp-compare-row { grid-template-columns: 120px 1fr 1fr; }
+    .bp-principles { grid-template-columns: 1fr; }
+    .bp-principle { border-right: none; border-bottom: 1px solid var(--bp-rule); }
+    .bp-principle:last-child { border-bottom: none; }
+    .bp-tl-row { grid-template-columns: 160px 1fr; }
+    .bp-tl-body { grid-template-columns: 1fr; gap: 18px; }
+    .bp-comp-row { grid-template-columns: 1fr; gap: 8px; }
+    .bp-footer { padding: 32px; }
+}
+@media (max-width: 600px) {
+    .bp-sheet { margin: 12px; }
+    .bp-hero h1 { font-size: 28px; }
+    .bp-section-title { font-size: 22px; }
+    .bp-compare-head, .bp-compare-row { grid-template-columns: 1fr; }
+    .bp-compare-row .label { background: rgba(14, 59, 42, 0.08); }
+    .bp-anti-head, .bp-anti-row { grid-template-columns: 1fr; }
+    .bp-tl-row { grid-template-columns: 1fr; }
+    .bp-tl-head { border-right: none; border-bottom: 1px solid var(--bp-rule); }
+}
+</style>
+</head>
+<body>
+
+<div class="bp-sheet">
+
+
+    <!-- ========= BRAND BAR ========= -->
+    <a class="bp-brandbar" href="index.html" aria-label="목차로 이동">
+        <img class="bb-logo" src="assets/logos/logo1-transparent.png" alt="AI ROASTING">
+        <span>AI ROASTING · AX GUIDE TO COMPANY BRAIN OS</span>
+    </a>
+
+    <!-- ========= STEP NAVIGATION ========= -->
+    <nav class="bp-stepnav" aria-label="전체 단계">
+        <ol class="bp-steps">
+            <li class="bp-step"><a href="blueprint.html">진단</a></li>
+            <li class="bp-step active" aria-current="step"><a href="organization.html">1</a></li>
+            <li class="bp-step"><a href="pilot.html">2</a></li>
+            <li class="bp-step"><a href="criteria.html">3</a></li>
+            <li class="bp-step"><a href="resource.html">4</a></li>
+            <li class="bp-step"><a href="ainative.html">5</a></li>
+        </ol>
+        <a class="bp-back" href="index.html">← 목록으로</a>
+        <div class="bp-substeps" aria-label="1단계 추진체계 페이지">
+            <a href="organization.html">TF 조직 세팅</a>
+            <a href="operations.html" class="active" aria-current="page">운영 계획 수립</a>
+            <a href="capability.html">AI 부트캠프</a>
+        </div>
+    </nav>
+
+    <!-- ========= HERO ========= -->
+    <section class="bp-hero">
+        <div class="bp-hero-eyebrow">Step 1 · 추진체계 구축 · 운영 계획 수립 · BRAIN OS 운영 약속</div>
+        <h1>TF의 6개월을 한 장의 운영 계획으로 확정합니다.</h1>
+        <p class="bp-lead">월별 마일스톤·표준 LLM·결정 회의체를 한 장에 묶어, COMPANY BRAIN OS의 첫 운영 리듬을 자리잡게 만듭니다.</p>
+        <div class="bp-summary">
+            <strong>운영 계획은 세 가지를 한자리에서 정합니다.</strong> 첫째, 6개월 마일스톤을 월 단위로 못박습니다. 둘째, 표준 LLM 1개와 보조 모델 1개를 선택하고 사용 가이드를 문서로 남깁니다. 셋째, 회의체 4종(데일리·주간·월간·분기)과 KPI 6개를 캘린더에 박아 둡니다. 이 세 가지가 임기 종료일에 무엇으로 끝낼지에 답을 줍니다.
+        </div>
+    </section>
+
+    <nav class="bp-hero-nav" aria-label="섹션 바로가기">
+        <a href="#why">왜 운영 계획인가</a>
+        <a href="#milestones">6개월 마일스톤</a>
+        <a href="#llm-criteria">LLM 선택 기준</a>
+        <a href="#llm-matrix">모델 비교와 권고</a>
+        <a href="#rhythm">운영 리듬과 KPI</a>
+        <a href="#pitfalls">흔한 실패 패턴</a>
+    </nav>
+
+    <!-- ========= 1. 왜 운영 계획인가 ========= -->
+    <section class="bp-section" id="why">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">왜 즉흥 실행이 아니라 운영 계획인가</h2>
+            </div>
+            <div class="bp-section-meta">즉흥 실행 · 운영 계획 비교</div>
+        </div>
+
+        <p class="bp-section-intro">TF가 모이자마자 "일단 해보자"로 시작하면 첫 분기가 흐른 뒤에야 무엇을 했는지 정리됩니다. 운영 계획은 속도를 늦추는 문서가 아니라, 첫 한 달 안에 결정 비용을 한꺼번에 치르는 도구입니다. 한 번 정해두면 그 뒤로 같은 질문을 반복하지 않습니다.</p>
+
+        <div class="bp-compare">
+            <div class="bp-compare-head">
+                <div>비교 항목</div>
+                <div>즉흥 실행</div>
+                <div class="pick">운영 계획 수립</div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="label">출발 속도</div>
+                <div>회의를 잡고 도구를 깔며 첫 한 달이 흐릅니다. 결정해야 할 항목이 회의마다 다시 등장합니다.</div>
+                <div class="preferred">출범 1주 차에 계획을 확정하고, <strong>2주 차부터는 실행에만 집중</strong>합니다. 반복 결정 비용이 사라집니다.</div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="label">LLM 결정</div>
+                <div>멤버 각자가 익숙한 도구를 씁니다. 사내 보안 검토가 산출물마다 다시 일어납니다.</div>
+                <div class="preferred">표준 모델 1개와 보조 1개를 처음에 합의합니다. <strong>보안·법무 검토를 한 번에 통과</strong>시켜 두면 이후 산출물은 같은 권한 위에서 굴러갑니다.</div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="label">월별 산출물</div>
+                <div>"이번 달엔 뭐 했지"가 보고 시점마다 새로 정리됩니다. 스폰서가 진척을 가늠하기 어렵습니다.</div>
+                <div class="preferred">월별 산출물이 미리 적혀 있어 <strong>스폰서 보고가 5분 만에 끝납니다.</strong> 늦은 항목을 즉시 짚어낼 수 있습니다.</div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="label">사람 의존도</div>
+                <div>TF 리드의 머릿속에 모든 계획이 있습니다. 리드가 자리를 비우면 진행이 멈춥니다.</div>
+                <div class="preferred">문서가 외장 두뇌 역할을 합니다. <strong>코어 멤버 누구든 한 페이지를 열어 다음 액션을 확인</strong>할 수 있습니다.</div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="label">실패 회수</div>
+                <div>임기 종료 즈음에 "계획대로 안 됐다"는 감정만 남습니다. 다음 차수에 같은 실수를 반복합니다.</div>
+                <div class="preferred">계획과 실제의 차이가 매월 기록됩니다. <strong>그 기록이 자산으로 남아, 다음 TF가 같은 자리에서 다시 부딪히지 않습니다.</strong></div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="label">적합한 상황</div>
+                <div>1~2명의 단발 실험. 사실상 TF가 아닌 사이드 프로젝트.</div>
+                <div class="preferred">5명에서 9명의 정예 TF가 <strong>6개월 임기를 들고 가는 모든 경우</strong>입니다. 임기가 명확한 만큼 계획이 의무가 됩니다.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= 2. 6개월 마일스톤 ========= -->
+    <section class="bp-section" id="milestones">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">6개월 운영 마일스톤</h2>
+            </div>
+            <div class="bp-section-meta">월별 테마 · 핵심 활동 · 끝낼 산출물</div>
+        </div>
+
+        <p class="bp-section-intro">TF 임기 6개월을 월별 테마로 나눕니다. 각 달에는 한 가지 큰 테마만 둡니다. 두 가지 이상을 한 달에 묶으면 둘 다 어중간하게 끝납니다. 좌측은 그 달의 테마, 우측은 핵심 활동과 끝낼 산출물입니다. 산출물은 다음 달의 입력이 되도록 짭니다.</p>
+
+        <div class="bp-timeline">
+            <div class="bp-tl-row">
+                <div class="bp-tl-head">
+                    <div class="month">1개월차</div>
+                    <div class="theme">기반 정렬과 표준 모델 확정</div>
+                </div>
+                <div class="bp-tl-body">
+                    <div class="col">
+                        <h5>핵심 활동</h5>
+                        <ul>
+                            <li>킥오프 미팅과 TF 헌장 서명</li>
+                            <li>LLM 후보 2~3종 PoC 비교 (보안·성능·비용)</li>
+                            <li>회의체 4종 캘린더 고정과 권한 발급</li>
+                            <li>빅 베팅 후보 영역 10개로 좁히기</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h5>끝낼 산출물</h5>
+                        <ul>
+                            <li><strong>운영 계획 한 페이지</strong> 확정</li>
+                            <li>표준 LLM 1개 + 보조 1개 선정 보고서</li>
+                            <li>사내 보안·법무 가이드 1.0</li>
+                            <li>빅 베팅 후보 10건 리스트</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="bp-tl-row">
+                <div class="bp-tl-head">
+                    <div class="month">2개월차</div>
+                    <div class="theme">빅 베팅 압축과 데이터 정비</div>
+                </div>
+                <div class="bp-tl-body">
+                    <div class="col">
+                        <h5>핵심 활동</h5>
+                        <ul>
+                            <li>빅 베팅 후보 10건을 3~5건으로 압축</li>
+                            <li>각 베팅별 DRI 1명 지정과 책임 합의</li>
+                            <li>데이터 접근 권한과 원천 데이터 점검</li>
+                            <li>부트캠프 1차 모듈 가동 (역량 강화 페이지와 연결)</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h5>끝낼 산출물</h5>
+                        <ul>
+                            <li><strong>빅 베팅 3~5건</strong> 확정 문서</li>
+                            <li>DRI 매트릭스 1.0</li>
+                            <li>데이터 자산 인벤토리</li>
+                            <li>부트캠프 학습 일지 (코어 전원)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="bp-tl-row">
+                <div class="bp-tl-head">
+                    <div class="month">3개월차</div>
+                    <div class="theme">Quick Win 가동과 사내 공유</div>
+                </div>
+                <div class="bp-tl-body">
+                    <div class="col">
+                        <h5>핵심 활동</h5>
+                        <ul>
+                            <li>코어 멤버별 Quick Win 1건 가동</li>
+                            <li>부서 동료 5명 사용 흔적 확보</li>
+                            <li>전사 공지 2차 (TF 진척 공유)</li>
+                            <li>스폰서 분기 보고 1회</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h5>끝낼 산출물</h5>
+                        <ul>
+                            <li><strong>Quick Win 5~8건</strong> 실가동</li>
+                            <li>사내 위키 Skill 문서 등록 1차</li>
+                            <li>실패 일지 1.0</li>
+                            <li>스폰서 분기 보고 슬라이드</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="bp-tl-row">
+                <div class="bp-tl-head">
+                    <div class="month">4개월차</div>
+                    <div class="theme">사내 해커톤과 확산</div>
+                </div>
+                <div class="bp-tl-body">
+                    <div class="col">
+                        <h5>핵심 활동</h5>
+                        <ul>
+                            <li>전사 사내 해커톤 1회 운영 (2박 3일 또는 1주 단축)</li>
+                            <li>우수 작품 3~5건 채택과 후속 자원 배정</li>
+                            <li>챔피언 후보군 1차 식별</li>
+                            <li>LLM 사용 패턴 재검토와 모델 조정</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h5>끝낼 산출물</h5>
+                        <ul>
+                            <li><strong>해커톤 출품작 20건 이상</strong> 가운데 3~5건 채택</li>
+                            <li>챔피언 후보 명단</li>
+                            <li>모델 사용량과 비용 리포트</li>
+                            <li>해커톤 회고 문서</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="bp-tl-row">
+                <div class="bp-tl-head">
+                    <div class="month">5개월차</div>
+                    <div class="theme">운영 매뉴얼화와 자산 이관 준비</div>
+                </div>
+                <div class="bp-tl-body">
+                    <div class="col">
+                        <h5>핵심 활동</h5>
+                        <ul>
+                            <li>우수 Quick Win을 정식 운영 자산으로 승격</li>
+                            <li>운영 매뉴얼 1.0 작성 (회의체·KPI·LLM 가이드)</li>
+                            <li>2단계 우선순위화 페이지 입력 자료 정리</li>
+                            <li>코어 멤버 복귀 부서장과 인계 협의</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h5>끝낼 산출물</h5>
+                        <ul>
+                            <li><strong>운영 매뉴얼 1.0</strong></li>
+                            <li>2단계 입력 자료 (우선순위 후보 풀)</li>
+                            <li>인계 계획서 (자산·폐기 구분)</li>
+                            <li>챔피언 인증 후보 최종 명단</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="bp-tl-row">
+                <div class="bp-tl-head">
+                    <div class="month">6개월차</div>
+                    <div class="theme">인계와 차기 TF 설계</div>
+                </div>
+                <div class="bp-tl-body">
+                    <div class="col">
+                        <h5>핵심 활동</h5>
+                        <ul>
+                            <li>산출물 인계식과 챔피언 인증서 발급</li>
+                            <li>코어 멤버 원소속 부서로 복귀</li>
+                            <li>차기 TF 후보군 선발과 헌장 초안</li>
+                            <li>임원 보고 (성과와 다음 6개월 제안)</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h5>끝낼 산출물</h5>
+                        <ul>
+                            <li><strong>인계식 회의록</strong>과 챔피언 인증서</li>
+                            <li>차기 TF 헌장 0.5</li>
+                            <li>6개월 종합 회고 문서</li>
+                            <li>스폰서 최종 보고 슬라이드</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= 3. LLM 선택 기준 ========= -->
+    <section class="bp-section" id="llm-criteria">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">LLM 선택 기준 3가지</h2>
+            </div>
+            <div class="bp-section-meta">보안 적합성 · 도메인 성능 · 운영 비용</div>
+        </div>
+
+        <p class="bp-section-intro">표준 LLM 선정은 출범 1개월 안에 끝냅니다. 멤버마다 다른 모델을 쓰면 보안 검토를 매번 다시 받아야 하고, 산출물의 품질 편차도 커집니다. 선택 기준은 세 가지로 충분합니다. 보안 적합성이 통과 조건이고, 도메인 성능과 운영 비용이 가중치입니다. 세 가지를 한 번에 점수화해 표준 1개와 보조 1개를 정합니다.</p>
+
+        <div class="bp-principles">
+            <div class="bp-principle">
+                <div class="bp-principle-num">기준 1</div>
+                <div class="bp-principle-name">보안 적합성으로<br>1차 거릅니다</div>
+                <div class="bp-principle-body">
+                    영업기밀과 개인정보를 다루는 회사라면 <strong>학습 비활용 옵션, 데이터 처리 위치(리전), 사내 SSO 연동, 감사 로그</strong>가 1차 통과 조건입니다. 한 항목이라도 막히면 후보에서 빼고 다음으로 넘어갑니다. 사내 정보보안·법무가 처음부터 결정 회의에 참여해야 같은 검토를 두 번 받지 않습니다.
+                </div>
+                <div class="bp-principle-evidence">
+                    <b>점검 항목</b>학습 비활용, 데이터 리전, SSO/SCIM, 감사 로그, DLP 연동, 모델 카드 공개 여부.
+                </div>
+            </div>
+            <div class="bp-principle">
+                <div class="bp-principle-num">기준 2</div>
+                <div class="bp-principle-name">도메인 성능을<br>실제 업무로 평가합니다</div>
+                <div class="bp-principle-body">
+                    벤치마크 점수보다 자기 회사의 실제 업무 샘플로 평가합니다. 빅 베팅 후보 영역에서 <strong>대표 과제 5~10건을 PoC 데이터셋</strong>으로 묶어 두 모델 이상에 같은 프롬프트로 돌립니다. 한국어 품질, 도구 호출(Function Call), 컨텍스트 윈도우, 추론 안정성을 함께 봅니다. 회의실 시연이 아니라 데이터 기반 비교 문서가 결과입니다.
+                </div>
+                <div class="bp-principle-evidence">
+                    <b>비교 차원</b>한국어 자연스러움, 도구 호출 안정성, 긴 문맥(20만 토큰 이상) 처리, 코딩 능력, 추론 일관성.
+                </div>
+            </div>
+            <div class="bp-principle">
+                <div class="bp-principle-num">기준 3</div>
+                <div class="bp-principle-name">운영 비용을<br>월간 예측치로 봅니다</div>
+                <div class="bp-principle-body">
+                    토큰 단가만 비교하지 않습니다. 빅 베팅이 본격 가동되면 월 사용량이 PoC의 10~50배가 됩니다. <strong>월간 예측 비용, 캐싱 적용 여부, 배치 할인, 멤버십(엔터프라이즈)·종량제 구조</strong>를 함께 산정합니다. 표준 모델은 본 작업 대다수를, 보조 모델은 비용 절감이나 특수 과제에 한정해 쓰는 이원 구조가 일반적입니다.
+                </div>
+                <div class="bp-principle-evidence">
+                    <b>비용 변수</b>토큰 단가, 캐시 할인, 배치 할인, 엔터프라이즈 정액제, 한도 초과 정책, 환율 변동.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= 4. 모델 비교와 권고 ========= -->
+    <section class="bp-section" id="llm-matrix">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">주요 LLM 비교와 권고 구성</h2>
+            </div>
+            <div class="bp-section-meta">상용 모델 4종 · 강점 · 주의점 · 적합한 자리</div>
+        </div>
+
+        <p class="bp-section-intro">아래 표는 2026년 기준 일반 기업 TF가 가장 자주 후보로 올리는 상용 모델 네 종을 정리한 것입니다. 모델 성능은 분기마다 빠르게 바뀌므로 절대 순위로 받지 않습니다. 자기 회사 PoC 결과와 함께 가중치를 매기는 비교 시작점으로 씁니다. 권고 구성은 표준 모델 1개와 보조 모델 1개를 두는 단순한 이원 구조이며, 멀티 모델 라우팅은 2단계 이후 도입을 권장합니다.</p>
+
+        <div class="bp-matrix">
+            <table class="bp-matrix-table">
+                <thead>
+                    <tr>
+                        <th>모델</th>
+                        <th>강점</th>
+                        <th>주의점</th>
+                        <th>적합한 자리</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="name">Claude<span class="vendor">Anthropic</span></td>
+                        <td class="strength">긴 문맥 추론과 코드·문서 작성 안정성이 강점입니다. 도구 호출과 에이전트 워크플로우에서 결과 일관성이 높습니다. Constitutional AI 기반의 안전성 정책이 분명합니다.</td>
+                        <td class="watch">한국 리전이 아직 제한적입니다. 일본·미국 리전 사용 시 사내 데이터 정책 검토가 필요합니다. 가격대가 GPT 계열보다 일반적으로 높습니다.</td>
+                        <td class="fit"><strong>긴 보고서·계약서·코드 작성</strong>과 에이전트 워크플로우의 표준 모델로 적합합니다. AX 1단계 표준 1순위 후보.</td>
+                    </tr>
+                    <tr>
+                        <td class="name">GPT<span class="vendor">OpenAI</span></td>
+                        <td class="strength">생태계가 가장 넓고 사내 도구 연동(Microsoft 365·Copilot) 사례가 가장 많습니다. 멀티모달(이미지·음성)과 실시간 API가 강합니다. Azure OpenAI를 통한 엔터프라이즈 계약이 성숙합니다.</td>
+                        <td class="watch">모델 버전 교체 주기가 빠르고 출력 톤이 자주 바뀝니다. 동일 프롬프트의 일관성을 회사 기준선으로 잡으려면 버전을 명시적으로 고정해야 합니다.</td>
+                        <td class="fit"><strong>Microsoft 365가 사내 표준</strong>인 회사의 표준 모델로 적합합니다. 멀티모달이 필요한 자리에 잘 맞습니다.</td>
+                    </tr>
+                    <tr>
+                        <td class="name">Gemini<span class="vendor">Google</span></td>
+                        <td class="strength">Google Workspace 연동과 초장문맥(200만 토큰급)이 강점입니다. 검색·지도 등 구글 자체 데이터 연결이 손쉽습니다. Vertex AI를 통한 데이터 거버넌스 옵션이 풍부합니다.</td>
+                        <td class="watch">한국어 톤이 모델 버전별로 편차가 큽니다. 도구 호출과 함수 응답의 일관성이 GPT·Claude보다 낮다는 평이 자주 보입니다. 엔터프라이즈 도입 사례 폭이 좁습니다.</td>
+                        <td class="fit"><strong>Google Workspace가 사내 표준</strong>이거나 초장문맥이 핵심인 자리에 적합합니다. 보조 모델로 두는 회사가 많습니다.</td>
+                    </tr>
+                    <tr>
+                        <td class="name">국산·sLLM<span class="vendor">HyperCLOVA X 등</span></td>
+                        <td class="strength">국내 데이터 리전과 한국어 문화 맥락의 처리가 강점입니다. 정부·공공·금융 규제 환경에서 사내 IT 검토 통과가 빠릅니다. 도메인 특화 파인튜닝의 사례가 늘고 있습니다.</td>
+                        <td class="watch">고난도 추론과 영어 코드 작성에서 글로벌 상위 모델과 격차가 있습니다. 도구 호출 API 성숙도가 아직 후발입니다. 자체 호스팅 옵션은 운영 부담이 큽니다.</td>
+                        <td class="fit"><strong>국내 개인정보·금융 규제 적용 업무</strong>의 보조 모델로 적합합니다. 단독 표준보다는 글로벌 모델과 이원 구성을 권장합니다.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="bp-comp-diagram" style="margin-top: 28px;">
+            <div class="bp-comp-row">
+                <div class="bp-comp-tier">권고 1</div>
+                <div class="bp-comp-detail">
+                    <h4>1단계는 표준 1개 + 보조 1개의 이원 구조</h4>
+                    <p>표준 모델 하나를 두면 회의 어휘와 산출물 톤이 통일됩니다. 보조 모델은 표준이 약한 영역(비용 절감, 특정 모달리티, 규제 업무)에만 한정해 씁니다. <strong>처음부터 3개 이상을 동시에 굴리면 운영 비용이 학습 비용보다 빠르게 증가합니다.</strong></p>
+                </div>
+            </div>
+            <div class="bp-comp-row">
+                <div class="bp-comp-tier">권고 2</div>
+                <div class="bp-comp-detail">
+                    <h4>멀티 모델 라우팅은 2단계 이후로 미룹니다</h4>
+                    <p>라우터 게이트웨이(예: LiteLLM, OpenRouter, 사내 자체 게이트웨이)로 모델을 동적으로 분기하는 구조는 매력적입니다. 다만 1단계에서는 라우팅 정책을 검증할 데이터가 부족합니다. <strong>2단계 우선순위화 이후 빅 베팅별 요구가 분명해진 시점</strong>에 도입을 검토합니다.</p>
+                </div>
+            </div>
+            <div class="bp-comp-row">
+                <div class="bp-comp-tier">권고 3</div>
+                <div class="bp-comp-detail">
+                    <h4>모델 사용 가이드를 한 페이지로 못박습니다</h4>
+                    <p>표준 모델 선정 후 즉시 사내 가이드를 1.0으로 작성합니다. <strong>어떤 데이터까지 입력 가능한지, 어떤 산출물에 사용할 수 있는지, 외부 공유 시 어떤 표기를 붙이는지</strong> 세 가지가 핵심입니다. 가이드가 없는 모델은 도입한 적이 없는 모델과 같습니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= 5. 운영 리듬과 KPI ========= -->
+    <section class="bp-section" id="rhythm">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">운영 리듬과 KPI</h2>
+            </div>
+            <div class="bp-section-meta">회의체 4종 · KPI 6개</div>
+        </div>
+
+        <p class="bp-section-intro">운영 계획의 마지막 한 장은 회의 캘린더와 KPI 한 묶음입니다. 회의는 네 가지 주기로 충분하고, KPI는 여섯 개를 넘기지 않습니다. 회의가 늘기 시작하면 그 시점에 회의 자체를 안건으로 올리고, KPI가 늘기 시작하면 가장 약한 두 개를 골라 일단 폐기합니다.</p>
+
+        <div class="bp-comp-diagram">
+            <div class="bp-comp-row">
+                <div class="bp-comp-tier">회의 1</div>
+                <div class="bp-comp-detail">
+                    <h4>코어 데일리 (15분)</h4>
+                    <p>매일 오전 같은 시간에 15분으로 끊습니다. <strong>오늘 끝낼 한 가지, 막혀 있는 한 가지, 도움 요청 한 가지</strong>만 돌아가며 말합니다. 안건이 있으면 별도 회의로 빼고 데일리 시간을 늘리지 않습니다.</p>
+                    <div class="roles">
+                        <span class="role-chip">매일 15분</span>
+                        <span class="role-chip">코어 전원</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bp-comp-row">
+                <div class="bp-comp-tier">회의 2</div>
+                <div class="bp-comp-detail">
+                    <h4>주간 회고 (60분)</h4>
+                    <p>금요일 오후에 한 주를 닫습니다. KPI 6개의 변화를 숫자로 보고, 다음 주 우선순위 3개를 합의합니다. <strong>회고의 마지막 10분은 항상 "이번 주에 폐기할 일"을 정하는 데 씁니다.</strong></p>
+                    <div class="roles">
+                        <span class="role-chip">주 1회 60분</span>
+                        <span class="role-chip">코어 + 멘토</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bp-comp-row">
+                <div class="bp-comp-tier">회의 3</div>
+                <div class="bp-comp-detail">
+                    <h4>월간 스폰서 보고 (45분)</h4>
+                    <p>월 1회 스폰서에 직접 보고합니다. 보고 형식은 항상 같은 한 장입니다. <strong>이번 달 끝낸 산출물, 다음 달 약속, 보류·가속 결정이 필요한 항목.</strong> 45분 안에 끝나지 않으면 운영 계획이 흐려진 신호입니다.</p>
+                    <div class="roles">
+                        <span class="role-chip">월 1회 45분</span>
+                        <span class="role-chip">스폰서 + 리드</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bp-comp-row">
+                <div class="bp-comp-tier">회의 4</div>
+                <div class="bp-comp-detail">
+                    <h4>분기 외부 사례 학습 (반나절)</h4>
+                    <p>분기 1회 반나절을 외부 사례 학습에 씁니다. 컨설팅펌 리포트 1편, 동종 산업 사례 1편, 글로벌 빅테크 발표 1편을 코어가 돌아가며 발제합니다. <strong>같은 자리에 스폰서가 동석</strong>해야 학습이 다음 분기 계획에 반영됩니다.</p>
+                    <div class="roles">
+                        <span class="role-chip">분기 1회 반나절</span>
+                        <span class="role-chip">코어 + 스폰서</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="margin: 44px 0 18px; font-size: 19px; font-weight: 700; color: var(--bp-ink); letter-spacing: -0.005em;">KPI 6개 (월간 갱신)</h3>
+        <p style="margin: 0 0 22px; font-size: 14px; line-height: 1.75; color: var(--ink-soft);">한 페이지에 들어가는 6개로 한정합니다. 셋은 활동량, 셋은 결과입니다. 7개부터는 추적이 무너집니다.</p>
+
+        <div class="bp-anti">
+            <div class="bp-anti-head">
+                <div>활동 KPI 3개</div>
+                <div>결과 KPI 3개</div>
+            </div>
+            <div class="bp-anti-row">
+                <div class="good"><strong>Quick Win 신규 가동 건수</strong><br>월별로 가동된 신규 Quick Win 수. 5건 미만이면 부트캠프와의 짝이 풀린 신호입니다.</div>
+                <div class="good"><strong>Quick Win 30일 동료 사용 흔적</strong><br>가동된 Quick Win 중 동료 5명 이상이 직접 써본 비율. 60% 미만이면 다음 달 산출물 단위를 줄입니다.</div>
+            </div>
+            <div class="bp-anti-row">
+                <div class="good"><strong>Skill 문서 등록 수</strong><br>사내 위키에 신규 등록된 Skill 문서 누적 수. 자산이 회사 안에 남는 속도입니다.</div>
+                <div class="good"><strong>채택된 빅 베팅 후보 수</strong><br>코어가 만든 자료 중 다음 단계 후보로 채택된 건수. 임기 종료 시 3~5건이 목표입니다.</div>
+            </div>
+            <div class="bp-anti-row">
+                <div class="good"><strong>월간 LLM 사용량과 비용</strong><br>표준·보조 모델 합산 토큰과 비용. 한도의 80% 도달 시 다음 달 사용 패턴을 재설계합니다.</div>
+                <div class="good"><strong>챔피언 후보 식별 수</strong><br>임기 종료 시 자기 부서로 복귀시킬 챔피언 후보 누적 수. 6개월 임기 기준 5~9명이 정상 범위입니다.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= 6. 흔한 실패 패턴 ========= -->
+    <section class="bp-section" id="pitfalls">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">흔한 실패 패턴과 대응</h2>
+            </div>
+            <div class="bp-section-meta">운영 계획을 무너뜨리는 5가지 함정</div>
+        </div>
+
+        <p class="bp-section-intro">아래는 운영 계획을 짜고도 첫 90일 안에 자주 보이는 실패 패턴입니다. 좌측은 흔히 나타나는 모습, 우측은 같은 상황을 다르게 푸는 방법입니다. 3개 이상이 동시에 보이면 운영 계획 자체를 다시 점검할 신호입니다.</p>
+
+        <div class="bp-anti">
+            <div class="bp-anti-head">
+                <div>자주 나타나는 함정</div>
+                <div>대응 방향</div>
+            </div>
+            <div class="bp-anti-row">
+                <div class="bad"><strong>"운영 계획이 PPT 50장이 됩니다."</strong> 형식이 두꺼워지면 정작 코어가 한 번도 펴보지 않습니다. 보고용 문서로 굳어 운영에서 멀어집니다.</div>
+                <div class="good"><strong>운영 계획은 한 페이지로 묶습니다.</strong> 마일스톤·LLM·회의체·KPI 네 블록이 한 화면에 들어가야 매일 참고됩니다. 부속 자료는 별첨으로 둡니다.</div>
+            </div>
+            <div class="bp-anti-row">
+                <div class="bad"><strong>"LLM 선정이 한 분기를 잡아먹습니다."</strong> 모델 비교에 두 달, 보안 검토에 한 달이 흐릅니다. 그 사이 멤버 각자가 익숙한 도구를 임시로 쓰며 검토 부담만 누적됩니다.</div>
+                <div class="good"><strong>선정 기한을 1개월로 못박습니다.</strong> 보안·법무·IT를 같은 회의에 부르고, PoC 비교는 사내 업무 샘플 5~10건으로 한정합니다. 완벽한 비교가 아니라 첫 선택을 빠르게 합니다.</div>
+            </div>
+            <div class="bp-anti-row">
+                <div class="bad"><strong>"마일스톤이 임기 종료까지 그대로 갑니다."</strong> 3개월 차에 외부 환경이 바뀌었는데도 1개월차에 적은 계획을 그대로 들고 갑니다.</div>
+                <div class="good"><strong>분기마다 마일스톤을 다시 봅니다.</strong> 외부 환경(모델 출시·규제·경쟁사)과 내부 학습(부트캠프·Quick Win)에 따라 남은 3개월을 조정합니다. 다만 KPI는 함부로 갈지 않습니다.</div>
+            </div>
+            <div class="bp-anti-row">
+                <div class="bad"><strong>"회의가 늘어납니다."</strong> 데일리·주간·월간·분기 외에 정기 외 회의가 생기고, 한 주에 회의가 8건을 넘기 시작합니다.</div>
+                <div class="good"><strong>회의 추가는 주간 회고에서만 결정</strong>합니다. 새 회의를 더하려면 기존 회의 하나를 폐기해야 합니다. 회의 합계가 늘면 그 자체를 다음 회고 안건으로 올립니다.</div>
+            </div>
+            <div class="bp-anti-row">
+                <div class="bad"><strong>"KPI가 14개로 늘어납니다."</strong> 보고할 때마다 측정 지표가 추가되고, 추적 자체가 풀타임 업무가 됩니다.</div>
+                <div class="good"><strong>KPI 상한을 6개로 못박습니다.</strong> 새 지표를 더하려면 기존 지표 하나를 일단 폐기합니다. 추적 비용이 측정 가치를 넘기는 순간 KPI는 함정이 됩니다.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= FOOTER ========= -->
+    <footer class="bp-footer">
+        <p style="margin:0 0 10px; font-size:11.5px; opacity:0.78;">* 이 페이지는 AX 5단계 로드맵의 1단계(추진체계 구축)를 세 작업으로 나눈 두 번째, 운영 계획 수립을 다룹니다. 앞 페이지는 TF 조직 세팅이고, 다음 페이지는 AI 부트캠프(교육·Quick Win·해커톤)입니다.</p>
+        <p style="margin:0 0 10px;"><strong>참고 자료.</strong> McKinsey(The State of AI 2025, Rewired), BCG(AI Radar 2026, Build for the Future 2025), Bain(Technology Report 2024), a16z(How 100 Enterprise CIOs Are Building and Buying Gen AI, 2025), Anthropic(Model Card · Enterprise Security), OpenAI(Azure OpenAI Enterprise Deployment), Google Cloud(Vertex AI Data Governance), 네이버 클라우드(HyperCLOVA X Enterprise).</p>
+        <p style="margin:0; opacity:0.85;">LLM 선택과 운영 매뉴얼의 구체 절차는 산업 규제, 데이터 민감도, 기존 IT 인프라에 따라 달라집니다. 이 페이지는 일반 기업을 기준으로 한 권고이며, 실제 적용 시 사내 정보보안·법무·재무 검토를 함께 거쳐야 합니다.</p>
+        <p style="margin:22px 0 0; padding-top:18px; border-top:1px solid rgba(247,245,239,0.18); font-size:11.5px; opacity:0.7; letter-spacing:0.04em;">&copy; 2026 AI ROASTING. All rights reserved.</p>
+    </footer>
+
+</div>
+
+<script>
+(function() {
+    'use strict';
+    var navLinks = document.querySelectorAll('.bp-hero-nav a');
+    if (!navLinks.length) return;
+
+    var linkMap = {};
+    var sectionIds = [];
+    navLinks.forEach(function(link) {
+        var id = (link.getAttribute('href') || '').replace('#', '');
+        if (!id) return;
+        var el = document.getElementById(id);
+        if (!el) return;
+        linkMap[id] = { link: link, el: el };
+        sectionIds.push(id);
+    });
+    if (!sectionIds.length) return;
+
+    function setActive(id) {
+        sectionIds.forEach(function(k) {
+            if (k === id) linkMap[k].link.classList.add('active');
+            else linkMap[k].link.classList.remove('active');
+        });
+    }
+
+    function update() {
+        var nav = document.querySelector('.bp-hero-nav');
+        var navH = nav ? nav.offsetHeight : 0;
+        var trigger = navH + 60;
+        var currentId = null;
+        for (var i = 0; i < sectionIds.length; i++) {
+            var rect = linkMap[sectionIds[i]].el.getBoundingClientRect();
+            if (rect.top <= trigger) currentId = sectionIds[i];
+            else break;
+        }
+        setActive(currentId);
+    }
+
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(function() {
+            update();
+            ticking = false;
+        });
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+})();
+</script>
+
+</body>
+</html>

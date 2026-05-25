@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>참고 · 어떤 AI 서비스를 사용해야 할까요? · ChatGPT·Claude·Gemini·OpenRouter·오케스트레이터·자체 LLM</title>
+<meta name="description" content="ChatGPT·Claude·Gemini 빅3 비교, OpenRouter로 저가 모델 활용, 모델 오케스트레이터, Enterprise 요금제 보안, 자체 LLM 구축까지 한 페이지에 정리한 AI 서비스 선택 가이드입니다.">
+<meta name="author" content="AI ROASTING">
+<meta name="theme-color" content="#0E3B2A">
+<link rel="icon" type="image/png" href="assets/logos/logo1.png">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+/* ================== 참고 · AI 서비스 선택 Local Styles ================== */
+/* ainative.html과 동일한 bp-* 시각 토큰을 그대로 차용합니다. */
+
+:root {
+    --bp-grid: rgba(14, 59, 42, 0.06);
+    --bp-grid-strong: rgba(14, 59, 42, 0.12);
+    --bp-line: #0E3B2A;
+    --bp-ink: #0F1A16;
+    --bp-paper: #F7F5EF;
+    --bp-paper-2: #FBFAF6;
+    --bp-rule: #D6D2C5;
+    --bp-accent: #1B6E4F;
+    --bp-gold: #9A7B0A;
+    --bp-red: #8B2E1F;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 50px; }
+body {
+    background:
+        linear-gradient(var(--bp-grid) 1px, transparent 1px) 0 0 / 32px 32px,
+        linear-gradient(90deg, var(--bp-grid) 1px, transparent 1px) 0 0 / 32px 32px,
+        var(--bp-paper);
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    line-break: strict;
+}
+
+/* ===== Sheet wrapper ===== */
+.bp-sheet {
+    max-width: 1320px;
+    margin: 32px auto;
+    background: var(--bp-paper-2);
+    border: 1.5px solid var(--bp-line);
+    box-shadow: 0 1px 0 var(--bp-line), 0 24px 60px -30px rgba(6, 32, 24, 0.35);
+    position: relative;
+}
+.bp-sheet::before, .bp-sheet::after {
+    content: "";
+    position: absolute;
+    width: 16px; height: 16px;
+    border: 1px solid var(--bp-line);
+}
+.bp-sheet::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+.bp-sheet::after  { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
+/* ===== Step navigation ===== */
+.bp-stepnav {
+    padding: 36px 56px 28px;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1.5px solid #062018;
+}
+.bp-stepnav::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+}
+.bp-step {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid rgba(247, 245, 239, 0.55);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--sans);
+    font-size: 11.5px;
+    font-weight: 600;
+    color: rgba(247, 245, 239, 0.85);
+    letter-spacing: 0.02em;
+    position: relative;
+}
+.bp-step + .bp-step { margin-left: 24px; }
+.bp-step + .bp-step::before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    width: 24px;
+    height: 1px;
+    background: rgba(247, 245, 239, 0.4);
+    transform: translateY(-50%);
+}
+.bp-back {
+    display: block;
+    text-align: center;
+    margin-top: 18px;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: rgba(247, 245, 239, 0.78);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: color .15s ease, letter-spacing .15s ease;
+    position: relative;
+    z-index: 1;
+}
+.bp-back:hover { color: var(--bp-paper); letter-spacing: 0.08em; }
+
+.bp-substeps {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+.bp-substeps span {
+    border: 1.5px solid var(--bp-paper);
+    background: linear-gradient(180deg, #14523B 0%, #0E3B2A 100%);
+    padding: 12px 28px;
+    color: var(--bp-paper);
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    min-width: 260px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+        0 0 0 4px rgba(14, 59, 42, 0.55),
+        0 8px 20px -8px rgba(6, 32, 24, 0.7);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+    .bp-stepnav { padding: 24px 16px 20px; }
+    .bp-step { width: 26px; height: 26px; font-size: 10px; }
+    .bp-step + .bp-step { margin-left: 16px; }
+    .bp-step + .bp-step::before { width: 16px; }
+    .bp-substeps { gap: 8px; }
+    .bp-substeps span { min-width: 0; flex: 1 1 auto; padding: 10px 14px; font-size: 12px; }
+}
+
+/* ===== Hero block ===== */
+.bp-hero {
+    padding: 64px 56px 56px;
+    border-bottom: 1.5px solid var(--bp-line);
+    position: relative;
+    background:
+        radial-gradient(ellipse at top right, rgba(154, 123, 10, 0.07), transparent 60%),
+        var(--bp-paper-2);
+}
+.bp-hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    margin-bottom: 18px;
+}
+.bp-hero h1 {
+    font-size: 52px;
+    line-height: 1.18;
+    margin: 0 0 22px;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+}
+.bp-hero .bp-lead {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+}
+.bp-hero .bp-summary {
+    margin-top: 36px;
+    padding: 22px 26px;
+    background: rgba(14, 59, 42, 0.04);
+    border-top: 1px solid var(--bp-rule);
+    border-bottom: 1px solid var(--bp-rule);
+    font-size: 14px;
+    line-height: 1.75;
+}
+.bp-hero .bp-summary strong { color: var(--bp-line); }
+
+/* ===== Section submenu ===== */
+.bp-hero-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 12px 56px;
+    background: var(--bp-paper-2);
+    border-top: 1px solid var(--bp-line);
+    border-bottom: 1px solid var(--bp-line);
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    box-shadow: 0 2px 8px -4px rgba(6, 32, 24, 0.18);
+}
+.bp-hero-nav a {
+    flex: 1 1 0;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--bp-ink);
+    padding: 10px 16px;
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper);
+    text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    letter-spacing: -0.005em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bp-hero-nav a:hover { background: var(--bp-line); color: var(--bp-paper); }
+.bp-hero-nav a.active {
+    background: var(--bp-line);
+    color: var(--bp-paper);
+    border-color: var(--bp-line);
+    box-shadow: inset 0 -3px 0 var(--bp-accent);
+}
+
+/* ===== Section frame ===== */
+.bp-section {
+    padding: 56px 56px 64px;
+    border-bottom: 1.5px solid var(--bp-line);
+    position: relative;
+}
+.bp-section:last-of-type { border-bottom: none; }
+.bp-section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 36px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--bp-rule);
+}
+.bp-section-title {
+    font-size: 30px;
+    margin: 0;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    font-weight: 700;
+}
+.bp-title-link {
+    color: var(--bp-line);
+    text-decoration: none;
+    border-bottom: 1.5px dotted var(--bp-line);
+    transition: color .15s ease, border-color .15s ease;
+}
+.bp-title-link:hover {
+    color: var(--bp-accent);
+    border-bottom-color: var(--bp-accent);
+}
+.bp-title-link::after {
+    content: " ↗";
+    font-size: 0.7em;
+    vertical-align: super;
+    font-weight: 600;
+    letter-spacing: 0;
+}
+.bp-section-meta {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    text-align: right;
+    line-height: 1.6;
+}
+.bp-section-intro {
+    margin: 0 0 28px;
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+}
+
+/* ===== 빅3 비교 카드 (3 컬럼) ===== */
+.bp-big3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-big3-card {
+    padding: 28px 26px 30px;
+    border-right: 1px solid var(--bp-rule);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+}
+.bp-big3-card:last-child { border-right: none; }
+.bp-big3-tag {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+}
+.bp-big3-name {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    letter-spacing: -0.01em;
+    margin: 0;
+    line-height: 1.25;
+}
+.bp-big3-maker {
+    font-family: var(--sans);
+    font-size: 11.5px;
+    color: var(--ink-mute);
+    letter-spacing: 0.06em;
+    margin-top: -8px;
+}
+.bp-big3-row {
+    display: grid;
+    grid-template-columns: 78px 1fr;
+    gap: 12px;
+    padding: 10px 0;
+    border-top: 1px dashed var(--bp-rule);
+    font-size: 13px;
+    line-height: 1.65;
+}
+.bp-big3-row:first-of-type { border-top: 1px solid var(--bp-line); margin-top: 4px; }
+.bp-big3-row .k {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding-top: 2px;
+}
+.bp-big3-row .v { color: var(--ink-soft); }
+.bp-big3-row .v strong { color: var(--bp-ink); }
+
+/* ===== 비교 표 (compact) ===== */
+.bp-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    font-size: 13px;
+    line-height: 1.65;
+}
+.bp-table thead th {
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 14px 16px;
+    text-align: left;
+    border-right: 1px solid rgba(247, 245, 239, 0.18);
+}
+.bp-table thead th:last-child { border-right: none; }
+.bp-table tbody td {
+    padding: 14px 16px;
+    border-top: 1px solid var(--bp-rule);
+    border-right: 1px solid var(--bp-rule);
+    color: var(--ink-soft);
+    vertical-align: top;
+}
+.bp-table tbody td:last-child { border-right: none; }
+.bp-table tbody td:first-child {
+    font-family: var(--sans);
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    letter-spacing: 0.01em;
+    background: rgba(14, 59, 42, 0.03);
+    width: 160px;
+}
+.bp-table tbody td strong { color: var(--bp-ink); }
+
+/* ===== Orchestrator 층 (BRAIN OS 스타일 차용) ===== */
+.bp-layers {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-layers-head {
+    padding: 18px 24px;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+.bp-layer-row {
+    display: grid;
+    grid-template-columns: 100px 220px 1fr;
+    border-top: 1px solid var(--bp-rule);
+    align-items: stretch;
+}
+.bp-layer-row > div {
+    padding: 18px 22px;
+    border-right: 1px solid var(--bp-rule);
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+}
+.bp-layer-row > div:last-child { border-right: none; }
+.bp-layer-row .layer-tag {
+    font-family: var(--sans);
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.1em;
+    background: rgba(14, 59, 42, 0.04);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+.bp-layer-row .layer-name {
+    font-weight: 700;
+    color: var(--bp-ink);
+    font-size: 14.5px;
+    letter-spacing: -0.005em;
+    display: flex;
+    align-items: center;
+}
+.bp-layer-row .layer-desc strong { color: var(--bp-ink); }
+.bp-layer-row .layer-desc code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12px;
+    background: rgba(14, 59, 42, 0.06);
+    color: var(--bp-line);
+    padding: 1px 6px;
+    border-radius: 3px;
+}
+
+/* ===== 2-Col 대비 (자체 LLM vs 외부 API) ===== */
+.bp-vs {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-vs-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+}
+.bp-vs-col {
+    padding: 28px 30px 30px;
+}
+.bp-vs-col.left {
+    background: rgba(139, 46, 31, 0.03);
+    border-right: 1px solid var(--bp-rule);
+}
+.bp-vs-col.right {
+    background: rgba(27, 110, 79, 0.05);
+}
+.bp-vs-col h4 {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+}
+.bp-vs-col.left h4 { color: var(--bp-red); }
+.bp-vs-col.right h4 { color: var(--bp-line); }
+.bp-vs-col h5 {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0 0 14px;
+    color: var(--bp-ink);
+    letter-spacing: -0.005em;
+    line-height: 1.4;
+}
+.bp-vs-col ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.bp-vs-col li {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    padding: 8px 0;
+    border-top: 1px dashed var(--bp-rule);
+}
+.bp-vs-col li:first-child { border-top: none; padding-top: 0; }
+.bp-vs-col li strong { color: var(--bp-ink); }
+
+/* ===== Handoff 박스 ===== */
+.bp-handoff {
+    margin-top: 28px;
+    padding: 20px 24px 22px;
+    background: var(--bp-paper-2);
+    border-top: 1px solid var(--bp-line);
+    border-bottom: 1px solid var(--bp-line);
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+}
+.bp-handoff .tag {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+.bp-handoff strong { color: var(--bp-ink); }
+
+/* ===== 시나리오 매트릭스 ===== */
+.bp-matrix {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-matrix-head {
+    display: grid;
+    grid-template-columns: 220px 1fr 1fr;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+}
+.bp-matrix-head > div {
+    padding: 14px 18px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border-right: 1px solid rgba(247, 245, 239, 0.18);
+}
+.bp-matrix-head > div:last-child { border-right: none; }
+.bp-matrix-row {
+    display: grid;
+    grid-template-columns: 220px 1fr 1fr;
+    border-top: 1px solid var(--bp-rule);
+    align-items: stretch;
+}
+.bp-matrix-row > div {
+    padding: 18px 20px;
+    border-right: 1px solid var(--bp-rule);
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+}
+.bp-matrix-row > div:last-child { border-right: none; }
+.bp-matrix-row .who {
+    font-family: var(--sans);
+    font-weight: 700;
+    color: var(--bp-ink);
+    background: rgba(14, 59, 42, 0.04);
+    font-size: 14px;
+    letter-spacing: -0.005em;
+    display: flex;
+    align-items: center;
+}
+.bp-matrix-row .stack strong { color: var(--bp-line); }
+.bp-matrix-row .why strong { color: var(--bp-ink); }
+
+/* ===== References ===== */
+.bp-refs {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-refs-head {
+    display: grid;
+    grid-template-columns: 160px 1.4fr 1.6fr;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+}
+.bp-refs-head > div {
+    padding: 14px 18px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border-right: 1px solid rgba(247, 245, 239, 0.18);
+}
+.bp-refs-head > div:last-child { border-right: none; }
+.bp-refs-row {
+    display: grid;
+    grid-template-columns: 160px 1.4fr 1.6fr;
+    border-top: 1px solid var(--bp-rule);
+}
+.bp-refs-row > div {
+    padding: 16px 18px;
+    border-right: 1px solid var(--bp-rule);
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+}
+.bp-refs-row > div:last-child { border-right: none; }
+.bp-refs-row .kind {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: rgba(14, 59, 42, 0.03);
+}
+.bp-refs-row .source strong {
+    color: var(--bp-ink);
+    font-family: var(--sans);
+    letter-spacing: 0.02em;
+}
+.bp-refs-row .source .sub {
+    display: block;
+    margin-top: 4px;
+    font-size: 11.5px;
+    color: var(--ink-mute);
+    font-family: var(--sans);
+}
+.bp-refs-row .source a {
+    color: var(--bp-line);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--bp-line);
+}
+.bp-refs-row .source a:hover { color: var(--bp-accent); border-bottom-color: var(--bp-accent); }
+
+/* ===== Closing footer ===== */
+.bp-footer {
+    padding: 36px 56px 44px;
+    background:
+        radial-gradient(ellipse at 0% 100%, rgba(27, 110, 79, 0.35), transparent 55%),
+        linear-gradient(110deg, #14523B 0%, #0E3B2A 35%, #0A2E22 70%, #062018 100%);
+    color: rgba(247, 245, 239, 0.92);
+    font-family: var(--sans);
+    font-size: 12.5px;
+    line-height: 1.7;
+    border-top: 1.5px solid #062018;
+    position: relative;
+    overflow: hidden;
+}
+.bp-footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-footer > * { position: relative; z-index: 1; }
+.bp-footer strong { color: var(--bp-paper); }
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+    .bp-hero { padding: 48px 32px; }
+    .bp-hero h1 { font-size: 38px; }
+    .bp-section { padding: 40px 32px; }
+    .bp-big3 { grid-template-columns: 1fr; }
+    .bp-big3-card { border-right: none; border-bottom: 1px solid var(--bp-rule); }
+    .bp-big3-card:last-child { border-bottom: none; }
+    .bp-vs-row { grid-template-columns: 1fr; }
+    .bp-vs-col.left { border-right: none; border-bottom: 1px solid var(--bp-rule); }
+    .bp-layer-row { grid-template-columns: 80px 160px 1fr; }
+    .bp-matrix-head, .bp-matrix-row { grid-template-columns: 160px 1fr 1fr; }
+    .bp-refs-head, .bp-refs-row { grid-template-columns: 140px 1fr 1.4fr; }
+    .bp-footer { padding: 32px; }
+    .bp-hero-nav { padding: 10px 16px; gap: 6px; }
+    .bp-hero-nav a { font-size: 12px; padding: 8px 8px; }
+}
+@media (max-width: 600px) {
+    .bp-sheet { margin: 12px; }
+    .bp-hero h1 { font-size: 28px; }
+    .bp-section-title { font-size: 22px; }
+    .bp-layer-row, .bp-matrix-head, .bp-matrix-row, .bp-refs-head, .bp-refs-row {
+        grid-template-columns: 1fr;
+    }
+    .bp-layer-row > div, .bp-matrix-row > div, .bp-refs-row > div {
+        border-right: none;
+        border-bottom: 1px solid var(--bp-rule);
+    }
+    .bp-layer-row > div:last-child, .bp-matrix-row > div:last-child, .bp-refs-row > div:last-child {
+        border-bottom: none;
+    }
+    .bp-table thead { display: none; }
+    .bp-table, .bp-table tbody, .bp-table tr, .bp-table td { display: block; width: 100%; }
+    .bp-table tbody td:first-child {
+        width: auto;
+        background: rgba(14, 59, 42, 0.06);
+        border-top: 1.5px solid var(--bp-line);
+    }
+    .bp-hero-nav { overflow-x: auto; }
+    .bp-hero-nav a { flex: 0 0 auto; min-width: 96px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bp-sheet">
+
+
+    <!-- ========= BRAND BAR ========= -->
+    <a class="bp-brandbar" href="index.html" aria-label="목차로 이동">
+        <img class="bb-logo" src="assets/logos/logo1-transparent.png" alt="AI ROASTING">
+        <span>AI ROASTING · AX GUIDE TO COMPANY BRAIN OS</span>
+    </a>
+
+    <!-- ========= STEP NAVIGATION ========= -->
+    <nav class="bp-stepnav" aria-label="참고 자료">
+        <ol class="bp-steps">
+            <li class="bp-step"><a href="blueprint.html">진단</a></li>
+            <li class="bp-step"><a href="organization.html">1</a></li>
+            <li class="bp-step"><a href="pilot.html">2</a></li>
+            <li class="bp-step"><a href="criteria.html">3</a></li>
+            <li class="bp-step"><a href="resource.html">4</a></li>
+            <li class="bp-step"><a href="ainative.html">5</a></li>
+        </ol>
+        <a class="bp-back" href="index.html">← 목록으로</a>
+        <div class="bp-substeps" aria-label="참고 자료">
+            <span aria-current="page">참고 · AI 서비스 선택</span>
+        </div>
+    </nav>
+
+    <!-- ========= HERO ========= -->
+    <section class="bp-hero">
+        <div class="bp-hero-eyebrow">참고 자료 · 5단계 본문 외 부록 · AI 서비스 선택 가이드</div>
+        <h1>어떤 AI 서비스를 사용해야 할까요?</h1>
+        <p class="bp-lead">첫 분기의 비용·속도·보안을 결정하는 네 가지 질문, 빅3 분담·OpenRouter 활용·자체 LLM 검토·Enterprise 도입 시점을 한 장에 정리합니다.</p>
+        <div class="bp-summary">
+            <strong>결론부터 말씀드립니다.</strong> 빅3는 셋 다 도입해 사람마다 작업에 맞는 모델을 직접 고르도록 자율을 부여하는 편이 가장 효과적입니다. 분류, 요약, 검색처럼 정형화된 대량 작업은 OpenRouter로 저가 모델에 보내 비용을 낮춥니다. 보안이 중요한 업무에는 빅3의 Enterprise 요금제를 적용하고, 외부 송신 자체가 부담스러운 데이터는 AWS Bedrock, GCP Vertex AI, Azure OpenAI의 VPC 직접 호출로 한 단계 더 격리합니다. 자체 LLM 구축은 데이터의 외부 송신이 원천 금지된 경우, 또는 월 토큰 비용이 자체 서빙의 손익분기점을 넘긴 경우에만 검토합니다. <strong>한 모델로 통일하려는 시도는 대부분 잘못된 답입니다.</strong>
+        </div>
+    </section>
+
+    <nav class="bp-hero-nav" aria-label="섹션 바로가기">
+        <a href="#big3">빅3 비교</a>
+        <a href="#openrouter">OpenRouter</a>
+        <a href="#selfhost">자체 LLM</a>
+        <a href="#enterprise">보안과 Enterprise</a>
+        <a href="#matrix">상황별 선택</a>
+        <a href="#refs">참고 자료</a>
+    </nav>
+
+    <!-- ========= 1. 빅3 비교 ========= -->
+    <section class="bp-section" id="big3">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">ChatGPT · Claude · Gemini, 세 모델은 같은 종(種)이 아닙니다</h2>
+            </div>
+            <div class="bp-section-meta">OpenAI · Anthropic · Google · 2026년 1분기 기준</div>
+        </div>
+
+        <p class="bp-section-intro">세 모델 모두 범용 대화형 모델이지만, 잘하는 영역과 약한 영역이 분명히 다릅니다. 한 사람에게 한 가지 모델만 제공하면 그 모델의 약점이 곧 사용자 결과물의 한계로 이어집니다. 임원이 던져야 할 질문은 "어느 모델이 가장 똑똑한가"가 아니라 "어느 자리에 어느 모델을 배치할 것인가"입니다.</p>
+
+        <div class="bp-big3">
+            <article class="bp-big3-card">
+                <div class="bp-big3-tag">빅3 · 1</div>
+                <h3 class="bp-big3-name">ChatGPT</h3>
+                <div class="bp-big3-maker">OpenAI · GPT-5 계열 (5.1, 5.1 mini, o-시리즈 추론)</div>
+                <div class="bp-big3-row"><div class="k">강점</div><div class="v">범용성이 가장 높습니다. <strong>이미지 생성, 음성, 실시간 대화, 코드 인터프리터</strong>가 단일 화면에 통합되어 있습니다. Custom GPT와 GPTs 마켓을 활용할 수 있어 비전문가의 진입 장벽이 가장 낮습니다.</div></div>
+                <div class="bp-big3-row"><div class="k">약점</div><div class="v">긴 문서의 일관성과 한국어 자연스러움은 Claude에 비해 부족합니다. 내부 모델 자동 전환 방식으로 인해 동일 질문에도 답변이 달라지는 경우가 있습니다.</div></div>
+                <div class="bp-big3-row"><div class="k">요금</div><div class="v">Free / Plus 월 20달러 / Pro 월 200달러 / Team 사용자당 / <strong>Enterprise</strong> 별도 계약 / API</div></div>
+                <div class="bp-big3-row"><div class="k">권장 활용처</div><div class="v">멀티모달 워크플로우, 마케팅·디자인 시안 작업, 비전공자의 첫 도구, GPTs를 활용한 사내 챗봇 시제품 구축.</div></div>
+            </article>
+
+            <article class="bp-big3-card">
+                <div class="bp-big3-tag">빅3 · 2</div>
+                <h3 class="bp-big3-name">Claude</h3>
+                <div class="bp-big3-maker">Anthropic · Claude 4 계열 (Opus 4.7, Sonnet 4.6, Haiku 4.5)</div>
+                <div class="bp-big3-row"><div class="k">강점</div><div class="v"><strong>긴 문서 처리, 한국어 글쓰기, 코딩</strong> 영역에서 가장 안정적인 성능을 보입니다. 200K 토큰 컨텍스트를 끝까지 일관되게 처리합니다. Claude Code, Skills, Agent SDK가 함께 제공되어 에이전트 운영에 적합합니다.</div></div>
+                <div class="bp-big3-row"><div class="k">약점</div><div class="v">이미지 생성과 실시간 음성 기능이 제한적입니다. 검색 통합 수준은 ChatGPT나 Gemini에 비해 떨어집니다.</div></div>
+                <div class="bp-big3-row"><div class="k">요금</div><div class="v">Free / Pro 월 20달러 / Max 월 100·200달러 / Team / <strong>Enterprise</strong> 별도 계약 / API · Bedrock · Vertex AI</div></div>
+                <div class="bp-big3-row"><div class="k">권장 활용처</div><div class="v">보고서와 계약서 검토, 한국어 본문 작성, 코딩과 에이전트 운영, IR·법무 등 정확도가 결정적인 업무.</div></div>
+            </article>
+
+            <article class="bp-big3-card">
+                <div class="bp-big3-tag">빅3 · 3</div>
+                <h3 class="bp-big3-name">Gemini</h3>
+                <div class="bp-big3-maker">Google · Gemini 3 계열 (Pro, Flash, Nano)</div>
+                <div class="bp-big3-row"><div class="k">강점</div><div class="v"><strong>100만 토큰 컨텍스트와 멀티모달 처리 깊이</strong>에서 빅3 중 가장 우수합니다. Workspace(Docs, Sheets, Meet, Gmail) 통합 수준이 가장 높으며, Google 검색 연동으로 최신 정보 처리 능력도 우수합니다.</div></div>
+                <div class="bp-big3-row"><div class="k">약점</div><div class="v">한국어 표현이 다소 기계적이며 추론의 일관성에 편차가 있습니다. 독립 제품보다 Workspace 내 부가 기능으로 활용되는 경향이 있어 단독 사용 시 경험이 다소 부족합니다.</div></div>
+                <div class="bp-big3-row"><div class="k">요금</div><div class="v">Free / AI Pro 월 약 30달러 / AI Ultra 월 약 250달러 / <strong>Workspace 기본 포함</strong> / Vertex AI Enterprise</div></div>
+                <div class="bp-big3-row"><div class="k">권장 활용처</div><div class="v">긴 영상과 PDF 분석, 사내 Workspace 기반 자동화, 시장 조사와 뉴스 큐레이션, 영상·이미지 멀티모달 분석.</div></div>
+            </article>
+        </div>
+
+        <div class="bp-handoff">
+            <div class="tag">"통일"이 아니라 "역할 분담"이 답입니다</div>
+            한 사람에게 한 가지 모델만 제공하면 그 모델의 약점이 곧 사용자의 한계가 됩니다. 임원, 기획, 법무, 엔지니어가 동일한 모델로 일할 경우, 가장 비싼 자리에서도 가장 저렴한 모델 수준의 정확도밖에 얻지 못합니다. <strong>권장안은 빅3를 모두 도입하고, 작업의 성격에 따라 사용자가 직접 모델을 선택하도록 자율성을 부여하는 것입니다.</strong> 1인당 월 60달러 안팎의 추가 비용은 한 번의 의사결정 품질 개선만으로 충분히 회수됩니다. 본격 운영 단계에서는 OpenRouter로 모델 라우팅을 자동화하여, 사용자가 매번 직접 선택하지 않아도 되도록 구성합니다.
+        </div>
+    </section>
+
+    <!-- ========= 2. OpenRouter ========= -->
+    <section class="bp-section" id="openrouter">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title"><a class="bp-title-link" href="https://openrouter.ai/" target="_blank" rel="noopener">OpenRouter</a> · 한 API로 100개 모델을 부르는 모델 게이트웨이</h2>
+            </div>
+            <div class="bp-section-meta">멀티 프로바이더 · 가격 비교 · 자동 폴백</div>
+        </div>
+
+        <p class="bp-section-intro">OpenAI, Anthropic, Google은 물론 Mistral·DeepSeek·Qwen·Llama 계열의 오픈웨이트 모델, xAI와 Cohere의 자체 모델까지 단일 엔드포인트로 호출할 수 있는 라우팅 서비스입니다. 운영 관점에서 네 가지 장점이 있습니다.</p>
+
+        <table class="bp-table">
+            <thead>
+                <tr><th>측면</th><th>OpenRouter가 푸는 자리</th><th>현장 적용 예</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>단일 API</td>
+                    <td>모델사마다 다른 SDK, API 키, 요청 포맷의 차이를 단일 인터페이스로 통합합니다. 모델 교체에 필요한 작업이 코드 한 줄 수준으로 단순화됩니다.</td>
+                    <td>동일한 에이전트 코드로 GPT-5.1, Claude Sonnet 4.6, Gemini 3 Pro를 작업 종류에 따라 교체합니다.</td>
+                </tr>
+                <tr>
+                    <td>가격 가시화</td>
+                    <td>모델별 입력·출력 토큰 단가가 동일 화면에 표시되어, 모델 선택을 즉석에서 결정할 수 있습니다.</td>
+                    <td>분류와 요약 작업은 <strong>Llama 3.3 70B, DeepSeek V3, Qwen 2.5</strong>처럼 약 1/10 가격의 모델로 대체합니다.</td>
+                </tr>
+                <tr>
+                    <td>자동 폴백</td>
+                    <td>1순위 모델에 장애가 발생하면 2·3순위 모델로 자동 재시도합니다. 단일 모델사 장애가 회사 운영 전체로 확산되지 않습니다.</td>
+                    <td>Claude API 장애 시 동일 작업을 GPT-5.1로 자동 재시도하도록 폴백 체인을 사전 설정합니다.</td>
+                </tr>
+                <tr>
+                    <td>저가 모델 활용</td>
+                    <td>오픈웨이트 모델(<strong>Llama, Mistral, DeepSeek, Qwen</strong>)을 활용해 대량 작업의 단위 비용을 큰 폭으로 절감할 수 있습니다.</td>
+                    <td>하루 1만 건의 분류·태깅·요약 작업은 저가 모델로, 하루 100건의 임원 보고서는 Opus 또는 Gemini 3 Pro로 분리해 처리합니다.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="bp-handoff">
+            <div class="tag">한 가지 유의 사항 · 데이터 흐름</div>
+            OpenRouter는 게이트웨이 구조이므로, 모든 요청이 OpenRouter 인프라를 한 번 경유합니다. 회사 데이터를 외부로 반출할 수 없는 업무에는 그대로 적용하기 어렵습니다. <strong>이러한 업무는 뒤에서 다룰 Enterprise 요금제 또는 Bedrock, Vertex AI, Azure OpenAI의 직접 호출 방식으로 전환합니다.</strong> OpenRouter는 보안 등급이 낮은 일반 업무, 외부 정보 처리, 실험과 시제품 단계에 적합합니다.
+        </div>
+    </section>
+
+    <!-- ========= 3. 자체 LLM ========= -->
+    <section class="bp-section" id="selfhost">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">자체 LLM 구축은 언제 진지하게 검토하는가</h2>
+            </div>
+            <div class="bp-section-meta">Llama · Qwen · Mistral · vLLM · NVIDIA NIM · H100</div>
+        </div>
+
+        <p class="bp-section-intro">"우리 회사만의 AI를 만들고 싶다"는 요구사항은 대부분 외부 모델로 해결할 수 있습니다. 다만 아래 조건 중 두 가지 이상이 동시에 해당하는 경우는 예외입니다. 이 시점부터는 외부 모델로 해결되지 않으므로 자체 서빙을 진지하게 검토할 단계입니다.</p>
+
+        <div class="bp-vs">
+            <div class="bp-vs-row">
+                <div class="bp-vs-col left">
+                    <h4>외부 API로 충분한 경우</h4>
+                    <h5>대부분의 일반 업무가 이 범주에 해당합니다</h5>
+                    <ul>
+                        <li><strong>월 토큰 사용량이 수억 원 이하인 회사.</strong> 자체 서빙의 고정비(GPU, 인력, 인프라)가 외부 API의 변동비를 회수하기 어렵습니다.</li>
+                        <li><strong>Enterprise 요금제와 VPC 호출로 보안 요건이 해결되는 회사.</strong> 학습 미사용, SSO, VPC만 확보해도 대부분의 요건이 충족됩니다.</li>
+                        <li><strong>최신 모델의 추론 성능을 분기마다 반영해야 하는 회사.</strong> 자체 모델로는 빅3의 분기 단위 업그레이드 속도를 따라가기 어렵습니다.</li>
+                        <li><strong>고품질 도메인 데이터가 충분하지 않은 회사.</strong> 데이터가 부족한 상태에서의 fine-tuning은 오히려 성능 저하를 초래합니다.</li>
+                        <li><strong>GPU 운영과 MLOps 인력이 부족한 회사.</strong> 모델 배포는 시작 단계일 뿐이며, 패치·평가·롤백을 주 단위로 수행해야 합니다.</li>
+                    </ul>
+                </div>
+                <div class="bp-vs-col right">
+                    <h4>자체 LLM을 검토해야 하는 경우</h4>
+                    <h5>아래 조건 중 두 가지 이상이 동시에 해당해야 검토 대상이 됩니다</h5>
+                    <ul>
+                        <li><strong>데이터의 외부 송신이 원천 금지된 경우.</strong> 규제, 계약, 고객 합의로 외부 호출 자체가 불가능한 환경(국방, 일부 금융, 일부 의료).</li>
+                        <li><strong>월 토큰 비용이 자체 서빙의 손익분기점을 초과한 경우.</strong> 월 청구액이 H100 8대 운영비를 초과하는 수준이라면 ROI가 자체 서빙 쪽으로 기울기 시작합니다.</li>
+                        <li><strong>도메인 특화 fine-tuning의 가치가 명확한 경우.</strong> 고품질 자사 데이터로 학습할 경우 외부 모델 대비 정확도가 유의미하게 향상됩니다.</li>
+                        <li><strong>저지연 응답이 결정적인 경우.</strong> 외부 API의 네트워크 왕복 지연으로는 요구 수준을 충족할 수 없는 실시간 추론(자율주행, 실시간 통제).</li>
+                        <li><strong>장기적 모델 자주권이 전략 자산인 경우.</strong> 외부 모델사에 대한 의존도 자체가 산업 내 협상력으로 환산되는 분야.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <p class="bp-section-intro" style="margin-top: 28px;">자체 서빙으로 방향을 잡았다면, 표준 스택은 다음과 같습니다. 모든 옵션을 동시에 검토하기보다는 한 가지를 깊이 있게 진행하는 편이 효율적입니다.</p>
+
+        <div class="bp-layers">
+            <div class="bp-layers-head">자체 LLM 운영 스택의 표준 조합</div>
+            <div class="bp-layer-row">
+                <div class="layer-tag">모델</div>
+                <div class="layer-name">오픈웨이트 베이스</div>
+                <div class="layer-desc"><strong>Llama 3·4, Qwen 2.5·3, Mistral, DeepSeek V3</strong>가 1차 후보군입니다. 한국어 처리 성능은 Qwen과 DeepSeek 계열이 우수하며, 라이선스 안정성은 Llama가 가장 검증되어 있습니다. 베이스 모델 선정 후 자사 데이터를 활용해 LoRA 또는 QLoRA 방식으로 fine-tuning을 수행합니다.</div>
+            </div>
+            <div class="bp-layer-row">
+                <div class="layer-tag">서빙</div>
+                <div class="layer-name">vLLM · TGI · NVIDIA NIM</div>
+                <div class="layer-desc"><code>vLLM</code>이 오픈소스 표준으로 가장 널리 채택되어 있습니다. 운영 안정성과 엔터프라이즈 지원을 동시에 확보하려면 <strong>NVIDIA NIM</strong> 마이크로서비스 또는 <strong>Hugging Face TGI</strong>를 검토합니다.</div>
+            </div>
+            <div class="bp-layer-row">
+                <div class="layer-tag">인프라</div>
+                <div class="layer-name">H100·H200 GPU 클러스터</div>
+                <div class="layer-desc">70B 클래스 모델 1대 추론에는 H100 4~8장이 필요합니다. 자체 데이터센터 구축은 12~18개월의 리드 타임이 소요되므로, 통상 <strong>AWS·GCP·Azure의 GPU 임대</strong> 또는 <strong>CoreWeave·Lambda 등 GPU 전문 클라우드</strong>로 시작합니다.</div>
+            </div>
+            <div class="bp-layer-row">
+                <div class="layer-tag">운영</div>
+                <div class="layer-name">평가·관측·재학습 루프</div>
+                <div class="layer-desc"><strong>자체 평가 데이터셋(eval set) 보유</strong>가 모델 학습 자체보다 더 중요합니다. 회사 도메인의 정답 기준이 없으면 모델 성능의 개선 여부를 판단할 수 없습니다. 관측 도구로는 LangSmith, Langfuse, Arize, WhyLabs가 표준 후보군입니다.</div>
+            </div>
+        </div>
+
+        <div class="bp-handoff">
+            <div class="tag">자체 LLM에 대한 가장 흔한 오해</div>
+            <strong>"보안 때문에 자체 모델을 구축한다"는 결론은 대부분 한 단계 성급한 판단입니다.</strong> 보안 요건의 90퍼센트는 Enterprise 요금제와 Bedrock, Vertex AI, Azure OpenAI의 VPC 호출로 충분히 해결됩니다. 자체 LLM이 정답이 되는 경우는 세 가지로 정리됩니다. 데이터의 외부 송신이 원천 금지된 경우, 토큰 비용이 자체 서빙의 손익분기점을 초과한 경우, 도메인 특화 fine-tuning의 가치가 검증된 경우입니다. 이 세 가지가 함께 충족되지 않으면, 자체 모델은 빅3 대비 비용과 속도 모두에서 불리합니다.
+        </div>
+    </section>
+
+    <!-- ========= 4. Enterprise · 보안 ========= -->
+    <section class="bp-section" id="enterprise">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">보안 요건이 높을수록 Enterprise 요금제, 그 다음은 클라우드 직접 호출</h2>
+            </div>
+            <div class="bp-section-meta">학습 미사용 · SSO · DLP · VPC 호출</div>
+        </div>
+
+        <p class="bp-section-intro">법무, 재무, HR, 고객 데이터처럼 외부 학습에 활용되어서는 안 되는 데이터는 무료나 일반 요금제로 처리하지 않습니다. 두 단계의 선택지가 있습니다. 1단계는 빅3의 Enterprise 요금제이고, 2단계는 AWS Bedrock, GCP Vertex AI, Azure OpenAI를 통한 직접 호출입니다.</p>
+
+        <table class="bp-table">
+            <thead>
+                <tr><th>플랫폼</th><th>학습 미사용</th><th>인증·통제</th><th>특징</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ChatGPT Enterprise · Team</td>
+                    <td><strong>기본 미사용</strong></td>
+                    <td>SSO(SAML), SCIM, DLP, 감사 로그</td>
+                    <td>SOC 2 Type II, GDPR 인증을 보유합니다. 가장 광범위한 사용 기반과 가장 완성도 높은 관리 콘솔을 제공합니다.</td>
+                </tr>
+                <tr>
+                    <td>Claude Enterprise · Team</td>
+                    <td><strong>기본 미사용</strong></td>
+                    <td>SSO, SCIM, 감사 로그, 도메인 캡처</td>
+                    <td>SOC 2 Type II와 HIPAA(BAA)를 지원합니다. 긴 컨텍스트, 코딩, 문서 작업이 핵심인 업무에 적합합니다.</td>
+                </tr>
+                <tr>
+                    <td>Gemini for Workspace · AI Ultra</td>
+                    <td><strong>기본 미사용</strong></td>
+                    <td>Google Workspace 관리 콘솔, DLP, Vault</td>
+                    <td>Workspace를 이미 도입한 회사라면 추가 도입 비용이 거의 발생하지 않습니다.</td>
+                </tr>
+                <tr>
+                    <td>AWS Bedrock</td>
+                    <td>모델 사용 데이터 학습 없음</td>
+                    <td>VPC 내 호출, IAM, KMS 키 관리, PrivateLink</td>
+                    <td>Claude, Llama, Mistral, Titan 등 다수 모델을 동일한 거버넌스 체계에서 운영할 수 있습니다.</td>
+                </tr>
+                <tr>
+                    <td>GCP Vertex AI</td>
+                    <td>모델 사용 데이터 학습 없음</td>
+                    <td>VPC Service Controls, CMEK, IAM</td>
+                    <td>Gemini, Claude, Llama를 모두 지원하며, BigQuery 및 Workspace 데이터와의 연동성이 우수합니다.</td>
+                </tr>
+                <tr>
+                    <td>Azure OpenAI</td>
+                    <td>입출력 데이터 학습 미사용</td>
+                    <td>Private Endpoint, Entra ID, 콘텐츠 필터</td>
+                    <td>Microsoft 365와 Azure를 이미 활용 중인 회사의 1순위 옵션이며, 한국 리전(서울)도 제공됩니다.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="bp-handoff">
+            <div class="tag">의사결정 순서</div>
+            첫 단계로 <strong>실험과 시제품은 일반 요금제</strong>를 사용해 빠르게 운영합니다. 다음 단계로 <strong>팀 단위 운영이 시작되는 시점에 Team 또는 Enterprise 요금제</strong>로 전환해 학습 미사용, SSO, 감사 로그를 확보합니다. 마지막 단계로 <strong>고객, 재무, 계약처럼 외부 반출이 허용되지 않는 데이터</strong>는 Bedrock, Vertex AI, Azure OpenAI의 VPC 호출로 한 단계 더 격리합니다. 이 단계를 건너뛸 경우, 보안 사고가 발생하기 전까지는 비용만 증가하고, 사고가 발생한 뒤에야 비로소 그 비용이 정당화됩니다.
+        </div>
+    </section>
+
+    <!-- ========= 5. 상황별 선택 매트릭스 ========= -->
+    <section class="bp-section" id="matrix">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">상황별 권장 조합</h2>
+            </div>
+            <div class="bp-section-meta">개인 · 팀 · 대기업 · 보안 민감 업무 · 데이터 격리</div>
+        </div>
+
+        <p class="bp-section-intro">회사 규모, 보안 요건, 워크로드 성격에 따라 권장 조합이 달라집니다. "모델 하나만 선택해 달라"는 질문에는 답하기 어렵지만, "현재 어느 위치에 있는가"라는 질문에는 명확히 답할 수 있습니다.</p>
+
+        <div class="bp-matrix">
+            <div class="bp-matrix-head">
+                <div>상황</div>
+                <div>스택</div>
+                <div>이유</div>
+            </div>
+            <div class="bp-matrix-row">
+                <div class="who">개인 · 1인 실험가</div>
+                <div class="stack"><strong>ChatGPT Plus + Claude Pro</strong>를 병행하고, 필요한 경우 Gemini Free를 보조로 사용합니다.</div>
+                <div class="why">월 40달러로 빅3의 강점을 모두 확보할 수 있습니다. <strong>특정 모델에 종속되지 않는 감각</strong>을 가장 저렴하게 습득하는 단계입니다.</div>
+            </div>
+            <div class="bp-matrix-row">
+                <div class="who">스타트업 · 10~50인 팀</div>
+                <div class="stack">사내 사용에는 <strong>ChatGPT Team + Claude Team</strong>을, 백오피스 자동화에는 <strong>OpenRouter</strong>를 적용합니다.</div>
+                <div class="why">두 빅3로 사내 사용을 분담하고, 대량 처리는 OpenRouter로 저가 모델까지 활용합니다. <strong>토큰 비용이 인건비 대비 결정적이지 않은 구간</strong>입니다.</div>
+            </div>
+            <div class="bp-matrix-row">
+                <div class="who">중견·대기업 · 일반 업무</div>
+                <div class="stack"><strong>두 가지 Enterprise 요금제</strong>(ChatGPT Enterprise + Claude Enterprise)에 <strong>Gemini for Workspace</strong>를 결합합니다.</div>
+                <div class="why">SSO, 감사 로그, 학습 미사용이 기본 요건입니다. <strong>Workspace를 이미 도입한 회사라면 Gemini는 추가 비용 없이</strong> 사용할 수 있습니다.</div>
+            </div>
+            <div class="bp-matrix-row">
+                <div class="who">대기업 · 보안 민감 업무</div>
+                <div class="stack"><strong>AWS Bedrock</strong>(Claude, Llama, Mistral), <strong>Vertex AI</strong>(Gemini, Claude), <strong>Azure OpenAI</strong>(GPT) 중 한 가지를 선택합니다.</div>
+                <div class="why">VPC 호출과 KMS 키 관리로 데이터가 회사 클라우드를 벗어나지 않습니다. <strong>현재 사용 중인 퍼블릭 클라우드 사업자</strong>를 1순위 후보로 검토합니다.</div>
+            </div>
+            <div class="bp-matrix-row">
+                <div class="who">데이터 외부 송신 금지</div>
+                <div class="stack"><strong>자체 서빙</strong>(Llama, Qwen, Mistral) 기반에 <strong>vLLM 또는 NIM</strong>, 그리고 <strong>자체 평가셋</strong>을 구성합니다.</div>
+                <div class="why">규제나 계약상의 이유로 외부 호출 자체가 불가능한 경우입니다. <strong>모델 자주권</strong>이 운영의 전제 조건이 되는 환경이며, 빅3는 비공식 정보 조회 용도로만 활용합니다.</div>
+            </div>
+        </div>
+
+        <div class="bp-handoff">
+            <div class="tag">조합은 분기마다 재점검합니다</div>
+            <strong>빅3는 분기 단위로 모델을 교체하고 가격을 절반 수준으로 인하합니다.</strong> 6개월 전의 정답이 현재의 정답이 아닐 수 있다는 의미입니다. 자산 축적 4단계 순환의 검증 단계에서 사용량, 만족도, 비용을 분기마다 재집계하고, 그 데이터를 바탕으로 다음 분기의 모델 조합을 다시 설계합니다. 한 번 결정한 스택을 1년 동안 그대로 유지하는 것이 가장 비싼 의사결정입니다.
+        </div>
+    </section>
+
+    <!-- ========= 6. 참고 자료 ========= -->
+    <section class="bp-section" id="refs">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">참고 자료</h2>
+            </div>
+            <div class="bp-section-meta">모델사 · 모델 게이트웨이 · 클라우드 · 자체 서빙</div>
+        </div>
+
+        <div class="bp-refs">
+            <div class="bp-refs-head">
+                <div>구분</div>
+                <div>출처와 자료</div>
+                <div>본 페이지에서의 역할</div>
+            </div>
+            <div class="bp-refs-row">
+                <div class="kind">모델사 · OpenAI</div>
+                <div class="source">
+                    <strong>OpenAI</strong>, <a href="https://openai.com/chatgpt/enterprise/" target="_blank" rel="noopener">ChatGPT Enterprise · Team</a>, <a href="https://platform.openai.com/" target="_blank" rel="noopener">Platform API</a>
+                    <span class="sub">openai.com</span>
+                </div>
+                <div>GPT-5 계열, Custom GPT, Enterprise 요금제의 학습 미사용·SSO·DLP 정책에 대한 1차 출처입니다.</div>
+            </div>
+            <div class="bp-refs-row">
+                <div class="kind">모델사 · Anthropic</div>
+                <div class="source">
+                    <strong>Anthropic</strong>, <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener">Claude</a>, <a href="https://www.anthropic.com/enterprise" target="_blank" rel="noopener">Claude Enterprise</a>, <a href="https://docs.claude.com/" target="_blank" rel="noopener">Claude Docs · Agent SDK</a>
+                    <span class="sub">anthropic.com · claude.com</span>
+                </div>
+                <div>Claude 4 계열(Opus 4.7, Sonnet 4.6, Haiku 4.5), 200K 컨텍스트, Skills와 Agent SDK 사양에 대한 1차 출처입니다.</div>
+            </div>
+            <div class="bp-refs-row">
+                <div class="kind">모델사 · Google</div>
+                <div class="source">
+                    <strong>Google</strong>, <a href="https://deepmind.google/technologies/gemini/" target="_blank" rel="noopener">Gemini</a>, <a href="https://workspace.google.com/solutions/ai/" target="_blank" rel="noopener">Gemini for Workspace</a>, <a href="https://cloud.google.com/vertex-ai" target="_blank" rel="noopener">Vertex AI</a>
+                    <span class="sub">google.com · cloud.google.com</span>
+                </div>
+                <div>Gemini 3 계열의 100만 토큰 컨텍스트, Workspace 통합, Vertex AI의 VPC Service Controls 사양에 대한 1차 출처입니다.</div>
+            </div>
+            <div class="bp-refs-row">
+                <div class="kind">모델 게이트웨이</div>
+                <div class="source">
+                    <strong>OpenRouter</strong>, <a href="https://openrouter.ai/models" target="_blank" rel="noopener">Models</a>, <a href="https://openrouter.ai/docs/" target="_blank" rel="noopener">Docs</a>
+                    <span class="sub">openrouter.ai</span>
+                </div>
+                <div>단일 API를 통한 100여 개 모델 호출, 모델별 토큰 단가 비교, 폴백 체인 설정에 대한 1차 출처입니다.</div>
+            </div>
+            <div class="bp-refs-row">
+                <div class="kind">클라우드 호출</div>
+                <div class="source">
+                    <strong>AWS Bedrock</strong>, <a href="https://aws.amazon.com/bedrock/" target="_blank" rel="noopener">aws.amazon.com/bedrock</a> · <strong>Azure OpenAI</strong>, <a href="https://learn.microsoft.com/azure/ai-services/openai/" target="_blank" rel="noopener">learn.microsoft.com</a>
+                    <span class="sub">VPC 호출 · KMS · Private Endpoint</span>
+                </div>
+                <div>Enterprise 요금제 다음 단계에서 VPC 내부 모델 직접 호출 거버넌스 표준에 대한 1차 출처입니다.</div>
+            </div>
+            <div class="bp-refs-row">
+                <div class="kind">자체 서빙</div>
+                <div class="source">
+                    <strong>vLLM</strong>, <a href="https://docs.vllm.ai/" target="_blank" rel="noopener">docs.vllm.ai</a> · <strong>NVIDIA NIM</strong>, <a href="https://www.nvidia.com/en-us/ai/" target="_blank" rel="noopener">nvidia.com/ai</a> · <strong>Hugging Face TGI</strong>
+                    <span class="sub">오픈웨이트 서빙 런타임</span>
+                </div>
+                <div>Llama, Qwen, Mistral 계열 오픈웨이트 모델을 자체 인프라에서 추론 서빙하기 위한 표준 런타임의 1차 출처입니다.</div>
+            </div>
+            <div class="bp-refs-row">
+                <div class="kind">본 가이드</div>
+                <div class="source">
+                    <strong>본 가이드</strong>, B-4 업무 방식 재설계 · D 자산 축적 4단계 순환
+                    <span class="sub">본 가이드의 B·D 영역</span>
+                </div>
+                <div>모델 선택을 도구 결정이 아닌 자산 축적 4단계 순환의 입력값으로 보는 본 가이드의 관점과 연결됩니다.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= FOOTER ========= -->
+    <footer class="bp-footer">
+        <p style="margin:0 0 10px; font-size:11.5px; opacity:0.78;">* 이 페이지는 5단계 본문 외 부록입니다. AX의 최종 목적지는 모델 선택이 아니라 COMPANY BRAIN OS의 운영입니다. 모델은 분기마다 바뀌지만, 그 위에 축적된 자산은 회사를 떠나지 않습니다.</p>
+        <p style="margin:0 0 10px;"><strong>결론 요약.</strong> 빅3는 셋 다 도입하여 작업의 성격에 따라 분담합니다. 분류, 요약, 검색처럼 정형화된 작업은 OpenRouter로 저가 모델에 분산합니다. 자체 LLM은 데이터 외부 송신 금지, 토큰 비용의 손익분기점 초과, 도메인 fine-tuning 가치라는 세 가지 조건 중 두 가지 이상이 동시에 충족될 때만 검토합니다. 보안은 Enterprise 요금제와 VPC 호출의 두 단계로 강화합니다.</p>
+        <p style="margin:0 0 10px; opacity:0.85;">분기마다 사용량, 비용, 정확도를 재집계하여 다음 분기의 모델 조합을 다시 설계합니다. 한 번 결정한 스택을 1년 동안 그대로 유지하는 것이 가장 비싼 의사결정입니다.</p>
+        <p style="margin:22px 0 0; padding-top:18px; border-top:1px solid rgba(247,245,239,0.18); font-size:11.5px; opacity:0.7; letter-spacing:0.04em;">&copy; 2026 AI ROASTING. All rights reserved.</p>
+    </footer>
+
+</div>
+
+<script>
+(function() {
+    'use strict';
+    var navLinks = document.querySelectorAll('.bp-hero-nav a');
+    if (!navLinks.length) return;
+
+    var linkMap = {};
+    var sectionIds = [];
+    navLinks.forEach(function(link) {
+        var id = (link.getAttribute('href') || '').replace('#', '');
+        if (!id) return;
+        var el = document.getElementById(id);
+        if (!el) return;
+        linkMap[id] = { link: link, el: el };
+        sectionIds.push(id);
+    });
+    if (!sectionIds.length) return;
+
+    function setActive(id) {
+        sectionIds.forEach(function(k) {
+            if (k === id) linkMap[k].link.classList.add('active');
+            else linkMap[k].link.classList.remove('active');
+        });
+    }
+
+    function update() {
+        var nav = document.querySelector('.bp-hero-nav');
+        var navH = nav ? nav.offsetHeight : 0;
+        var trigger = navH + 60;
+        var currentId = null;
+        for (var i = 0; i < sectionIds.length; i++) {
+            var rect = linkMap[sectionIds[i]].el.getBoundingClientRect();
+            if (rect.top <= trigger) currentId = sectionIds[i];
+            else break;
+        }
+        setActive(currentId);
+    }
+
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(function() {
+            update();
+            ticking = false;
+        });
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+.page.strategy {
+  --track-primary: var(--strategy-primary);
+  --track-primary-light: var(--strategy-primary-light);
+}
+.page.strategy .page-title-bar { border-left: 6px solid var(--strategy-primary); }
+.page.strategy .page-title-bar .track-label { color: var(--strategy-primary); }
+.page.strategy h1 { color: var(--text-primary); }
+.page.strategy a.cross-link { color: var(--strategy-primary); border-bottom: 1px solid currentColor; }

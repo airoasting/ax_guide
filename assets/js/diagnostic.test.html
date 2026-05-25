@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html><head><title>diagnostic.js test</title></head>
+<body>
+<h1>diagnostic.js test results</h1>
+<div id="results"></div>
+<script src="diagnostic.js"></script>
+<script>
+const cases = [
+  { name: 'all 1 → Lv1', input: [1,1,1,1,1,1,1], expectedLv: 1 },
+  { name: 'all 3 → Lv3', input: [3,3,3,3,3,3,3], expectedLv: 3 },
+  { name: 'all 5 → Lv5', input: [5,5,5,5,5,5,5], expectedLv: 5 },
+  { name: 'mixed → Lv3', input: [3,4,2,3,4,3,3], expectedLv: 3 },
+  { name: 'low-mid → Lv2', input: [2,2,2,2,2,2,2], expectedLv: 2 },
+  { name: 'high → Lv4', input: [4,4,4,4,4,4,4], expectedLv: 4 },
+];
+const out = document.getElementById('results');
+let pass = 0, fail = 0;
+cases.forEach(c => {
+  const res = window.AXDiag.calculate(c.input);
+  const ok = res.lv === c.expectedLv;
+  if (ok) pass++; else fail++;
+  out.innerHTML += `<p style="color:${ok?'green':'red'};margin:4px 0;">${ok?'PASS':'FAIL'}: ${c.name} (got Lv${res.lv}, avg ${res.avg.toFixed(2)})</p>`;
+});
+out.innerHTML += `<hr><p><strong>Summary: ${pass} passed, ${fail} failed</strong></p>`;
+</script>
+</body>
+</html>

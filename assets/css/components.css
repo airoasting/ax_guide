@@ -1,0 +1,148 @@
+/* === 카드 === */
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--nm-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--nm-shadow);
+  padding: var(--space-6);
+  min-height: 165px;
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.card:hover { transform: translateY(-2px); box-shadow: 10px 10px 26px var(--nm-dark), -10px -10px 26px var(--nm-light); }
+.card.strategy { border-left: 3px solid var(--strategy-primary); }
+.card.execution { border-left: 3px solid var(--execution-primary); }
+.card-title { font-size: var(--fs-h3); font-weight: 700; margin-bottom: var(--space-2); }
+.card-desc { font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.55; }
+.card-meta { display: flex; gap: var(--space-2); margin-top: auto; padding-top: var(--space-3); font-size: var(--fs-xs); color: var(--text-tertiary); }
+
+/* === 뱃지 === */
+.badge { display: inline-block; padding: 3px 10px; border-radius: var(--radius-pill); font-size: var(--fs-xs); font-weight: 600; }
+.badge.strategy { background: var(--strategy-primary); color: var(--text-on-dark); }
+.badge.execution { background: var(--execution-primary); color: var(--text-on-dark); }
+.badge.lv1 { background: #E5F4E5; color: var(--color-success); }
+.badge.lv2 { background: #E5F4E5; color: var(--color-success); }
+.badge.lv3 { background: #FBF2DA; color: var(--color-warning); }
+.badge.lv4 { background: #FBF2DA; color: var(--color-warning); }
+.badge.lv5 { background: #FAE0E5; color: var(--color-danger); }
+
+/* === 결정 박스 (전략 트랙 머리) === */
+.decision-box {
+  background: rgba(30,58,138,0.06);
+  border-left: 4px solid var(--strategy-primary);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  margin: var(--space-6) 0;
+}
+.decision-box h3 { color: var(--strategy-primary); margin-bottom: var(--space-3); }
+.decision-box ul { list-style: none; }
+.decision-box li { padding: var(--space-2) 0; padding-left: var(--space-6); position: relative; }
+.decision-box li::before {
+  content: '☐'; position: absolute; left: 0; color: var(--strategy-primary); font-size: 18px;
+}
+
+/* === 핸드오프 박스 (전략 트랙 끝) === */
+.handoff-box {
+  background: rgba(217,119,87,0.08);
+  border-left: 4px solid var(--execution-primary);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  margin: var(--space-8) 0 var(--space-6);
+}
+.handoff-box h3 { color: var(--execution-primary); margin-bottom: var(--space-3); font-size: var(--fs-h3); }
+.handoff-box a { color: var(--execution-primary); font-weight: 700; text-decoration: underline; }
+
+/* === 역참조 박스 (실행 트랙 머리) === */
+.upstream-box {
+  background: rgba(30,58,138,0.06);
+  border-left: 4px solid var(--strategy-primary);
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-6);
+  margin: var(--space-6) 0;
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+}
+.upstream-box strong { color: var(--strategy-primary); }
+.upstream-box a { color: var(--strategy-primary); text-decoration: underline; }
+
+/* === Lv 박스 === */
+.lv-box {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  margin: var(--space-3) 0;
+  background: var(--nm-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--nm-shadow-sm);
+  align-items: center;
+}
+.lv-box .lv-label { font-weight: 800; font-size: var(--fs-h3); }
+
+/* === AI ROASTING 관점 박스 === */
+.perspective-box {
+  background: linear-gradient(135deg, #1A1917 0%, #2A2622 100%);
+  color: var(--text-on-dark);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin: var(--space-6) 0;
+}
+.perspective-box .label { font-size: var(--fs-xs); letter-spacing: 1.5px; text-transform: uppercase; color: var(--execution-primary); margin-bottom: var(--space-2); font-weight: 700; }
+.perspective-box h3 { color: var(--text-on-dark); margin-bottom: var(--space-3); }
+.perspective-box p { color: rgba(255,255,255,0.85); }
+
+/* === 비교 표 === */
+.compare-table { width: 100%; border-collapse: collapse; margin: var(--space-6) 0; font-size: var(--fs-sm); }
+.compare-table th, .compare-table td { padding: var(--space-3) var(--space-4); text-align: left; border-bottom: 1px solid rgba(0,0,0,0.06); }
+.compare-table th { background: rgba(0,0,0,0.03); font-weight: 700; }
+.compare-table td.center { text-align: center; }
+.compare-table .pill { display: inline-block; padding: 2px 8px; border-radius: var(--radius-pill); font-size: var(--fs-xs); font-weight: 600; }
+.compare-table .pill.good { background: #E5F4E5; color: var(--color-success); }
+.compare-table .pill.mid { background: #FBF2DA; color: var(--color-warning); }
+.compare-table .pill.bad { background: #FAE0E5; color: var(--color-danger); }
+
+/* === 다운로드 카드 === */
+.download-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-6);
+  background: var(--nm-bg);
+  border-radius: var(--radius-md);
+  box-shadow: var(--nm-shadow-sm);
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.2s;
+}
+.download-card:hover { box-shadow: var(--nm-shadow); }
+.download-card .icon { font-size: 28px; }
+.download-card .info { flex: 1; }
+.download-card .info .title { font-weight: 700; }
+.download-card .info .meta { font-size: var(--fs-xs); color: var(--text-tertiary); }
+
+/* === 키보드 포커스 (접근성) === */
+.nav-btn:focus-visible,
+.card:focus-visible,
+.download-card:focus-visible {
+  outline: 2px solid var(--strategy-primary);
+  outline-offset: 3px;
+}
+.page.execution .card:focus-visible,
+.page.execution .download-card:focus-visible {
+  outline-color: var(--execution-primary);
+}
+
+/* === 페이지 타이틀 바 (트랙별 색은 strategy.css/execution.css에서 override) === */
+.page-title-bar {
+  padding-left: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+.page-title-bar .track-label {
+  font-size: var(--fs-xs);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 700;
+}

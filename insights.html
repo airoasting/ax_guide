@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B-2-2 핵심 시사점 도출 · 파일럿이 남긴 것을 다음 단계 입력값으로</title>
+<meta name="description" content="AX 2단계 파일럿 실행의 두 번째 작업. 됨/안 됨/조직 역량 발견의 세 칸 학습 리포트로 정리해 3단계 과제 우선순위화의 근거로 넘기는 방법.">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+/* ================== B-2-2 Insights Page Local Styles ================== */
+/* organization.html과 동일한 bp-* 시각 토큰을 그대로 차용합니다. */
+
+:root {
+    --bp-grid: rgba(14, 59, 42, 0.06);
+    --bp-grid-strong: rgba(14, 59, 42, 0.12);
+    --bp-line: #0E3B2A;
+    --bp-ink: #0F1A16;
+    --bp-paper: #F7F5EF;
+    --bp-paper-2: #FBFAF6;
+    --bp-rule: #D6D2C5;
+    --bp-accent: #1B6E4F;
+    --bp-gold: #9A7B0A;
+    --bp-red: #8B2E1F;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 50px; }
+body {
+    background:
+        linear-gradient(var(--bp-grid) 1px, transparent 1px) 0 0 / 32px 32px,
+        linear-gradient(90deg, var(--bp-grid) 1px, transparent 1px) 0 0 / 32px 32px,
+        var(--bp-paper);
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    line-break: strict;
+}
+
+/* ===== Sheet wrapper ===== */
+.bp-sheet {
+    max-width: 1320px;
+    margin: 32px auto;
+    background: var(--bp-paper-2);
+    border: 1.5px solid var(--bp-line);
+    box-shadow: 0 1px 0 var(--bp-line), 0 24px 60px -30px rgba(6, 32, 24, 0.35);
+    position: relative;
+}
+.bp-sheet::before, .bp-sheet::after {
+    content: "";
+    position: absolute;
+    width: 16px; height: 16px;
+    border: 1px solid var(--bp-line);
+}
+.bp-sheet::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+.bp-sheet::after  { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
+/* ===== Step navigation ===== */
+.bp-stepnav {
+    padding: 36px 56px 28px;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1.5px solid #062018;
+}
+.bp-stepnav::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+}
+.bp-step {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid rgba(247, 245, 239, 0.55);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--sans);
+    font-size: 11.5px;
+    font-weight: 600;
+    color: rgba(247, 245, 239, 0.85);
+    letter-spacing: 0.02em;
+    position: relative;
+    transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+.bp-step.active {
+    background: var(--bp-paper);
+    color: var(--bp-ink);
+    border-color: var(--bp-paper);
+    font-weight: 700;
+}
+.bp-step + .bp-step { margin-left: 24px; }
+.bp-step + .bp-step::before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    width: 24px;
+    height: 1px;
+    background: rgba(247, 245, 239, 0.4);
+    transform: translateY(-50%);
+}
+.bp-back {
+    display: block;
+    text-align: center;
+    margin-top: 18px;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: rgba(247, 245, 239, 0.78);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: color .15s ease, letter-spacing .15s ease;
+    position: relative;
+    z-index: 1;
+}
+.bp-back:hover { color: var(--bp-paper); letter-spacing: 0.08em; }
+
+.bp-substeps {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+.bp-substeps a, .bp-substeps span {
+    border: 1px solid rgba(247, 245, 239, 0.28);
+    background: transparent;
+    padding: 12px 24px;
+    color: rgba(247, 245, 239, 0.75);
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: background .18s ease, border-color .18s ease, color .18s ease;
+    min-width: 200px;
+    text-align: center;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.bp-substeps a:hover {
+    background: rgba(247, 245, 239, 0.08);
+    border-color: rgba(247, 245, 239, 0.6);
+    color: var(--bp-paper);
+}
+.bp-substeps span {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+.bp-substeps a.active {
+    background: linear-gradient(180deg, #14523B 0%, #0E3B2A 100%);
+    color: var(--bp-paper);
+    border: 1.5px solid var(--bp-paper);
+    font-weight: 700;
+    box-shadow:
+        0 0 0 4px rgba(14, 59, 42, 0.55),
+        0 8px 20px -8px rgba(6, 32, 24, 0.7);
+    transform: translateY(-1px);
+    cursor: default;
+    pointer-events: none;
+}
+
+@media (max-width: 600px) {
+    .bp-stepnav { padding: 24px 16px 20px; }
+    .bp-step { width: 26px; height: 26px; font-size: 10px; }
+    .bp-step + .bp-step { margin-left: 16px; }
+    .bp-step + .bp-step::before { width: 16px; }
+    .bp-substeps { gap: 8px; }
+    .bp-substeps a, .bp-substeps span { min-width: 0; flex: 1 1 auto; padding: 10px 14px; font-size: 12px; }
+}
+
+/* ===== Hero block ===== */
+.bp-hero {
+    padding: 64px 56px 56px;
+    border-bottom: 1.5px solid var(--bp-line);
+    position: relative;
+    background:
+        radial-gradient(ellipse at top right, rgba(27, 110, 79, 0.06), transparent 60%),
+        var(--bp-paper-2);
+}
+.bp-hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    margin-bottom: 18px;
+}
+.bp-hero h1 {
+    font-size: 52px;
+    line-height: 1.18;
+    margin: 0 0 22px;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+}
+.bp-hero .bp-lead {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+}
+.bp-hero .bp-summary {
+    margin-top: 36px;
+    padding: 22px 26px;
+    background: rgba(14, 59, 42, 0.04);
+    border-top: 1px solid var(--bp-rule);
+    border-bottom: 1px solid var(--bp-rule);
+    font-size: 14px;
+    line-height: 1.75;
+}
+.bp-hero .bp-summary strong { color: var(--bp-line); }
+
+/* ===== Section submenu ===== */
+.bp-hero-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 12px 56px;
+    background: var(--bp-paper-2);
+    border-top: 1px solid var(--bp-line);
+    border-bottom: 1px solid var(--bp-line);
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    box-shadow: 0 2px 8px -4px rgba(6, 32, 24, 0.18);
+}
+.bp-hero-nav a {
+    flex: 1 1 0;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--bp-ink);
+    padding: 10px 16px;
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper);
+    text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    letter-spacing: -0.005em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bp-hero-nav a:hover { background: var(--bp-line); color: var(--bp-paper); }
+.bp-hero-nav a.active {
+    background: var(--bp-line);
+    color: var(--bp-paper);
+    border-color: var(--bp-line);
+    box-shadow: inset 0 -3px 0 var(--bp-accent);
+}
+
+/* ===== Section frame ===== */
+.bp-section {
+    padding: 56px 56px 64px;
+    border-bottom: 1.5px solid var(--bp-line);
+    position: relative;
+}
+.bp-section:last-of-type { border-bottom: none; }
+.bp-section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 36px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--bp-rule);
+}
+.bp-section-title {
+    font-size: 30px;
+    margin: 0;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    font-weight: 700;
+}
+.bp-section-meta {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    text-align: right;
+    line-height: 1.6;
+}
+.bp-section-intro {
+    margin: 0 0 28px;
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+}
+
+/* ===== Three-column learning report ===== */
+.bp-principles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-principle {
+    padding: 28px 26px 30px;
+    border-right: 1px solid var(--bp-rule);
+    background: var(--bp-paper-2);
+    transition: background .25s ease, transform .25s ease, box-shadow .25s ease;
+    position: relative;
+}
+.bp-principle:last-child { border-right: none; }
+.bp-principle:hover {
+    background: rgba(27, 110, 79, 0.06);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px -10px rgba(6, 32, 24, 0.25);
+    z-index: 2;
+}
+.bp-principle-num {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--bp-accent);
+    font-weight: 700;
+    margin-bottom: 10px;
+    transition: color .25s ease, letter-spacing .25s ease;
+}
+.bp-principle:hover .bp-principle-num { color: var(--bp-line); letter-spacing: 0.24em; }
+.bp-principle-name {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    margin-bottom: 14px;
+    letter-spacing: -0.005em;
+    line-height: 1.35;
+}
+.bp-principle-body {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+}
+.bp-principle-body strong { color: var(--bp-ink); }
+.bp-principle-evidence {
+    padding-top: 16px;
+    border-top: 1px solid var(--bp-rule);
+    font-family: var(--sans);
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--ink-mute);
+    letter-spacing: 0.005em;
+}
+.bp-principle-evidence b {
+    display: block;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+/* ===== Diagram rows (tiered structure) ===== */
+.bp-comp-diagram {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    padding: 32px 36px 36px;
+}
+.bp-comp-row {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px dashed var(--bp-rule);
+    align-items: flex-start;
+}
+.bp-comp-row:last-child { border-bottom: none; }
+.bp-comp-tier {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding-top: 4px;
+}
+.bp-comp-detail h4 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    margin: 0 0 8px;
+    letter-spacing: -0.005em;
+}
+.bp-comp-detail p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    margin: 0 0 8px;
+}
+.bp-comp-detail .roles {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.bp-comp-detail .role-chip {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--bp-line);
+    background: rgba(14, 59, 42, 0.06);
+    border: 1px solid var(--bp-rule);
+    padding: 5px 11px;
+    letter-spacing: 0.01em;
+}
+
+/* ===== Report template (three-section block) ===== */
+.bp-report {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-report-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+    position: relative;
+}
+.bp-report-head::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-report-head > div {
+    padding: 14px 20px;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-right: 1px solid rgba(247, 245, 239, 0.14);
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+.bp-report-head > div:last-child { border-right: none; }
+.bp-report-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-top: 1px solid var(--bp-rule);
+}
+.bp-report-body > div {
+    padding: 22px 22px 24px;
+    border-right: 1px solid var(--bp-rule);
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+}
+.bp-report-body > div:last-child { border-right: none; }
+.bp-report-body h5 {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    font-weight: 700;
+    margin: 0 0 10px;
+}
+.bp-report-body ul {
+    margin: 0;
+    padding-left: 18px;
+}
+.bp-report-body ul li {
+    margin-bottom: 6px;
+}
+.bp-report-body ul li strong {
+    color: var(--bp-ink);
+}
+
+/* ===== Checklist ===== */
+.bp-checklist {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-check-row {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--bp-rule);
+    align-items: flex-start;
+    gap: 16px;
+}
+.bp-check-row:last-child { border-bottom: none; }
+.bp-check-num {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.12em;
+    padding-top: 2px;
+}
+.bp-check-body h4 {
+    font-size: 15.5px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    margin: 0 0 6px;
+    letter-spacing: -0.005em;
+}
+.bp-check-body p {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+}
+
+/* ===== Handoff box ===== */
+.bp-handoff {
+    margin-top: 28px;
+    padding: 24px 28px;
+    background: rgba(14, 59, 42, 0.05);
+    border-top: 1px solid var(--bp-line);
+    border-bottom: 1px solid var(--bp-line);
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--bp-ink);
+}
+.bp-handoff strong { color: var(--bp-line); }
+.bp-handoff .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+/* ===== References table ===== */
+.bp-refs {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-refs-head {
+    display: grid;
+    grid-template-columns: 150px 1.1fr 1.4fr;
+    background: rgba(14, 59, 42, 0.06);
+    border-bottom: 1px solid var(--bp-line);
+}
+.bp-refs-head > div {
+    padding: 12px 18px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--bp-line);
+    border-right: 1px solid var(--bp-rule);
+}
+.bp-refs-head > div:last-child { border-right: none; }
+.bp-refs-row {
+    display: grid;
+    grid-template-columns: 150px 1.1fr 1.4fr;
+    border-top: 1px solid var(--bp-rule);
+}
+.bp-refs-row:first-of-type { border-top: none; }
+.bp-refs-row > div {
+    padding: 16px 18px;
+    font-size: 13px;
+    line-height: 1.65;
+    border-right: 1px solid var(--bp-rule);
+    color: var(--ink-soft);
+}
+.bp-refs-row > div:last-child { border-right: none; }
+.bp-refs-row .kind {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    font-weight: 700;
+    background: rgba(14, 59, 42, 0.03);
+    display: flex;
+    align-items: center;
+}
+.bp-refs-row .source { color: var(--bp-ink); }
+.bp-refs-row .source strong { color: var(--bp-line); font-weight: 700; }
+.bp-refs-row .source .sub {
+    display: block;
+    font-size: 11.5px;
+    color: var(--ink-mute);
+    margin-top: 4px;
+    letter-spacing: 0.02em;
+    font-family: var(--sans);
+}
+
+/* ===== Closing footer ===== */
+.bp-footer {
+    padding: 36px 56px 44px;
+    background:
+        radial-gradient(ellipse at 0% 100%, rgba(27, 110, 79, 0.35), transparent 55%),
+        linear-gradient(110deg, #14523B 0%, #0E3B2A 35%, #0A2E22 70%, #062018 100%);
+    color: rgba(247, 245, 239, 0.92);
+    font-family: var(--sans);
+    font-size: 12.5px;
+    line-height: 1.7;
+    border-top: 1.5px solid #062018;
+    position: relative;
+    overflow: hidden;
+}
+.bp-footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-footer > * { position: relative; z-index: 1; }
+.bp-footer strong { color: var(--bp-paper); }
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+    .bp-hero { padding: 48px 32px; }
+    .bp-hero h1 { font-size: 38px; }
+    .bp-section { padding: 40px 32px; }
+    .bp-principles { grid-template-columns: 1fr; }
+    .bp-principle { border-right: none; border-bottom: 1px solid var(--bp-rule); }
+    .bp-principle:last-child { border-bottom: none; }
+    .bp-comp-row { grid-template-columns: 1fr; gap: 8px; }
+    .bp-report-head, .bp-report-body { grid-template-columns: 1fr; }
+    .bp-report-body > div { border-right: none; border-bottom: 1px solid var(--bp-rule); }
+    .bp-report-body > div:last-child { border-bottom: none; }
+    .bp-footer { padding: 32px; }
+}
+@media (max-width: 600px) {
+    .bp-sheet { margin: 12px; }
+    .bp-hero h1 { font-size: 28px; }
+    .bp-section-title { font-size: 22px; }
+    .bp-check-row { grid-template-columns: 1fr; gap: 6px; }
+    .bp-refs-head, .bp-refs-row { grid-template-columns: 1fr; }
+    .bp-refs-row > div { border-right: none; border-bottom: 1px solid var(--bp-rule); }
+    .bp-refs-row > div:last-child { border-bottom: none; }
+}
+@media (max-width: 1024px) and (min-width: 601px) {
+    .bp-refs-head, .bp-refs-row { grid-template-columns: 110px 1fr 1.3fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="bp-sheet">
+
+
+    <!-- ========= BRAND BAR ========= -->
+    <a class="bp-brandbar" href="index.html" aria-label="목차로 이동">
+        <img class="bb-logo" src="assets/logos/logo1-transparent.png" alt="AI ROASTING">
+        <span>AI ROASTING · AX GUIDE TO COMPANY BRAIN OS</span>
+    </a>
+
+    <!-- ========= STEP NAVIGATION ========= -->
+    <nav class="bp-stepnav" aria-label="전체 단계">
+        <ol class="bp-steps">
+            <li class="bp-step"><a href="blueprint.html">진단</a></li>
+            <li class="bp-step"><a href="organization.html">1</a></li>
+            <li class="bp-step active" aria-current="step"><a href="pilot.html">2</a></li>
+            <li class="bp-step"><a href="criteria.html">3</a></li>
+            <li class="bp-step"><a href="resource.html">4</a></li>
+            <li class="bp-step"><a href="ainative.html">5</a></li>
+        </ol>
+        <a class="bp-back" href="index.html">← 목록으로</a>
+        <div class="bp-substeps" aria-label="2단계 파일럿 실행 페이지">
+            <a href="pilot.html">파일럿 대상 선정과 실행</a>
+            <a href="insights.html" class="active" aria-current="page">핵심 시사점 도출</a>
+        </div>
+    </nav>
+
+    <!-- ========= HERO ========= -->
+    <section class="bp-hero">
+        <div class="bp-hero-eyebrow">Step 2 · 파일럿 실행 · 핵심 시사점 도출 · BRAIN OS 첫 진단 데이터</div>
+        <h1>파일럿의 산출물은 "성공"이 아니라 "BRAIN OS의 첫 진단 데이터"입니다.</h1>
+        <p class="bp-lead">파일럿이 남겨야 할 것은 성공 사례가 아니라 3단계 과제 우선순위화의 입력값이 될 현장 데이터입니다.</p>
+        <div class="bp-summary">
+            <strong>이 단계의 결론은 단순합니다.</strong> 모든 사이클이 끝나면 됨/안 됨/조직 역량 발견의 세 칸으로 학습 리포트를 한 장씩 정리합니다. 그 다음 전체 파일럿을 가로로 모아, AI가 잘한 영역과 못한 영역, 데이터 상태, 직원 수용도, 현장 병목을 한 페이지로 압축합니다. 책상 분석이 아니라 현장 경험을 근거로 빅 베팅을 골라낼 입력값을 만드는 자리입니다.
+        </div>
+    </section>
+
+    <nav class="bp-hero-nav" aria-label="섹션 바로가기">
+        <a href="#what">진짜 산출물 정의</a>
+        <a href="#framework">참고 프레임워크</a>
+        <a href="#report">학습 리포트 3칸</a>
+        <a href="#capability">조직 역량 발견</a>
+        <a href="#handoff">3단계로 인계</a>
+        <a href="#template">리포트 템플릿</a>
+        <a href="#refs">참고 자료</a>
+    </nav>
+
+    <!-- ========= 1. 진짜 산출물의 정의 ========= -->
+    <section class="bp-section" id="what">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">파일럿 실행이 남겨야 할 것</h2>
+            </div>
+            <div class="bp-section-meta">성공 사례 아닌 현장 데이터</div>
+        </div>
+
+        <p class="bp-section-intro">파일럿이 끝났을 때 가장 흔한 보고 양식은 "5건 중 3건 성공, 2건 실패"입니다. 이 표는 임원 보고에는 편하지만 다음 단계의 결정에는 거의 쓸모가 없습니다. 어떤 영역에서 무엇이 막혔는지, 우리 데이터가 어떤 상태였는지, 현장은 어떻게 반응했는지가 빠져 있기 때문입니다. 파일럿 실행의 산출물은 결과표가 아니라 학습 자산입니다.</p>
+
+        <div class="bp-principles">
+            <div class="bp-principle">
+                <div class="bp-principle-num">산출물 1</div>
+                <div class="bp-principle-name">AI가 잘한 영역과<br>못한 영역의 윤곽</div>
+                <div class="bp-principle-body">
+                    "이런 업무는 의외로 잘 되고, 이런 업무는 생각보다 안 된다"는 <strong>유형별 윤곽</strong>입니다. 사이클이 끝난 직후, 결손 항목과 결정적 오류 유형을 함께 적습니다. 일치율 숫자만 남기지 않습니다.
+                </div>
+                <div class="bp-principle-evidence">
+                    <b>왜 중요한가</b>이 윤곽이 3단계 DRI 매트릭스에서 Deploy·Reshape·Invent 분류의 기준선이 됩니다.
+                </div>
+            </div>
+            <div class="bp-principle">
+                <div class="bp-principle-num">산출물 2</div>
+                <div class="bp-principle-name">조직 역량의<br>실제 모습</div>
+                <div class="bp-principle-body">
+                    데이터 상태, 직원 수용도, 권한·승인 흐름, 현장의 진짜 병목입니다. <strong>분석으로는 보이지 않던 운영의 결손</strong>이 한 사이클 안에 드러납니다. 빅 베팅을 짤 때 가장 자주 빠뜨리는 요소가 여기입니다.
+                </div>
+                <div class="bp-principle-evidence">
+                    <b>왜 중요한가</b>맥킨지 The State of AI 2025와 BCG AI Radar 2026은 AI 전환 실패의 다수를 "조직 준비도 누락"으로 분류합니다.
+                </div>
+            </div>
+            <div class="bp-principle">
+                <div class="bp-principle-num">산출물 3</div>
+                <div class="bp-principle-name">의외의 발견과<br>가설 수정</div>
+                <div class="bp-principle-body">
+                    파일럿 전에 세운 가설 중 무엇이 깨졌는지, 어떤 새로운 가설이 생겼는지를 적습니다. <strong>"이건 잘 될 줄 알았는데 안 됐다"와 "이건 작은 후보였는데 잠재력이 크다"</strong>가 가장 가치 있는 두 줄입니다.
+                </div>
+                <div class="bp-principle-evidence">
+                    <b>왜 중요한가</b>가설 수정이 누락된 학습은 회사 자산이 아니라 개인 경험으로 남고, 다음 분기에 같은 실수를 반복합니다.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= 2. 참고 프레임워크 ========= -->
+    <section class="bp-section" id="framework">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">참고 프레임워크: Blameless Postmortem + AAR</h2>
+            </div>
+            <div class="bp-section-meta">US Army · Google SRE · Etsy · Toyota</div>
+        </div>
+
+        <p class="bp-section-intro">학습 추출의 정형 양식은 새로 만들지 않습니다. 1970년대 미군이 정립한 After Action Review(AAR)의 4질문, 2012년 Etsy의 John Allspaw가 정리한 Blameless Postmortem, 2016년 Google SRE Book의 Postmortem Culture, Toyota Production System의 5 Whys가 같은 결론에 모이는 자리입니다. 다음 섹션의 3칸 학습 리포트(됨/안 됨/조직 역량 발견)는 이 프레임워크를 AI 파일럿에 응용한 양식입니다.</p>
+
+        <div class="bp-comp-diagram">
+            <div class="bp-comp-row">
+                <div class="bp-comp-tier">질문 1 · 기대</div>
+                <div class="bp-comp-detail">
+                    <h4>What was expected. 사이클 전에 무엇을 기대했는가</h4>
+                    <p>사이클 시작 전에 적어둔 학습 가설을 그대로 옮깁니다. "이 후보가 잘 되면, 또는 안 되면, 우리는 무엇을 알게 되는가." <strong>출발점이 명시되어 있어야 깨진 가설을 알아볼 수</strong> 있습니다. 가설을 적지 않은 사이클은 학습 가치도 함께 사라집니다.</p>
+                    <div class="roles">
+                        <span class="role-chip">US Army AAR 4질문 표준</span>
+                        <span class="role-chip">학습 가설 명시화</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bp-comp-row">
+                <div class="bp-comp-tier">질문 2 · 결과</div>
+                <div class="bp-comp-detail">
+                    <h4>What actually happened. 실제로 무엇이 일어났는가</h4>
+                    <p>결과를 사실 그대로 적습니다. 일치율, 결손 유형, 회복 비용, 현장 반응. <strong>평가어("훌륭했다", "부족했다") 대신 관찰어로</strong> 채웁니다. Google SRE Book이 강조하는 "사실 우선" 원칙입니다.</p>
+                    <div class="roles">
+                        <span class="role-chip">Google SRE Postmortem Culture</span>
+                        <span class="role-chip">관찰어 우선</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bp-comp-row">
+                <div class="bp-comp-tier">질문 3 · 갭</div>
+                <div class="bp-comp-detail">
+                    <h4>Why the gap. 기대와 결과의 차이는 어디서 왔는가</h4>
+                    <p>가설과 결과의 차이를 다섯 번 "왜"로 파헤칩니다. Toyota Production System의 5 Whys가 같은 결론에 모입니다. <strong>첫 번째 답에서 멈추지 않습니다.</strong> 표면 원인이 아니라 시스템·데이터·역량의 결손까지 도달해야 다음 사이클에 같은 실수가 반복되지 않습니다.</p>
+                    <div class="roles">
+                        <span class="role-chip">Toyota Production System 5 Whys</span>
+                        <span class="role-chip">표면 원인 너머</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bp-comp-row">
+                <div class="bp-comp-tier">질문 4 · 다음</div>
+                <div class="bp-comp-detail">
+                    <h4>What will we do next. 다음 사이클을 어떻게 바꿀 것인가</h4>
+                    <p>같은 실수의 반복을 막을 시스템 변경 한 줄과, 다음 사이클로 넘길 가설 한 줄을 적습니다. <strong>개인을 탓하지 않습니다.</strong> 시스템과 가설만 다룹니다. Etsy의 John Allspaw가 정립한 Blameless 원칙의 핵심입니다.</p>
+                    <div class="roles">
+                        <span class="role-chip">Etsy Blameless Postmortems</span>
+                        <span class="role-chip">시스템·가설 변경</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bp-handoff" style="margin-top: 32px;">
+            <div class="tag">Blameless 원칙이 왜 중요한가</div>
+            <strong>개인을 탓하는 문화가 있는 조직은 됨/안 됨 칸만 가득 차고, 조직 역량 발견 칸은 비어 있습니다.</strong> Etsy John Allspaw(2012)와 Google SRE Book(2016)이 공통적으로 강조하는 지점입니다. 비난을 피하느라 사실이 흐려지고, 표면 원인만 적히고, 시스템 결손은 끝내 적히지 않습니다. 학습 리포트의 분량이 아니라 "쓴 사람이 안전하다고 느끼는 정도"가 학습 양을 결정합니다.
+        </div>
+    </section>
+
+    <!-- ========= 3. 학습 리포트 3칸 ========= -->
+    <section class="bp-section" id="report">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">학습 리포트의 3칸 양식</h2>
+            </div>
+            <div class="bp-section-meta">잘된 점, 안된 점, 조직 역량 발견</div>
+        </div>
+
+        <p class="bp-section-intro">각 파일럿 사이클은 종료 직후, 다음 3칸짜리 리포트 한 장을 남깁니다. 사이클 회고(1시간)의 마지막 30분 안에 작성합니다. 시간이 지나면 디테일이 흐려져 됨/안 됨의 경계만 남고 조직 역량 발견은 통째로 사라집니다. 양식이 짧을수록 작성이 끝납니다.</p>
+
+        <div class="bp-report">
+            <div class="bp-report-head">
+                <div>됨</div>
+                <div>안 됨</div>
+                <div>조직 역량 발견</div>
+            </div>
+            <div class="bp-report-body">
+                <div>
+                    <h5>What worked</h5>
+                    <ul>
+                        <li><strong>업무 유형</strong>. 어떤 종류의 입력·출력에서 결과가 좋았는가.</li>
+                        <li><strong>일치율과 표본 수</strong>. 단순 평균이 아니라 표본 분포까지 적습니다.</li>
+                        <li><strong>의외의 성공</strong>. 가설 밖이었지만 잘 작동한 영역.</li>
+                        <li><strong>현장 반응</strong>. 실제 사용자가 다시 쓰고 싶다고 한 지점.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h5>What didn't</h5>
+                    <ul>
+                        <li><strong>결정적 오류 유형</strong>. 환각, 누락, 잘못된 인용 같은 패턴 분류.</li>
+                        <li><strong>의외의 실패</strong>. 잘 될 줄 알았는데 막힌 영역과 그 이유.</li>
+                        <li><strong>한계 영역</strong>. 모델·도구·프롬프트 어디 단계에서 막혔는가.</li>
+                        <li><strong>회복 비용</strong>. 잘못된 결과를 사람이 바로잡는 데 들인 시간.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h5>What we learned about us</h5>
+                    <ul>
+                        <li><strong>데이터 상태</strong>. 결손, 중복, 표준화 부재가 어디서 드러났는가.</li>
+                        <li><strong>직원 수용도</strong>. 누가 빠르게 따라왔고 누가 거리를 두었는가.</li>
+                        <li><strong>현장 병목</strong>. 권한·승인·시스템 통합 어디에서 멈췄는가.</li>
+                        <li><strong>시간 재투자</strong>. 절약된 시간을 어디에 다시 썼는가.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="bp-handoff" style="margin-top: 28px;">
+            <div class="tag">분량 기준</div>
+            <strong>한 사이클 한 장.</strong> A4 한 페이지를 넘기지 않습니다. 표 형태로 칸을 짧게 채우는 쪽이, 긴 서술형 리포트보다 다음 단계에서 압축하기 쉽습니다. "다음 사람이 30초 안에 읽고 의사결정에 쓸 수 있는가"가 통과 기준입니다.
+        </div>
+    </section>
+
+    <!-- ========= 3. 조직 역량의 실제 발견 ========= -->
+    <section class="bp-section" id="capability">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">조직 역량의 실제 발견</h2>
+            </div>
+            <div class="bp-section-meta">분석으로는 안 보이던 4가지 신호</div>
+        </div>
+
+        <p class="bp-section-intro">조직 역량 칸은 가장 자주 비어 있는 칸입니다. 됨/안 됨은 결과를 보면 적기 쉽지만, 조직 역량 발견은 의식적으로 찾지 않으면 손에 잡히지 않습니다. 아래 네 가지 신호를 사이클 회고의 고정 안건으로 둡니다.</p>
+
+        <div class="bp-comp-diagram">
+            <div class="bp-comp-row">
+                <div class="bp-comp-tier">신호 1 · 데이터</div>
+                <div class="bp-comp-detail">
+                    <h4>우리 데이터가 실제로 어떤 상태인가</h4>
+                    <p>파일럿 실행 한 건만 돌려도 우리 데이터의 결손이 노출됩니다. 칼럼이 비어 있거나, 부서별로 정의가 다르거나, 비정형 텍스트가 표준이 없는 채 쌓여 있거나. <strong>"AI보다 데이터 정비가 먼저"</strong>라는 결론이 자주 등장합니다. 빅 베팅 후보를 짤 때, 어떤 영역이 데이터 정비 선행을 요구하는지 명시합니다.</p>
+                    <div class="roles">
+                        <span class="role-chip">결손·중복 패턴</span>
+                        <span class="role-chip">부서 간 정의 차이</span>
+                        <span class="role-chip">비정형 표준 부재</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bp-comp-row">
+                <div class="bp-comp-tier">신호 2 · 수용도</div>
+                <div class="bp-comp-detail">
+                    <h4>직원이 따라오는가, 거리를 두는가</h4>
+                    <p>같은 도구를 줘도 부서·세대·직무에 따라 수용 속도가 크게 다릅니다. <strong>빠르게 따라온 사람의 공통점</strong>과 거리를 둔 사람의 공통점을 분리해 적습니다. 이 신호가 빅 베팅을 위한 사람·프로세스 70% 투자(BCG 10-20-70)의 설계에 그대로 쓰입니다.</p>
+                    <div class="roles">
+                        <span class="role-chip">얼리어답터 프로필</span>
+                        <span class="role-chip">저항의 진짜 이유</span>
+                        <span class="role-chip">교육 공백 영역</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bp-comp-row">
+                <div class="bp-comp-tier">신호 3 · 권한·승인</div>
+                <div class="bp-comp-detail">
+                    <h4>현장의 진짜 병목은 어디에 있는가</h4>
+                    <p>AI가 잘 작동해도 권한·승인·결재 흐름이 막히면 산출물이 현장에 닿지 않습니다. 데이터 열람 권한, 외부 도구 결제, 보안 검토, 부서 간 합의 어디에서 며칠을 흘려보냈는지 기록합니다. <strong>이 시간 손실은 3단계 우선순위화에서 ROI 계산을 흔드는 항목</strong>입니다.</p>
+                    <div class="roles">
+                        <span class="role-chip">권한 신청 리드타임</span>
+                        <span class="role-chip">보안 검토 병목</span>
+                        <span class="role-chip">부서 합의 지연</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bp-comp-row">
+                <div class="bp-comp-tier">신호 4 · 시간 재투자</div>
+                <div class="bp-comp-detail">
+                    <h4>절약된 시간이 어디로 갔는가</h4>
+                    <p>한 사이클 단위로 "이번에 몇 시간을 절약했고, 그 시간을 어디에 다시 썼는가"를 기록합니다. 답이 비어 있다면 그 자체가 발견입니다. 보고서 시간 절약이 보고서 길이 증가로 흡수되었다면, <strong>4단계 업무 재설계에서 워크플로우 자체를 다시 그려야 한다는 신호</strong>입니다.</p>
+                    <div class="roles">
+                        <span class="role-chip">절약 시간 측정</span>
+                        <span class="role-chip">재투자 경로 추적</span>
+                        <span class="role-chip">재설계 후보 식별</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= 4. 3단계로 인계 ========= -->
+    <section class="bp-section" id="handoff">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">3단계 과제 우선순위화로 어떻게 넘기는가</h2>
+            </div>
+            <div class="bp-section-meta">사이클 리포트 · 통합 시사점 · 입력값</div>
+        </div>
+
+        <p class="bp-section-intro">개별 사이클 리포트는 다음 단계로 그대로 넘기지 않습니다. TF가 한 번 더 가로로 묶어, 통합 시사점 한 페이지를 만듭니다. 이 페이지가 3단계 과제 우선순위화의 입력값입니다. 빅 베팅 3~5건은 책상 분석이 아니라 이 페이지를 근거로 결정합니다.</p>
+
+        <div class="bp-checklist">
+            <div class="bp-check-row">
+                <div class="bp-check-num">01</div>
+                <div class="bp-check-body">
+                    <h4>개별 사이클 리포트를 한 자리에 모읍니다</h4>
+                    <p>3~7건의 리포트를 한 폴더에 모읍니다. 됨/안 됨/조직 역량 발견의 3칸 양식이 통일되어 있어야 다음 단계 압축이 빠릅니다. 양식이 다르면 압축에 추가 작업이 들어갑니다.</p>
+                </div>
+            </div>
+            <div class="bp-check-row">
+                <div class="bp-check-num">02</div>
+                <div class="bp-check-body">
+                    <h4>AI가 잘한 영역·못한 영역의 유형을 추출합니다</h4>
+                    <p>리포트 전체에서 반복되는 패턴을 뽑습니다. "정형 표 정리는 일관되게 잘 됐다", "고유명사 인용은 거의 실패했다" 같은 유형이 나옵니다. 이 유형이 3단계 DRI 매트릭스의 분류 근거가 됩니다.</p>
+                </div>
+            </div>
+            <div class="bp-check-row">
+                <div class="bp-check-num">03</div>
+                <div class="bp-check-body">
+                    <h4>조직 역량 발견을 한 페이지로 합칩니다</h4>
+                    <p>데이터·수용도·권한·시간 재투자 네 칸으로 묶어 한 페이지로 정리합니다. 빅 베팅 후보 검토 시, 각 후보가 어떤 조직 역량 결손에 부딪힐지를 미리 점검할 수 있습니다.</p>
+                </div>
+            </div>
+            <div class="bp-check-row">
+                <div class="bp-check-num">04</div>
+                <div class="bp-check-body">
+                    <h4>의외의 발견 두 줄을 별도로 강조합니다</h4>
+                    <p>"잘 될 줄 알았는데 안 됐다"와 "작은 후보였는데 잠재력이 컸다"를 페이지 상단에 별도로 둡니다. 빅 베팅 후보 풀의 출발점이 이 두 줄에서 달라집니다.</p>
+                </div>
+            </div>
+            <div class="bp-check-row">
+                <div class="bp-check-num">05</div>
+                <div class="bp-check-body">
+                    <h4>스폰서 보고를 1회로 끝냅니다</h4>
+                    <p>통합 시사점을 스폰서에게 1회 보고하는 자리에서 3단계 진입을 결정합니다. 이 자리는 빅 베팅을 정하는 자리가 아니라 다음 단계 작업의 입력값을 확정하는 자리입니다. 빅 베팅 확정은 3단계 안에서 이뤄집니다.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bp-handoff">
+            <div class="tag">다음 단계 입력값</div>
+            3단계 과제 우선순위화는 통합 시사점 한 페이지 + 개별 사이클 리포트 모음을 입력값으로 받습니다. <strong>"감으로 고른 use case"가 "현장 데이터로 검증된 후보"로 바뀐 상태</strong>에서 미시 엔진 7문항(현황 진단)을 본격적으로 돌려, COMPANY BRAIN OS에 우선 적재할 자산을 가립니다.
+        </div>
+    </section>
+
+    <!-- ========= 5. 리포트 템플릿 ========= -->
+    <section class="bp-section" id="template">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">사이클 리포트와 통합 시사점 템플릿</h2>
+            </div>
+            <div class="bp-section-meta">A4 한 페이지 · 다음 사람이 30초 안에 읽는 분량</div>
+        </div>
+
+        <p class="bp-section-intro">아래는 사이클 종료 회고의 마지막 30분에 한 장씩 채우는 양식입니다. 텍스트 박스 안 항목은 한두 줄로 짧게 답합니다. 길게 쓰지 않습니다. 통합 시사점은 같은 양식을 가로로 합쳐 한 페이지로 압축합니다.</p>
+
+        <div class="bp-comp-diagram">
+            <div class="bp-comp-row">
+                <div class="bp-comp-tier">상단 · 메타</div>
+                <div class="bp-comp-detail">
+                    <h4>파일럿 후보 식별과 사이클 정보</h4>
+                    <p>후보 이름, 담당자, 사이클 시작·종료일, 표본 수를 한 줄로 적습니다. 6주를 넘긴 사이클은 그 사유를 한 줄로 같이 적습니다.</p>
+                    <div class="roles">
+                        <span class="role-chip">후보명·담당자</span>
+                        <span class="role-chip">사이클 기간</span>
+                        <span class="role-chip">표본 수</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bp-comp-row">
+                <div class="bp-comp-tier">중단 · 3칸</div>
+                <div class="bp-comp-detail">
+                    <h4>잘된 점, 안된 점, 조직 역량 발견</h4>
+                    <p>각 칸에 4~6개 항목을 글머리표로 적습니다. 결과 요약 문장은 두지 않습니다. 표 자체가 요약입니다.</p>
+                    <div class="roles">
+                        <span class="role-chip">What worked</span>
+                        <span class="role-chip">What didn't</span>
+                        <span class="role-chip">What we learned about us</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bp-comp-row">
+                <div class="bp-comp-tier">하단 · 가설</div>
+                <div class="bp-comp-detail">
+                    <h4>가설 수정 두 줄</h4>
+                    <p>"잘 될 줄 알았는데 안 됐다", "작은 후보였는데 잠재력이 컸다"를 각각 한 줄씩 적습니다. 둘 다 비어 있는 사이클은 학습이 부족하다는 신호입니다. 다음 사이클 설계 전에 보완 안건으로 올립니다.</p>
+                    <div class="roles">
+                        <span class="role-chip">깨진 가설</span>
+                        <span class="role-chip">새 가설</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bp-comp-row">
+                <div class="bp-comp-tier">푸터 · 인계</div>
+                <div class="bp-comp-detail">
+                    <h4>3단계로 넘길 메모 한 줄</h4>
+                    <p>이 후보를 3단계 빅 베팅 풀에 어떤 형태로 올릴지 한 줄로 적습니다. 예. "Deploy 후보로 즉시 검토", "데이터 정비 선행 후 Reshape 후보로", "보류 풀로 이동". 다음 단계 작업의 출발점이 됩니다.</p>
+                    <div class="roles">
+                        <span class="role-chip">DRI 분류 초안</span>
+                        <span class="role-chip">선행 작업 필요 여부</span>
+                        <span class="role-chip">보류 사유</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ========= 7. 참고 자료 ========= -->
+    <section class="bp-section" id="refs">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">참고 자료</h2>
+            </div>
+            <div class="bp-section-meta">컨설팅펌 · VC · 빅테크 · 군·학계</div>
+        </div>
+
+        <p class="bp-section-intro">이 페이지의 권고는 다음 세 자료의 공통 결론을 정리한 것입니다. 학습 리포트의 4질문 구조는 US Army AAR에서, "사실 우선·비난 회피"의 운영 원칙은 Google SRE에서, 됨/안 됨이 아니라 가설 검증까지가 학습이라는 정의는 Lean Startup에서 가져왔습니다.</p>
+
+        <div class="bp-refs">
+            <div class="bp-refs-head">
+                <div>구분</div>
+                <div>출처</div>
+                <div>참고 항목</div>
+            </div>
+            <div class="bp-refs-row">
+                <div class="kind">군 · 정부 기관</div>
+                <div class="source">
+                    <strong>US Army</strong>, After Action Review (AAR)
+                    <span class="sub">US Army Training Circular 25-20, 1993</span>
+                </div>
+                <div>"기대-결과-갭-다음" 4질문 표준. 학습 리포트 구조의 출발점입니다.</div>
+            </div>
+            <div class="bp-refs-row">
+                <div class="kind">빅테크 · 엔지니어링</div>
+                <div class="source">
+                    <strong>Google SRE</strong>, Site Reliability Engineering
+                    <span class="sub">sre.google/sre-book, 2016, Ch.15 "Postmortem Culture"</span>
+                </div>
+                <div>"사실 우선" 원칙, 평가어 대신 관찰어, 비난 회피와 학습 양의 상관관계.</div>
+            </div>
+            <div class="bp-refs-row">
+                <div class="kind">연구자 · 저자</div>
+                <div class="source">
+                    <strong>Eric Ries</strong>, The Lean Startup
+                    <span class="sub">Crown Business, 2011</span>
+                </div>
+                <div>Validated Learning 정의. 됨/안 됨 결과가 아니라 가설 검증까지가 학습이라는 기준입니다.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= FOOTER ========= -->
+    <footer class="bp-footer">
+        <p style="margin:0 0 10px; font-size:11.5px; opacity:0.78;">* 이 페이지는 AX 5단계 로드맵의 2단계(파일럿 실행)를 두 작업으로 나눈 두 번째, 핵심 시사점 도출을 다룹니다. 앞 페이지는 파일럿 대상 선정과 실행이며, 다음 단계는 3단계 과제 우선순위화입니다.</p>
+        <p style="margin:0 0 10px;"><strong>참고 자료.</strong> McKinsey(The State of AI 2025), Bain(Technology Report 2024), BCG(AI Radar 2026, 10-20-70 자원 배분), PwC(Agent OS), Deloitte(State of Generative AI in the Enterprise). 조직 역량 발견의 네 신호(데이터·수용도·권한·시간 재투자)는 본 가이드가 컨설팅펌 보고서 공통 결론을 정리한 것입니다.</p>
+        <p style="margin:0; opacity:0.85;">리포트 양식과 통합 시사점의 구체 구성은 회사 규모와 산업에 따라 조정합니다. 외부 송출 파일럿이 포함된 경우, 통합 시사점 작성 단계에서 사내 법무·정보보안 검토를 한 번 더 거칩니다.</p>
+        <p style="margin:22px 0 0; padding-top:18px; border-top:1px solid rgba(247,245,239,0.18); font-size:11.5px; opacity:0.7; letter-spacing:0.04em;">&copy; 2026 AI ROASTING. All rights reserved.</p>
+    </footer>
+
+</div>
+
+<script>
+(function() {
+    'use strict';
+    var navLinks = document.querySelectorAll('.bp-hero-nav a');
+    if (!navLinks.length) return;
+
+    var linkMap = {};
+    var sectionIds = [];
+    navLinks.forEach(function(link) {
+        var id = (link.getAttribute('href') || '').replace('#', '');
+        if (!id) return;
+        var el = document.getElementById(id);
+        if (!el) return;
+        linkMap[id] = { link: link, el: el };
+        sectionIds.push(id);
+    });
+    if (!sectionIds.length) return;
+
+    function setActive(id) {
+        sectionIds.forEach(function(k) {
+            if (k === id) linkMap[k].link.classList.add('active');
+            else linkMap[k].link.classList.remove('active');
+        });
+    }
+
+    function update() {
+        var nav = document.querySelector('.bp-hero-nav');
+        var navH = nav ? nav.offsetHeight : 0;
+        var trigger = navH + 60;
+        var currentId = null;
+        for (var i = 0; i < sectionIds.length; i++) {
+            var rect = linkMap[sectionIds[i]].el.getBoundingClientRect();
+            if (rect.top <= trigger) currentId = sectionIds[i];
+            else break;
+        }
+        setActive(currentId);
+    }
+
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(function() {
+            update();
+            ticking = false;
+        });
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+})();
+</script>
+
+</body>
+</html>

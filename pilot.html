@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B-2-1 파일럿 대상 선정과 실행 · 책상 분석을 멈추고 손으로 돌립니다</title>
+<meta name="description" content="AX 2단계 파일럿 실행의 첫 번째 작업. 우선순위화 이전에 소수의 학습용 파일럿을 골라 짧고 안전하게 돌리는 방법.">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+/* ================== B-2-1 Pilot Page Local Styles ================== */
+/* organization.html과 동일한 bp-* 시각 토큰을 그대로 차용합니다. */
+
+:root {
+    --bp-grid: rgba(14, 59, 42, 0.06);
+    --bp-grid-strong: rgba(14, 59, 42, 0.12);
+    --bp-line: #0E3B2A;
+    --bp-ink: #0F1A16;
+    --bp-paper: #F7F5EF;
+    --bp-paper-2: #FBFAF6;
+    --bp-rule: #D6D2C5;
+    --bp-accent: #1B6E4F;
+    --bp-gold: #9A7B0A;
+    --bp-red: #8B2E1F;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 50px; }
+body {
+    background:
+        linear-gradient(var(--bp-grid) 1px, transparent 1px) 0 0 / 32px 32px,
+        linear-gradient(90deg, var(--bp-grid) 1px, transparent 1px) 0 0 / 32px 32px,
+        var(--bp-paper);
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    line-break: strict;
+}
+
+/* ===== Sheet wrapper ===== */
+.bp-sheet {
+    max-width: 1320px;
+    margin: 32px auto;
+    background: var(--bp-paper-2);
+    border: 1.5px solid var(--bp-line);
+    box-shadow: 0 1px 0 var(--bp-line), 0 24px 60px -30px rgba(6, 32, 24, 0.35);
+    position: relative;
+}
+.bp-sheet::before, .bp-sheet::after {
+    content: "";
+    position: absolute;
+    width: 16px; height: 16px;
+    border: 1px solid var(--bp-line);
+}
+.bp-sheet::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+.bp-sheet::after  { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
+/* ===== Step navigation ===== */
+.bp-stepnav {
+    padding: 36px 56px 28px;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1.5px solid #062018;
+}
+.bp-stepnav::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+}
+.bp-step {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid rgba(247, 245, 239, 0.55);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--sans);
+    font-size: 11.5px;
+    font-weight: 600;
+    color: rgba(247, 245, 239, 0.85);
+    letter-spacing: 0.02em;
+    position: relative;
+    transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+.bp-step.active {
+    background: var(--bp-paper);
+    color: var(--bp-ink);
+    border-color: var(--bp-paper);
+    font-weight: 700;
+}
+.bp-step + .bp-step { margin-left: 24px; }
+.bp-step + .bp-step::before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    width: 24px;
+    height: 1px;
+    background: rgba(247, 245, 239, 0.4);
+    transform: translateY(-50%);
+}
+.bp-back {
+    display: block;
+    text-align: center;
+    margin-top: 18px;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: rgba(247, 245, 239, 0.78);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: color .15s ease, letter-spacing .15s ease;
+    position: relative;
+    z-index: 1;
+}
+.bp-back:hover { color: var(--bp-paper); letter-spacing: 0.08em; }
+
+.bp-substeps {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+.bp-substeps a, .bp-substeps span {
+    border: 1px solid rgba(247, 245, 239, 0.28);
+    background: transparent;
+    padding: 12px 24px;
+    color: rgba(247, 245, 239, 0.75);
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: background .18s ease, border-color .18s ease, color .18s ease;
+    min-width: 200px;
+    text-align: center;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.bp-substeps a:hover {
+    background: rgba(247, 245, 239, 0.08);
+    border-color: rgba(247, 245, 239, 0.6);
+    color: var(--bp-paper);
+}
+.bp-substeps span {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+.bp-substeps a.active {
+    background: linear-gradient(180deg, #14523B 0%, #0E3B2A 100%);
+    color: var(--bp-paper);
+    border: 1.5px solid var(--bp-paper);
+    font-weight: 700;
+    box-shadow:
+        0 0 0 4px rgba(14, 59, 42, 0.55),
+        0 8px 20px -8px rgba(6, 32, 24, 0.7);
+    transform: translateY(-1px);
+    cursor: default;
+    pointer-events: none;
+}
+
+@media (max-width: 600px) {
+    .bp-stepnav { padding: 24px 16px 20px; }
+    .bp-step { width: 26px; height: 26px; font-size: 10px; }
+    .bp-step + .bp-step { margin-left: 16px; }
+    .bp-step + .bp-step::before { width: 16px; }
+    .bp-substeps { gap: 8px; }
+    .bp-substeps a, .bp-substeps span { min-width: 0; flex: 1 1 auto; padding: 10px 14px; font-size: 12px; }
+}
+
+/* ===== Hero block ===== */
+.bp-hero {
+    padding: 64px 56px 56px;
+    border-bottom: 1.5px solid var(--bp-line);
+    position: relative;
+    background:
+        radial-gradient(ellipse at top right, rgba(27, 110, 79, 0.06), transparent 60%),
+        var(--bp-paper-2);
+}
+.bp-hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    margin-bottom: 18px;
+}
+.bp-hero h1 {
+    font-size: 52px;
+    line-height: 1.18;
+    margin: 0 0 22px;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+}
+.bp-hero .bp-lead {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+}
+.bp-hero .bp-summary {
+    margin-top: 36px;
+    padding: 22px 26px;
+    background: rgba(14, 59, 42, 0.04);
+    border-top: 1px solid var(--bp-rule);
+    border-bottom: 1px solid var(--bp-rule);
+    font-size: 14px;
+    line-height: 1.75;
+}
+.bp-hero .bp-summary strong { color: var(--bp-line); }
+
+/* ===== Section submenu ===== */
+.bp-hero-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 12px 56px;
+    background: var(--bp-paper-2);
+    border-top: 1px solid var(--bp-line);
+    border-bottom: 1px solid var(--bp-line);
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    box-shadow: 0 2px 8px -4px rgba(6, 32, 24, 0.18);
+}
+.bp-hero-nav a {
+    flex: 1 1 0;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--bp-ink);
+    padding: 10px 16px;
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper);
+    text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    letter-spacing: -0.005em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bp-hero-nav a:hover { background: var(--bp-line); color: var(--bp-paper); }
+.bp-hero-nav a.active {
+    background: var(--bp-line);
+    color: var(--bp-paper);
+    border-color: var(--bp-line);
+    box-shadow: inset 0 -3px 0 var(--bp-accent);
+}
+
+/* ===== Section frame ===== */
+.bp-section {
+    padding: 56px 56px 64px;
+    border-bottom: 1.5px solid var(--bp-line);
+    position: relative;
+}
+.bp-section:last-of-type { border-bottom: none; }
+.bp-section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 36px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--bp-rule);
+}
+.bp-section-title {
+    font-size: 30px;
+    margin: 0;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    font-weight: 700;
+}
+.bp-section-meta {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    text-align: right;
+    line-height: 1.6;
+}
+.bp-section-intro {
+    margin: 0 0 28px;
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+}
+
+/* ===== Compare table (분석 vs 파일럿) ===== */
+.bp-compare {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-compare-head {
+    display: grid;
+    grid-template-columns: 160px 1fr 1fr;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+    position: relative;
+}
+.bp-compare-head::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-compare-head > div {
+    padding: 14px 20px;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-right: 1px solid rgba(247, 245, 239, 0.14);
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+.bp-compare-head > div:last-child { border-right: none; }
+.bp-compare-head .pick {
+    color: #FFE9A8;
+    letter-spacing: 0.12em;
+}
+.bp-compare-head .pick::after {
+    content: "이 단계";
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #0E3B2A;
+    background: #FFE9A8;
+    border: 1px solid #FFE9A8;
+    letter-spacing: 0.08em;
+}
+
+.bp-compare-row {
+    display: grid;
+    grid-template-columns: 160px 1fr 1fr;
+    border-top: 1px solid var(--bp-rule);
+}
+.bp-compare-row > div {
+    padding: 16px 20px;
+    font-size: 14px;
+    line-height: 1.7;
+    border-right: 1px solid var(--bp-rule);
+    color: var(--bp-ink);
+}
+.bp-compare-row > div:last-child { border-right: none; }
+.bp-compare-head > div:first-child {
+    text-align: center;
+}
+.bp-compare-row .label {
+    font-family: var(--sans);
+    font-weight: 700;
+    color: var(--bp-line);
+    letter-spacing: 0.04em;
+    background: rgba(14, 59, 42, 0.03);
+    font-size: 13px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bp-compare-row .preferred {
+    background: rgba(27, 110, 79, 0.05);
+    color: var(--bp-ink);
+}
+.bp-compare-row .preferred strong { color: var(--bp-line); }
+
+/* ===== Principle cards ===== */
+.bp-principles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-principle {
+    padding: 28px 26px 30px;
+    border-right: 1px solid var(--bp-rule);
+    background: var(--bp-paper-2);
+    transition: background .25s ease, transform .25s ease, box-shadow .25s ease;
+    position: relative;
+}
+.bp-principle:last-child { border-right: none; }
+.bp-principle:hover {
+    background: rgba(27, 110, 79, 0.06);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px -10px rgba(6, 32, 24, 0.25);
+    z-index: 2;
+}
+.bp-principle-num {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--bp-accent);
+    font-weight: 700;
+    margin-bottom: 10px;
+    transition: color .25s ease, letter-spacing .25s ease;
+}
+.bp-principle:hover .bp-principle-num { color: var(--bp-line); letter-spacing: 0.24em; }
+.bp-principle-name {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    margin-bottom: 14px;
+    letter-spacing: -0.005em;
+    line-height: 1.35;
+}
+.bp-principle-body {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+}
+.bp-principle-body strong { color: var(--bp-ink); }
+.bp-principle-evidence {
+    padding-top: 16px;
+    border-top: 1px solid var(--bp-rule);
+    font-family: var(--sans);
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--ink-mute);
+    letter-spacing: 0.005em;
+}
+.bp-principle-evidence b {
+    display: block;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+/* ===== Selection criteria diagram ===== */
+.bp-comp-diagram {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    padding: 32px 36px 36px;
+}
+.bp-comp-row {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px dashed var(--bp-rule);
+    align-items: flex-start;
+}
+.bp-comp-row:last-child { border-bottom: none; }
+.bp-comp-tier {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding-top: 4px;
+}
+.bp-comp-detail h4 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    margin: 0 0 8px;
+    letter-spacing: -0.005em;
+}
+.bp-comp-detail p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    margin: 0 0 8px;
+}
+.bp-comp-detail .roles {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.bp-comp-detail .role-chip {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--bp-line);
+    background: rgba(14, 59, 42, 0.06);
+    border: 1px solid var(--bp-rule);
+    padding: 5px 11px;
+    letter-spacing: 0.01em;
+}
+
+/* ===== Checklist ===== */
+.bp-checklist {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-check-row {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--bp-rule);
+    align-items: flex-start;
+    gap: 16px;
+}
+.bp-check-row:last-child { border-bottom: none; }
+.bp-check-num {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.12em;
+    padding-top: 2px;
+}
+.bp-check-body h4 {
+    font-size: 15.5px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    margin: 0 0 6px;
+    letter-spacing: -0.005em;
+}
+.bp-check-body p {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+}
+
+/* ===== Antipattern table (함정) ===== */
+.bp-anti {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-anti-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(139, 46, 31, 0.35), transparent 60%),
+        linear-gradient(90deg, #2A0E0A 0%, #4A1A12 50%, #5C2218 100%);
+    color: var(--bp-paper);
+    position: relative;
+}
+.bp-anti-head > div {
+    padding: 14px 20px;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-right: 1px solid rgba(247, 245, 239, 0.14);
+    text-align: center;
+}
+.bp-anti-head > div:last-child { border-right: none; }
+.bp-anti-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--bp-rule);
+}
+.bp-anti-row > div {
+    padding: 18px 22px;
+    font-size: 14px;
+    line-height: 1.7;
+    border-right: 1px solid var(--bp-rule);
+    color: var(--ink-soft);
+}
+.bp-anti-row > div:last-child { border-right: none; }
+.bp-anti-row .bad {
+    background: rgba(139, 46, 31, 0.04);
+}
+.bp-anti-row .bad strong { color: var(--bp-red); }
+.bp-anti-row .good {
+    background: rgba(14, 59, 42, 0.04);
+}
+.bp-anti-row .good strong { color: var(--bp-line); }
+
+/* ===== Handoff box ===== */
+.bp-handoff {
+    margin-top: 28px;
+    padding: 24px 28px;
+    background: rgba(14, 59, 42, 0.05);
+    border-top: 1px solid var(--bp-line);
+    border-bottom: 1px solid var(--bp-line);
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--bp-ink);
+}
+.bp-handoff strong { color: var(--bp-line); }
+.bp-handoff .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+/* ===== References table ===== */
+.bp-refs {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-refs-head {
+    display: grid;
+    grid-template-columns: 150px 1.1fr 1.4fr;
+    background: rgba(14, 59, 42, 0.06);
+    border-bottom: 1px solid var(--bp-line);
+}
+.bp-refs-head > div {
+    padding: 12px 18px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--bp-line);
+    border-right: 1px solid var(--bp-rule);
+}
+.bp-refs-head > div:last-child { border-right: none; }
+.bp-refs-row {
+    display: grid;
+    grid-template-columns: 150px 1.1fr 1.4fr;
+    border-top: 1px solid var(--bp-rule);
+}
+.bp-refs-row:first-of-type { border-top: none; }
+.bp-refs-row > div {
+    padding: 16px 18px;
+    font-size: 13px;
+    line-height: 1.65;
+    border-right: 1px solid var(--bp-rule);
+    color: var(--ink-soft);
+}
+.bp-refs-row > div:last-child { border-right: none; }
+.bp-refs-row .kind {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    font-weight: 700;
+    background: rgba(14, 59, 42, 0.03);
+    display: flex;
+    align-items: center;
+}
+.bp-refs-row .source { color: var(--bp-ink); }
+.bp-refs-row .source strong { color: var(--bp-line); font-weight: 700; }
+.bp-refs-row .source .sub {
+    display: block;
+    font-size: 11.5px;
+    color: var(--ink-mute);
+    margin-top: 4px;
+    letter-spacing: 0.02em;
+    font-family: var(--sans);
+}
+
+/* ===== Closing footer ===== */
+.bp-footer {
+    padding: 36px 56px 44px;
+    background:
+        radial-gradient(ellipse at 0% 100%, rgba(27, 110, 79, 0.35), transparent 55%),
+        linear-gradient(110deg, #14523B 0%, #0E3B2A 35%, #0A2E22 70%, #062018 100%);
+    color: rgba(247, 245, 239, 0.92);
+    font-family: var(--sans);
+    font-size: 12.5px;
+    line-height: 1.7;
+    border-top: 1.5px solid #062018;
+    position: relative;
+    overflow: hidden;
+}
+.bp-footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-footer > * { position: relative; z-index: 1; }
+.bp-footer strong { color: var(--bp-paper); }
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+    .bp-hero { padding: 48px 32px; }
+    .bp-hero h1 { font-size: 38px; }
+    .bp-section { padding: 40px 32px; }
+    .bp-compare-head, .bp-compare-row { grid-template-columns: 120px 1fr 1fr; }
+    .bp-principles { grid-template-columns: 1fr; }
+    .bp-principle { border-right: none; border-bottom: 1px solid var(--bp-rule); }
+    .bp-principle:last-child { border-bottom: none; }
+    .bp-comp-row { grid-template-columns: 1fr; gap: 8px; }
+    .bp-footer { padding: 32px; }
+}
+@media (max-width: 600px) {
+    .bp-sheet { margin: 12px; }
+    .bp-hero h1 { font-size: 28px; }
+    .bp-section-title { font-size: 22px; }
+    .bp-compare-head, .bp-compare-row { grid-template-columns: 1fr; }
+    .bp-compare-row .label { background: rgba(14, 59, 42, 0.08); }
+    .bp-anti-head, .bp-anti-row { grid-template-columns: 1fr; }
+    .bp-check-row { grid-template-columns: 1fr; gap: 6px; }
+    .bp-refs-head, .bp-refs-row { grid-template-columns: 1fr; }
+    .bp-refs-row > div { border-right: none; border-bottom: 1px solid var(--bp-rule); }
+    .bp-refs-row > div:last-child { border-bottom: none; }
+}
+@media (max-width: 1024px) {
+    .bp-refs-head, .bp-refs-row { grid-template-columns: 110px 1fr 1.3fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="bp-sheet">
+
+
+    <!-- ========= BRAND BAR ========= -->
+    <a class="bp-brandbar" href="index.html" aria-label="목차로 이동">
+        <img class="bb-logo" src="assets/logos/logo1-transparent.png" alt="AI ROASTING">
+        <span>AI ROASTING · AX GUIDE TO COMPANY BRAIN OS</span>
+    </a>
+
+    <!-- ========= STEP NAVIGATION ========= -->
+    <nav class="bp-stepnav" aria-label="전체 단계">
+        <ol class="bp-steps">
+            <li class="bp-step"><a href="blueprint.html">진단</a></li>
+            <li class="bp-step"><a href="organization.html">1</a></li>
+            <li class="bp-step active" aria-current="step"><a href="pilot.html">2</a></li>
+            <li class="bp-step"><a href="criteria.html">3</a></li>
+            <li class="bp-step"><a href="resource.html">4</a></li>
+            <li class="bp-step"><a href="ainative.html">5</a></li>
+        </ol>
+        <a class="bp-back" href="index.html">← 목록으로</a>
+        <div class="bp-substeps" aria-label="2단계 파일럿 실행 페이지">
+            <a href="pilot.html" class="active" aria-current="page">파일럿 대상 선정과 실행</a>
+            <a href="insights.html">핵심 시사점 도출</a>
+        </div>
+    </nav>
+
+    <!-- ========= HERO ========= -->
+    <section class="bp-hero">
+        <div class="bp-hero-eyebrow">Step 2 · 파일럿 실행 · 대상 선정과 실행 · BRAIN OS 첫 모듈</div>
+        <h1>책상에서의 분석을 멈추고, COMPANY BRAIN OS의 첫 모듈을 손으로 한 번 돌려봅니다.</h1>
+        <p class="bp-lead">과제 우선순위화 이전에 BRAIN OS의 첫 모듈을 짧고 안전한 자리에서 직접 돌려보며 현장 데이터를 모으는 단계입니다.</p>
+        <div class="bp-summary">
+            <strong>이 단계의 결론은 단순합니다.</strong> 1단계에서 꾸린 TF가 6개월 임기 안에서 소수의 파일럿을 직접 손으로 돌립니다. 빅 베팅을 정하는 자리가 아니라 학습용 샘플을 돌리는 자리입니다. 전략적 중요도가 높은 후보가 아니라 빠르고 저위험한 후보를 먼저 고릅니다. 짧은 사이클, 안전한 실험 환경, 가벼운 신뢰 점검의 세 원칙으로 돌리고, 빅 베팅 확정은 다음 단계(3단계 과제 우선순위화)로 미룹니다.
+        </div>
+    </section>
+
+    <nav class="bp-hero-nav" aria-label="섹션 바로가기">
+        <a href="#why">왜 파일럿 실행이 먼저인가</a>
+        <a href="#framework">참고 프레임워크</a>
+        <a href="#selection">대상 선정 기준</a>
+        <a href="#execution">실행 3원칙</a>
+        <a href="#pitfalls">경계할 함정</a>
+        <a href="#refs">참고 자료</a>
+    </nav>
+
+    <!-- ========= 1. 왜 파일럿 실행이 먼저인가 ========= -->
+    <section class="bp-section" id="why">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">왜 우선순위화보다 파일럿 실행이 먼저인가</h2>
+            </div>
+            <div class="bp-section-meta">책상 분석 · 현장 실험 비교</div>
+        </div>
+
+        <p class="bp-section-intro">기존 컨설팅펌의 권고는 "파일럿 난립을 피하라"는 것이었고, 그 자체는 옳습니다. 다만 BCG·Bain이 경고하는 난립은 방향 없이 수백 개를 산발적으로 벌이는 모습입니다. 의도적으로 소수의 학습용 파일럿을 먼저 돌리는 것과는 다릅니다. 책상에서만 따진 우선순위는 빅 베팅의 가짜 확신을 만들기 쉽습니다.</p>
+
+        <div class="bp-compare">
+            <div class="bp-compare-head">
+                <div>비교 항목</div>
+                <div>책상 분석으로 우선순위 먼저</div>
+                <div class="pick">소수의 파일럿 실행 먼저</div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="label">판단 근거</div>
+                <div>회의실에서 정리한 사업 우선순위와 추정 ROI에 의지합니다. 데이터·도구·현장 반응은 가정으로 둡니다.</div>
+                <div class="preferred">실제로 몇 건을 돌려본 <strong>현장 데이터</strong>를 근거로 둡니다. 가정이 적을수록 빅 베팅의 정확도가 올라갑니다.</div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="label">AI 적합성 판단</div>
+                <div>"이건 AI로 잘 될 것"이라는 직관에 의존합니다. 정작 돌려보면 "의외로 안 되는" 영역이 다수 발견됩니다.</div>
+                <div class="preferred">잘 되는 영역과 안 되는 영역의 윤곽이 한 사이클 안에서 드러납니다. <strong>빅 베팅 후보군이 사실에 가깝게 정리</strong>됩니다.</div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="label">조직 역량</div>
+                <div>데이터 상태, 직원 수용도, 현장 병목은 분석 시점에 잘 보이지 않습니다.</div>
+                <div class="preferred">한 건만 돌려도 우리 데이터의 결손, 권한 충돌, 현장 저항 같은 <strong>운영의 실제 모습</strong>이 노출됩니다.</div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="label">위험 통제</div>
+                <div>큰 베팅을 큰 자원으로 시작하면, 실패가 드러나는 시점이 늦고 비용이 큽니다.</div>
+                <div class="preferred">짧고 작은 단위로 실패를 빨리 노출시킵니다. <strong>학습 비용이 작고 회복이 빠릅니다.</strong></div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="label">난립과의 차이</div>
+                <div>방향 없는 PoC 수백 건. 부서별 개인기 단위로 흩어지고, 학습이 회사 자산으로 남지 않습니다.</div>
+                <div class="preferred">TF가 의도적으로 고른 <strong>한 자리 수의 학습용 파일럿</strong>. 학습 결과가 다음 단계의 입력값으로 그대로 흘러갑니다.</div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="label">기간</div>
+                <div>분석과 워크숍에 1~2개월을 소비한 뒤 본격 사업화로 들어갑니다.</div>
+                <div class="preferred">TF 임기(6개월) 안에서 <strong>1~2개월 안에 한 사이클</strong>을 끝내고 시사점을 정리합니다.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= 2. 참고 프레임워크 ========= -->
+    <section class="bp-section" id="framework">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">참고 프레임워크: Build-Measure-Learn 루프</h2>
+            </div>
+            <div class="bp-section-meta">Eric Ries · YC · BCG · a16z</div>
+        </div>
+
+        <p class="bp-section-intro">파일럿 실행은 새로운 사이클 구조가 아닙니다. Eric Ries가 The Lean Startup(2011)에서 정리한 Build-Measure-Learn 루프, YC Paul Graham이 같은 해 권한 "Do Things That Don't Scale"(2013), BCG의 Test &amp; Learn 원칙이 한자리에 모이는 자리입니다. 2~6주 사이클, 사람이 손으로 돌리는 시제품, 결과보다 학습 리포트가 중요한 이유 모두 이 루프에서 나옵니다. 미시 엔진 7문항으로 후보 업무를 전면 해부하는 본격 적용은 3단계 과제 우선순위화로 미룹니다.</p>
+
+        <div class="bp-principles">
+            <div class="bp-principle">
+                <div class="bp-principle-num">단계 1 · BUILD</div>
+                <div class="bp-principle-name">최소 형태로<br>가장 빨리 만듭니다</div>
+                <div class="bp-principle-body">
+                    YC의 MVP 사고를 그대로 적용합니다. 파일럿 첫 출력물은 자동화된 운영 시스템이 아니라 <strong>사람이 옆에서 돌리는 손-주도 시제품</strong>입니다. Paul Graham이 2013년 에세이에서 정리한 대로, 처음에는 확장성이 아니라 학습 속도가 기준입니다.
+                </div>
+                <div class="bp-principle-evidence">
+                    <b>출처</b>Paul Graham (YC), "Do Things That Don't Scale" (2013). Eric Ries, The Lean Startup (2011)의 MVP 정의.
+                </div>
+            </div>
+            <div class="bp-principle">
+                <div class="bp-principle-num">단계 2 · MEASURE</div>
+                <div class="bp-principle-name">정답을 아는 데이터로<br>가볍게 점검합니다</div>
+                <div class="bp-principle-body">
+                    BCG의 Test &amp; Learn 원칙은 "측정 가능한 학습 가설을 먼저 적고, 그 가설에 답할 수 있는 최소 측정만 한다"고 정리합니다. 본격적 신뢰 구축은 4단계 위임-성실 루프로 미루고, <strong>여기서는 정답을 아는 과거 데이터로 윤곽만</strong> 잡습니다.
+                </div>
+                <div class="bp-principle-evidence">
+                    <b>출처</b>BCG "Build for the Future" (2025), Test &amp; Learn 원칙. Eric Ries의 Validated Learning 정의.
+                </div>
+            </div>
+            <div class="bp-principle">
+                <div class="bp-principle-num">단계 3 · LEARN</div>
+                <div class="bp-principle-name">검증된 학습으로<br>남깁니다</div>
+                <div class="bp-principle-body">
+                    Eric Ries의 "Validated Learning"이 핵심 개념입니다. <strong>됨/안 됨이라는 단순 결과가 아니라 가설이 어떻게 깨졌고 어떤 새 가설이 생겼는지</strong>까지 적은 것만 검증된 학습으로 인정합니다. 다음 페이지의 됨/안 됨/조직 역량 발견 3칸 학습 리포트가 이 학습의 정형화 양식입니다.
+                </div>
+                <div class="bp-principle-evidence">
+                    <b>출처</b>Eric Ries, The Lean Startup (2011), Chapter 3 "Validated Learning."
+                </div>
+            </div>
+        </div>
+
+        <div class="bp-handoff" style="margin-top: 32px;">
+            <div class="tag">왜 AI 파일럿에 그대로 맞는가</div>
+            <strong>AI는 결과의 표면이 매끄러워서, 결과만 보면 학습이 빠르게 사라집니다.</strong> 매끄러운 출력이 좋게 보이는 순간 "성공"으로 기록되고, 환각·결손·현장 병목은 같이 흘러갑니다. Build-Measure-Learn 루프의 강점은 결과를 기록하기 전에 학습 가설을 먼저 적게 한다는 점입니다. AI 도입의 빠른 자기기만을 차단하는 가장 단순한 도구입니다.
+        </div>
+    </section>
+
+    <!-- ========= 3. 대상 선정 기준 ========= -->
+    <section class="bp-section" id="selection">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">파일럿 대상 선정 기준</h2>
+            </div>
+            <div class="bp-section-meta">전략적 중요도 아닌 빠르고 저위험 우선</div>
+        </div>
+
+        <p class="bp-section-intro">1단계 해커톤과 현장에서 올라온 후보 풀에서 골라냅니다. 이때 적용할 기준은 전략적 중요도가 아니라 학습 속도입니다. 짧은 주기로 결과를 볼 수 있고, 실패해도 타격이 작은 것부터 잡습니다. 여기서 고르는 건 최종 빅 베팅이 아니라 학습용 샘플이라는 점을 잊지 않습니다.</p>
+
+        <div class="bp-principles">
+            <div class="bp-principle">
+                <div class="bp-principle-num">기준 1</div>
+                <div class="bp-principle-name">사이클이<br>짧을 것</div>
+                <div class="bp-principle-body">
+                    한 사이클을 <strong>2주에서 6주 안에</strong> 돌릴 수 있는 후보를 우선합니다. 시작과 끝이 분기를 넘기는 후보는 학습 속도가 떨어집니다. 결과를 빨리 봐야 다음 후보를 다시 짤 수 있습니다.
+                </div>
+                <div class="bp-principle-evidence">
+                    <b>근거</b>BCG AI Radar 2026이 강조하는 "테스트하고 학습하라" 원칙은 분기 단위가 아니라 주 단위 사이클을 전제로 합니다.
+                </div>
+            </div>
+            <div class="bp-principle">
+                <div class="bp-principle-num">기준 2</div>
+                <div class="bp-principle-name">실패해도<br>타격이 작을 것</div>
+                <div class="bp-principle-body">
+                    고객 응대, 매출·결제, 외부 공시, 안전·규제처럼 <strong>실패가 외부로 흘러가는 영역</strong>은 파일럿 실행에서 제외합니다. 내부 보고서 작성, 사내 지식 검색, 회의록 정리, 영업 자료 초안처럼 외부로 새지 않는 영역부터 시작합니다.
+                </div>
+                <div class="bp-principle-evidence">
+                    <b>근거</b>맥킨지 The State of AI 2025는 AI 도입 실패의 다수가 "초기 단계에서 고객 접점부터 손댄 사례"라는 것을 지적합니다.
+                </div>
+            </div>
+            <div class="bp-principle">
+                <div class="bp-principle-num">기준 3</div>
+                <div class="bp-principle-name">학습 가치가<br>분명할 것</div>
+                <div class="bp-principle-body">
+                    "성공해도 무엇을 배웠는지 모르는" 후보는 제외합니다. <strong>"이 후보가 잘 되면/안 되면 우리는 무엇을 알게 되는가"</strong>를 한 문장으로 답할 수 있을 때 통과시킵니다. 학습 가설을 미리 적어두면 결과 해석이 빨라집니다.
+                </div>
+                <div class="bp-principle-evidence">
+                    <b>근거</b>Bain Technology Report 2024는 AI 고성과 그룹과 저성과 그룹의 차이를 "학습 설계의 명시성"으로 정리합니다.
+                </div>
+            </div>
+        </div>
+
+        <div class="bp-handoff" style="margin-top: 32px;">
+            <div class="tag">선정 규모</div>
+            <strong>한 자리 수로 묶습니다.</strong> 권장 범위는 3건에서 7건 사이. 인원 5~9명짜리 TF가 6개월 임기 안에 한 사람당 1~2개 사이클을 책임지는 규모입니다. 그 이상이면 사이클이 늘어지고, 그 이하면 학습 표본이 부족합니다. 후보 풀이 30~50개로 모인 경우 한 자리 수로 압축하는 자리는 스폰서 보고 1회로 끝냅니다. 길게 끄는 워크숍은 두지 않습니다.
+        </div>
+    </section>
+
+    <!-- ========= 3. 실행 3원칙 ========= -->
+    <section class="bp-section" id="execution">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">파일럿 실행의 3원칙</h2>
+            </div>
+            <div class="bp-section-meta">짧은 사이클 · 안전한 환경 · 가벼운 점검</div>
+        </div>
+
+        <p class="bp-section-intro">실행 단계에서는 완성도를 노리지 않습니다. 빨리 돌려서 빨리 배우는 것이 목표입니다. 정확도 90%를 한 번 만드는 것보다, 60% 결과를 다섯 번 보는 쪽이 학습 가치가 큽니다. 본격적인 신뢰 구축(위임-성실 루프의 전면 적용)은 4단계 업무 재설계로 미룹니다. 지금은 탐색이지 검증·확장이 아닙니다.</p>
+
+        <div class="bp-comp-diagram">
+            <div class="bp-comp-row">
+                <div class="bp-comp-tier">원칙 1 · 짧은 사이클</div>
+                <div class="bp-comp-detail">
+                    <h4>완벽을 노리지 않고, 빠르게 돌리고 빠르게 배웁니다</h4>
+                    <p>한 사이클의 기본 형태는 다음과 같습니다. 1주차에 데이터와 도구를 붙입니다. 2~3주차에 시제품을 돌립니다. 4주차에 현장 사용자가 직접 써보고 의견을 줍니다. 5~6주차에 결과를 정리합니다. 사이클이 6주를 넘기 시작하면 그 자체로 위험 신호입니다. <strong>"무엇이 막혀 길어졌는지"를 안건으로 올립니다.</strong></p>
+                    <div class="roles">
+                        <span class="role-chip">2~6주 사이클</span>
+                        <span class="role-chip">데일리 스탠드업 15분</span>
+                        <span class="role-chip">사이클 종료 시 회고 1시간</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bp-comp-row">
+                <div class="bp-comp-tier">원칙 2 · 안전한 환경</div>
+                <div class="bp-comp-detail">
+                    <h4>실패가 허용되는 범위 안에서 돌립니다</h4>
+                    <p>고객·매출에 직접 닿는 업무는 내부 검증부터 거칩니다. 사내 데이터 일부, 익명화된 표본, 과거 사례를 먼저 입력으로 씁니다. 산출물은 자동 발송이 아니라 <strong>사람이 한 번 더 검토한 뒤 내보내는 구조</strong>로 둡니다. 사용 권한은 TF 코어와 지원 인력 일부로 한정합니다. 실패가 외부로 새나가지 않게 차단막을 먼저 세우고 시작합니다.</p>
+                    <div class="roles">
+                        <span class="role-chip">내부 데이터 우선</span>
+                        <span class="role-chip">사람이 최종 송출</span>
+                        <span class="role-chip">권한 화이트리스트</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bp-comp-row">
+                <div class="bp-comp-tier">원칙 3 · 가벼운 점검</div>
+                <div class="bp-comp-detail">
+                    <h4>정답을 아는 과거 데이터로 "되는지"를 본다</h4>
+                    <p>이미 정답이 있는 과거 사례(작년 보고서, 종결된 상담 로그, 마감된 견적)를 입력으로 넣고 AI 결과를 사람의 결과와 비교합니다. 일치율과 결손 항목, 결정적 오류의 유형을 기록합니다. 다만 본격적 신뢰 구축, 즉 <strong>위임-성실 루프의 전면 적용은 4단계로 미룹니다.</strong> 지금은 "쓸 만한가, 어디서 막히는가"의 윤곽만 잡으면 충분합니다.</p>
+                    <div class="roles">
+                        <span class="role-chip">과거 정답 데이터 대조</span>
+                        <span class="role-chip">결손 유형 기록</span>
+                        <span class="role-chip">전면 검증은 4단계로 이연</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= 4. 경계할 함정 ========= -->
+    <section class="bp-section" id="pitfalls">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">파일럿 실행에서 흔히 빠지는 함정</h2>
+            </div>
+            <div class="bp-section-meta">첫 사이클 안에 가장 자주 보는 4가지</div>
+        </div>
+
+        <p class="bp-section-intro">파일럿 실행은 의도가 단순한 만큼 함정도 단순합니다. 아래 4가지는 첫 한두 사이클 안에 거의 반드시 한 번씩 등장합니다. 좌측은 흔히 나타나는 모습, 우측은 같은 상황을 다르게 푸는 방법입니다.</p>
+
+        <div class="bp-anti">
+            <div class="bp-anti-head">
+                <div>흔히 나타나는 함정</div>
+                <div>대응 방향</div>
+            </div>
+            <div class="bp-anti-row">
+                <div class="bad"><strong>"환각을 맹신합니다."</strong> AI가 만든 매끄러운 문장을 그대로 사실로 받아들입니다. 문장의 톤이 좋다는 것은 모델이 학습한 패턴에 맞는 결과라는 신호일 뿐, 사실 검증의 신호가 아닙니다.</div>
+                <div class="good"><strong>중요한 업무는 출처 요구와 교차 검증을 기본값으로 둡니다.</strong> 탐색 단계라도 숫자·고유명사·인용은 사람이 원본 대조까지 마칩니다. "매끄러움 = 정확"이라는 가짜 신호를 코어 멤버 전원에게 미리 환기합니다.</div>
+            </div>
+            <div class="bp-anti-row">
+                <div class="bad"><strong>"절약된 시간이 증발합니다."</strong> 10~15% 생산성 향상이 보여도, 절약된 시간을 더 높은 가치의 일로 다시 붓지 않으면 그 이득은 사라집니다. "보고서가 더 길어졌다"로 끝나는 경우가 많습니다.</div>
+                <div class="good"><strong>사이클 회고에서 "절약된 시간을 어디에 썼나"를 한 항목으로 기록</strong>합니다. 다음 사이클 설계에 시간 재투자 가설을 넣습니다. 4단계 업무 재설계의 입력값으로도 그대로 흘러갑니다.</div>
+            </div>
+            <div class="bp-anti-row">
+                <div class="bad"><strong>"파일럿이 본 사업처럼 부풀어 오릅니다."</strong> 한 후보의 결과가 좋아 보이면, 사이클 안에서 범위를 늘리려는 압력이 커집니다. 그 순간 사이클이 6주를 넘기고 다른 후보가 멈춥니다.</div>
+                <div class="good"><strong>한 사이클의 범위 변경 요청은 다음 사이클의 안건으로 미룹니다.</strong> 이번 사이클은 정해진 범위 안에서 끝내고, 확장은 3단계 우선순위화의 빅 베팅 후보로 보냅니다.</div>
+            </div>
+            <div class="bp-anti-row">
+                <div class="bad"><strong>"성공률만 보고하고 학습은 흘립니다."</strong> 사이클이 끝나면 "성공/실패"만 표시하고, 무엇을 배웠는지는 머릿속에만 남습니다. 다음 단계로 넘어가는 시점에 학습이 사라집니다.</div>
+                <div class="good"><strong>모든 사이클은 학습 리포트 한 장을 산출물로 남깁니다.</strong> 됨/안 됨/조직 역량 발견의 세 칸으로 정형화합니다. 다음 페이지의 시사점 도출에서 이 리포트를 모아 쓰게 됩니다.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= 6. 참고 자료 ========= -->
+    <section class="bp-section" id="refs">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">참고 자료</h2>
+            </div>
+            <div class="bp-section-meta">컨설팅펌 · VC · 연구자 · 빅테크</div>
+        </div>
+
+        <p class="bp-section-intro">이 페이지의 권고는 다음 자료의 공통 결론을 정리한 것입니다. 사이클 구조와 학습 검증은 Lean Startup·YC에서, 자원 배분과 우선순위 게이트는 컨설팅펌에서, 가벼운 신뢰 점검의 측정 기준은 a16z·Anthropic의 실무 문서에서 가져왔습니다.</p>
+
+        <div class="bp-refs">
+            <div class="bp-refs-head">
+                <div>구분</div>
+                <div>출처</div>
+                <div>참고 항목</div>
+            </div>
+            <div class="bp-refs-row">
+                <div class="kind">연구자 · 저자</div>
+                <div class="source">
+                    <strong>Eric Ries</strong>, The Lean Startup
+                    <span class="sub">Crown Business, 2011</span>
+                </div>
+                <div>Build-Measure-Learn 루프, MVP(Minimum Viable Product), Validated Learning. 파일럿 사이클 구조의 출발점입니다.</div>
+            </div>
+            <div class="bp-refs-row">
+                <div class="kind">VC · 액셀러레이터</div>
+                <div class="source">
+                    <strong>Paul Graham (YC)</strong>, "Do Things That Don't Scale"
+                    <span class="sub">paulgraham.com/ds.html, 2013</span>
+                </div>
+                <div>탐색 단계에서 사람이 손으로 돌리는 시제품의 정당화. 확장성보다 학습 속도를 우선하는 근거입니다.</div>
+            </div>
+            <div class="bp-refs-row">
+                <div class="kind">VC · 액셀러레이터</div>
+                <div class="source">
+                    <strong>a16z (Andreessen Horowitz)</strong>, AI Canon
+                    <span class="sub">a16z.com/ai-canon</span>
+                </div>
+                <div>엔터프라이즈 AI 도입의 "실험 모드 vs 운영 모드" 구분. 파일럿 실행이 어느 모드에 속하는지를 명시합니다.</div>
+            </div>
+            <div class="bp-refs-row">
+                <div class="kind">컨설팅펌</div>
+                <div class="source">
+                    <strong>BCG</strong>, Build for the Future / AI Radar
+                    <span class="sub">BCG, 2025 · 2026</span>
+                </div>
+                <div>Test &amp; Learn 원칙, 10-20-70 자원 배분, "파일럿 난립의 함정" 경고. 파일럿 규모와 사이클 설계의 근거입니다.</div>
+            </div>
+            <div class="bp-refs-row">
+                <div class="kind">컨설팅펌</div>
+                <div class="source">
+                    <strong>McKinsey</strong>, The State of AI / Rewired
+                    <span class="sub">McKinsey &amp; Co., 2025 · 2023</span>
+                </div>
+                <div>AI 고성과 그룹의 운영 특성, 도입 실패 패턴(고객 접점부터 손대는 함정), 우선순위 게이트.</div>
+            </div>
+            <div class="bp-refs-row">
+                <div class="kind">컨설팅펌</div>
+                <div class="source">
+                    <strong>Bain &amp; Company</strong>, Technology Report
+                    <span class="sub">Bain, 2024</span>
+                </div>
+                <div>AI 고성과 그룹과 일반 그룹의 차이가 "학습 설계의 명시성"에 있다는 분석. 학습 가설을 먼저 적는 근거입니다.</div>
+            </div>
+            <div class="bp-refs-row">
+                <div class="kind">빅테크 · 모델사</div>
+                <div class="source">
+                    <strong>Anthropic</strong>, Building Effective Agents
+                    <span class="sub">anthropic.com, 2024</span>
+                </div>
+                <div>AI 에이전트의 "능력 영역과 한계 영역" 구분. 가벼운 신뢰 점검에서 무엇을 측정해야 하는지 정리합니다.</div>
+            </div>
+            <div class="bp-refs-row">
+                <div class="kind">리서치 · 시장조사</div>
+                <div class="source">
+                    <strong>Gartner</strong>, Hype Cycle for Generative AI
+                    <span class="sub">Gartner, annual</span>
+                </div>
+                <div>기술 성숙도 곡선의 어느 구간에서 어떤 도입 패턴이 작동하는지의 시장 기준점.</div>
+            </div>
+        </div>
+
+        <div class="bp-handoff" style="margin-top: 28px;">
+            <div class="tag">다음 페이지로 인계</div>
+            모든 사이클이 종료되면, 다음 페이지 <strong>"핵심 시사점 도출"</strong>에서 됨/안 됨/조직 역량 발견의 세 칸으로 정리합니다. 그 결과가 3단계 과제 우선순위화의 입력값이 됩니다. 책상 분석이 아니라 현장 경험을 근거로 빅 베팅 3~5건을 골라내는 자리입니다.
+        </div>
+    </section>
+
+    <!-- ========= FOOTER ========= -->
+    <footer class="bp-footer">
+        <p style="margin:0 0 10px; font-size:11.5px; opacity:0.78;">* 이 페이지는 AX 5단계 로드맵의 2단계(파일럿 실행)를 두 작업으로 나눈 첫 번째, 파일럿 대상 선정과 실행을 다룹니다. 이어지는 페이지는 핵심 시사점 도출이며, 3단계 과제 우선순위화의 입력값을 만듭니다.</p>
+        <p style="margin:0 0 10px;"><strong>참고 자료.</strong> McKinsey(The State of AI 2025), Bain(Technology Report 2024), BCG(AI Radar 2026), PwC(Agent OS), Deloitte(State of Generative AI in the Enterprise). "파일럿 난립" 경고의 출처는 BCG·Bain 보고서이며, 본 가이드는 그 경고와 의도적 파일럿 실행의 차이를 구분해 적용합니다.</p>
+        <p style="margin:0; opacity:0.85;">파일럿 사이클 길이와 권한 화이트리스트의 구체 기준은 회사 규모와 산업에 따라 조정합니다. 외부 송출이 있는 업무를 후보로 검토할 때는 사내 법무·정보보안 검토를 함께 거칩니다.</p>
+        <p style="margin:22px 0 0; padding-top:18px; border-top:1px solid rgba(247,245,239,0.18); font-size:11.5px; opacity:0.7; letter-spacing:0.04em;">&copy; 2026 AI ROASTING. All rights reserved.</p>
+    </footer>
+
+</div>
+
+<script>
+(function() {
+    'use strict';
+    var navLinks = document.querySelectorAll('.bp-hero-nav a');
+    if (!navLinks.length) return;
+
+    var linkMap = {};
+    var sectionIds = [];
+    navLinks.forEach(function(link) {
+        var id = (link.getAttribute('href') || '').replace('#', '');
+        if (!id) return;
+        var el = document.getElementById(id);
+        if (!el) return;
+        linkMap[id] = { link: link, el: el };
+        sectionIds.push(id);
+    });
+    if (!sectionIds.length) return;
+
+    function setActive(id) {
+        sectionIds.forEach(function(k) {
+            if (k === id) linkMap[k].link.classList.add('active');
+            else linkMap[k].link.classList.remove('active');
+        });
+    }
+
+    function update() {
+        var nav = document.querySelector('.bp-hero-nav');
+        var navH = nav ? nav.offsetHeight : 0;
+        var trigger = navH + 60;
+        var currentId = null;
+        for (var i = 0; i < sectionIds.length; i++) {
+            var rect = linkMap[sectionIds[i]].el.getBoundingClientRect();
+            if (rect.top <= trigger) currentId = sectionIds[i];
+            else break;
+        }
+        setActive(currentId);
+    }
+
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(function() {
+            update();
+            ticking = false;
+        });
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+})();
+</script>
+
+</body>
+</html>

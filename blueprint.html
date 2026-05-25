@@ -1,0 +1,1825 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>청사진 · AI-Native 전환 5단계 프레임워크</title>
+<meta name="description" content="AI-aware에서 AI-Native 조직으로 가는 전체 프레임워크의 단일 청사진. 5층위·5단계·10문항·4단계 순환을 한 페이지에 펼친다.">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+/* ================== Blueprint Page Local Styles ================== */
+
+:root {
+    --bp-grid: rgba(14, 59, 42, 0.06);
+    --bp-grid-strong: rgba(14, 59, 42, 0.12);
+    --bp-line: #0E3B2A;
+    --bp-ink: #0F1A16;
+    --bp-paper: #F7F5EF;
+    --bp-paper-2: #FBFAF6;
+    --bp-rule: #D6D2C5;
+    --bp-accent: #1B6E4F;
+    --bp-gold: #9A7B0A;
+    --bp-red: #8B2E1F;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 116px; }
+section[id] { scroll-margin-top: 116px; }
+body {
+    background:
+        linear-gradient(var(--bp-grid) 1px, transparent 1px) 0 0 / 32px 32px,
+        linear-gradient(90deg, var(--bp-grid) 1px, transparent 1px) 0 0 / 32px 32px,
+        var(--bp-paper);
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    line-break: strict;
+}
+
+/* ===== Section submenu (sticky 바로가기) ===== */
+.bp-hero-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 12px 56px;
+    background: var(--bp-paper-2);
+    border-top: 1px solid var(--bp-line);
+    border-bottom: 1px solid var(--bp-line);
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    box-shadow: 0 2px 8px -4px rgba(6, 32, 24, 0.18);
+}
+.bp-hero-nav a {
+    flex: 1 1 0;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--bp-ink);
+    padding: 10px 16px;
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper);
+    text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    letter-spacing: -0.005em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bp-hero-nav a:hover {
+    background: var(--bp-line);
+    color: var(--bp-paper);
+    border-color: var(--bp-line);
+}
+.bp-hero-nav a.is-active {
+    background: var(--bp-line);
+    color: var(--bp-paper);
+    border-color: var(--bp-line);
+}
+
+/* ===== Sheet wrapper (architectural drawing sheet) ===== */
+.bp-sheet {
+    max-width: 1320px;
+    margin: 32px auto;
+    background: var(--bp-paper-2);
+    border: 1.5px solid var(--bp-line);
+    box-shadow: 0 1px 0 var(--bp-line), 0 24px 60px -30px rgba(6, 32, 24, 0.35);
+    position: relative;
+}
+.bp-sheet::before, .bp-sheet::after {
+    content: "";
+    position: absolute;
+    width: 16px; height: 16px;
+    border: 1px solid var(--bp-line);
+}
+.bp-sheet::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+.bp-sheet::after  { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
+/* ===== Step navigation (diagnosis.html과 동일) ===== */
+.bp-stepnav {
+    padding: 36px 56px 28px;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1.5px solid #062018;
+}
+.bp-stepnav::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+}
+.bp-steps li.bp-step {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid rgba(247, 245, 239, 0.55);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--sans);
+    font-size: 11.5px;
+    font-weight: 600;
+    color: rgba(247, 245, 239, 0.85);
+    letter-spacing: 0.02em;
+    position: relative;
+    transition: background .2s ease, color .2s ease, border-color .2s ease;
+    background: transparent;
+    grid-template-columns: none;
+    margin-top: 0;
+}
+.bp-steps li.bp-step.active {
+    background: var(--bp-paper);
+    color: var(--bp-ink);
+    border-color: var(--bp-paper);
+    font-weight: 700;
+}
+.bp-steps li.bp-step + li.bp-step { margin-left: 24px; }
+.bp-steps li.bp-step + li.bp-step::before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    width: 24px;
+    height: 1px;
+    background: rgba(247, 245, 239, 0.4);
+    transform: translateY(-50%);
+}
+.bp-back {
+    display: block;
+    text-align: center;
+    margin-top: 18px;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: rgba(247, 245, 239, 0.78);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: color .15s ease, letter-spacing .15s ease;
+    position: relative;
+    z-index: 1;
+}
+.bp-back:hover { color: var(--bp-paper); letter-spacing: 0.08em; }
+.bp-substeps {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+.bp-substeps a {
+    border: 1px solid rgba(247, 245, 239, 0.28);
+    background: transparent;
+    padding: 12px 24px;
+    color: rgba(247, 245, 239, 0.75);
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: background .18s ease, border-color .18s ease, color .18s ease;
+    min-width: 220px;
+    text-align: center;
+    position: relative;
+}
+.bp-substeps a:hover {
+    background: rgba(247, 245, 239, 0.08);
+    border-color: rgba(247, 245, 239, 0.6);
+    color: var(--bp-paper);
+}
+.bp-substeps a.active {
+    background: linear-gradient(180deg, #14523B 0%, #0E3B2A 100%);
+    color: var(--bp-paper);
+    border: 1.5px solid var(--bp-paper);
+    font-weight: 700;
+    box-shadow:
+        0 0 0 4px rgba(14, 59, 42, 0.55),
+        0 8px 20px -8px rgba(6, 32, 24, 0.7);
+    transform: translateY(-1px);
+    cursor: default;
+    pointer-events: none;
+}
+
+/* ===== Title block (architect's stamp). trustworthy deep green ===== */
+.bp-titleblock {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: 1.5px solid #062018;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(247, 245, 239, 0.72);
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    position: relative;
+    overflow: hidden;
+}
+.bp-titleblock::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-titleblock > div {
+    padding: 16px 22px;
+    border-right: 1px solid rgba(247, 245, 239, 0.14);
+    position: relative;
+    z-index: 1;
+}
+.bp-titleblock > div:last-child { border-right: none; }
+.bp-titleblock .tb-label { display: block; font-size: 9.5px; opacity: 0.62; margin-bottom: 5px; letter-spacing: 0.14em; }
+.bp-titleblock .tb-value { font-size: 13px; color: var(--bp-paper); letter-spacing: 0.04em; font-weight: 600; }
+
+/* ===== Hero block ===== */
+.bp-hero {
+    padding: 64px 56px 56px;
+    border-bottom: 1.5px solid var(--bp-line);
+    position: relative;
+    background:
+        radial-gradient(ellipse at top right, rgba(27, 110, 79, 0.06), transparent 60%),
+        var(--bp-paper-2);
+}
+.bp-hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    margin-bottom: 18px;
+}
+.bp-hero h1 {
+    font-size: 52px;
+    line-height: 1.18;
+    margin: 0 0 22px;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+}
+.bp-hero .bp-lead {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+}
+.bp-hero .bp-summary {
+    margin-top: 36px;
+    padding: 22px 26px;
+    background: rgba(14, 59, 42, 0.04);
+    border-top: 1px solid var(--bp-rule);
+    border-bottom: 1px solid var(--bp-rule);
+    font-size: 16px;
+    line-height: 1.75;
+}
+.bp-hero .bp-summary strong { color: var(--bp-line); }
+
+/* ===== Section frame ===== */
+.bp-section {
+    padding: 56px 56px 64px;
+    border-bottom: 1.5px solid var(--bp-line);
+    position: relative;
+}
+.bp-section:last-of-type { border-bottom: none; }
+.bp-section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 36px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--bp-rule);
+}
+.bp-section-intro {
+    margin: 0 0 28px;
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+}
+.bp-section-num {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+.bp-section-title {
+    font-size: 30px;
+    margin: 0;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    font-weight: 700;
+}
+.bp-section-meta {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    text-align: right;
+    line-height: 1.6;
+}
+
+/* ===== 5층위 지도 (Five-layer map) ===== */
+.bp-map {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper);
+}
+.bp-map-cell {
+    padding: 22px 20px 24px;
+    border-right: 1px solid var(--bp-rule);
+    position: relative;
+    min-height: 220px;
+    background: var(--bp-paper-2);
+    transition: background .2s ease;
+}
+.bp-map-cell:last-child { border-right: none; }
+.bp-map-cell:hover { background: rgba(27, 110, 79, 0.04); }
+.bp-map-layer {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.bp-map-name {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.35;
+    margin: 0 0 12px;
+    color: var(--bp-ink);
+}
+.bp-map-q {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin: 0 0 16px;
+    font-style: italic;
+}
+.bp-map-content {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+}
+.bp-map-cell::before {
+    content: attr(data-tick);
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-family: var(--sans);
+    font-size: 10px;
+    color: var(--bp-line);
+    opacity: 0.5;
+    letter-spacing: 0.1em;
+}
+
+/* ===== Two-column compare (AI-aware vs AI-Native) ===== */
+.bp-compare {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-compare-head {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr 1.4fr;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+    position: relative;
+}
+.bp-compare-head::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-compare-head > div {
+    padding: 16px 22px;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-right: 1px solid rgba(247, 245, 239, 0.14);
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+.bp-compare-head > div:last-child { border-right: none; }
+.bp-compare-row {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr 1.4fr;
+    border-top: 1px solid var(--bp-rule);
+}
+.bp-compare-row > div {
+    padding: 16px 22px;
+    font-size: 14.5px;
+    line-height: 1.65;
+    border-right: 1px solid var(--bp-rule);
+}
+.bp-compare-row > div:last-child { border-right: none; }
+.bp-compare-row .bp-label { font-weight: 600; color: var(--bp-ink); background: rgba(14, 59, 42, 0.03); }
+.bp-compare-row .bp-before { color: var(--ink-soft); }
+.bp-compare-row .bp-after { color: var(--bp-line); font-weight: 500; background: rgba(27, 110, 79, 0.045); }
+
+/* ===== Stat strip ===== */
+.bp-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    margin: 28px 0 8px;
+}
+.bp-stat {
+    padding: 26px 24px;
+    border-right: 1px solid var(--bp-rule);
+    position: relative;
+}
+.bp-stat:last-child { border-right: none; }
+.bp-stat-num {
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--bp-line);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+}
+.bp-stat-label {
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    font-family: var(--sans);
+}
+
+/* ===== Principles grid (5 cards) ===== */
+.bp-principles {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+}
+.bp-principle {
+    border: 1px solid var(--bp-line);
+    padding: 22px 18px 20px;
+    background: var(--bp-paper-2);
+    position: relative;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+}
+.bp-principle-num {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--bp-accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+.bp-principle-title {
+    font-size: 15.5px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 0 0 12px;
+    color: var(--bp-ink);
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--bp-rule);
+}
+.bp-principle-body {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    flex: 1;
+}
+.bp-principle-body ul {
+    margin: 0;
+    padding-left: 18px;
+}
+.bp-principle-body ul li {
+    margin-bottom: 7px;
+    padding-left: 2px;
+}
+.bp-principle-body ul li:last-child { margin-bottom: 0; }
+.bp-principle-body ul li::marker {
+    color: var(--bp-accent);
+    font-size: 14px;
+}
+.bp-principle-link {
+    margin-top: 14px;
+    font-family: var(--sans);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    font-weight: 600;
+}
+
+/* ===== Roadmap timeline (5 steps) ===== */
+.bp-roadmap {
+    position: relative;
+    margin-top: 12px;
+}
+.bp-roadmap-gate {
+    border: 1.5px dashed var(--bp-line);
+    padding: 18px 24px;
+    margin-bottom: 18px;
+    background: rgba(14, 59, 42, 0.025);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 24px;
+}
+.bp-roadmap-gate-tag {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--bp-red);
+    font-weight: 700;
+    padding: 4px 10px;
+    border: 1px solid var(--bp-red);
+}
+.bp-roadmap-gate-title { font-weight: 700; font-size: 16px; color: var(--bp-ink); letter-spacing: -0.005em; }
+.bp-roadmap-gate-meta { font-size: 12px; color: var(--ink-mute); font-family: var(--sans); }
+
+/* 진단 게이트 카드. 진단 도구로 가는 클릭 링크 */
+a.bp-roadmap-gate {
+    text-decoration: none;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    color: inherit;
+}
+a.bp-roadmap-gate:hover {
+    background: rgba(14, 59, 42, 0.07);
+    border-style: solid;
+    border-color: var(--bp-line);
+    transform: translateY(-1px);
+}
+.bp-roadmap-gate-cta {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--bp-paper);
+    background: var(--bp-line);
+    padding: 12px 20px;
+    border: 1px solid var(--bp-line);
+    white-space: nowrap;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    text-align: center;
+}
+a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
+    background: var(--bp-accent);
+    border-color: var(--bp-accent);
+}
+
+.bp-step {
+    display: grid;
+    grid-template-columns: 96px 1fr 280px;
+    border: 1px solid var(--bp-line);
+    margin-top: -1px;
+    background: var(--bp-paper-2);
+}
+.bp-step.heart { background: linear-gradient(90deg, rgba(154, 123, 10, 0.06), var(--bp-paper-2) 30%); }
+
+.bp-step-num {
+    border-right: 1px solid var(--bp-rule);
+    padding: 24px 20px;
+    text-align: center;
+    background: var(--bp-line);
+    color: var(--bp-paper);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+.bp-step.heart .bp-step-num { background: var(--bp-gold); }
+.bp-step-num-big {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+    font-family: var(--sans);
+}
+.bp-step-num-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.85;
+}
+
+.bp-step-body { padding: 22px 26px; border-right: 1px solid var(--bp-rule); }
+.bp-step-q {
+    font-size: 13px;
+    color: var(--bp-accent);
+    font-family: var(--sans);
+    font-weight: 600;
+    margin: 0 0 6px;
+    letter-spacing: 0.02em;
+}
+.bp-step-title {
+    font-size: 19px;
+    font-weight: 700;
+    margin: 0 0 12px;
+    color: var(--bp-ink);
+    letter-spacing: -0.01em;
+}
+.bp-step-title .heart-tag {
+    display: inline-block;
+    margin-left: 8px;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--bp-gold);
+    border: 1px solid var(--bp-gold);
+    padding: 2px 8px;
+    text-transform: uppercase;
+    vertical-align: middle;
+    font-weight: 700;
+}
+.bp-step-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0 0 14px;
+}
+.bp-step-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.bp-step-tag {
+    font-family: var(--sans);
+    font-size: 11px;
+    padding: 3px 9px;
+    border: 1px solid var(--bp-rule);
+    color: var(--ink-soft);
+    background: var(--bp-paper);
+    letter-spacing: 0.02em;
+}
+
+.bp-step-output {
+    padding: 22px 24px;
+    background: rgba(14, 59, 42, 0.035);
+    font-size: 12.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+}
+.bp-step-output-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+/* ===== Micro engine 10-question diagram ===== */
+.bp-liner {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    padding: 28px;
+}
+.bp-liner-center {
+    text-align: center;
+    padding: 18px 24px;
+    background: var(--bp-line);
+    color: var(--bp-paper);
+    margin: 0 auto 24px;
+    max-width: 540px;
+    border: 2px solid var(--bp-line);
+}
+.bp-liner-center .label {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 6px;
+}
+.bp-liner-center .q {
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+.bp-liner-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+.bp-liner-block {
+    border: 1px solid var(--bp-rule);
+    background: var(--bp-paper);
+}
+.bp-liner-block-head {
+    padding: 14px 18px;
+    background: rgba(14, 59, 42, 0.05);
+    border-bottom: 1px solid var(--bp-rule);
+}
+.bp-liner-block-head .tag {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+.bp-liner-block-head .title {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--bp-ink);
+}
+.bp-liner-block-head .sub {
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 3px;
+    font-style: italic;
+}
+.bp-liner-qs { padding: 6px 0; }
+.bp-liner-q {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    padding: 10px 18px;
+    border-bottom: 1px solid var(--bp-rule);
+    align-items: baseline;
+    gap: 8px;
+}
+.bp-liner-q:last-child { border-bottom: none; }
+.bp-liner-q-num {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--bp-accent);
+}
+.bp-liner-q-text {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+}
+.bp-liner-q-text strong { color: var(--bp-ink); }
+
+.bp-liner-bottom {
+    margin-top: 16px;
+    border: 1.5px solid var(--bp-gold);
+    background: rgba(154, 123, 10, 0.04);
+}
+.bp-liner-bottom .bp-liner-block-head {
+    background: rgba(154, 123, 10, 0.08);
+    border-bottom-color: rgba(154, 123, 10, 0.3);
+}
+.bp-liner-bottom .bp-liner-block-head .tag { color: var(--bp-gold); }
+.bp-liner-bottom .bp-liner-q-num { color: var(--bp-gold); }
+.bp-liner-bottom .bp-liner-q { border-bottom-color: rgba(154, 123, 10, 0.18); }
+
+/* ===== Asset accumulation loop diagram ===== */
+.bp-kal {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    position: relative;
+}
+.bp-kal-step {
+    padding: 24px 22px 28px;
+    border-right: 1px solid var(--bp-rule);
+    position: relative;
+}
+.bp-kal-step:last-child { border-right: none; }
+.bp-kal-step::after {
+    content: "→";
+    position: absolute;
+    right: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--bp-paper-2);
+    color: var(--bp-accent);
+    font-size: 20px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+.bp-kal-step:last-child::after {
+    content: "↻";
+    right: 12px;
+    top: 12px;
+    transform: none;
+    background: transparent;
+    color: var(--bp-gold);
+    font-size: 22px;
+}
+.bp-kal-code {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--bp-accent);
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+.bp-kal-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    margin: 0 0 12px;
+    letter-spacing: -0.01em;
+}
+.bp-kal-do {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin: 0 0 14px;
+}
+.bp-kal-source {
+    font-family: var(--sans);
+    font-size: 11px;
+    color: var(--bp-line);
+    padding-top: 10px;
+    border-top: 1px dashed var(--bp-rule);
+    letter-spacing: 0.02em;
+}
+
+.bp-kal-thesis {
+    border: 1.5px solid var(--bp-line);
+    background: rgba(14, 59, 42, 0.04);
+    padding: 22px 28px;
+    margin-bottom: 20px;
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: var(--bp-ink);
+}
+.bp-kal-thesis strong { color: var(--bp-line); }
+
+/* ===== Case study (Guess Korea) ===== */
+.bp-case {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+.bp-case-card {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    padding: 22px 24px;
+}
+.bp-case-card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--bp-rule);
+    margin-bottom: 14px;
+}
+.bp-case-card-head .k {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.1em;
+}
+.bp-case-card-head .name { font-weight: 700; font-size: 15px; }
+.bp-case-card p { margin: 0 0 8px; font-size: 13.5px; line-height: 1.7; color: var(--ink-soft); }
+.bp-case-card .quote {
+    border-top: 1px solid var(--bp-rule);
+    border-bottom: 1px solid var(--bp-rule);
+    padding: 10px 14px;
+    margin: 8px 0 10px;
+    color: var(--bp-ink);
+    font-style: italic;
+    font-size: 13px;
+    background: rgba(27, 110, 79, 0.03);
+}
+.bp-case-card table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 6px; }
+.bp-case-card td {
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--bp-rule);
+    line-height: 1.55;
+    vertical-align: top;
+}
+.bp-case-card td:first-child { font-weight: 600; color: var(--bp-ink); width: 32%; background: rgba(14,59,42,0.03); }
+
+/* ===== Overall flow diagram (final) ===== */
+.bp-flow {
+    border: 1.5px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    padding: 36px 40px;
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--bp-ink);
+    overflow-x: auto;
+    white-space: pre;
+    letter-spacing: 0.01em;
+}
+
+/* ===== Connector / legend ===== */
+.bp-legend {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding: 14px 56px;
+    border-bottom: 1.5px solid var(--bp-line);
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    background: var(--bp-paper);
+}
+.bp-legend-item { display: flex; align-items: center; gap: 8px; }
+.bp-legend-swatch {
+    width: 14px; height: 14px;
+    border: 1px solid var(--bp-line);
+    display: inline-block;
+}
+.bp-legend-swatch.fill-ink { background: var(--bp-line); }
+.bp-legend-swatch.fill-gold { background: var(--bp-gold); }
+.bp-legend-swatch.fill-soft { background: rgba(14,59,42,0.05); }
+
+/* ===== Source citation + chart blocks ===== */
+.bp-source-block {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    margin-bottom: 16px;
+}
+.bp-source-head {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    padding: 18px 26px;
+    border-bottom: 1px solid var(--bp-rule);
+    background: rgba(14, 59, 42, 0.04);
+    gap: 14px;
+    align-items: baseline;
+}
+.bp-source-tag {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    font-weight: 700;
+    line-height: 1.6;
+    white-space: nowrap;
+}
+.bp-source-meta a {
+    color: var(--bp-line);
+    border-bottom: 1px dotted var(--bp-line);
+    font-weight: 600;
+}
+.bp-source-meta a:hover {
+    color: var(--bp-accent);
+    border-bottom-color: var(--bp-accent);
+}
+.bp-source-title {
+    font-size: 17px;
+    color: var(--bp-ink);
+    font-weight: 700;
+    line-height: 1.45;
+    letter-spacing: -0.005em;
+}
+.bp-source-meta {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink-mute);
+    margin-top: 6px;
+    letter-spacing: 0.02em;
+    line-height: 1.55;
+}
+.bp-source-body { padding: 24px 26px; }
+
+/* Horizontal proportional bars (분포 차트) */
+.bp-distbar {
+    display: flex;
+    height: 52px;
+    border: 1px solid var(--bp-line);
+    overflow: hidden;
+    margin: 14px 0 8px;
+}
+.bp-distbar-seg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--bp-paper);
+    border-right: 1px solid rgba(247, 245, 239, 0.18);
+    position: relative;
+}
+.bp-distbar-seg:last-child { border-right: none; }
+.bp-distbar-seg.s-leaders {
+    background: linear-gradient(135deg, #14523B 0%, #1B6E4F 100%);
+    flex: 0 0 5%;
+    min-width: 60px;
+}
+.bp-distbar-seg.s-scalers {
+    background: linear-gradient(135deg, #4A6B5C 0%, #6E8A7C 100%);
+    flex: 0 0 35%;
+}
+.bp-distbar-seg.s-others {
+    background: linear-gradient(135deg, #B8B5A8 0%, #D6D2C5 100%);
+    flex: 0 0 60%;
+    color: var(--bp-ink);
+}
+.bp-distbar-legend {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 10px;
+}
+.bp-distbar-legend-item {
+    font-family: var(--sans);
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    padding-top: 10px;
+    border-top: 2px solid var(--bp-line);
+}
+.bp-distbar-legend-item.s-leaders-l { border-top-color: #14523B; }
+.bp-distbar-legend-item.s-scalers-l { border-top-color: #4A6B5C; }
+.bp-distbar-legend-item.s-others-l { border-top-color: #B8B5A8; }
+.bp-distbar-legend-item strong { display: block; color: var(--bp-ink); font-size: 15.5px; margin-bottom: 4px; font-weight: 700; letter-spacing: -0.005em; }
+
+/* Multi-metric horizontal bar chart (성과 배수) */
+.bp-metric-chart { margin-top: 10px; }
+.bp-metric-row {
+    display: grid;
+    grid-template-columns: 220px 1fr 90px;
+    align-items: center;
+    gap: 18px;
+    padding: 14px 0;
+    border-bottom: 1px dashed var(--bp-rule);
+}
+.bp-metric-row:last-child { border-bottom: none; }
+.bp-metric-label {
+    font-family: var(--sans);
+    font-size: 15px;
+    color: var(--bp-ink);
+    font-weight: 600;
+    line-height: 1.35;
+}
+.bp-metric-label .sub {
+    display: block;
+    font-size: 12px;
+    color: var(--ink-mute);
+    letter-spacing: 0.02em;
+    margin-top: 3px;
+    font-weight: 400;
+}
+.bp-metric-track {
+    position: relative;
+    height: 28px;
+    background: rgba(14, 59, 42, 0.05);
+    border: 1px solid var(--bp-rule);
+}
+.bp-metric-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #1B6E4F 0%, #14523B 100%);
+}
+.bp-metric-baseline {
+    position: absolute;
+    top: -4px; bottom: -4px;
+    width: 2px;
+    background: var(--bp-ink);
+}
+.bp-metric-baseline::after {
+    content: "후발주자 1배";
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--sans);
+    font-size: 11px;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+}
+.bp-metric-value {
+    font-family: var(--sans);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--bp-line);
+    text-align: right;
+    letter-spacing: -0.02em;
+}
+
+.bp-chart-caption {
+    margin-top: 20px;
+    padding-top: 14px;
+    border-top: 1px solid var(--bp-rule);
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink-mute);
+    line-height: 1.7;
+}
+.bp-chart-caption a { color: var(--bp-accent); border-bottom: 1px dotted var(--bp-accent); }
+
+.bp-chart-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 16px;
+    align-items: stretch;
+}
+.bp-chart-grid > .bp-source-block {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 2;
+}
+
+/* Chart 2 / Chart 3 본문의 "읽는 법" 박스. 세로 사이즈 동일 */
+.bp-read-hint {
+    margin: 0 0 18px;
+    padding: 14px 16px;
+    background: rgba(14, 59, 42, 0.04);
+    border: 1px solid var(--bp-rule);
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    min-height: 78px;
+    display: flex;
+    align-items: center;
+}
+.bp-read-hint strong { color: var(--bp-ink); margin-right: 2px; white-space: nowrap; }
+
+/* Funnel chart. 88% to 39% to 6% */
+.bp-funnel {
+    margin: 14px 0 8px;
+}
+.bp-funnel-step {
+    display: grid;
+    grid-template-columns: 1fr 90px 200px;
+    align-items: center;
+    gap: 18px;
+    padding: 16px 0 8px;
+}
+.bp-funnel-bar {
+    height: 38px;
+    background: linear-gradient(90deg, #1B6E4F 0%, #14523B 50%, #0E3B2A 100%);
+    border: 1px solid #062018;
+}
+.bp-funnel-bar.s-mid {
+    background: linear-gradient(90deg, #4A6B5C 0%, #3A574A 100%);
+    border-color: #2A4338;
+}
+.bp-funnel-bar.s-narrow {
+    background: linear-gradient(90deg, #14523B 0%, #062018 100%);
+    border-color: #062018;
+}
+.bp-funnel-bar-label {
+    font-family: var(--sans);
+    font-size: 15.5px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    letter-spacing: 0.005em;
+    line-height: 1.35;
+}
+.bp-funnel-value {
+    font-family: var(--sans);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--bp-line);
+    text-align: left;
+    letter-spacing: -0.02em;
+    line-height: 1;
+}
+.bp-funnel-desc {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--ink-soft);
+    grid-column: 1 / -1;
+    line-height: 1.65;
+    margin: 4px 0 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed var(--bp-rule);
+}
+.bp-funnel-step + .bp-funnel-desc + .bp-funnel-step { padding-top: 6px; }
+
+/* Stat triplets (CEO 데이터 등) */
+.bp-stat-trio {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 14px 0 4px;
+}
+.bp-stat-mini {
+    border: 1px solid var(--bp-rule);
+    padding: 18px 18px 16px;
+    background: rgba(14, 59, 42, 0.025);
+}
+.bp-stat-mini-num {
+    font-family: var(--sans);
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--bp-line);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    margin-bottom: 10px;
+}
+.bp-stat-mini-label {
+    font-family: var(--sans);
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+}
+@media (max-width: 900px) {
+    .bp-chart-grid { grid-template-columns: 1fr; }
+    .bp-metric-row { grid-template-columns: 1fr; gap: 6px; }
+    .bp-metric-value { text-align: left; }
+}
+
+/* ===== Closing footer ===== */
+.bp-footer {
+    padding: 36px 56px 44px;
+    background:
+        radial-gradient(ellipse at 0% 100%, rgba(27, 110, 79, 0.35), transparent 55%),
+        linear-gradient(110deg, #14523B 0%, #0E3B2A 35%, #0A2E22 70%, #062018 100%);
+    color: rgba(247, 245, 239, 0.92);
+    font-family: var(--sans);
+    font-size: 12.5px;
+    line-height: 1.7;
+    border-top: 1.5px solid #062018;
+    position: relative;
+    overflow: hidden;
+}
+.bp-footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-footer > * { position: relative; z-index: 1; }
+.bp-footer strong { color: var(--bp-paper); }
+.bp-footer a { color: var(--bp-paper); border-bottom-color: rgba(247,245,239,0.4); }
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+    .bp-hero { padding: 48px 32px; }
+    .bp-hero h1 { font-size: 38px; }
+    .bp-section { padding: 40px 32px; }
+    .bp-map, .bp-principles { grid-template-columns: repeat(2, 1fr); }
+    .bp-stats { grid-template-columns: repeat(2, 1fr); }
+    .bp-step { grid-template-columns: 80px 1fr; }
+    .bp-step-output { grid-column: 1 / -1; border-top: 1px solid var(--bp-rule); }
+    .bp-liner-grid { grid-template-columns: 1fr; }
+    .bp-kal { grid-template-columns: 1fr 1fr; }
+    .bp-case { grid-template-columns: 1fr; }
+    .bp-titleblock { grid-template-columns: repeat(3, 1fr); }
+    .bp-stepnav { padding: 24px 16px 20px; }
+    .bp-steps li.bp-step { width: 26px; height: 26px; font-size: 10px; }
+    .bp-steps li.bp-step + li.bp-step { margin-left: 16px; }
+    .bp-steps li.bp-step + li.bp-step::before { width: 16px; }
+    .bp-substeps { gap: 8px; }
+    .bp-substeps a { min-width: 0; flex: 1 1 auto; padding: 10px 14px; font-size: 12px; }
+    .bp-legend { padding: 14px 32px; }
+    .bp-footer { padding: 32px; }
+}
+@media (max-width: 600px) {
+    .bp-sheet { margin: 12px; }
+    .bp-hero h1 { font-size: 30px; }
+    .bp-section-title { font-size: 24px; }
+    .bp-map, .bp-principles, .bp-stats, .bp-kal { grid-template-columns: 1fr; }
+    .bp-compare-head, .bp-compare-row { grid-template-columns: 1fr; }
+    .bp-step { grid-template-columns: 1fr; }
+    .bp-step-num { padding: 14px; flex-direction: row; }
+    .bp-flow { font-size: 11px; padding: 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bp-sheet">
+
+
+    <!-- ========= BRAND BAR ========= -->
+    <a class="bp-brandbar" href="index.html" aria-label="목차로 이동">
+        <img class="bb-logo" src="assets/logos/logo1-transparent.png" alt="AI ROASTING">
+        <span>AI ROASTING · AX GUIDE TO COMPANY BRAIN OS</span>
+    </a>
+
+    <!-- ========= STEP NAVIGATION ========= -->
+    <nav class="bp-stepnav" aria-label="전체 단계">
+        <ol class="bp-steps">
+            <li class="bp-step active" aria-current="step"><a href="blueprint.html">진단</a></li>
+            <li class="bp-step"><a href="organization.html">1</a></li>
+            <li class="bp-step"><a href="pilot.html">2</a></li>
+            <li class="bp-step"><a href="criteria.html">3</a></li>
+            <li class="bp-step"><a href="resource.html">4</a></li>
+            <li class="bp-step"><a href="ainative.html">5</a></li>
+        </ol>
+        <a class="bp-back" href="index.html">← 목록으로</a>
+        <div class="bp-substeps" aria-label="진단 단계 페이지">
+            <a href="blueprint.html" class="active" aria-current="page">AX 추진 원칙</a>
+            <a href="diagnosis.html">현재 수준 진단</a>
+        </div>
+    </nav>
+
+    <!-- ========= HERO ========= -->
+    <section class="bp-hero">
+        <div class="bp-hero-eyebrow">Blueprint · COMPANY BRAIN OS 청사진</div>
+        <h1>10곳 중 9곳이 AI를 도입했습니다.<br>그러나 실질적 성과를 내는 곳은 100곳 중 6곳뿐입니다.</h1>
+        <p class="bp-lead">이 청사진은 AI 고성과 6%의 회사가 가진 COMPANY BRAIN OS의 구조와 그것을 짓는 다섯 원칙을 한 장에 펼친 그림입니다.</p>
+    </section>
+
+    <nav class="bp-hero-nav" aria-label="섹션 바로가기">
+        <a href="#evidence">AX 성과 분석 리포트</a>
+        <a href="#pitfalls">흔히 빠지는 다섯 개의 함정</a>
+        <a href="#blueprint">우리가 가야 할 도착지, AI-Native 조직</a>
+        <a href="#principles">AX 추진 다섯 가지 원칙</a>
+    </nav>
+
+
+    <!-- ========= EVIDENCE · 출처와 차트 ========= -->
+    <section class="bp-section" id="evidence">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">AX 성과 분석 리포트</h2>
+            </div>
+            <div class="bp-section-meta">McKinsey · 2025년 11월<br>BCG AI Radar · 2026년 1월<br>BCG Build for the Future · 2025년 9월</div>
+        </div>
+
+        <!-- 카드 1. McKinsey 깔때기 -->
+        <div class="bp-source-block">
+            <div class="bp-source-head">
+                <div>
+                    <div class="bp-source-tag">Chart 1<br>McKinsey</div>
+                </div>
+                <div>
+                    <div class="bp-source-title">100곳 중 88곳이 AI를 도입했지만, 실질적 성과를 내는 곳은 6곳뿐입니다</div>
+                </div>
+            </div>
+            <div class="bp-source-body">
+                <div class="bp-funnel">
+                    <div class="bp-funnel-step">
+                        <div class="bp-funnel-bar" style="width: 100%;"></div>
+                        <div class="bp-funnel-value">88%</div>
+                        <div class="bp-funnel-bar-label">AI 도입</div>
+                    </div>
+                    <div class="bp-funnel-desc">응답 기업의 88%가 최소 한 가지 업무 기능에서 AI를 정기적으로 운영합니다. 1년 전(78%) 대비 10%p 상승한 수치입니다.</div>
+
+                    <div class="bp-funnel-step">
+                        <div class="bp-funnel-bar s-mid" style="width: 44%;"></div>
+                        <div class="bp-funnel-value">39%</div>
+                        <div class="bp-funnel-bar-label">영업이익 영향</div>
+                    </div>
+                    <div class="bp-funnel-desc">이 가운데 영업이익에 어떤 형태로든 실질적 영향이 잡힌다고 응답한 비율은 39%입니다. 그러나 대부분은 그 영향이 전사 영업이익의 5%에 못 미친다고 보고했습니다.</div>
+
+                    <div class="bp-funnel-step">
+                        <div class="bp-funnel-bar s-narrow" style="width: 8%;"></div>
+                        <div class="bp-funnel-value">6%</div>
+                        <div class="bp-funnel-bar-label">실질적 가치 창출</div>
+                    </div>
+                    <div class="bp-funnel-desc">전사 영업이익의 5% 이상을 AI가 창출한다고 응답한 'AI 고성과 그룹'은 단 6%에 불과합니다. 이들은 다른 기업 대비 에이전트 확장 속도가 약 3배 빠릅니다.</div>
+                </div>
+                <div class="bp-chart-caption">
+                    핵심 메시지. "AI를 도입했다"는 사실만으로는 더 이상 경쟁 우위가 되지 못합니다. 실질적 격차는 "AI가 전사 영업이익의 5% 이상을 창출하고 있는가"라는 한 줄에서 갈립니다.<br>
+                    표본. 전 세계 약 1,400명의 임원 응답.<br>
+                    출처. McKinsey &amp; Company <a href="https://www.mckinsey.com/~/media/mckinsey/business%20functions/quantumblack/our%20insights/the%20state%20of%20ai/november%202025/the-state-of-ai-2025-agents-innovation_cmyk-v1.pdf" target="_blank" rel="noopener">"The State of AI 2025: Agents, innovation, and transformation"</a>, 2025년 11월 발표.
+                </div>
+            </div>
+        </div>
+
+        <div class="bp-chart-grid" style="margin-top: 16px;">
+
+            <!-- 카드 2. BCG 성과 배수 (2025 Oct, 정량 격차) -->
+            <div class="bp-source-block">
+                <div class="bp-source-head">
+                    <div>
+                        <div class="bp-source-tag">Chart 2<br>BCG</div>
+                    </div>
+                    <div>
+                        <div class="bp-source-title">AI 선도 기업(상위 5%)의 AI 매출은 후발주자의 5배, 주주 수익률은 3.6배에 달했습니다</div>
+                    </div>
+                </div>
+                <div class="bp-source-body">
+                    <div class="bp-read-hint">
+                        <strong>읽는 법.</strong> 막대 안 검정 세로선이 후발주자 평균(1배)이며, 그 선을 넘어 뻗어 나간 그린 막대 길이가 선도 기업(상위 5%)이 만들어 낸 격차입니다.
+                    </div>
+
+                    <div class="bp-metric-chart">
+                        <div class="bp-metric-row">
+                            <div class="bp-metric-label">총주주수익률 (3년)
+                                <span class="sub">Total Shareholder Return, 3-yr</span>
+                            </div>
+                            <div class="bp-metric-track">
+                                <div class="bp-metric-fill" style="width: 72%;"></div>
+                                <div class="bp-metric-baseline" style="left: 20%;"></div>
+                            </div>
+                            <div class="bp-metric-value">3.6배</div>
+                        </div>
+                        <div class="bp-metric-row">
+                            <div class="bp-metric-label">AI 기인 매출 증가
+                                <span class="sub">AI-driven revenue uplift</span>
+                            </div>
+                            <div class="bp-metric-track">
+                                <div class="bp-metric-fill" style="width: 95%;"></div>
+                                <div class="bp-metric-baseline" style="left: 20%;"></div>
+                            </div>
+                            <div class="bp-metric-value">5.0배</div>
+                        </div>
+                        <div class="bp-metric-row">
+                            <div class="bp-metric-label">AI 기인 비용 절감
+                                <span class="sub">AI-driven cost reduction</span>
+                            </div>
+                            <div class="bp-metric-track">
+                                <div class="bp-metric-fill" style="width: 60%;"></div>
+                                <div class="bp-metric-baseline" style="left: 20%;"></div>
+                            </div>
+                            <div class="bp-metric-value">3.0배</div>
+                        </div>
+                        <div class="bp-metric-row">
+                            <div class="bp-metric-label">전사 매출 성장률
+                                <span class="sub">Overall revenue growth</span>
+                            </div>
+                            <div class="bp-metric-track">
+                                <div class="bp-metric-fill" style="width: 34%;"></div>
+                                <div class="bp-metric-baseline" style="left: 20%;"></div>
+                            </div>
+                            <div class="bp-metric-value">1.7배</div>
+                        </div>
+                        <div class="bp-metric-row">
+                            <div class="bp-metric-label">영업이익률
+                                <span class="sub">EBIT margin</span>
+                            </div>
+                            <div class="bp-metric-track">
+                                <div class="bp-metric-fill" style="width: 32%;"></div>
+                                <div class="bp-metric-baseline" style="left: 20%;"></div>
+                            </div>
+                            <div class="bp-metric-value">1.6배</div>
+                        </div>
+                    </div>
+                    <div class="bp-chart-caption">
+                        해석. 동일한 시장 조건에서도 AI를 운영 모델에 체계적으로 내재화한 상위 5%가 모든 지표에서 후발주자를 압도합니다.<br>
+                        표본. Future-built(상위 5%)와 Laggards(후발주자) 평균 비교.<br>
+                        출처. BCG <a href="https://media-publications.bcg.com/The-Widening-AI-Value-Gap-October-2025.pdf" target="_blank" rel="noopener">"Build for the Future 2025: The Widening AI Value Gap"</a>, 2025년 9월 발표.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 카드 3. BCG AI Radar 2026 -->
+            <div class="bp-source-block">
+                <div class="bp-source-head">
+                    <div>
+                        <div class="bp-source-tag">Chart 3<br>BCG</div>
+                    </div>
+                    <div>
+                        <div class="bp-source-title">AI 의사결정의 무게중심이 CEO 직속으로 이동했습니다</div>
+                    </div>
+                </div>
+                <div class="bp-source-body">
+                    <div class="bp-read-hint">
+                        <strong>읽는 법.</strong> 위쪽 세 박스는 2026년 1월 BCG가 조사한 글로벌 1,803명 CEO 응답에서 추출한 핵심 지표이며, 아래 가로 막대는 같은 조사가 분류한 CEO 세 가지 유형의 비율 분포입니다.
+                    </div>
+
+                    <div class="bp-stat-trio">
+                        <div class="bp-stat-mini">
+                            <div class="bp-stat-mini-num">72%</div>
+                            <div class="bp-stat-mini-label">회사의 AI 최종 의사결정권자가 CEO 본인이라고 응답했습니다. 1년 전 대비 정확히 두 배입니다.</div>
+                        </div>
+                        <div class="bp-stat-mini">
+                            <div class="bp-stat-mini-num">94%</div>
+                            <div class="bp-stat-mini-label">단기 ROI가 가시화되지 않더라도 AI 투자를 지속하겠다고 응답했습니다.</div>
+                        </div>
+                        <div class="bp-stat-mini">
+                            <div class="bp-stat-mini-num">90%</div>
+                            <div class="bp-stat-mini-label">2026년 내에 AI 에이전트가 측정 가능한 ROI를 창출할 것으로 기대했습니다.</div>
+                        </div>
+                    </div>
+
+                    <h4 style="font-family: var(--sans); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bp-accent); margin: 22px 0 10px; font-weight: 700;">CEO 유형 분포 (BCG 자체 분류)</h4>
+                    <div class="bp-distbar">
+                        <div class="bp-distbar-seg s-leaders">15%</div>
+                        <div class="bp-distbar-seg s-scalers" style="flex: 0 0 70%;">70%</div>
+                        <div class="bp-distbar-seg s-others" style="flex: 0 0 15%;">15%</div>
+                    </div>
+                    <div class="bp-distbar-legend" style="grid-template-columns: repeat(3, 1fr);">
+                        <div class="bp-distbar-legend-item s-leaders-l">
+                            <strong>Trailblazers · 선도형 (15%)</strong>
+                            선제적 투자, 전사 업스킬링, AI 성과에 대한 강한 확신을 바탕으로 전환을 주도합니다.
+                        </div>
+                        <div class="bp-distbar-legend-item s-scalers-l">
+                            <strong>Pragmatists · 실용형 (70%)</strong>
+                            AI의 잠재력에는 동의하나, 가치가 명확하고 위험이 통제 가능한 영역에 한해 투자를 집행합니다.
+                        </div>
+                        <div class="bp-distbar-legend-item s-others-l">
+                            <strong>Followers · 추종형<br>(15%)</strong>
+                            AI의 중요성을 인지하나 확신이 부족해, 소규모 파일럿 단계에 머무릅니다.
+                        </div>
+                    </div>
+                    <div class="bp-chart-caption">
+                        핵심 메시지. 2026년의 AI는 더 이상 IT 부서 단위의 프로젝트가 아니라 CEO 직속 어젠다로 격상됐습니다. 기업들은 평균 매출의 1.7%를 AI에 투자할 계획이며, 이는 전년 대비 두 배 수준입니다.<br>
+                        표본. 전 세계 1,803명 임원 응답.<br>
+                        출처. BCG <a href="https://web-assets.bcg.com/73/8e/cc44cbc14a3b81695f8a3de28ff1/ai-radar-2026-web-jan-2026-edit.pdf" target="_blank" rel="noopener">"AI Radar 2026: As AI Investments Surge, CEOs Take the Lead"</a>, 2026년 1월.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ========= 흔히 빠지는 함정 다섯 ========= -->
+    <section class="bp-section" id="pitfalls">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">흔히 빠지는 다섯 개의 함정</h2>
+            </div>
+            <div class="bp-section-meta">100곳 중 94곳이 6%에 들지 못하는 이유</div>
+        </div>
+
+        <p style="margin:0 0 28px; font-size:15px; color: var(--ink-soft); line-height:1.75;">100곳 중 94곳이 6%에 들지 못하는 데에는 이유가 있습니다. 현장에서 가장 빈번히 반복되는 다섯 가지 함정을 정리합니다.</p>
+
+        <div class="bp-principles">
+            <div class="bp-principle">
+                <div class="bp-principle-num">P° 1</div>
+                <h4 class="bp-principle-title">도구부터 논의하는 함정</h4>
+                <div class="bp-principle-body">
+                    <ul>
+                        <li>회의의 첫 의제는 도구 선택입니다. "ChatGPT냐, Claude냐, Gemini냐."</li>
+                        <li>두 달 동안 도구 벤치마크, 라이선스 협상, 보안 심사가 이어집니다.</li>
+                        <li>정작 일하는 방식은 그대로인 채, 도구 도입을 AX 추진으로 착각합니다.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bp-principle">
+                <div class="bp-principle-num">P° 2</div>
+                <h4 class="bp-principle-title">PoC 범람 함정</h4>
+                <div class="bp-principle-body">
+                    <ul>
+                        <li>분기마다 각 부서에서 "AI로 ○○를 시도해 보겠다"는 신청서가 수십 건 올라옵니다.</li>
+                        <li>전부 승인되면 한정된 인력과 예산이 30~50갈래로 분산됩니다.</li>
+                        <li>1년 뒤 경영진의 "진척 한 줄 요약" 요청에 누구도 답하지 못합니다.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bp-principle">
+                <div class="bp-principle-num">P° 3</div>
+                <h4 class="bp-principle-title">환각 맹신 함정</h4>
+                <div class="bp-principle-body">
+                    <ul>
+                        <li>Claude·ChatGPT가 단정적인 어조로 내놓은 답을 그대로 보고서에 옮깁니다.</li>
+                        <li>그러나 매끄러운 문장이 정확한 사실의 보증은 아닙니다.</li>
+                        <li>사고가 외부에 드러난 뒤에야 출처 표기 규정을 부랴부랴 만듭니다.</li>
+                        <li>그 시점이면 동일한 실수가 이미 부서마다 누적돼 있습니다.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bp-principle">
+                <div class="bp-principle-num">P° 4</div>
+                <h4 class="bp-principle-title">시간 비효율 함정</h4>
+                <div class="bp-principle-body">
+                    <ul>
+                        <li>직원 50명의 보고서 작성 시간이 각각 두 시간씩 단축됩니다.</li>
+                        <li>그러나 그 시간은 메신저 대화와 즉흥 회의로 곧 채워집니다.</li>
+                        <li>절감된 인건비를 고부가가치 업무로 재배치할 장치가 부재합니다.</li>
+                        <li>결국 재무 효과는 측정 단계 직전에 소실됩니다.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bp-principle">
+                <div class="bp-principle-num">P° 5</div>
+                <h4 class="bp-principle-title">거버넌스 누수 함정</h4>
+                <div class="bp-principle-body">
+                    <ul>
+                        <li>분기 매출 데이터를 ChatGPT 무료 버전에 입력한 사실이 외부 감사 과정에서 드러납니다.</li>
+                        <li>사후에 비로소 사용 지침이 마련됩니다.</li>
+                        <li>지침이 공유될 무렵이면 유사 사례가 사내에 이미 수십 건 누적돼 있습니다.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <p style="margin: 22px 0 0; font-size: 12px; color: var(--ink-mute); line-height: 1.6; font-family: var(--sans);">* PoC (Proof of Concept). 본격 도입 전, 아이디어가 실제로 작동하는지 작게 시험해 보는 단계입니다.</p>
+    </section>
+
+
+    <!-- ========= A. 청사진 ========= -->
+    <section class="bp-section" id="blueprint">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">우리가 가야 할 도착지, AI-Native 조직</h2>
+            </div>
+            <div class="bp-section-meta">AI-aware vs AI-Native · 7개 영역 비교</div>
+        </div>
+
+        <div class="bp-compare">
+            <div class="bp-compare-head">
+                <div>업무 영역</div>
+                <div>이전 방식 (AI-aware)</div>
+                <div>AI-Native 조직 방식</div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="bp-label">AI의 위치</div>
+                <div class="bp-before">ChatGPT로 이메일 초안을 다듬는 정도, 업무의 한쪽 구석에 머뭅니다.</div>
+                <div class="bp-after">고객 문의가 들어오면 Claude가 분류부터 응대 초안 작성, 거버넌스 체크까지 한 번에 처리합니다.</div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="bp-label">도입 단위</div>
+                <div class="bp-before">마케터는 ChatGPT, 개발자는 Claude, 임원은 Gemini를 각자 알아서 씁니다.</div>
+                <div class="bp-after">리뷰 응대, 견적 작성, 미팅 노트 같은 업무 자체가 AI를 전제로 새로 짜여 있습니다.</div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="bp-label">Use case 운영</div>
+                <div class="bp-before">PoC 프로젝트로 챗봇·요약기·이미지 생성기 수십 개가 동시에 돌아가다 절반은 반년 뒤 사라집니다.</div>
+                <div class="bp-after">CS 응대, 영업 제안서, 리스크 리뷰처럼 가장 큰 가치를 만드는 3~5건에만 자원을 집중합니다.</div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="bp-label">절감된 시간</div>
+                <div class="bp-before">ChatGPT로 보고서를 2시간 일찍 끝냈지만, 절약한 그 시간을 그대로 카톡 대화와 회의에 써 버립니다.</div>
+                <div class="bp-after">Claude가 단순 분석을 처리해 준 만큼, 그 시간을 고객 인터뷰나 신제품 기획에 다시 씁니다.</div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="bp-label">AI와의 관계</div>
+                <div class="bp-before">ChatGPT 답변을 그대로 붙여 보고하거나, 환각을 심각하게 경험한 뒤 "AI 못 믿는다"며 닫아 버립니다.</div>
+                <div class="bp-after">사실 검증이 필요한 일은 출처를 요구하고, 창의 발상 영역은 자유롭게 풀어 줍니다. 작업별로 신뢰 수준이 다릅니다.</div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="bp-label">거버넌스</div>
+                <div class="bp-before">한 직원이 고객 데이터를 ChatGPT에 붙여 넣은 사고가 터진 뒤에야 가이드라인을 만듭니다.</div>
+                <div class="bp-after">어떤 데이터를 어떤 모델에 어디까지 보낼지, 처음부터 규정·로그·승인 절차를 깔아 둡니다.</div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="bp-label">에이전트</div>
+                <div class="bp-before">GPT로 이메일만 요약, Claude로 코드만 리뷰. 한 번에 한 가지 일만 시킵니다.</div>
+                <div class="bp-after">주문이 오면 Claude가 재고를 보고, GPT가 고객 안내를 작성하고, Gemini가 배송을 잡습니다. 여러 에이전트가 한 작업을 이어서 처리합니다.</div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ========= 북극성 원칙 다섯 (별도 섹션) ========= -->
+    <section class="bp-section" id="principles">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">AX 추진 다섯 가지 원칙</h2>
+            </div>
+            <div class="bp-section-meta">5% 고성과 그룹이 공통으로 지키는 규칙</div>
+        </div>
+
+        <div class="bp-principles">
+            <div class="bp-principle">
+                <div class="bp-principle-num">N° 1</div>
+                <h4 class="bp-principle-title">도구 도입 회의가 아니라 업무 자체를 다시 짜는 회의를 엽니다</h4>
+                <div class="bp-principle-body">
+                    <ul>
+                        <li>"어떤 AI를 살까" 회의에 두 시간을 쓰지 않습니다.</li>
+                        <li>"이 업무가 어떤 단계를 거치는지"를 화이트보드에 먼저 분해합니다.</li>
+                        <li>도구는 그 분해가 끝난 다음에 고릅니다.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bp-principle">
+                <div class="bp-principle-num">N° 2</div>
+                <h4 class="bp-principle-title">예산의 70%를 사람과 프로세스에 씁니다</h4>
+                <div class="bp-principle-body">
+                    <ul>
+                        <li>라이선스 5천만 원 + 교육 5백만 원 → 1년 뒤 "쓸 줄 아는 사람이 없다".</li>
+                        <li>같은 라이선스 + 교육 1억 원 → 1년 뒤 "토큰이 모자라다".</li>
+                        <li>알고리즘 10%, 데이터·기술 20%, 사람·프로세스 70%가 기준선입니다.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bp-principle">
+                <div class="bp-principle-num">N° 3</div>
+                <h4 class="bp-principle-title">수십 건 시도 대신 굵직한 서너 건만 합니다</h4>
+                <div class="bp-principle-body">
+                    <ul>
+                        <li>분기마다 올라오는 PoC 신청서 30~50건을 전부 승인하지 않습니다.</li>
+                        <li>임원진이 직접 3~5건만 통과시킵니다.</li>
+                        <li>그 안에 인력의 30%를 우선 붙입니다.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bp-principle">
+                <div class="bp-principle-num">N° 4</div>
+                <h4 class="bp-principle-title">업무마다 AI 검증 강도를 다르게 둡니다</h4>
+                <div class="bp-principle-body">
+                    <ul>
+                        <li>마케팅 카피: Claude가 쓴 안을 한 번 읽고 게재합니다.</li>
+                        <li>분기 재무 코멘트: 두 명이 출처를 대조하고 CFO 결재까지 받습니다.</li>
+                        <li>같은 도구라도 업무 성격이 다르면 검증 단계도 달라져야 합니다.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bp-principle">
+                <div class="bp-principle-num">N° 5</div>
+                <h4 class="bp-principle-title">사고가 터지기 전에 거버넌스를 먼저 고민합니다</h4>
+                <div class="bp-principle-body">
+                    <ul>
+                        <li>AI 도입 첫 주에 "어떤 데이터를 어디까지 보낼 수 있는가" 매트릭스를 게시합니다.</li>
+                        <li>책임자, 승인 절차, 감사 기록을 도입 시점에 함께 정합니다.</li>
+                        <li>외부 감사에서 사고가 드러난 뒤에 만드는 것이 아닙니다.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= B. 진단 게이트 ========= -->
+    <section class="bp-section" id="diagnosis">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">AI 성숙도 자가 진단</h2>
+            </div>
+            <div class="bp-section-meta">McKinsey Rewired 6차원 진단 · 5점 척도</div>
+        </div>
+
+        <p style="margin:0 0 28px; font-size:15px; color: var(--ink-soft); line-height:1.75;">본격적으로 AX를 추진하기 전, 현재 위치를 정량적으로 점검하는 단계입니다.</p>
+
+        <div class="bp-roadmap">
+
+            <a class="bp-roadmap-gate" href="diagnosis.html" aria-label="AI 성숙도 자가 진단 시작">
+                <div class="bp-roadmap-gate-tag">GATE</div>
+                <div>
+                    <div class="bp-roadmap-gate-title">현재 위치와 목표 도착지 사이의 격차를 정량화합니다</div>
+                    <div style="font-size:13px; color: var(--ink-soft); margin-top:6px; line-height:1.65;">McKinsey Rewired 6차원 진단 도구로 전략, 인재, 운영모델, 기술, 데이터, 도입 여섯 축을 5점 척도로 평가합니다. 가장 취약한 두 축이 본격 로드맵의 우선 착수 지점이 됩니다.</div>
+                </div>
+                <div class="bp-roadmap-gate-cta">진단 시작 →</div>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- ========= FOOTER ========= -->
+    <footer class="bp-footer">
+        <p style="margin:0 0 10px;"><strong>이 문서가 모든 산출물의 원본입니다.</strong> 실전 템플릿, BRAIN OS 운영 매뉴얼, 웹사이트는 모두 여기서 갈라져 나옵니다. 내용을 고칠 일이 생기면 plan.md를 먼저 손보고, 그 변경을 나머지에 반영합니다.</p>
+        <p style="margin:0; opacity:0.85;">참고 컨설팅펌. McKinsey(State of AI 2025, Rewired), BCG(Build for the Future 2025, AI Radar 2026), Bain, PwC, KPMG, Deloitte 등 글로벌 컨설팅펌의 2025~2026년 AI 관련 보고서. 그 외 참고 도구. Anthropic AI Fluency(4D 프레임워크, Skill). COMPANY BRAIN OS와 그것을 짓는 미시 엔진(10문항)·자산 축적 4단계 순환은 위 자료들을 빌드업 구조로 엮어 만든 본 가이드의 독자 방법론입니다. 이 문서는 경영진의 의사결정을 돕는 용도이며, 구체적인 투자나 법률 판단은 전문가의 검토를 함께 받기를 권합니다.</p>
+    </footer>
+
+</div>
+
+<script>
+// Scroll spy: 스크롤 위치에 따라 sticky nav의 해당 메뉴를 강조
+(function () {
+    const navLinks = Array.from(document.querySelectorAll('.bp-hero-nav a'));
+    const sections = navLinks
+        .map(link => document.querySelector(link.getAttribute('href')))
+        .filter(Boolean);
+
+    if (!sections.length) return;
+
+    function setActive(id) {
+        navLinks.forEach(link => {
+            link.classList.toggle('is-active', link.getAttribute('href') === '#' + id);
+        });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        // 화면에 보이는 섹션 중 가장 위쪽에 있는 것을 active로
+        const visible = entries
+            .filter(e => e.isIntersecting)
+            .map(e => e.target);
+
+        if (visible.length === 0) return;
+
+        // 여러 섹션이 동시에 보이면 viewport 상단에 더 가까운 쪽 우선
+        visible.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+        setActive(visible[0].id);
+    }, {
+        rootMargin: '-90px 0px -55% 0px',
+        threshold: 0
+    });
+
+    sections.forEach(s => observer.observe(s));
+})();
+</script>
+</body>
+</html>

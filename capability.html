@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B-1-3 AI 부트캠프 · 교육과 Quick Win, 해커톤으로 챔피언을 만듭니다</title>
+<meta name="description" content="AX 1단계 추진체계 구축의 세 번째 작업. TF 5~9명을 90일 부트캠프 교육, 자기 도메인 Quick Win 제작, 4개월차 사내 해커톤 세 가지로 회사의 첫 AI 챔피언으로 만듭니다.">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+/* ================== B-1-2 Capability Page Local Styles ================== */
+/* organization.html과 동일한 bp-* 시각 토큰을 그대로 차용합니다. */
+
+:root {
+    --bp-grid: rgba(14, 59, 42, 0.06);
+    --bp-grid-strong: rgba(14, 59, 42, 0.12);
+    --bp-line: #0E3B2A;
+    --bp-ink: #0F1A16;
+    --bp-paper: #F7F5EF;
+    --bp-paper-2: #FBFAF6;
+    --bp-rule: #D6D2C5;
+    --bp-accent: #1B6E4F;
+    --bp-gold: #9A7B0A;
+    --bp-red: #8B2E1F;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 50px; }
+body {
+    background:
+        linear-gradient(var(--bp-grid) 1px, transparent 1px) 0 0 / 32px 32px,
+        linear-gradient(90deg, var(--bp-grid) 1px, transparent 1px) 0 0 / 32px 32px,
+        var(--bp-paper);
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    line-break: strict;
+}
+
+/* ===== Sheet wrapper ===== */
+.bp-sheet {
+    max-width: 1320px;
+    margin: 32px auto;
+    background: var(--bp-paper-2);
+    border: 1.5px solid var(--bp-line);
+    box-shadow: 0 1px 0 var(--bp-line), 0 24px 60px -30px rgba(6, 32, 24, 0.35);
+    position: relative;
+}
+.bp-sheet::before, .bp-sheet::after {
+    content: "";
+    position: absolute;
+    width: 16px; height: 16px;
+    border: 1px solid var(--bp-line);
+}
+.bp-sheet::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+.bp-sheet::after  { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
+/* ===== Step navigation ===== */
+.bp-stepnav {
+    padding: 36px 56px 28px;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1.5px solid #062018;
+}
+.bp-stepnav::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+}
+.bp-step {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid rgba(247, 245, 239, 0.55);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--sans);
+    font-size: 11.5px;
+    font-weight: 600;
+    color: rgba(247, 245, 239, 0.85);
+    letter-spacing: 0.02em;
+    position: relative;
+    transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+.bp-step.active {
+    background: var(--bp-paper);
+    color: var(--bp-ink);
+    border-color: var(--bp-paper);
+    font-weight: 700;
+}
+.bp-step + .bp-step { margin-left: 24px; }
+.bp-step + .bp-step::before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    width: 24px;
+    height: 1px;
+    background: rgba(247, 245, 239, 0.4);
+    transform: translateY(-50%);
+}
+.bp-back {
+    display: block;
+    text-align: center;
+    margin-top: 18px;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: rgba(247, 245, 239, 0.78);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: color .15s ease, letter-spacing .15s ease;
+    position: relative;
+    z-index: 1;
+}
+.bp-back:hover { color: var(--bp-paper); letter-spacing: 0.08em; }
+
+.bp-substeps {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+.bp-substeps a, .bp-substeps span {
+    border: 1px solid rgba(247, 245, 239, 0.28);
+    background: transparent;
+    padding: 12px 24px;
+    color: rgba(247, 245, 239, 0.75);
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: background .18s ease, border-color .18s ease, color .18s ease;
+    min-width: 200px;
+    text-align: center;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.bp-substeps a:hover {
+    background: rgba(247, 245, 239, 0.08);
+    border-color: rgba(247, 245, 239, 0.6);
+    color: var(--bp-paper);
+}
+.bp-substeps span {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+.bp-substeps a.active {
+    background: linear-gradient(180deg, #14523B 0%, #0E3B2A 100%);
+    color: var(--bp-paper);
+    border: 1.5px solid var(--bp-paper);
+    font-weight: 700;
+    box-shadow:
+        0 0 0 4px rgba(14, 59, 42, 0.55),
+        0 8px 20px -8px rgba(6, 32, 24, 0.7);
+    transform: translateY(-1px);
+    cursor: default;
+    pointer-events: none;
+}
+
+@media (max-width: 600px) {
+    .bp-stepnav { padding: 24px 16px 20px; }
+    .bp-step { width: 26px; height: 26px; font-size: 10px; }
+    .bp-step + .bp-step { margin-left: 16px; }
+    .bp-step + .bp-step::before { width: 16px; }
+    .bp-substeps { gap: 8px; }
+    .bp-substeps a, .bp-substeps span { min-width: 0; flex: 1 1 auto; padding: 10px 14px; font-size: 12px; }
+}
+
+/* ===== Hero block ===== */
+.bp-hero {
+    padding: 64px 56px 56px;
+    border-bottom: 1.5px solid var(--bp-line);
+    position: relative;
+    background:
+        radial-gradient(ellipse at top right, rgba(27, 110, 79, 0.06), transparent 60%),
+        var(--bp-paper-2);
+}
+.bp-hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    margin-bottom: 18px;
+}
+.bp-hero h1 {
+    font-size: 52px;
+    line-height: 1.18;
+    margin: 0 0 22px;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+}
+.bp-hero .bp-lead {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+}
+.bp-hero .bp-summary {
+    margin-top: 36px;
+    padding: 22px 26px;
+    background: rgba(14, 59, 42, 0.04);
+    border-bottom: 1px solid var(--bp-rule);
+    font-size: 14px;
+    line-height: 1.75;
+}
+.bp-hero .bp-summary strong { color: var(--bp-line); }
+
+/* ===== Section submenu ===== */
+.bp-hero-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 12px 56px;
+    background: var(--bp-paper-2);
+    border-top: 1px solid var(--bp-line);
+    border-bottom: 1px solid var(--bp-line);
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    box-shadow: 0 2px 8px -4px rgba(6, 32, 24, 0.18);
+}
+.bp-hero-nav a {
+    flex: 1 1 0;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--bp-ink);
+    padding: 10px 16px;
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper);
+    text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    letter-spacing: -0.005em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bp-hero-nav a:hover { background: var(--bp-line); color: var(--bp-paper); }
+.bp-hero-nav a.active {
+    background: var(--bp-line);
+    color: var(--bp-paper);
+    border-color: var(--bp-line);
+    box-shadow: inset 0 -3px 0 var(--bp-accent);
+}
+
+/* ===== Section frame ===== */
+.bp-section {
+    padding: 56px 56px 64px;
+    border-bottom: 1.5px solid var(--bp-line);
+    position: relative;
+}
+.bp-section:last-of-type { border-bottom: none; }
+.bp-section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 28px;
+    margin-bottom: 36px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--bp-rule);
+}
+.bp-section-head > div:first-child { flex: 1; min-width: 0; }
+.bp-section-head .bp-section-meta { flex-shrink: 0; }
+@media (max-width: 768px) {
+    .bp-section-head { flex-direction: column; align-items: flex-start; gap: 10px; padding-bottom: 12px; }
+    .bp-section-head .bp-section-meta { text-align: left; }
+}
+.bp-section-title {
+    font-size: 30px;
+    margin: 0;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    font-weight: 700;
+}
+.bp-section-meta {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    text-align: right;
+    line-height: 1.6;
+}
+.bp-section-intro {
+    margin: 0 0 28px;
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+}
+
+/* ===== Compare table ===== */
+.bp-compare {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-compare-head {
+    display: grid;
+    grid-template-columns: 160px 1fr 1fr;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+    position: relative;
+}
+.bp-compare-head::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-compare-head > div {
+    padding: 14px 20px;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-right: 1px solid rgba(247, 245, 239, 0.14);
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+.bp-compare-head > div:last-child { border-right: none; }
+.bp-compare-head .pick {
+    color: #FFE9A8;
+    letter-spacing: 0.12em;
+}
+.bp-compare-head .pick::after {
+    content: "추천";
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #0E3B2A;
+    background: #FFE9A8;
+    border: 1px solid #FFE9A8;
+    letter-spacing: 0.08em;
+}
+
+.bp-compare-row {
+    display: grid;
+    grid-template-columns: 160px 1fr 1fr;
+    border-top: 1px solid var(--bp-rule);
+}
+.bp-compare-row > div {
+    padding: 16px 20px;
+    font-size: 14px;
+    line-height: 1.7;
+    border-right: 1px solid var(--bp-rule);
+    color: var(--bp-ink);
+}
+.bp-compare-row > div:last-child { border-right: none; }
+.bp-compare-head > div:first-child {
+    text-align: center;
+}
+.bp-compare-row .label {
+    font-family: var(--sans);
+    font-weight: 700;
+    color: var(--bp-line);
+    letter-spacing: 0.04em;
+    background: rgba(14, 59, 42, 0.03);
+    font-size: 13px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bp-compare-row .preferred {
+    background: rgba(27, 110, 79, 0.05);
+    color: var(--bp-ink);
+}
+.bp-compare-row .preferred strong { color: var(--bp-line); }
+
+/* ===== Module cards (90-day bootcamp 4-up) ===== */
+.bp-principles.bp-4d {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-principle {
+    padding: 28px 24px 30px;
+    border-right: 1px solid var(--bp-rule);
+    background: var(--bp-paper-2);
+    transition: background .25s ease, transform .25s ease, box-shadow .25s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.bp-principle:last-child { border-right: none; }
+.bp-principle:hover {
+    background: rgba(27, 110, 79, 0.06);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px -10px rgba(6, 32, 24, 0.25);
+    z-index: 2;
+}
+.bp-principle-num {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--bp-accent);
+    font-weight: 700;
+    margin-bottom: 10px;
+    transition: color .25s ease, letter-spacing .25s ease;
+}
+.bp-principle:hover .bp-principle-num { color: var(--bp-line); letter-spacing: 0.24em; }
+.bp-principle-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    margin-bottom: 14px;
+    letter-spacing: -0.005em;
+    line-height: 1.35;
+}
+.bp-principle-name .en {
+    display: block;
+    font-family: var(--sans);
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--bp-accent);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+.bp-principle-body {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+    flex: 1;
+}
+.bp-principle-body strong { color: var(--bp-ink); }
+.bp-principle-evidence {
+    padding-top: 16px;
+    border-top: 1px solid var(--bp-rule);
+    margin-top: auto;
+    font-family: var(--sans);
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--ink-mute);
+    letter-spacing: 0.005em;
+}
+.bp-principle-evidence b {
+    display: block;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+/* ===== Tier diagram (BCG 4 roles, hub-and-spoke timeline) ===== */
+.bp-comp-diagram {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    padding: 32px 36px 36px;
+}
+.bp-comp-row {
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    gap: 20px;
+    padding: 22px 0;
+    border-bottom: 1px dashed var(--bp-rule);
+    align-items: flex-start;
+}
+.bp-comp-row:last-child { border-bottom: none; }
+.bp-comp-tier {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding-top: 4px;
+}
+.bp-comp-detail h4 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    margin: 0 0 8px;
+    letter-spacing: -0.005em;
+}
+.bp-comp-detail p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    margin: 0 0 8px;
+}
+.bp-comp-detail p strong { color: var(--bp-ink); }
+.bp-comp-detail .roles {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.bp-comp-detail .role-chip {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--bp-line);
+    background: rgba(14, 59, 42, 0.06);
+    border: 1px solid var(--bp-rule);
+    padding: 5px 11px;
+    letter-spacing: 0.01em;
+}
+
+/* ===== BCG callout note under role diagram ===== */
+.bp-callout {
+    margin-top: 24px;
+    padding: 18px 22px;
+    background: rgba(14, 59, 42, 0.04);
+    border-top: 1px solid var(--bp-line);
+    border-bottom: 1px solid var(--bp-line);
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--bp-ink);
+}
+.bp-callout strong { color: var(--bp-line); }
+.bp-callout .src {
+    display: block;
+    margin-top: 8px;
+    font-family: var(--sans);
+    font-size: 11px;
+    color: var(--ink-mute);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* ===== Checklist ===== */
+.bp-checklist {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-check-row {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--bp-rule);
+    align-items: flex-start;
+    gap: 16px;
+}
+.bp-check-row:last-child { border-bottom: none; }
+.bp-check-num {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.12em;
+    padding-top: 2px;
+}
+.bp-check-body h4 {
+    font-size: 15.5px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    margin: 0 0 6px;
+    letter-spacing: -0.005em;
+}
+.bp-check-body p {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+}
+.bp-check-body p strong { color: var(--bp-ink); }
+
+/* ===== Measurement framework (Kirkpatrick × BCG) ===== */
+.bp-measure {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-measure-head {
+    display: grid;
+    grid-template-columns: 170px 1fr 1fr;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+    position: relative;
+}
+.bp-measure-head::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-measure-head > div {
+    padding: 14px 20px;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-right: 1px solid rgba(247, 245, 239, 0.14);
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+.bp-measure-head > div:last-child { border-right: none; }
+.bp-measure-row {
+    display: grid;
+    grid-template-columns: 170px 1fr 1fr;
+    border-top: 1px solid var(--bp-rule);
+}
+.bp-measure-row > div {
+    padding: 18px 20px;
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--bp-ink);
+    border-right: 1px solid var(--bp-rule);
+}
+.bp-measure-row > div:last-child { border-right: none; }
+.bp-measure-row .layer {
+    background: rgba(14, 59, 42, 0.04);
+    font-family: var(--sans);
+    font-weight: 700;
+    color: var(--bp-line);
+    font-size: 13.5px;
+    letter-spacing: 0.02em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+.bp-measure-row .layer .layer-en {
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    font-weight: 700;
+    margin-bottom: 6px;
+    display: block;
+}
+.bp-measure-row .impact { background: rgba(27, 110, 79, 0.04); }
+.bp-measure-row .impact strong, .bp-measure-row .define strong { color: var(--bp-line); }
+
+/* ===== Role pyramid (BCG-style 4-tier chart) ===== */
+.bp-pyramid {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    padding: 44px 48px 40px;
+}
+
+/* Header row with horizontal rule + dot */
+.bp-pyramid-header {
+    display: grid;
+    grid-template-columns: 360px 1fr 1.1fr;
+    gap: 40px;
+    margin-bottom: 14px;
+    align-items: center;
+}
+.bp-pyramid-header .head-cell {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+.bp-pyramid-header .head-cell.spacer { visibility: hidden; }
+.bp-pyramid-header .head-label {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+}
+.bp-pyramid-header .head-line {
+    flex: 1;
+    height: 1px;
+    background: var(--bp-ink);
+    position: relative;
+}
+.bp-pyramid-header .head-line::after {
+    content: "";
+    position: absolute;
+    right: -3px;
+    top: -3px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--bp-ink);
+}
+
+/* Row */
+.bp-pyramid-row {
+    display: grid;
+    grid-template-columns: 360px 1fr 1.1fr;
+    gap: 40px;
+    padding: 24px 0;
+    align-items: center;
+}
+
+/* Role cell · big icon + name + example */
+.role-cell {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.role-icon {
+    flex-shrink: 0;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid;
+}
+.role-icon svg {
+    width: 32px;
+    height: 32px;
+    stroke-width: 1.8;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.bp-pyramid-row[data-tier="shaper"] .role-icon {
+    background: #DCEBE2;
+    border-color: #8FBFA1;
+    color: var(--bp-line);
+}
+.bp-pyramid-row[data-tier="leader"] .role-icon {
+    background: #B8D8C5;
+    border-color: #5BA47C;
+    color: var(--bp-line);
+}
+.bp-pyramid-row[data-tier="transformer"] .role-icon {
+    background: #2A6E50;
+    border-color: #1F5D43;
+    color: var(--bp-paper);
+}
+.bp-pyramid-row[data-tier="frontline"] .role-icon {
+    background: #0E3B2A;
+    border-color: #062018;
+    color: var(--bp-paper);
+}
+
+.role-text { display: flex; flex-direction: column; min-width: 0; }
+.role-name {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    margin-bottom: 6px;
+}
+.bp-pyramid-row[data-tier="shaper"] .role-name { color: var(--bp-line); }
+.bp-pyramid-row[data-tier="leader"] .role-name { color: #2A6E50; }
+.bp-pyramid-row[data-tier="transformer"] .role-name { color: var(--bp-line); }
+.bp-pyramid-row[data-tier="frontline"] .role-name { color: var(--bp-line); }
+
+.role-eg {
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: var(--ink-mute);
+    letter-spacing: 0.005em;
+    line-height: 1.5;
+}
+
+/* Graphic cell · blocks (left-aligned, right side slanted) */
+.graphic-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+.blocks-row {
+    display: flex;
+    gap: 6px;
+}
+.block {
+    width: 38px;
+    height: 54px;
+    clip-path: polygon(0% 0%, 38% 0%, 100% 100%, 0% 100%);
+    transition: transform .25s ease;
+}
+.bp-pyramid-row[data-tier="shaper"] .block { background: #B8D8C5; }
+.bp-pyramid-row[data-tier="leader"] .block { background: #5BA47C; }
+.bp-pyramid-row[data-tier="transformer"] .block { background: #2A6E50; }
+.bp-pyramid-row[data-tier="frontline"] .block { background: #0E3B2A; }
+.bp-pyramid-row:hover .block { transform: translateY(-3px); }
+
+/* Outcome cell */
+.outcome-cell {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--bp-ink);
+}
+.outcome-cell strong { color: var(--bp-line); }
+
+/* Responsive */
+@media (max-width: 1100px) {
+    .bp-pyramid { padding: 32px 24px; }
+    .bp-pyramid-header, .bp-pyramid-row {
+        grid-template-columns: 280px 1fr 1fr;
+        gap: 24px;
+    }
+    .role-name { font-size: 20px; }
+    .role-icon { width: 60px; height: 60px; }
+    .role-icon svg { width: 28px; height: 28px; }
+    .block { width: 32px; height: 46px; }
+}
+@media (max-width: 768px) {
+    .bp-pyramid-header { display: none; }
+    .bp-pyramid-row {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding: 22px 0;
+        border-top: 1px solid var(--bp-rule);
+    }
+    .bp-pyramid-row:first-of-type { border-top: none; }
+    .graphic-cell { align-items: flex-start; }
+    .block { width: 28px; height: 40px; }
+}
+
+/* ===== Antipattern table ===== */
+.bp-anti {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-anti-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(139, 46, 31, 0.35), transparent 60%),
+        linear-gradient(90deg, #2A0E0A 0%, #4A1A12 50%, #5C2218 100%);
+    color: var(--bp-paper);
+    position: relative;
+}
+.bp-anti-head > div {
+    padding: 14px 20px;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-right: 1px solid rgba(247, 245, 239, 0.14);
+    text-align: center;
+}
+.bp-anti-head > div:last-child { border-right: none; }
+.bp-anti-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--bp-rule);
+}
+.bp-anti-row > div {
+    padding: 18px 22px;
+    font-size: 14px;
+    line-height: 1.7;
+    border-right: 1px solid var(--bp-rule);
+    color: var(--ink-soft);
+}
+.bp-anti-row > div:last-child { border-right: none; }
+.bp-anti-row .bad {
+    background: rgba(139, 46, 31, 0.04);
+}
+.bp-anti-row .bad strong { color: var(--bp-red); }
+.bp-anti-row .good {
+    background: rgba(14, 59, 42, 0.04);
+}
+.bp-anti-row .good strong { color: var(--bp-line); }
+
+/* ===== References block (footer) ===== */
+.bp-refs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 22px;
+    margin: 4px 0 18px;
+    padding: 18px 22px;
+    background: rgba(247, 245, 239, 0.06);
+    border: 1px solid rgba(247, 245, 239, 0.18);
+}
+.bp-refs .ref-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.bp-refs .ref-tag {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(247, 245, 239, 0.6);
+}
+.bp-refs .ref-title {
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: rgba(247, 245, 239, 0.95);
+}
+.bp-refs .ref-title a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 3px;
+}
+.bp-refs .ref-note {
+    font-family: var(--sans);
+    font-size: 11.5px;
+    color: rgba(247, 245, 239, 0.65);
+    line-height: 1.55;
+}
+@media (max-width: 768px) {
+    .bp-refs { grid-template-columns: 1fr; }
+}
+
+/* ===== Closing footer ===== */
+.bp-footer {
+    padding: 36px 56px 44px;
+    background:
+        radial-gradient(ellipse at 0% 100%, rgba(27, 110, 79, 0.35), transparent 55%),
+        linear-gradient(110deg, #14523B 0%, #0E3B2A 35%, #0A2E22 70%, #062018 100%);
+    color: rgba(247, 245, 239, 0.92);
+    font-family: var(--sans);
+    font-size: 12.5px;
+    line-height: 1.7;
+    border-top: 1.5px solid #062018;
+    position: relative;
+    overflow: hidden;
+}
+.bp-footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-footer > * { position: relative; z-index: 1; }
+.bp-footer strong { color: var(--bp-paper); }
+.bp-footer a { color: rgba(247, 245, 239, 0.92); text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+.bp-footer a:hover { color: var(--bp-paper); }
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+    .bp-hero { padding: 48px 32px; }
+    .bp-hero h1 { font-size: 38px; }
+    .bp-section { padding: 40px 32px; }
+    .bp-compare-head, .bp-compare-row { grid-template-columns: 120px 1fr 1fr; }
+    .bp-measure-head, .bp-measure-row { grid-template-columns: 130px 1fr 1fr; }
+    .bp-principles.bp-4d { grid-template-columns: repeat(2, 1fr); }
+    .bp-principle { border-right: 1px solid var(--bp-rule); border-bottom: 1px solid var(--bp-rule); }
+    .bp-principles.bp-4d .bp-principle:nth-child(2n) { border-right: none; }
+    .bp-principles.bp-4d .bp-principle:nth-last-child(-n+2) { border-bottom: none; }
+    .bp-comp-row { grid-template-columns: 1fr; gap: 8px; }
+    .bp-footer { padding: 32px; }
+}
+@media (max-width: 600px) {
+    .bp-sheet { margin: 12px; }
+    .bp-hero h1 { font-size: 28px; }
+    .bp-section-title { font-size: 22px; }
+    .bp-compare-head, .bp-compare-row { grid-template-columns: 1fr; }
+    .bp-compare-row .label { background: rgba(14, 59, 42, 0.08); }
+    .bp-measure-head, .bp-measure-row { grid-template-columns: 1fr; }
+    .bp-measure-head > div, .bp-measure-row > div { border-right: none; }
+    .bp-measure-row .layer { text-align: left; }
+    .bp-principles.bp-4d { grid-template-columns: 1fr; }
+    .bp-principles.bp-4d .bp-principle { border-right: none; }
+    .bp-principles.bp-4d .bp-principle:last-child { border-bottom: none; }
+    .bp-anti-head, .bp-anti-row { grid-template-columns: 1fr; }
+    .bp-check-row { grid-template-columns: 1fr; gap: 6px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bp-sheet">
+
+
+    <!-- ========= BRAND BAR ========= -->
+    <a class="bp-brandbar" href="index.html" aria-label="목차로 이동">
+        <img class="bb-logo" src="assets/logos/logo1-transparent.png" alt="AI ROASTING">
+        <span>AI ROASTING · AX GUIDE TO COMPANY BRAIN OS</span>
+    </a>
+
+    <!-- ========= STEP NAVIGATION ========= -->
+    <nav class="bp-stepnav" aria-label="전체 단계">
+        <ol class="bp-steps">
+            <li class="bp-step"><a href="blueprint.html">진단</a></li>
+            <li class="bp-step active" aria-current="step"><a href="organization.html">1</a></li>
+            <li class="bp-step"><a href="pilot.html">2</a></li>
+            <li class="bp-step"><a href="criteria.html">3</a></li>
+            <li class="bp-step"><a href="resource.html">4</a></li>
+            <li class="bp-step"><a href="ainative.html">5</a></li>
+        </ol>
+        <a class="bp-back" href="index.html">← 목록으로</a>
+        <div class="bp-substeps" aria-label="1단계 추진체계 페이지">
+            <a href="organization.html">TF 조직 세팅</a>
+            <a href="operations.html">운영 계획 수립</a>
+            <a href="capability.html" class="active" aria-current="page">AI 부트캠프</a>
+        </div>
+    </nav>
+
+    <!-- ========= HERO ========= -->
+    <section class="bp-hero">
+        <div class="bp-hero-eyebrow">Step 1 · 추진체계 구축 · AI 부트캠프 · BRAIN OS 첫 챔피언</div>
+        <h1>90일 부트캠프와 해커톤으로 COMPANY BRAIN OS의 첫 챔피언을 만듭니다.</h1>
+        <p class="bp-lead">5~9명 TF의 90일 부트캠프를 교육·Quick Win·해커톤 세 활동에만 집중해 BRAIN OS의 첫 챔피언을 키웁니다.</p>
+        <div class="bp-summary">
+            <strong>AI 부트캠프는 세 활동으로만 구성됩니다.</strong> 첫째, 90일 부트캠프로 학습합니다. 둘째, 부트캠프 29일차부터 자기 도메인에서 Quick Win을 만들어 봅니다. 셋째, 4개월차에 사내 해커톤을 열어 챔피언 후보군을 전사로 확장합니다. 그 외 활동(전사 동시 교육, 강사 양성 트랙, 외부 컨퍼런스 파견)은 본 단계의 범위에 두지 않습니다.
+        </div>
+    </section>
+
+    <nav class="bp-hero-nav" aria-label="섹션 바로가기">
+        <a href="#bootcamp">90일 부트캠프 교육</a>
+        <a href="#quickwin">Quick Win 운영</a>
+        <a href="#hackathon">사내 해커톤</a>
+        <a href="#pitfalls">흔한 실패 패턴</a>
+    </nav>
+
+    <!-- ========= 1. 90일 부트캠프 ========= -->
+    <section class="bp-section" id="bootcamp">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">90일 부트캠프 · TF는 무엇을 학습하는가</h2>
+            </div>
+            <div class="bp-section-meta">시간의 70%+ 할당 · 4개 모듈 · 학습과 만들기의 짝</div>
+        </div>
+
+        <p class="bp-section-intro">TF 5~9명에게 일과의 70% 이상을 부트캠프와 자기 도메인 적용에 보장합니다. 90일은 학습과 만들기를 짝으로 한 번 완주할 수 있는 최소 기간입니다. 4개 모듈이 순차적으로 전개됩니다. 기본기로 시작해 협업 역량을 익히고, 29일차부터 자기 도메인에서 Quick Win을 만든 다음, 마지막에 동료에게 옮기는 코칭 연습으로 마무리합니다.</p>
+
+        <div class="bp-principles bp-4d">
+            <div class="bp-principle">
+                <div class="bp-principle-num">1~14일차</div>
+                <div class="bp-principle-name">AI 기본기</div>
+                <div class="bp-principle-body">
+                    초반 14일은 TF가 강의실로 출근하는 기간입니다. 모델의 종류와 한계, 비용 구조, 정보보안·개인정보 가이드를 집중 학습합니다. 도구 매뉴얼이 아니라 <strong>"이 일에 AI를 쓸지 말지"를 판단하는 기준</strong>을 다지는 시간입니다. 사내 보안·법무가 코티칭으로 참여해 회사의 실제 제약을 함께 전달합니다.
+                </div>
+                <div class="bp-principle-evidence">
+                    <b>산출물</b>자기 부서 업무 목록을 두고 "AI 위임 가능 / 일부 가능 / 사람 전담"으로 1차 분류한 표 1장.
+                </div>
+            </div>
+            <div class="bp-principle">
+                <div class="bp-principle-num">15~28일차</div>
+                <div class="bp-principle-name">4D 협업 역량</div>
+                <div class="bp-principle-body">
+                    4D 협업 프레임워크, 즉 <strong>위임(Delegation)·설명(Description)·분별(Discernment)·성실(Diligence)</strong>을 자기 도메인의 실제 의사결정 사례로 실습합니다. AI에게 무엇을 맡길지(Delegation), 어떻게 맥락을 전달할지(Description), 결과 품질을 어떻게 판별할지(Discernment), 책임을 어떻게 끝까지 지는지(Diligence)의 네 단어를 회사 공통 어휘로 정착시킵니다.
+                </div>
+                <div class="bp-principle-evidence">
+                    <b>산출물</b>자기 도메인의 의사결정 사례 3건을 4D(Delegation·Description·Discernment·Diligence) 어휘로 분해한 케이스 노트.
+                </div>
+            </div>
+            <div class="bp-principle">
+                <div class="bp-principle-num">29~60일차</div>
+                <div class="bp-principle-name">Quick Win 제작</div>
+                <div class="bp-principle-body">
+                    초반 28일에서 분류한 use case 중 하나를 골라 <strong>자기 손으로 만들어 봅니다.</strong> 작은 자동화, Skill 문서 한두 개, 가벼운 에이전트 한 개 정도가 적정 단위입니다. 베테랑의 암묵지를 Skill로 옮기는 K1~K3 사이클을 직접 돌립니다. 멘토 1명과 도메인 자문 1명이 한 팀에 붙습니다.
+                </div>
+                <div class="bp-principle-evidence">
+                    <b>산출물</b>30일 안에 동료 5명 이상이 직접 써본 흔적이 남는 Quick Win 1~2건.
+                </div>
+            </div>
+            <div class="bp-principle">
+                <div class="bp-principle-num">61~90일차</div>
+                <div class="bp-principle-name">동료 코칭과 자산화</div>
+                <div class="bp-principle-body">
+                    만든 Quick Win을 옆자리 동료 1~2명에게 옮기는 코칭 실습입니다. 사내 위키에 Skill 문서로 자산화하고, 신규 사용자가 막히는 자리를 기록해 다음 버전에 반영합니다. <strong>여기서부터 챔피언으로 굳어지는 신호</strong>가 나옵니다. 동료가 챔피언의 이름을 부르며 묻기 시작하면 통과입니다.
+                </div>
+                <div class="bp-principle-evidence">
+                    <b>산출물</b>코칭 완료 1명 + 사내 위키 등록 Skill 문서 + 다음 버전 백로그.
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ========= 2. Quick Win 운영 ========= -->
+    <section class="bp-section" id="quickwin">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">Quick Win 운영 체크리스트</h2>
+            </div>
+            <div class="bp-section-meta">29일차부터 만들고 30일 안에 동료가 직접 써보게 하는 7개 항목</div>
+        </div>
+
+        <p class="bp-section-intro">Quick Win은 "재미있는 데모"가 아닙니다. 부트캠프와 짝을 이룬 작은 실전입니다. 29일차 시점에 한 명당 한두 개를 자기 도메인에서 만들고, 30일 안에 동료 5명 이상이 직접 써본 흔적이 남아야 다음 모듈로 넘어갑니다. 아래 7개 항목은 Quick Win을 PoC로 굳히지 않기 위한 운영 규약입니다.</p>
+
+        <div class="bp-checklist">
+            <div class="bp-check-row">
+                <div class="bp-check-num">01</div>
+                <div class="bp-check-body">
+                    <h4>산출물 단위를 미리 못박습니다</h4>
+                    <p>한 사람당 적정 단위는 <strong>자기 도메인의 작은 자동화 1건 또는 Skill 문서 1~2개</strong>입니다. 화려한 멀티 에이전트 데모는 1단계의 산출물이 아닙니다. 단위를 처음에 못박지 않으면 "조금만 더"를 반복하다 임기 종료를 맞습니다.</p>
+                </div>
+            </div>
+            <div class="bp-check-row">
+                <div class="bp-check-num">02</div>
+                <div class="bp-check-body">
+                    <h4>자기 도메인에서만 고릅니다</h4>
+                    <p>옆 부서의 멋진 use case가 더 매력적으로 보일 때가 있습니다. 그러나 챔피언화의 핵심은 "옆자리 동료가 신뢰하는 사람"이 되는 일입니다. <strong>자기 부서의 실제 통증</strong>이 아니면 챔피언으로 자라지 않습니다.</p>
+                </div>
+            </div>
+            <div class="bp-check-row">
+                <div class="bp-check-num">03</div>
+                <div class="bp-check-body">
+                    <h4>30일 안에 동료 5명이 직접 써보게 합니다</h4>
+                    <p>완성도가 아니라 사용 흔적이 통과 기준입니다. 자기 부서 동료 5명에게 직접 써보게 하고, 막힌 자리를 받아 적습니다. 5명을 못 채운 Quick Win은 다시 짭니다. <strong>사용된 적 없는 산출물은 자산이 아닙니다.</strong></p>
+                </div>
+            </div>
+            <div class="bp-check-row">
+                <div class="bp-check-num">04</div>
+                <div class="bp-check-body">
+                    <h4>청사진 적합도를 1순위 채점 기준으로 둡니다</h4>
+                    <p>기술적으로 멋진가가 아니라 AI-Native 청사진에 다가가는가, 빅 베팅 후보 풀에 기여하는가를 1순위로 묻습니다. 부가 기준은 분별 가능성, 위임 가능성, 운영 안착 난이도입니다. 심사위원에 TF 리드와 도메인 임원을 포함합니다.</p>
+                </div>
+            </div>
+            <div class="bp-check-row">
+                <div class="bp-check-num">05</div>
+                <div class="bp-check-body">
+                    <h4>실패한 Quick Win은 실패 일지로 등록합니다</h4>
+                    <p>탈락 산출물도 "쓸모 없음"으로 버리지 않습니다. 어떤 가설로 시작해 어디서 막혔는지를 짧게 정리해 사내 실패 일지에 보관합니다. <strong>다음 TF가 같은 자리에 다시 부딪히지 않게 하는 자산</strong>입니다.</p>
+                </div>
+            </div>
+            <div class="bp-check-row">
+                <div class="bp-check-num">06</div>
+                <div class="bp-check-body">
+                    <h4>우수 Quick Win은 그대로 ③단계 입구로 보냅니다</h4>
+                    <p>상위 1~2건은 시상으로 끝내지 않습니다. ③단계 파일럿의 첫 후보로 자동 등록하고, 해당 챔피언에게 파일럿 기간의 시간 할당을 보장합니다. <strong>이 약속이 다음 TF 차수의 지원자 수를 결정합니다.</strong></p>
+                </div>
+            </div>
+            <div class="bp-check-row">
+                <div class="bp-check-num">07</div>
+                <div class="bp-check-body">
+                    <h4>모든 Quick Win에 4D 한 줄을 남깁니다</h4>
+                    <p>산출물 옆에 "이 결과를 누가 위임받았고, 누가 분별했으며, 누가 끝까지 책임지는가" 한 줄을 적습니다. 양식이 어휘를 정착시킵니다. 이 한 줄이 PwC가 말하는 Responsible AI의 가장 작은 단위입니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= 3. 사내 해커톤 ========= -->
+    <section class="bp-section" id="hackathon">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">사내 해커톤 · TF 밖으로 챔피언 후보를 넓힙니다</h2>
+            </div>
+            <div class="bp-section-meta">4개월차 1회 · 2~3일 단축 운영 · 출품 20건 채택 3~5건</div>
+        </div>
+
+        <p class="bp-section-intro">해커톤은 운영 계획의 4개월차에 한 번 엽니다. 1~3개월차에 TF가 만든 Quick Win이 충분히 쌓인 시점이라야 좋은 출품작이 나오고, 5~6개월차의 인계 자산으로 자연스럽게 연결됩니다. 외부 행사처럼 화려하게 키우지 않습니다. <strong>2박 3일 또는 평일 5일 짧은 일정</strong>으로 줄이고, "재미있는 데모"가 아니라 "회사가 다음 분기에 쓸 후보"를 가린다는 목적을 처음부터 명시합니다.</p>
+
+        <div class="bp-compare">
+            <div class="bp-compare-head">
+                <div>비교 항목</div>
+                <div>일반 사내 해커톤</div>
+                <div class="pick">AX 챔피언 확장형 해커톤</div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="label">참가 단위</div>
+                <div>지원 부서가 자율적으로 팀을 짭니다. 비슷한 사람끼리 모이는 경향이 강합니다.</div>
+                <div class="preferred">각 팀에 TF 코어 멤버 1명을 멘토로 강제 배치합니다. 신청 단계부터 <strong>도메인 전문가와 기술 인력을 한 팀에 묶어</strong> 짝짓습니다.</div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="label">과제 폭</div>
+                <div>"자유 주제"로 출발하면 게임·재미 위주 작품이 절반을 차지합니다.</div>
+                <div class="preferred">빅 베팅 후보 3~5건과 직접 닿는 <strong>"실제 업무 미해결 문제 풀"</strong>에서 골라 출제합니다. 자유 주제는 전체의 30% 이하로 제한합니다.</div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="label">심사 기준</div>
+                <div>기술적 완성도와 발표 임팩트가 1순위가 됩니다. 가동되지 않을 데모가 우승합니다.</div>
+                <div class="preferred">1순위 기준은 <strong>"30일 안에 부서 동료 5명이 직접 써볼 수 있는가"</strong>입니다. 기술 완성도는 2순위, 발표 형식은 채점 항목에서 뺍니다.</div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="label">후속 처리</div>
+                <div>시상금과 사진으로 끝납니다. 다음 분기에는 이름이 잊힙니다.</div>
+                <div class="preferred">상위 3~5건은 운영 계획 5개월차의 <strong>정식 운영 자산 승격 트랙</strong>으로 자동 진입합니다. 출품자는 시간 할당과 챔피언 후보 인증을 함께 받습니다.</div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="label">LLM 사용</div>
+                <div>참가자 각자 익숙한 도구를 임의로 씁니다. 보안 검토가 사후에 다시 필요합니다.</div>
+                <div class="preferred">사용 도구를 표준 LLM 1개와 보조 1개로 한정합니다. <strong>운영 계획 페이지에서 정한 가이드</strong> 안에서만 사용을 허용해, 사후 검토 부담을 없앱니다.</div>
+            </div>
+        </div>
+
+        <h3 style="margin: 44px 0 18px; font-size: 19px; font-weight: 700; color: var(--bp-ink); letter-spacing: -0.005em;">해커톤 운영 체크리스트</h3>
+        <p style="margin: 0 0 22px; font-size: 14px; line-height: 1.75; color: var(--ink-soft);">아래 6개 항목은 해커톤 출범 30일 전에 준비를 마쳐야 할 작업입니다. 행사 자체보다 사전 설계가 결과의 80%를 결정합니다.</p>
+
+        <div class="bp-checklist">
+            <div class="bp-check-row">
+                <div class="bp-check-num">01</div>
+                <div class="bp-check-body">
+                    <h4>출제 풀을 빅 베팅과 묶어 미리 공개합니다</h4>
+                    <p>해커톤 30일 전, 운영 계획의 빅 베팅 3~5건과 직접 닿는 <strong>"실제 미해결 문제 10~15건"</strong>을 사내에 공개합니다. 참가자가 출발선에서 자기 부서의 통증과 연결할 시간을 줍니다. 비공개로 두면 첫날을 주제 탐색으로 흘려보냅니다.</p>
+                </div>
+            </div>
+            <div class="bp-check-row">
+                <div class="bp-check-num">02</div>
+                <div class="bp-check-body">
+                    <h4>팀당 멤버 3~5명과 TF 멘토 1명을 강제 배치합니다</h4>
+                    <p>한 팀은 멤버 3~5명으로 짜고, 그 안에 TF 코어 멤버 1명을 멘토로 붙입니다. 멘토는 산출물에 손을 대지 않습니다. <strong>4D 어휘로 막힌 자리를 풀어 주는 역할</strong>만 맡습니다. 한 부서 인원이 한 팀의 절반을 넘지 않도록 짝지어, 부서 정치가 끼어들 여지를 차단합니다.</p>
+                </div>
+            </div>
+            <div class="bp-check-row">
+                <div class="bp-check-num">03</div>
+                <div class="bp-check-body">
+                    <h4>LLM·데이터 권한을 행사 전에 일괄 발급합니다</h4>
+                    <p>표준 LLM 1개와 보조 1개의 접근 권한, 그리고 출제와 직접 관련된 데이터 권한을 행사 D-3일까지 일괄 발급합니다. 행사 첫 날을 권한 신청으로 보내면 다음 이틀이 무너집니다. <strong>출제 풀과 묶인 데이터셋</strong>은 사내 보안 가이드 안에서 미리 정제해 둡니다.</p>
+                </div>
+            </div>
+            <div class="bp-check-row">
+                <div class="bp-check-num">04</div>
+                <div class="bp-check-body">
+                    <h4>심사위원에 도메인 임원과 TF 리드를 포함합니다</h4>
+                    <p>외부 전문가만 부르면 발표 임팩트 위주 채점이 됩니다. <strong>도메인 임원 2명, TF 리드 1명, 외부 자문 1명</strong>의 4인 구성을 권장합니다. 심사 가중치는 사용 가능성 50%, 빅 베팅 적합도 30%, 기술 완성도 20%로 못박습니다.</p>
+                </div>
+            </div>
+            <div class="bp-check-row">
+                <div class="bp-check-num">05</div>
+                <div class="bp-check-body">
+                    <h4>시상 항목에 "30일 후 가동 보장"을 포함합니다</h4>
+                    <p>대상·우수상의 시상 내용에 <strong>"수상 후 30일 안에 본인 부서에서 가동, TF가 운영 자산화 지원"</strong>을 명시합니다. 시상금만 받고 흩어지는 구조를 처음부터 막습니다. 가동 보장 약속이 다음 차수 지원자 수를 결정합니다.</p>
+                </div>
+            </div>
+            <div class="bp-check-row">
+                <div class="bp-check-num">06</div>
+                <div class="bp-check-body">
+                    <h4>출품작 전체를 실패 일지에 자산화합니다</h4>
+                    <p>채택되지 않은 출품작도 사내 위키의 실패 일지에 짧게 정리합니다. 어떤 가설로 시작해 어디에서 막혔는지를 두세 문단으로 적어 두면, 다음 분기에 다른 부서가 같은 자리에서 다시 부딪히지 않습니다. <strong>해커톤의 진짜 자산은 우승작이 아니라 시도 전체의 기록</strong>입니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= 4. 흔한 실패 패턴 ========= -->
+    <section class="bp-section" id="pitfalls">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">흔한 실패 패턴과 대응</h2>
+            </div>
+            <div class="bp-section-meta">교육 · Quick Win · 해커톤에서 자주 보이는 3가지</div>
+        </div>
+
+        <p class="bp-section-intro">아래는 세 활동을 운영하며 첫 90일 안에 가장 자주 보이는 실패 패턴입니다. 각 활동에 한 가지씩 골라 두었습니다. 좌측이 흔한 모습, 우측이 같은 상황을 다르게 푸는 방법입니다.</p>
+
+        <div class="bp-anti">
+            <div class="bp-anti-head">
+                <div>자주 나타나는 함정</div>
+                <div>대응 방향</div>
+            </div>
+            <div class="bp-anti-row">
+                <div class="bad"><strong>교육 · "이수증으로 끝납니다."</strong> 4개 모듈을 다 들었다는 출석률만 남고, 자기 도메인 적용 흔적은 없습니다. 강의실 안에서 학습이 멈춥니다.</div>
+                <div class="good"><strong>모듈마다 산출물을 통과 조건으로 둡니다.</strong> 부트캠프 출석률이 아니라 모듈별 산출물(분류표·케이스 노트·Quick Win·Skill 문서)을 다음 모듈 진입 게이트로 씁니다.</div>
+            </div>
+            <div class="bp-anti-row">
+                <div class="bad"><strong>Quick Win · "PoC로 굳습니다."</strong> 데모는 멋진데 실제로 쓰는 동료가 없어 임기 종료와 함께 잊힙니다. 시상으로 끝나고 자산으로 남지 않습니다.</div>
+                <div class="good"><strong>30일 안 동료 5명 사용 흔적을 통과 조건</strong>으로 둡니다. 사용 흔적이 없는 산출물은 자산으로 등록하지 않고 실패 일지로 보냅니다.</div>
+            </div>
+            <div class="bp-anti-row">
+                <div class="bad"><strong>해커톤 · "발표 임팩트가 우승합니다."</strong> 화려한 시연이 1등을 가져가고, 다음 분기에는 가동되지 않은 채로 잊힙니다. 시상금만 남습니다.</div>
+                <div class="good"><strong>심사 가중치를 사용 가능성 50%로 못박고</strong>, 시상 항목에 "30일 안 본인 부서 가동"을 명시합니다. 가동 보장이 다음 차수 지원자 수를 결정합니다.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= FOOTER ========= -->
+    <footer class="bp-footer">
+        <p style="margin:0 0 14px; font-size:11.5px; opacity:0.78;">* 이 페이지는 AX 5단계 로드맵의 1단계(추진체계 구축)를 세 작업으로 나눈 세 번째, AI 부트캠프를 다룹니다. 앞 두 페이지는 TF 조직 세팅과 운영 계획 수립(6개월 마일스톤과 LLM 선택)이며, 이어지는 단계는 2단계 우선순위화입니다. 본 페이지는 교육·Quick Win·해커톤 세 활동에만 한정합니다.</p>
+
+        <p style="margin:0 0 8px; font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(247, 245, 239, 0.7);">참고 문서</p>
+
+        <div class="bp-refs">
+            <div class="ref-item">
+                <div class="ref-tag">BCG · 2025</div>
+                <div class="ref-title"><a href="https://www.bcg.com/publications/2025/to-unlock-the-full-value-of-ai-invest-in-your-people" target="_blank" rel="noopener">To Unlock the Full Value of AI, Invest in Your People</a></div>
+                <div class="ref-note">"사람에 투자한 깊이"가 AX 가치 실현의 핵심 변수라는 근거.</div>
+            </div>
+            <div class="ref-item">
+                <div class="ref-tag">McKinsey · 2025</div>
+                <div class="ref-title"><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank" rel="noopener">The State of AI 2025 / Rewired</a></div>
+                <div class="ref-note">capability building 6요소 중 talent. AX 추진 변수에서 사람 투자의 비중.</div>
+            </div>
+            <div class="ref-item">
+                <div class="ref-tag">Anthropic</div>
+                <div class="ref-title"><a href="https://www.anthropic.com/ai-fluency" target="_blank" rel="noopener">AI Fluency · 4D Framework</a></div>
+                <div class="ref-note">부트캠프 협업 역량 모듈의 원전. 위임·설명·분별·성실.</div>
+            </div>
+        </div>
+
+        <p style="margin:0; opacity:0.85;">부트캠프 커리큘럼과 Quick Win, 해커톤 운영 절차는 회사 규모와 산업, 기존 학습 인프라에 따라 달라집니다. 이 페이지는 일반 기업을 기준으로 한 권고이며, 실제 적용 시 사내 HR·교육·법무 부서 검토를 함께 거쳐야 합니다.</p>
+        <p style="margin:22px 0 0; padding-top:18px; border-top:1px solid rgba(247,245,239,0.18); font-size:11.5px; opacity:0.7; letter-spacing:0.04em;">&copy; 2026 AI ROASTING. All rights reserved.</p>
+    </footer>
+
+</div>
+
+<script>
+(function() {
+    'use strict';
+    var navLinks = document.querySelectorAll('.bp-hero-nav a');
+    if (!navLinks.length) return;
+
+    var linkMap = {};
+    var sectionIds = [];
+    navLinks.forEach(function(link) {
+        var id = (link.getAttribute('href') || '').replace('#', '');
+        if (!id) return;
+        var el = document.getElementById(id);
+        if (!el) return;
+        linkMap[id] = { link: link, el: el };
+        sectionIds.push(id);
+    });
+    if (!sectionIds.length) return;
+
+    function setActive(id) {
+        sectionIds.forEach(function(k) {
+            if (k === id) linkMap[k].link.classList.add('active');
+            else linkMap[k].link.classList.remove('active');
+        });
+    }
+
+    function update() {
+        var nav = document.querySelector('.bp-hero-nav');
+        var navH = nav ? nav.offsetHeight : 0;
+        var trigger = navH + 60;
+        var currentId = null;
+        for (var i = 0; i < sectionIds.length; i++) {
+            var rect = linkMap[sectionIds[i]].el.getBoundingClientRect();
+            if (rect.top <= trigger) currentId = sectionIds[i];
+            else break;
+        }
+        setActive(currentId);
+    }
+
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(function() {
+            update();
+            ticking = false;
+        });
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+})();
+</script>
+
+</body>
+</html>
