@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>청사진 · AI-Native 전환 5단계 프레임워크</title>
+<title>AX 추진 원칙 · AI ROASTING</title>
 <meta name="description" content="AI-aware에서 AI-Native 조직으로 가는 전체 프레임워크의 단일 청사진. 5층위·5단계·10문항·4단계 순환을 한 페이지에 펼친다.">
 <link rel="stylesheet" href="assets/style.css">
 <style>
@@ -22,8 +22,8 @@
     --bp-red: #8B2E1F;
 }
 
-html { scroll-behavior: smooth; scroll-padding-top: 116px; }
-section[id] { scroll-margin-top: 116px; }
+html { scroll-behavior: smooth; scroll-padding-top: 30px; }
+section[id] { scroll-margin-top: 30px; }
 body {
     background:
         linear-gradient(var(--bp-grid) 1px, transparent 1px) 0 0 / 32px 32px,
@@ -542,6 +542,93 @@ body {
     text-transform: uppercase;
     color: var(--bp-accent);
     font-weight: 600;
+}
+
+/* ===== Principles (illustrated variant) ===== */
+.bp-principles--illustrated .bp-principle {
+    padding: 24px 20px 22px;
+    min-height: 440px;
+    background: var(--bp-paper-2);
+    text-align: left;
+}
+.bp-principles--illustrated .bp-principle-num {
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    color: var(--bp-accent);
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--bp-rule);
+}
+.bp-principle-stat {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 44px;
+    line-height: 1.05;
+    color: var(--bp-line);
+    letter-spacing: -0.02em;
+    margin: 6px 0 4px;
+}
+.bp-principle-stat .unit {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0;
+    margin-left: 2px;
+    color: var(--bp-accent);
+}
+.bp-principle-stat-caption {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    margin-bottom: 18px;
+}
+.bp-principle-stat-caption strong {
+    color: var(--bp-ink);
+    font-weight: 700;
+}
+.bp-principle-svg {
+    margin: 4px 0 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 96px;
+}
+.bp-principle-svg svg {
+    width: 100%;
+    height: 100%;
+    max-width: 180px;
+}
+.bp-principles--illustrated .bp-principle-title {
+    font-size: 14.5px;
+    font-weight: 700;
+    line-height: 1.45;
+    margin: 0 0 12px;
+    color: var(--bp-ink);
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+.bp-principles--illustrated .bp-principle-body {
+    font-size: 12.5px;
+    line-height: 1.6;
+}
+.bp-principles--illustrated .bp-principle-body ul {
+    padding-left: 14px;
+}
+.bp-principles--illustrated .bp-principle-body ul li {
+    margin-bottom: 5px;
+}
+
+/* ===== Pitfall icon (under title) ===== */
+.bp-pitfall-icon {
+    margin: 4px 0 14px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bp-pitfall-icon svg {
+    height: 100%;
+    width: auto;
+    max-width: 120px;
 }
 
 /* ===== Roadmap timeline (5 steps) ===== */
@@ -1356,7 +1443,6 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
     <section class="bp-hero">
         <div class="bp-hero-eyebrow">Blueprint · COMPANY BRAIN OS 청사진</div>
         <h1>10곳 중 9곳이 AI를 도입했습니다.<br>그러나 실질적 성과를 내는 곳은 100곳 중 6곳뿐입니다.</h1>
-        <p class="bp-lead">이 청사진은 AI 고성과 6%의 회사가 가진 COMPANY BRAIN OS의 구조와 그것을 짓는 다섯 원칙을 한 장에 펼친 그림입니다.</p>
     </section>
 
     <nav class="bp-hero-nav" aria-label="섹션 바로가기">
@@ -1571,6 +1657,24 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
             <div class="bp-principle">
                 <div class="bp-principle-num">P° 1</div>
                 <h4 class="bp-principle-title">도구부터 논의하는 함정</h4>
+                <div class="bp-pitfall-icon" aria-hidden="true">
+                    <svg viewBox="0 0 140 64" xmlns="http://www.w3.org/2000/svg">
+                        <g fill="#FBFAF6" stroke="#0E3B2A" stroke-width="1.5">
+                            <rect x="4" y="22" width="34" height="28" rx="2"/>
+                            <rect x="42" y="22" width="34" height="28" rx="2"/>
+                            <rect x="80" y="22" width="34" height="28" rx="2"/>
+                        </g>
+                        <g font-family="Pretendard" font-size="8" font-weight="700" fill="#0F1A16" text-anchor="middle">
+                            <text x="21" y="40">GPT</text>
+                            <text x="59" y="40">Claude</text>
+                            <text x="97" y="40">Gemini</text>
+                        </g>
+                        <g transform="translate(124 18)">
+                            <circle r="10" fill="#1B6E4F"/>
+                            <text y="4" text-anchor="middle" font-family="Pretendard" font-size="14" font-weight="700" fill="#FBFAF6">?</text>
+                        </g>
+                    </svg>
+                </div>
                 <div class="bp-principle-body">
                     <ul>
                         <li>회의의 첫 의제는 도구 선택입니다. "ChatGPT냐, Claude냐, Gemini냐."</li>
@@ -1582,6 +1686,19 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
             <div class="bp-principle">
                 <div class="bp-principle-num">P° 2</div>
                 <h4 class="bp-principle-title">PoC 범람 함정</h4>
+                <div class="bp-pitfall-icon" aria-hidden="true">
+                    <svg viewBox="0 0 120 64" xmlns="http://www.w3.org/2000/svg">
+                        <g stroke="#0E3B2A" stroke-width="1.2" fill="#FBFAF6">
+                            <rect x="8" y="10" width="18" height="18" rx="2"/>
+                            <rect x="34" y="14" width="18" height="18" rx="2"/>
+                            <rect x="60" y="10" width="18" height="18" rx="2"/>
+                            <rect x="86" y="14" width="18" height="18" rx="2"/>
+                            <rect x="20" y="36" width="18" height="18" rx="2"/>
+                            <rect x="46" y="40" width="18" height="18" rx="2"/>
+                            <rect x="72" y="36" width="18" height="18" rx="2"/>
+                        </g>
+                    </svg>
+                </div>
                 <div class="bp-principle-body">
                     <ul>
                         <li>분기마다 각 부서에서 "AI로 ○○를 시도해 보겠다"는 신청서가 수십 건 올라옵니다.</li>
@@ -1593,6 +1710,22 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
             <div class="bp-principle">
                 <div class="bp-principle-num">P° 3</div>
                 <h4 class="bp-principle-title">환각 맹신 함정</h4>
+                <div class="bp-pitfall-icon" aria-hidden="true">
+                    <svg viewBox="0 0 120 64" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 8 L88 8 Q94 8 94 14 L94 38 Q94 44 88 44 L34 44 L22 56 L24 44 L14 44 Q8 44 8 38 Z"
+                            fill="#FBFAF6" stroke="#0E3B2A" stroke-width="1.5"/>
+                        <g stroke="#1B6E4F" stroke-width="1.4" stroke-linecap="round">
+                            <line x1="20" y1="18" x2="80" y2="18"/>
+                            <line x1="20" y1="26" x2="74" y2="26"/>
+                            <line x1="20" y1="34" x2="68" y2="34"/>
+                        </g>
+                        <g transform="translate(96 18)">
+                            <circle r="12" fill="#0E3B2A"/>
+                            <line x1="-5" y1="-5" x2="5" y2="5" stroke="#FBFAF6" stroke-width="2" stroke-linecap="round"/>
+                            <line x1="5" y1="-5" x2="-5" y2="5" stroke="#FBFAF6" stroke-width="2" stroke-linecap="round"/>
+                        </g>
+                    </svg>
+                </div>
                 <div class="bp-principle-body">
                     <ul>
                         <li>Claude·ChatGPT가 단정적인 어조로 내놓은 답을 그대로 보고서에 옮깁니다.</li>
@@ -1605,6 +1738,20 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
             <div class="bp-principle">
                 <div class="bp-principle-num">P° 4</div>
                 <h4 class="bp-principle-title">시간 비효율 함정</h4>
+                <div class="bp-pitfall-icon" aria-hidden="true">
+                    <svg viewBox="0 0 120 64" xmlns="http://www.w3.org/2000/svg">
+                        <g transform="translate(36 32)">
+                            <circle r="24" fill="#FBFAF6" stroke="#0E3B2A" stroke-width="1.5"/>
+                            <line x1="0" y1="0" x2="0" y2="-14" stroke="#0F1A16" stroke-width="1.8" stroke-linecap="round"/>
+                            <line x1="0" y1="0" x2="10" y2="6" stroke="#0F1A16" stroke-width="1.8" stroke-linecap="round"/>
+                            <circle r="2" fill="#0F1A16"/>
+                        </g>
+                        <g stroke="#1B6E4F" stroke-width="1.8" fill="none" stroke-linecap="round">
+                            <path d="M70 32 L102 32"/>
+                            <path d="M96 26 L102 32 L96 38"/>
+                        </g>
+                    </svg>
+                </div>
                 <div class="bp-principle-body">
                     <ul>
                         <li>직원 50명의 보고서 작성 시간이 각각 두 시간씩 단축됩니다.</li>
@@ -1617,6 +1764,17 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
             <div class="bp-principle">
                 <div class="bp-principle-num">P° 5</div>
                 <h4 class="bp-principle-title">거버넌스 누수 함정</h4>
+                <div class="bp-pitfall-icon" aria-hidden="true">
+                    <svg viewBox="0 0 120 64" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="48" y="6" width="14" height="8" rx="1" fill="#FBFAF6" stroke="#0E3B2A" stroke-width="1.5"/>
+                        <line x1="55" y1="6" x2="55" y2="16" stroke="#0E3B2A" stroke-width="1.2"/>
+                        <rect x="36" y="16" width="40" height="8" rx="1" fill="#FBFAF6" stroke="#0E3B2A" stroke-width="1.5"/>
+                        <rect x="62" y="24" width="12" height="10" fill="#FBFAF6" stroke="#0E3B2A" stroke-width="1.5"/>
+                        <circle cx="68" cy="40" r="1.6" fill="#1B6E4F"/>
+                        <circle cx="68" cy="47" r="2.1" fill="#1B6E4F"/>
+                        <path d="M68 53 Q 64 58 68 62 Q 72 58 68 53 Z" fill="#1B6E4F"/>
+                    </svg>
+                </div>
                 <div class="bp-principle-body">
                     <ul>
                         <li>분기 매출 데이터를 ChatGPT 무료 버전에 입력한 사실이 외부 감사 과정에서 드러납니다.</li>
@@ -1694,59 +1852,127 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
             <div class="bp-section-meta">5% 고성과 그룹이 공통으로 지키는 규칙</div>
         </div>
 
-        <div class="bp-principles">
+        <div class="bp-principles bp-principles--illustrated">
             <div class="bp-principle">
-                <div class="bp-principle-num">N° 1</div>
+                <div class="bp-principle-num">N° 1 · 업무 재설계</div>
+                <div class="bp-principle-svg" aria-hidden="true">
+                    <svg viewBox="0 0 180 96" xmlns="http://www.w3.org/2000/svg">
+                        <g fill="none" stroke="#0E3B2A" stroke-width="1.5">
+                            <rect x="20" y="34" width="44" height="28" rx="2" fill="#FBFAF6"/>
+                            <rect x="116" y="34" width="44" height="28" rx="2" fill="#1B6E4F"/>
+                            <line x1="64" y1="48" x2="116" y2="48"/>
+                            <path d="M111 43 L116 48 L111 53"/>
+                        </g>
+                        <g font-family="Pretendard" font-size="10" font-weight="700" text-anchor="middle">
+                            <text x="42" y="52" fill="#0F1A16">업무</text>
+                            <text x="138" y="52" fill="#FBFAF6">도구</text>
+                        </g>
+                    </svg>
+                </div>
                 <h4 class="bp-principle-title">도구 도입 회의가 아니라 업무 자체를 다시 짜는 회의를 엽니다</h4>
                 <div class="bp-principle-body">
                     <ul>
                         <li>"어떤 AI를 살까" 회의에 두 시간을 쓰지 않습니다.</li>
-                        <li>"이 업무가 어떤 단계를 거치는지"를 화이트보드에 먼저 분해합니다.</li>
-                        <li>도구는 그 분해가 끝난 다음에 고릅니다.</li>
+                        <li>업무 단계를 먼저 화이트보드에 분해합니다.</li>
+                        <li>도구는 분해가 끝난 다음에 고릅니다.</li>
                     </ul>
                 </div>
             </div>
+
             <div class="bp-principle">
-                <div class="bp-principle-num">N° 2</div>
+                <div class="bp-principle-num">N° 2 · 예산 배분</div>
+                <div class="bp-principle-svg" aria-hidden="true">
+                    <svg viewBox="0 0 180 96" xmlns="http://www.w3.org/2000/svg">
+                        <g transform="translate(90 48)">
+                            <circle r="34" fill="none" stroke="#D6D2C5" stroke-width="14"/>
+                            <circle r="34" fill="none" stroke="#1B6E4F" stroke-width="14"
+                                stroke-dasharray="149.6 213.6"
+                                transform="rotate(-90)"/>
+                            <text y="6" text-anchor="middle" font-family="Pretendard" font-size="18" font-weight="700" fill="#0F1A16">70%</text>
+                        </g>
+                    </svg>
+                </div>
                 <h4 class="bp-principle-title">예산의 70%를 사람과 프로세스에 씁니다</h4>
                 <div class="bp-principle-body">
                     <ul>
-                        <li>라이선스 5천만 원 + 교육 5백만 원 → 1년 뒤 "쓸 줄 아는 사람이 없다".</li>
-                        <li>같은 라이선스 + 교육 1억 원 → 1년 뒤 "토큰이 모자라다".</li>
-                        <li>알고리즘 10%, 데이터·기술 20%, 사람·프로세스 70%가 기준선입니다.</li>
+                        <li>라이선스 5천만 + 교육 5백만 → "쓸 줄 아는 사람이 없다".</li>
+                        <li>같은 라이선스 + 교육 1억 → "토큰이 모자라다".</li>
+                        <li>알고리즘 10%, 데이터·기술 20%, 사람 70%가 기준선.</li>
                     </ul>
                 </div>
             </div>
+
             <div class="bp-principle">
-                <div class="bp-principle-num">N° 3</div>
+                <div class="bp-principle-num">N° 3 · 집중 투자</div>
+                <div class="bp-principle-svg" aria-hidden="true">
+                    <svg viewBox="0 0 180 96" xmlns="http://www.w3.org/2000/svg">
+                        <g fill="#D6D2C5">
+                            <circle cx="50" cy="18" r="3.5"/>
+                            <circle cx="68" cy="16" r="3.5"/>
+                            <circle cx="86" cy="18" r="3.5"/>
+                            <circle cx="104" cy="16" r="3.5"/>
+                            <circle cx="122" cy="18" r="3.5"/>
+                            <circle cx="60" cy="30" r="3.5"/>
+                            <circle cx="78" cy="28" r="3.5"/>
+                            <circle cx="96" cy="30" r="3.5"/>
+                            <circle cx="114" cy="28" r="3.5"/>
+                        </g>
+                        <path d="M44 10 L128 10 L100 50 L100 82 L72 82 L72 50 Z"
+                            fill="none" stroke="#0E3B2A" stroke-width="1.5" stroke-linejoin="round"/>
+                        <g fill="#1B6E4F">
+                            <circle cx="82" cy="70" r="4"/>
+                            <circle cx="90" cy="76" r="4"/>
+                        </g>
+                    </svg>
+                </div>
                 <h4 class="bp-principle-title">수십 건 시도 대신 굵직한 서너 건만 합니다</h4>
                 <div class="bp-principle-body">
                     <ul>
-                        <li>분기마다 올라오는 PoC 신청서 30~50건을 전부 승인하지 않습니다.</li>
+                        <li>분기마다 올라오는 PoC 30~50건을 전부 승인하지 않습니다.</li>
                         <li>임원진이 직접 3~5건만 통과시킵니다.</li>
-                        <li>그 안에 인력의 30%를 우선 붙입니다.</li>
+                        <li>통과한 과제에 인력의 30%를 우선 붙입니다.</li>
                     </ul>
                 </div>
             </div>
+
             <div class="bp-principle">
-                <div class="bp-principle-num">N° 4</div>
+                <div class="bp-principle-num">N° 4 · 검증 강도</div>
+                <div class="bp-principle-svg" aria-hidden="true">
+                    <svg viewBox="0 0 180 96" xmlns="http://www.w3.org/2000/svg">
+                        <g transform="translate(20 70)">
+                            <rect x="0" y="-18" width="22" height="18" fill="#D6D2C5"/>
+                            <rect x="30" y="-30" width="22" height="30" fill="#1B6E4F" opacity="0.55"/>
+                            <rect x="60" y="-42" width="22" height="42" fill="#1B6E4F" opacity="0.75"/>
+                            <rect x="90" y="-54" width="22" height="54" fill="#0E3B2A"/>
+                            <line x1="-4" y1="0" x2="120" y2="0" stroke="#0F1A16" stroke-width="1.2"/>
+                        </g>
+                    </svg>
+                </div>
                 <h4 class="bp-principle-title">업무마다 AI 검증 강도를 다르게 둡니다</h4>
                 <div class="bp-principle-body">
                     <ul>
-                        <li>마케팅 카피: Claude가 쓴 안을 한 번 읽고 게재합니다.</li>
-                        <li>분기 재무 코멘트: 두 명이 출처를 대조하고 CFO 결재까지 받습니다.</li>
-                        <li>같은 도구라도 업무 성격이 다르면 검증 단계도 달라져야 합니다.</li>
+                        <li>마케팅 카피: 한 번 읽고 게재합니다.</li>
+                        <li>분기 재무 코멘트: 두 명 대조 + CFO 결재.</li>
+                        <li>같은 도구라도 업무가 다르면 검증도 달라집니다.</li>
                     </ul>
                 </div>
             </div>
+
             <div class="bp-principle">
-                <div class="bp-principle-num">N° 5</div>
+                <div class="bp-principle-num">N° 5 · 선제 거버넌스</div>
+                <div class="bp-principle-svg" aria-hidden="true">
+                    <svg viewBox="0 0 180 96" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M90 10 L130 22 L130 50 C130 70 112 84 90 90 C68 84 50 70 50 50 L50 22 Z"
+                            fill="#FBFAF6" stroke="#0E3B2A" stroke-width="1.5"/>
+                        <path d="M70 48 L84 62 L110 36" fill="none" stroke="#1B6E4F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
                 <h4 class="bp-principle-title">사고가 터지기 전에 거버넌스를 먼저 고민합니다</h4>
                 <div class="bp-principle-body">
                     <ul>
-                        <li>AI 도입 첫 주에 "어떤 데이터를 어디까지 보낼 수 있는가" 매트릭스를 게시합니다.</li>
-                        <li>책임자, 승인 절차, 감사 기록을 도입 시점에 함께 정합니다.</li>
-                        <li>외부 감사에서 사고가 드러난 뒤에 만드는 것이 아닙니다.</li>
+                        <li>도입 첫 주에 데이터 반출 매트릭스를 게시합니다.</li>
+                        <li>책임자·승인 절차·감사 기록을 함께 정합니다.</li>
+                        <li>외부 감사에서 사고가 드러난 뒤에 만들지 않습니다.</li>
                     </ul>
                 </div>
             </div>
@@ -1767,7 +1993,7 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
         <div class="bp-roadmap">
 
             <a class="bp-roadmap-gate" href="diagnosis.html" aria-label="AI 성숙도 자가 진단 시작">
-                <div class="bp-roadmap-gate-tag">GATE</div>
+                <div class="bp-roadmap-gate-tag">NEXT STEP</div>
                 <div>
                     <div class="bp-roadmap-gate-title">현재 위치와 목표 도착지 사이의 격차를 정량화합니다</div>
                     <div style="font-size:13px; color: var(--ink-soft); margin-top:6px; line-height:1.65;">McKinsey Rewired 6차원 진단 도구로 전략, 인재, 운영모델, 기술, 데이터, 도입 여섯 축을 5점 척도로 평가합니다. 가장 취약한 두 축이 본격 로드맵의 우선 착수 지점이 됩니다.</div>
@@ -1780,8 +2006,15 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
 
     <!-- ========= FOOTER ========= -->
     <footer class="bp-footer">
-        <p style="margin:0 0 10px;"><strong>이 문서가 모든 산출물의 원본입니다.</strong> 실전 템플릿, BRAIN OS 운영 매뉴얼, 웹사이트는 모두 여기서 갈라져 나옵니다. 내용을 고칠 일이 생기면 plan.md를 먼저 손보고, 그 변경을 나머지에 반영합니다.</p>
-        <p style="margin:0; opacity:0.85;">참고 컨설팅펌. McKinsey(State of AI 2025, Rewired), BCG(Build for the Future 2025, AI Radar 2026), Bain, PwC, KPMG, Deloitte 등 글로벌 컨설팅펌의 2025~2026년 AI 관련 보고서. 그 외 참고 도구. Anthropic AI Fluency(4D 프레임워크, Skill). COMPANY BRAIN OS와 그것을 짓는 미시 엔진(10문항)·자산 축적 4단계 순환은 위 자료들을 빌드업 구조로 엮어 만든 본 가이드의 독자 방법론입니다. 이 문서는 경영진의 의사결정을 돕는 용도이며, 구체적인 투자나 법률 판단은 전문가의 검토를 함께 받기를 권합니다.</p>
+        <p class="bp-footer-summary">COMPANY BRAIN OS를 AX의 도착지로 명시하고, 다섯 함정과 다섯 원칙을 경영진 의사결정의 공통 기준으로 확정합니다.</p>
+        <div class="bp-footer-bar">
+            <span class="bp-footer-copy">&copy; 2026 AI ROASTING. All rights reserved.</span>
+            <span class="bp-footer-author">
+                <span class="bp-footer-author-name">강정구 · Jayden Kang</span>
+                <a class="bp-footer-social bp-footer-fb" href="https://www.facebook.com/jayden.kang" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V13h2.7v8h3.4z"/></svg></a>
+                <a class="bp-footer-social bp-footer-in" href="https://www.linkedin.com/in/jayden-kang/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.4v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.59 0 4.25 2.36 4.25 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
+            </span>
+        </div>
     </footer>
 
 </div>

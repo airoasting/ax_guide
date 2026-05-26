@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>B-1-1 조직 세팅 · AX를 끌고 갈 TF를 어떻게 구성할 것인가</title>
+<title>조직 세팅 · AI ROASTING</title>
 <meta name="description" content="AX 1단계 추진체계 구축의 첫 번째 작업. 경영진 스폰서 직속의 한시적 정예 TF를 도메인 전문가와 기술 인력의 하이브리드 구조로 설계하는 방법.">
 <link rel="stylesheet" href="assets/style.css">
 <style>
@@ -23,7 +23,7 @@
     --bp-red: #8B2E1F;
 }
 
-html { scroll-behavior: smooth; scroll-padding-top: 50px; }
+html { scroll-behavior: smooth; scroll-padding-top: 64px; }
 body {
     background:
         linear-gradient(var(--bp-grid) 1px, transparent 1px) 0 0 / 32px 32px,
@@ -409,6 +409,8 @@ body {
     background: var(--bp-paper-2);
     transition: background .25s ease, transform .25s ease, box-shadow .25s ease;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 .bp-principle:last-child { border-right: none; }
 .bp-principle:hover {
@@ -435,11 +437,28 @@ body {
     letter-spacing: -0.005em;
     line-height: 1.35;
 }
+.bp-principle-figure {
+    margin: 4px 0 20px;
+    padding: 16px 0;
+    border-top: 1px solid var(--bp-rule);
+    border-bottom: 1px solid var(--bp-rule);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 160px;
+}
+.bp-principle-figure svg {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    display: block;
+}
 .bp-principle-body {
     font-size: 13.5px;
     line-height: 1.7;
     color: var(--ink-soft);
     margin-bottom: 18px;
+    flex: 1;
 }
 .bp-principle-body strong { color: var(--bp-ink); }
 .bp-principle-evidence {
@@ -569,8 +588,10 @@ body {
     padding: 24px 28px;
     border-bottom: 1px dashed var(--bp-rule);
     align-items: center;
+    transition: background 0.3s ease;
 }
 .bp-role-row:last-child { border-bottom: none; }
+.bp-role-row:hover { background: rgba(27, 110, 79, 0.06); }
 .bp-role-id {
     display: flex;
     align-items: center;
@@ -592,6 +613,15 @@ body {
 .bp-role-icon.s3 { background: rgba(27, 110, 79, 0.38); color: var(--bp-paper); border-color: var(--bp-line); }
 .bp-role-icon.s4 { background: var(--bp-line); color: var(--bp-paper); border-color: var(--bp-line); }
 .bp-role-icon svg { width: 26px; height: 26px; }
+.bp-role-icon { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.bp-role-row:hover .bp-role-icon {
+    transform: scale(1.06);
+    box-shadow: 0 6px 16px -6px rgba(14, 59, 42, 0.35);
+}
+.bp-role-label h4 { transition: letter-spacing 0.3s ease; }
+.bp-role-row:hover .bp-role-label h4 { letter-spacing: 0.01em; }
+.bp-role-outcome { transition: color 0.3s ease; }
+.bp-role-row:hover .bp-role-outcome { color: var(--bp-ink); }
 .bp-role-label h4 {
     font-size: 16px;
     font-weight: 700;
@@ -619,8 +649,14 @@ body {
     transition: transform 0.3s ease;
 }
 .bp-role-row:hover .bp-role-pyramid b {
-    transform: translateY(-1px);
+    transform: translateY(-4px);
 }
+.bp-role-pyramid b:nth-child(1) { transition-delay: 0s; }
+.bp-role-pyramid b:nth-child(2) { transition-delay: 0.05s; }
+.bp-role-pyramid b:nth-child(3) { transition-delay: 0.10s; }
+.bp-role-pyramid b:nth-child(4) { transition-delay: 0.15s; }
+.bp-role-pyramid b:nth-child(5) { transition-delay: 0.20s; }
+.bp-role-pyramid b:nth-child(6) { transition-delay: 0.25s; }
 .bp-role-pyramid.p1 { grid-template-columns: 24px; }
 .bp-role-pyramid.p1 b { background: rgba(27, 110, 79, 0.38); }
 .bp-role-pyramid.p2 { grid-template-columns: repeat(2, 24px); }
@@ -841,7 +877,7 @@ body {
     <!-- ========= HERO ========= -->
     <section class="bp-hero">
         <div class="bp-hero-eyebrow">Step 1 · 추진체계 구축 · 조직 세팅 · BRAIN OS 운영 주체</div>
-        <h1>COMPANY BRAIN OS를 지을 사람들을 먼저 한자리에 모읍니다.</h1>
+        <h1>AX를 실행할 사람들을 먼저 한자리에 모읍니다.</h1>
         <p class="bp-lead">1단계는 도구보다 먼저 누가 두뇌를 끌고 갈지에 합의해, BRAIN OS 빌드업의 첫 층인 운영 주체를 세우는 자리입니다.</p>
         <div class="bp-summary">
             <strong>결론은 단순합니다.</strong> 상설 부서를 새로 만들지 않습니다. C-레벨 스폰서에 직접 보고하는 한시적 TF(태스크포스)를 구성합니다. 도메인 전문가와 기술 인력을 섞은 하이브리드 구조로, 5명에서 9명 사이 소수 정예로 둡니다. 임기는 6개월에서 12개월입니다. 임기가 끝나면 역량은 현업에 흩어져 남고, TF 자체는 해체합니다.
@@ -865,7 +901,7 @@ body {
             <div class="bp-section-meta">상설 부서 신설 · 한시적 정예팀 비교</div>
         </div>
 
-        <p class="bp-section-intro">AI 전환의 출발점에 "AI본부" 같은 상설 부서를 새로 두면 단기적으로 책임 소재가 분명해 보입니다. 그러나 한계가 곧 드러납니다. 새 부서는 빠르게 외주처럼 굳어지고, 현업과 거리가 멀어지면서 도입이 다시 정체합니다. 한시적 TF는 임기와 산출물이 명확하고, 끝나는 시점에 역량이 현업으로 자연스럽게 이식됩니다.</p>
+        <p class="bp-section-intro">AI 전환의 출발점에 "AX본부" 같은 상설 부서를 새로 두면 단기적으로 책임 소재가 분명해 보입니다. 그러나 한계가 곧 드러납니다. 새 부서는 빠르게 외주처럼 굳어지고, 현업과 거리가 멀어지면서 도입이 다시 정체합니다. 한시적 TF는 임기와 산출물이 명확하고, 끝나는 시점에 역량이 현업으로 자연스럽게 이식됩니다.</p>
 
         <div class="bp-compare">
             <div class="bp-compare-head">
@@ -880,12 +916,12 @@ body {
             </div>
             <div class="bp-compare-row">
                 <div class="label">현업과의 거리</div>
-                <div>시간이 지나면 "별도의 AI 전환"이라는 칸막이가 생깁니다. 현업은 "그건 AI본부 일"이라고 미루기 시작합니다.</div>
+                <div>시간이 지나면 "별도의 AI 전환"이라는 칸막이가 생깁니다. 현업은 "그건 AX본부 일"이라고 미루기 시작합니다.</div>
                 <div class="preferred">현업에서 차출된 인력이 다시 현업으로 돌아갑니다. <strong>실행 자산이 그대로 현장에 남습니다.</strong></div>
             </div>
             <div class="bp-compare-row">
                 <div class="label">의사결정 속도</div>
-                <div>부서장 결재 라인이 새로 생겨, 빅 베팅 전환 같은 임원급 결정이 한 단계 멀어집니다.</div>
+                <div>부서장 결재 라인이 새로 생겨, 전략 과제 전환 같은 임원급 결정이 한 단계 멀어집니다.</div>
                 <div class="preferred">CEO 직속 또는 C-레벨 스폰서 직속으로 두면, <strong>의사결정 단계가 한 칸 줄어듭니다.</strong></div>
             </div>
             <div class="bp-compare-row">
@@ -900,7 +936,7 @@ body {
             </div>
             <div class="bp-compare-row">
                 <div class="label">실패 패턴</div>
-                <div>채용은 했는데 빅 베팅을 정하지 않아 인력이 PoC만 양산합니다.</div>
+                <div>채용은 했는데 전략 과제를 정하지 않아 인력이 PoC만 양산합니다.</div>
                 <div class="preferred">임기를 정하지 않고 운영하면 시간이 흐르며 상설 조직과 같아집니다. <strong>종료 조건을 처음부터 문서로 적습니다.</strong></div>
             </div>
         </div>
@@ -920,32 +956,68 @@ body {
         <div class="bp-principles">
             <div class="bp-principle">
                 <div class="bp-principle-num">원칙 1</div>
-                <div class="bp-principle-name">경영진 스폰서에<br>직접 연결합니다</div>
+                <div class="bp-principle-name">CEO 또는 C-Level<br>직속으로 배치합니다</div>
+                <div class="bp-principle-figure">
+                    <svg viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CEO 직속 보고선 1단계">
+                        <rect x="38" y="14" width="164" height="34" rx="2" fill="#0E3B2A"/>
+                        <text x="120" y="36" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12.5" font-weight="700" fill="#FBFAF6" letter-spacing="0.02em">CEO 또는 C-Level</text>
+                        <line x1="120" y1="48" x2="120" y2="96" stroke="#1B6E4F" stroke-width="3"/>
+                        <polygon points="115,90 125,90 120,98" fill="#1B6E4F"/>
+                        <rect x="138" y="62" width="52" height="22" fill="#FBFAF6" stroke="#1B6E4F" stroke-width="1.2"/>
+                        <text x="164" y="77" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="700" fill="#1B6E4F">1단계</text>
+                        <rect x="83" y="98" width="74" height="34" rx="2" fill="#FBFAF6" stroke="#0E3B2A" stroke-width="2"/>
+                        <text x="120" y="120" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#0F1A16" letter-spacing="0.06em">TF</text>
+                    </svg>
+                </div>
                 <div class="bp-principle-body">
-                    TF 보고선이 IT 부서 안에 머물면 어젠다는 "기술 도입 프로젝트"로 줄어듭니다. <strong>CEO 본인 또는 명확하게 위임받은 C-레벨 임원</strong>을 스폰서로 두고, TF 리드가 그 스폰서에 직접 보고합니다. 빅 베팅 후보를 보류할지 가속할지 한 단계 안에서 결정해야 속도가 납니다.
+                    TF 보고선이 IT 부서 안에 머물면 어젠다는 "기술 도입 프로젝트"로 줄어듭니다. <strong>CEO 본인 또는 명확하게 위임받은 C-레벨 임원</strong>을 스폰서로 두고, TF 리드가 그 스폰서에 직접 보고합니다. AI 프로젝트를 추진할지 CEO가 결정해야 속도가 납니다.
                 </div>
                 <div class="bp-principle-evidence">
-                    <b>근거</b>맥킨지 The State of AI 2025는 AI 고성과 그룹을 가르는 가장 강한 변수로 "CEO 본인의 직접 책임"을 지목합니다. Bain Technology Report 2024도 같은 결론입니다.
+                    <b>근거</b><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank" rel="noopener">맥킨지 The State of AI 2025</a>에 따르면, AI 성과를 가장 크게 가르는 요인은 "CEO가 직접 책임지는 구조"입니다. <a href="https://www.bain.com/globalassets/noindex/2025/bain_report_technology_report_2025.pdf" target="_blank" rel="noopener">Bain Technology Report 2025</a>도 같은 결론에 이릅니다.
                 </div>
             </div>
             <div class="bp-principle">
                 <div class="bp-principle-num">원칙 2</div>
-                <div class="bp-principle-name">도메인 전문가와<br>기술 인력을 섞습니다</div>
+                <div class="bp-principle-name">도메인 전문가와<br>기술 전문가를 섞습니다</div>
+                <div class="bp-principle-figure">
+                    <svg viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="도메인 전문가와 기술 전문가 비율 65 대 35">
+                        <text x="82" y="28" text-anchor="middle" font-family="sans-serif" font-size="11.5" font-weight="700" fill="#0E3B2A">도메인 전문가</text>
+                        <text x="195" y="28" text-anchor="middle" font-family="sans-serif" font-size="11.5" font-weight="700" fill="#9A7B0A">기술 전문가</text>
+                        <rect x="14" y="56" width="143" height="44" fill="#0E3B2A"/>
+                        <rect x="157" y="56" width="69" height="44" fill="#9A7B0A"/>
+                        <text x="86" y="85" text-anchor="middle" font-family="Georgia, serif" font-size="18" font-weight="700" fill="#FBFAF6">60~70%</text>
+                        <text x="192" y="85" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="700" fill="#FBFAF6">30~40%</text>
+                    </svg>
+                </div>
                 <div class="bp-principle-body">
-                    AI 전문가만 모으면 "기술적으로 흥미로운데 가치는 모호한" use case가 쌓입니다. 도메인 전문가만 모으면 "필요는 알겠는데 구현은 막연한" 요구사항이 쌓입니다. <strong>두 직군이 한 회의실에서 같이 결론을 내는 구조</strong>가 결정적입니다. 도메인 60~70%, 기술 30~40% 비율을 권장합니다.
+                    AI 전문가만 모으면 "기술적으로 흥미로운데 가치는 모호한" use case가 쌓입니다. 도메인 전문가만 모으면 "필요는 알겠는데 구현은 막연한" 요구사항이 쌓입니다. <strong>두 직군이 한 회의실에서 같이 결론을 내는 구조</strong>가 결정적입니다. 도메인 전문가 60~70%, 기술 전문가 30~40% 비율을 권장합니다.
                 </div>
                 <div class="bp-principle-evidence">
-                    <b>근거</b>BCG AI Radar 2026의 자원 배분 10-20-70 법칙에서 70%의 사람·프로세스 투자는 도메인 전문가가 주도하지 않으면 작동하지 않습니다.
+                    <b>근거</b><a href="https://www.bcg.com/capabilities/artificial-intelligence" target="_blank" rel="noopener">BCG AI Radar 2026</a>의 10-20-70 법칙은 자원의 70%를 사람과 프로세스에 투입해야 한다고 말합니다. 이 투자는 도메인 전문가가 주도하지 않으면 작동하지 않습니다.
                 </div>
             </div>
             <div class="bp-principle">
                 <div class="bp-principle-num">원칙 3</div>
-                <div class="bp-principle-name">소수 정예로<br>인원을 묶습니다</div>
+                <div class="bp-principle-name">소수 정예로<br>인원을 배치합니다</div>
+                <div class="bp-principle-figure">
+                    <svg viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="TF 권장 인원 5에서 9명">
+                        <g fill="#0E3B2A">
+                            <g transform="translate(60,24)"><circle cx="0" cy="0" r="6"/><path d="M -9 16 Q -9 7 0 7 Q 9 7 9 16 Z"/></g>
+                            <g transform="translate(90,24)"><circle cx="0" cy="0" r="6"/><path d="M -9 16 Q -9 7 0 7 Q 9 7 9 16 Z"/></g>
+                            <g transform="translate(120,24)"><circle cx="0" cy="0" r="6"/><path d="M -9 16 Q -9 7 0 7 Q 9 7 9 16 Z"/></g>
+                            <g transform="translate(150,24)"><circle cx="0" cy="0" r="6"/><path d="M -9 16 Q -9 7 0 7 Q 9 7 9 16 Z"/></g>
+                            <g transform="translate(180,24)"><circle cx="0" cy="0" r="6"/><path d="M -9 16 Q -9 7 0 7 Q 9 7 9 16 Z"/></g>
+                            <g transform="translate(75,58)"><circle cx="0" cy="0" r="6"/><path d="M -9 16 Q -9 7 0 7 Q 9 7 9 16 Z"/></g>
+                            <g transform="translate(165,58)"><circle cx="0" cy="0" r="6"/><path d="M -9 16 Q -9 7 0 7 Q 9 7 9 16 Z"/></g>
+                        </g>
+                        <text x="120" y="125" text-anchor="middle" font-family="Georgia, serif" font-size="36" font-weight="700" fill="#0E3B2A">5<tspan fill="#1B6E4F" font-size="26">~</tspan>9<tspan font-family="sans-serif" font-size="16" font-weight="600" fill="#0F1A16" dx="4">명</tspan></text>
+                    </svg>
+                </div>
                 <div class="bp-principle-body">
-                    빅 베팅이 3~5건이듯 TF도 그 규모에 맞춰 작게 둡니다. 권장 인원은 <strong>5명에서 9명 사이</strong>입니다. 그 이상이면 회의가 위임 회의로 바뀌고 결정 속도가 떨어집니다. 한 사람이 빅 베팅 하나를 책임지고, 빅 베팅 사이의 연결은 TF 리드가 조정합니다.
+                    전략 과제가 3~5건이듯 TF도 그 규모에 맞춰 작게 둡니다. 권장 인원은 <strong>5명에서 9명 사이</strong>입니다. 그 이상이면 회의가 위임 회의로 바뀌고 결정 속도가 떨어집니다. 한 사람이 전략 과제 하나를 책임지고, 전략 과제 사이의 연결은 TF 리드가 조정합니다.
                 </div>
                 <div class="bp-principle-evidence">
-                    <b>근거</b>아마존 "Two-Pizza Team" 원칙과 PwC Agent OS의 셀(cell) 구조가 같은 결론으로 모입니다. 의사결정이 한 회의실에서 끝나는 규모를 넘지 않습니다.
+                    <b>근거</b>아마존 제프 베조스의 "Two-Pizza Team" 원칙은 피자 두 판으로 한 끼를 해결할 수 있는 규모, 즉 6~10명 안쪽을 가리킵니다. 한 회의실 안에서 의사결정이 끝날 수 있는 규모를 유지해야 한다는 뜻입니다.
                 </div>
             </div>
         </div>
@@ -967,7 +1039,7 @@ body {
                 <div class="bp-comp-tier">Tier 0 · 스폰서</div>
                 <div class="bp-comp-detail">
                     <h4>경영진 스폰서 1명</h4>
-                    <p>CEO 또는 위임받은 C-레벨 임원. 빅 베팅의 보류와 가속, 예산 재배분, 부서 간 충돌 조정을 직접 결정합니다. 월 1회 정기 보고를 받고, 분기 1회 외부 사례 학습 워크숍에 동석합니다.</p>
+                    <p>CEO 또는 위임받은 C-레벨 임원. 전략 과제의 보류와 가속, 예산 재배분, 부서 간 충돌 조정을 직접 결정합니다. 월 1회 정기 보고를 받고, 분기 1회 외부 사례 학습 워크숍에 동석합니다.</p>
                     <div class="roles">
                         <span class="role-chip">CEO 직접</span>
                         <span class="role-chip">또는 COO/CTO/CSO 위임</span>
@@ -978,7 +1050,7 @@ body {
                 <div class="bp-comp-tier">Tier 1 · TF 리드</div>
                 <div class="bp-comp-detail">
                     <h4>TF 리드 1명</h4>
-                    <p>스폰서에 직접 보고하는 단일 책임자. 사내 신뢰가 두텁고 부서 정치에 휘둘리지 않을 사람을 고릅니다. 기술 백그라운드보다 <strong>의사결정 속도와 사내 관계 자본</strong>이 더 중요합니다. 빅 베팅 3~5건 사이의 우선순위와 자원 충돌을 조정합니다.</p>
+                    <p>스폰서에 직접 보고하는 단일 책임자. 사내 신뢰가 두텁고 부서 정치에 휘둘리지 않을 사람을 고릅니다. 기술 백그라운드보다 <strong>의사결정 속도와 사내 관계 자본</strong>이 더 중요합니다. 전략 과제 3~5건 사이의 우선순위와 자원 충돌을 조정합니다.</p>
                     <div class="roles">
                         <span class="role-chip">팀장~본부장급</span>
                         <span class="role-chip">100% 전임 권장</span>
@@ -989,7 +1061,7 @@ body {
                 <div class="bp-comp-tier">Tier 2 · 코어</div>
                 <div class="bp-comp-detail">
                     <h4>코어 멤버 4~7명</h4>
-                    <p>도메인 전문가 3~5명과 기술 인력 1~2명으로 구성합니다. 도메인 전문가는 빅 베팅 후보 영역의 베테랑(CS, 영업, 운영, 제품, 재무 중 해당 영역)에서 차출합니다. 기술 인력은 사내 데이터팀이나 엔지니어링팀에서 데려오되, 외부 협력사 인력은 코어에 두지 않습니다. <strong>코어는 100% 전임, 못해도 80% 이상 할당</strong>이라야 작동합니다.</p>
+                    <p>도메인 전문가 3~5명과 기술 인력 1~2명으로 구성합니다. 도메인 전문가는 전략 과제 후보 영역의 베테랑(CS, 영업, 운영, 제품, 재무 중 해당 영역)에서 차출합니다. 기술 인력은 사내 데이터팀이나 엔지니어링팀에서 데려오되, 외부 협력사 인력은 코어에 두지 않습니다. <strong>코어는 100% 전임, 못해도 80% 이상 할당</strong>이라야 작동합니다.</p>
                     <div class="roles">
                         <span class="role-chip">도메인 전문가 3~5명</span>
                         <span class="role-chip">기술 인력 1~2명</span>
@@ -1083,7 +1155,7 @@ body {
     <section class="bp-section" id="checklist">
         <div class="bp-section-head">
             <div>
-                <h2 class="bp-section-title">조직 세팅 실행 체크리스트</h2>
+                <h2 class="bp-section-title">TF 운영 체크리스트</h2>
             </div>
             <div class="bp-section-meta">킥오프 전 30일 안에 완료할 7개 항목</div>
         </div>
@@ -1157,11 +1229,11 @@ body {
 
         <div class="bp-anti">
             <div class="bp-anti-head">
-                <div>자주 나타나는 함정</div>
+                <div>자주 나타나는 실패 싸인</div>
                 <div>대응 방향</div>
             </div>
             <div class="bp-anti-row">
-                <div class="bad"><strong>"TF가 IT 부서 안 프로젝트"가 됩니다.</strong> 보고선이 CIO에 머무르고, 다른 부서장이 "그건 IT 일"이라고 인식합니다.</div>
+                <div class="bad"><strong>"TF가 IT 부서 안 프로젝트"가 됩니다.</strong> 보고선이 CTO에 머무르고, 다른 부서장이 "그건 IT 일"이라고 인식합니다.</div>
                 <div class="good"><strong>스폰서를 IT 외부로 옮깁니다.</strong> CEO 직속 또는 COO/CSO로 끌어올려, IT가 협력 부서로 자리매김하게 합니다.</div>
             </div>
             <div class="bp-anti-row">
@@ -1169,12 +1241,12 @@ body {
                 <div class="good"><strong>코어 인원 상한을 9명으로 못박습니다.</strong> 추가 수요는 지원 호출로 처리하고, 코어 인원을 늘려야 한다면 TF를 둘로 쪼개는 옵션을 먼저 검토합니다.</div>
             </div>
             <div class="bp-anti-row">
-                <div class="bad"><strong>"코어 멤버가 절반만 와 있습니다."</strong> 원소속 업무를 병행하며 회의에 30% 참여하는 멤버가 다수입니다.</div>
+                <div class="bad"><strong>"코어 멤버가 절반만 와 있습니다."</strong> 원소속 업무를 병행하며 TF에 30% 수준으로 참여하는 멤버가 다수입니다.</div>
                 <div class="good"><strong>80% 미만 할당은 코어에서 제외</strong>합니다. 원소속 부서장과 차출 합의를 다시 하거나, 인원을 교체합니다. 어중간한 참여는 결정 지연의 가장 큰 원인입니다.</div>
             </div>
             <div class="bp-anti-row">
-                <div class="bad"><strong>"빅 베팅 없이 PoC만 양산"합니다.</strong> 어떤 use case가 회사에 어떻게 기여하는지 묻지 않고 기술적 흥미만으로 과제가 늘어납니다.</div>
-                <div class="good"><strong>킥오프 30일 안에 빅 베팅 3~5건을 확정</strong>합니다. 그 안에 들지 않는 use case는 보류 목록으로 옮기고, 임기 종료까지 다시 꺼내지 않습니다.</div>
+                <div class="bad"><strong>"전략 과제 없이 PoC만 양산"합니다.</strong> 어떤 use case가 회사에 어떻게 기여하는지 묻지 않고 기술적 흥미만으로 과제가 늘어납니다.</div>
+                <div class="good"><strong>킥오프 30일 안에 전략 과제 3~5건을 확정</strong>합니다. 그 안에 들지 않는 use case는 보류 목록으로 옮기고, 임기 종료까지 다시 꺼내지 않습니다.</div>
             </div>
             <div class="bp-anti-row">
                 <div class="bad"><strong>"임기가 흐릿해집니다."</strong> 6개월이 지나도 종료 시점이 명확하지 않아, TF가 사실상 상설 조직처럼 굳어집니다.</div>
@@ -1185,10 +1257,15 @@ body {
 
     <!-- ========= FOOTER ========= -->
     <footer class="bp-footer">
-        <p style="margin:0 0 10px; font-size:11.5px; opacity:0.78;">* 이 페이지는 AX 5단계 로드맵의 1단계(추진체계 구축)를 세 작업으로 나눈 첫 번째, TF 조직 세팅을 다룹니다. 이어지는 두 페이지는 운영 계획 수립(6개월 마일스톤과 LLM 선택)과 AI 부트캠프(교육·Quick Win·해커톤)입니다.</p>
-        <p style="margin:0 0 10px;"><strong>참고 자료.</strong> McKinsey(Rewired 2023, The State of AI 2025), Bain(Technology Report 2024), BCG(Build for the Future 2025, AI Radar 2026), PwC(Agent OS), KPMG(Trusted AI), Deloitte(State of Generative AI in the Enterprise). 인용 출처는 각 원칙 카드와 진단 페이지의 컨설팅펌 참고자료 표에서 확인합니다.</p>
-        <p style="margin:0; opacity:0.85;">조직 설계와 권한 배분의 구체 절차는 회사 규모와 산업에 따라 달라집니다. 이 페이지는 일반 기업을 기준으로 한 권고이며, 실제 적용 시 사내 인사·법무 검토를 함께 거쳐야 합니다.</p>
-        <p style="margin:22px 0 0; padding-top:18px; border-top:1px solid rgba(247,245,239,0.18); font-size:11.5px; opacity:0.7; letter-spacing:0.04em;">&copy; 2026 AI ROASTING. All rights reserved.</p>
+        <p class="bp-footer-summary">경영진 직속 5~9명 하이브리드 TF를 출범시키고, 권한·의사결정·인계 규칙을 90일 안에 확정해 BRAIN OS 운영 주체를 가동합니다.</p>
+        <div class="bp-footer-bar">
+            <span class="bp-footer-copy">&copy; 2026 AI ROASTING. All rights reserved.</span>
+            <span class="bp-footer-author">
+                <span class="bp-footer-author-name">강정구 · Jayden Kang</span>
+                <a class="bp-footer-social bp-footer-fb" href="https://www.facebook.com/jayden.kang" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V13h2.7v8h3.4z"/></svg></a>
+                <a class="bp-footer-social bp-footer-in" href="https://www.linkedin.com/in/jayden-kang/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.4v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.59 0 4.25 2.36 4.25 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
+            </span>
+        </div>
     </footer>
 
 </div>

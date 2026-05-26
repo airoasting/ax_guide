@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 퍼스트 문제 정의력 · AI ROASTING</title>
+<meta name="description" content="구현 비용이 0에 가까워진 시대, 리더는 '잘 만드는 능력' 위에서 '잘 정의하는 능력'으로 옮겨갑니다. AI 퍼스트 인재의 5대 핵심 역량과 피플 리더십·에이전트 리더십 대비를 한 페이지에 정리합니다.">
+<meta name="author" content="AI ROASTING">
+<meta name="theme-color" content="#0E3B2A">
+<link rel="icon" type="image/png" href="assets/logos/logo1.png">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+/* ================== 참고 · AI 퍼스트 문제 정의력 Local Styles ================== */
+/* ai-services.html과 동일한 bp-* 시각 토큰을 차용합니다. */
+
+:root {
+    --bp-grid: rgba(14, 59, 42, 0.06);
+    --bp-grid-strong: rgba(14, 59, 42, 0.12);
+    --bp-line: #0E3B2A;
+    --bp-ink: #0F1A16;
+    --bp-paper: #F7F5EF;
+    --bp-paper-2: #FBFAF6;
+    --bp-rule: #D6D2C5;
+    --bp-accent: #1B6E4F;
+    --bp-gold: #9A7B0A;
+    --bp-red: #8B2E1F;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 50px; }
+body {
+    background:
+        linear-gradient(var(--bp-grid) 1px, transparent 1px) 0 0 / 32px 32px,
+        linear-gradient(90deg, var(--bp-grid) 1px, transparent 1px) 0 0 / 32px 32px,
+        var(--bp-paper);
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    line-break: strict;
+}
+
+/* ===== Sheet wrapper ===== */
+.bp-sheet {
+    max-width: 1320px;
+    margin: 32px auto;
+    background: var(--bp-paper-2);
+    border: 1.5px solid var(--bp-line);
+    box-shadow: 0 1px 0 var(--bp-line), 0 24px 60px -30px rgba(6, 32, 24, 0.35);
+    position: relative;
+}
+.bp-sheet::before, .bp-sheet::after {
+    content: "";
+    position: absolute;
+    width: 16px; height: 16px;
+    border: 1px solid var(--bp-line);
+}
+.bp-sheet::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+.bp-sheet::after  { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
+/* ===== Step navigation ===== */
+.bp-stepnav {
+    padding: 36px 56px 28px;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1.5px solid #062018;
+}
+.bp-stepnav::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+}
+.bp-step {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid rgba(247, 245, 239, 0.55);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--sans);
+    font-size: 11.5px;
+    font-weight: 600;
+    color: rgba(247, 245, 239, 0.85);
+    letter-spacing: 0.02em;
+    position: relative;
+}
+.bp-step a {
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.bp-step + .bp-step { margin-left: 24px; }
+.bp-step + .bp-step::before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    width: 24px;
+    height: 1px;
+    background: rgba(247, 245, 239, 0.4);
+    transform: translateY(-50%);
+}
+.bp-back {
+    display: block;
+    text-align: center;
+    margin-top: 18px;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: rgba(247, 245, 239, 0.78);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: color .15s ease, letter-spacing .15s ease;
+    position: relative;
+    z-index: 1;
+}
+.bp-back:hover { color: var(--bp-paper); letter-spacing: 0.08em; }
+
+.bp-substeps {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+.bp-substeps span,
+.bp-substeps a {
+    border: 1.5px solid var(--bp-paper);
+    padding: 12px 28px;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    min-width: 260px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+.bp-substeps span {
+    background: linear-gradient(180deg, #14523B 0%, #0E3B2A 100%);
+    color: var(--bp-paper);
+    box-shadow:
+        0 0 0 4px rgba(14, 59, 42, 0.55),
+        0 8px 20px -8px rgba(6, 32, 24, 0.7);
+    transform: translateY(-1px);
+}
+.bp-substeps a {
+    background: transparent;
+    color: rgba(247, 245, 239, 0.85);
+    border-color: rgba(247, 245, 239, 0.45);
+}
+.bp-substeps a:hover {
+    background: rgba(247, 245, 239, 0.08);
+    color: var(--bp-paper);
+    border-color: var(--bp-paper);
+}
+
+@media (max-width: 600px) {
+    .bp-stepnav { padding: 24px 16px 20px; }
+    .bp-step { width: 26px; height: 26px; font-size: 10px; }
+    .bp-step + .bp-step { margin-left: 16px; }
+    .bp-step + .bp-step::before { width: 16px; }
+    .bp-substeps { gap: 8px; }
+    .bp-substeps span { min-width: 0; flex: 1 1 auto; padding: 10px 14px; font-size: 12px; }
+}
+
+/* ===== Hero block ===== */
+.bp-hero {
+    padding: 64px 56px 56px;
+    border-bottom: 1.5px solid var(--bp-line);
+    position: relative;
+    background:
+        radial-gradient(ellipse at top right, rgba(154, 123, 10, 0.07), transparent 60%),
+        var(--bp-paper-2);
+}
+.bp-hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    margin-bottom: 18px;
+}
+.bp-hero h1 {
+    font-size: 48px;
+    line-height: 1.22;
+    margin: 0 0 22px;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+}
+.bp-hero .bp-lead {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+}
+.bp-hero .bp-summary {
+    margin-top: 36px;
+    padding: 22px 26px;
+    background: rgba(14, 59, 42, 0.04);
+    border-top: 1px solid var(--bp-rule);
+    border-bottom: 1px solid var(--bp-rule);
+    font-size: 14px;
+    line-height: 1.75;
+}
+.bp-hero .bp-summary strong { color: var(--bp-line); }
+
+/* ===== Sticky sub-menu ===== */
+.bp-hero-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 12px 56px;
+    background: var(--bp-paper-2);
+    border-top: 1px solid var(--bp-line);
+    border-bottom: 1px solid var(--bp-line);
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    box-shadow: 0 2px 8px -4px rgba(6, 32, 24, 0.18);
+}
+.bp-hero-nav a {
+    flex: 1 1 0;
+    font-family: var(--sans);
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--bp-ink);
+    padding: 10px 14px;
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper);
+    text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    letter-spacing: -0.005em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bp-hero-nav a:hover { background: var(--bp-line); color: var(--bp-paper); }
+.bp-hero-nav a.active {
+    background: var(--bp-line);
+    color: var(--bp-paper);
+    border-color: var(--bp-line);
+    box-shadow: inset 0 -3px 0 var(--bp-accent);
+}
+
+/* ===== Section frame ===== */
+.bp-section {
+    padding: 56px 56px 64px;
+    border-bottom: 1.5px solid var(--bp-line);
+    position: relative;
+}
+.bp-section:last-of-type { border-bottom: none; }
+.bp-section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 36px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--bp-rule);
+}
+.bp-section-title {
+    font-size: 28px;
+    margin: 0;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    font-weight: 700;
+}
+.bp-section-meta {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    text-align: right;
+    line-height: 1.6;
+}
+.bp-section-intro {
+    margin: 0 0 28px;
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+}
+
+/* ===== 1. 사례 + 시사점 2-Col ===== */
+.bp-twocol {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 20px;
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-twocol > div {
+    padding: 32px 32px 34px;
+    position: relative;
+}
+.bp-twocol .col-case {
+    border-right: 1px solid var(--bp-rule);
+    background: var(--bp-paper-2);
+}
+.bp-twocol .col-implication {
+    background:
+        radial-gradient(ellipse at 100% 0%, rgba(27, 110, 79, 0.32), transparent 55%),
+        linear-gradient(135deg, #062018 0%, #0E3B2A 60%, #14523B 100%);
+    color: rgba(247, 245, 239, 0.92);
+}
+.bp-twocol .col-implication::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-twocol .col-implication > * { position: relative; z-index: 1; }
+
+.bp-col-tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 8px 18px;
+    border-radius: 999px;
+    margin-bottom: 22px;
+}
+.col-case .bp-col-tag { color: var(--bp-paper); background: var(--bp-line); }
+.col-implication .bp-col-tag {
+    color: var(--bp-paper);
+    background: rgba(247, 245, 239, 0.18);
+    border: 1px solid rgba(247, 245, 239, 0.4);
+}
+
+.bp-case-source {
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 0 0 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--bp-rule);
+}
+.bp-case-source strong { color: var(--bp-ink); }
+.bp-case-source .meta {
+    display: block;
+    margin-top: 4px;
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--ink-mute);
+    letter-spacing: 0.02em;
+}
+
+.bp-case-block { margin-top: 16px; }
+.bp-case-block:first-of-type { margin-top: 0; }
+.bp-case-label {
+    font-family: var(--sans);
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+}
+.bp-case-block ul,
+.bp-case-block ol {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+}
+.bp-case-block li { margin: 2px 0; }
+.bp-case-block li strong { color: var(--bp-line); }
+.bp-case-quote {
+    margin-top: 22px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--bp-rule);
+    font-family: var(--sans);
+    font-size: 11.5px;
+    color: var(--ink-mute);
+    line-height: 1.55;
+    font-style: italic;
+}
+
+.bp-imp-list { list-style: none; margin: 0 0 24px; padding: 0; }
+.bp-imp-list li {
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(247, 245, 239, 0.18);
+}
+.bp-imp-list li:last-child { border-bottom: none; }
+.bp-imp-num {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: #8ED1AF;
+    margin-right: 8px;
+}
+.bp-imp-key {
+    font-size: 15.5px;
+    font-weight: 700;
+    color: var(--bp-paper);
+    letter-spacing: -0.005em;
+}
+.bp-imp-desc {
+    margin-top: 4px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: rgba(247, 245, 239, 0.78);
+}
+.bp-imp-conclusion {
+    margin-top: 8px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(247, 245, 239, 0.4);
+}
+.bp-imp-conclusion-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(247, 245, 239, 0.6);
+    margin-bottom: 10px;
+}
+.bp-imp-conclusion-body {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--bp-paper);
+}
+.bp-imp-conclusion-body strong { color: #E8D78B; }
+
+/* ===== 2. 시대 매트릭스 (4 × 2) ===== */
+.bp-era {
+    display: grid;
+    grid-template-columns: 110px repeat(4, 1fr);
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-era-corner,
+.bp-era-axis,
+.bp-era-head,
+.bp-era-cell {
+    padding: 18px 18px;
+    border-right: 1px solid var(--bp-rule);
+    border-top: 1px solid var(--bp-rule);
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    transition: background 0.28s ease, box-shadow 0.28s ease, color 0.28s ease;
+    position: relative;
+}
+.bp-era-corner { border-top: none; border-right: none; }
+.bp-era-head {
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-align: center;
+    border-top: none;
+}
+.bp-era-head:last-child { border-right: none; }
+.bp-era-axis {
+    background: rgba(14, 59, 42, 0.06);
+    font-family: var(--sans);
+    font-weight: 700;
+    color: var(--bp-ink);
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    line-height: 1.4;
+}
+.bp-era-axis .axis-sub {
+    font-size: 11px;
+    color: var(--ink-mute);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    margin-top: 4px;
+    text-transform: uppercase;
+}
+.bp-era-cell:last-child { border-right: none; }
+.bp-era-cell ul {
+    margin: 0;
+    padding-left: 16px;
+}
+.bp-era-cell li { margin: 3px 0; }
+.bp-era-cell .era-key {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 6px 10px;
+    background: rgba(154, 123, 10, 0.12);
+    border: 1px dashed var(--bp-gold);
+    color: var(--bp-gold);
+    font-family: var(--sans);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+.bp-era-cell.highlight {
+    background: rgba(27, 110, 79, 0.06);
+}
+.bp-era-cell.heavy {
+    background: rgba(14, 59, 42, 0.08);
+}
+
+/* ===== Era matrix hover animation ===== */
+.bp-era-cell {
+    cursor: default;
+    z-index: 1;
+}
+.bp-era-cell ul,
+.bp-era-cell li,
+.bp-era-cell .era-key {
+    transition: color 0.28s ease, background 0.28s ease, border-color 0.28s ease, transform 0.28s ease, letter-spacing 0.28s ease;
+}
+.bp-era-cell:hover {
+    background: rgba(14, 59, 42, 0.10);
+    box-shadow:
+        inset 0 0 0 1px var(--bp-accent),
+        inset 0 -3px 0 var(--bp-accent);
+    color: var(--bp-ink);
+    z-index: 2;
+}
+.bp-era-cell:hover li { color: var(--bp-ink); }
+.bp-era-cell:hover li strong { color: var(--bp-line); }
+.bp-era-cell:hover .era-key {
+    background: var(--bp-gold);
+    color: var(--bp-paper);
+    border-style: solid;
+    letter-spacing: 0.06em;
+}
+.bp-era-head {
+    transition: filter 0.28s ease, letter-spacing 0.28s ease;
+}
+.bp-era-head:hover {
+    filter: brightness(1.18);
+    letter-spacing: 0.12em;
+}
+.bp-era-axis {
+    transition: background 0.28s ease, color 0.28s ease;
+}
+.bp-era-axis:hover {
+    background: rgba(14, 59, 42, 0.14);
+    color: var(--bp-line);
+}
+.bp-era-foot {
+    grid-column: 1 / -1;
+    padding: 16px 22px;
+    background: rgba(14, 59, 42, 0.03);
+    border-top: 1px solid var(--bp-rule);
+    font-size: 11.5px;
+    line-height: 1.7;
+    color: var(--ink-mute);
+    font-family: var(--sans);
+    letter-spacing: 0.02em;
+}
+.bp-era-foot strong { color: var(--bp-ink); }
+
+/* ===== 3. 5대 핵심 역량 · 3단 흐름 ===== */
+.bp-flow {
+    display: grid;
+    grid-template-columns: 1.05fr 1.1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-flow-head {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1.05fr 1.1fr 1fr;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+}
+.bp-flow-head > div {
+    padding: 14px 22px;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border-right: 1px solid rgba(247, 245, 239, 0.18);
+}
+.bp-flow-head > div:last-child { border-right: none; }
+.bp-flow-row {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1.05fr 1.1fr 1fr;
+    border-top: 1px solid var(--bp-rule);
+}
+.bp-flow-row > div {
+    padding: 20px 22px;
+    border-right: 1px solid var(--bp-rule);
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.bp-flow-row > div:last-child { border-right: none; }
+.bp-flow-row .reality strong { color: var(--bp-ink); }
+.bp-flow-row .question {
+    background: rgba(14, 59, 42, 0.04);
+    color: var(--bp-ink);
+    font-weight: 600;
+}
+.bp-flow-row .capability {
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.18), transparent 60%),
+        linear-gradient(135deg, #14523B 0%, #0E3B2A 100%);
+    color: var(--bp-paper);
+    align-items: stretch;
+    padding: 18px 22px 20px;
+}
+.bp-flow-row .capability::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-flow-row .capability > div { position: relative; z-index: 1; width: 100%; }
+.cap-num {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: #8ED1AF;
+    margin-bottom: 4px;
+}
+.cap-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--bp-paper);
+    letter-spacing: -0.005em;
+    margin-bottom: 4px;
+}
+.cap-sub {
+    font-size: 12.5px;
+    color: rgba(247, 245, 239, 0.78);
+    line-height: 1.55;
+}
+
+/* ===== 4. AI 퍼스트 인재의 5대 핵심 역량 (5 컬럼 카드) ===== */
+.bp-cap5 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+}
+.bp-cap5-card {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    padding: 24px 20px 22px;
+    display: flex;
+    flex-direction: column;
+}
+.bp-cap5-num {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.22em;
+    margin-bottom: 14px;
+}
+.bp-cap5-icon {
+    width: 52px;
+    height: 52px;
+    color: var(--bp-line);
+    margin-bottom: 16px;
+    opacity: 0.9;
+}
+.bp-cap5-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.bp-cap5-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    letter-spacing: -0.005em;
+    line-height: 1.3;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--bp-rule);
+}
+.bp-cap5-desc {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    flex-grow: 1;
+    margin-bottom: 16px;
+}
+.bp-cap5-desc strong { color: var(--bp-ink); }
+.bp-cap5-vs {
+    background: rgba(14, 59, 42, 0.04);
+    border: 1px solid var(--bp-rule);
+    padding: 14px 14px 16px;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    text-align: center;
+}
+.bp-cap5-vs-old { color: var(--ink-mute); }
+.bp-cap5-vs-sep {
+    display: block;
+    margin: 6px 0;
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--bp-accent);
+}
+.bp-cap5-vs-new {
+    color: var(--bp-ink);
+    font-weight: 700;
+}
+
+/* ===== 5. 피플 리더십 vs 에이전트 리더십 ===== */
+.bp-leadership {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    overflow: hidden;
+}
+.bp-lead-head {
+    display: grid;
+    grid-template-columns: 130px repeat(6, 1fr);
+    background: var(--bp-line);
+    color: var(--bp-paper);
+}
+.bp-lead-head > div {
+    padding: 14px 12px;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-align: center;
+    border-right: 1px solid rgba(247, 245, 239, 0.18);
+}
+.bp-lead-head > div:last-child { border-right: none; }
+.bp-lead-head .axis-corner {
+    background: #062018;
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+.bp-lead-row {
+    display: grid;
+    grid-template-columns: 130px repeat(6, 1fr);
+    border-top: 1.5px solid var(--bp-line);
+}
+.bp-lead-row > div {
+    padding: 22px 14px;
+    border-right: 1px solid var(--bp-rule);
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    text-align: center;
+}
+.bp-lead-row > div:last-child { border-right: none; }
+.bp-lead-row.people {
+    background: rgba(14, 59, 42, 0.06);
+}
+.bp-lead-row.agent {
+    background: rgba(154, 123, 10, 0.06);
+}
+.bp-lead-row .row-axis {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 13.5px;
+    letter-spacing: 0.02em;
+    color: var(--bp-ink);
+    background: rgba(14, 59, 42, 0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.bp-lead-row.agent .row-axis {
+    color: var(--bp-red);
+    background: rgba(139, 46, 31, 0.05);
+}
+.bp-lead-row .cell-key {
+    display: block;
+    font-family: var(--sans);
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    margin-bottom: 8px;
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+}
+.bp-lead-row .cell-sub {
+    font-size: 11.5px;
+    color: var(--ink-mute);
+    line-height: 1.5;
+    display: block;
+}
+.bp-lead-row .cell-tag {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.06em;
+    padding: 2px 0;
+    border-top: 1px dashed var(--bp-rule);
+    width: 100%;
+}
+.bp-lead-row.agent .cell-tag { color: var(--bp-red); }
+.bp-lead-row .cell-highlight {
+    position: relative;
+    box-shadow: inset 0 0 0 2px var(--bp-red);
+    background: rgba(139, 46, 31, 0.04);
+    z-index: 1;
+}
+.bp-lead-foot {
+    padding: 18px 26px;
+    border-top: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+}
+.bp-lead-foot strong { color: var(--bp-ink); }
+
+/* ===== Handoff (단락 사이 안내) ===== */
+.bp-handoff {
+    margin-top: 28px;
+    padding: 20px 24px 22px;
+    background: var(--bp-paper-2);
+    border-top: 1px solid var(--bp-line);
+    border-bottom: 1px solid var(--bp-line);
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+}
+.bp-handoff .tag {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+.bp-handoff strong { color: var(--bp-ink); }
+
+/* ===== Closing footer ===== */
+.bp-footer {
+    padding: 36px 56px 44px;
+    background:
+        radial-gradient(ellipse at 0% 100%, rgba(27, 110, 79, 0.35), transparent 55%),
+        linear-gradient(110deg, #14523B 0%, #0E3B2A 35%, #0A2E22 70%, #062018 100%);
+    color: rgba(247, 245, 239, 0.92);
+    font-family: var(--sans);
+    font-size: 12.5px;
+    line-height: 1.7;
+    border-top: 1.5px solid #062018;
+    position: relative;
+    overflow: hidden;
+}
+.bp-footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-footer > * { position: relative; z-index: 1; }
+.bp-footer strong { color: var(--bp-paper); }
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+    .bp-hero { padding: 48px 32px; }
+    .bp-hero h1 { font-size: 34px; }
+    .bp-section { padding: 40px 32px; }
+    .bp-twocol { grid-template-columns: 1fr; }
+    .bp-twocol .col-case { border-right: none; border-bottom: 1px solid var(--bp-rule); }
+    .bp-era { grid-template-columns: 90px repeat(4, 1fr); font-size: 12px; }
+    .bp-era-cell, .bp-era-head, .bp-era-axis { padding: 14px 12px; }
+    .bp-flow, .bp-flow-head, .bp-flow-row { grid-template-columns: 1fr; }
+    .bp-flow-head > div, .bp-flow-row > div {
+        border-right: none;
+        border-bottom: 1px solid rgba(247, 245, 239, 0.18);
+    }
+    .bp-flow-row > div { border-bottom: 1px solid var(--bp-rule); border-right: none; }
+    .bp-flow-row .question, .bp-flow-row .capability { padding: 18px 22px; }
+    .bp-cap5 { grid-template-columns: repeat(2, 1fr); }
+    .bp-lead-head, .bp-lead-row { grid-template-columns: 110px repeat(3, 1fr); }
+    .bp-lead-head > div:nth-child(n+5), .bp-lead-row > div:nth-child(n+5) {
+        display: none;
+    }
+    .bp-footer { padding: 32px; }
+}
+@media (max-width: 600px) {
+    .bp-sheet { margin: 12px; }
+    .bp-hero h1 { font-size: 28px; }
+    .bp-section-title { font-size: 22px; }
+    .bp-era { grid-template-columns: 1fr; }
+    .bp-era-cell, .bp-era-head, .bp-era-axis { border-right: none; }
+    .bp-cap5 { grid-template-columns: 1fr; }
+    .bp-lead-head, .bp-lead-row { grid-template-columns: 90px 1fr 1fr; }
+    .bp-lead-head > div:nth-child(n+4), .bp-lead-row > div:nth-child(n+4) {
+        display: none;
+    }
+    .bp-hero-nav { padding: 10px 16px; flex-wrap: wrap; }
+    .bp-hero-nav a { font-size: 12px; padding: 8px 12px; flex: 1 1 calc(50% - 8px); }
+}
+</style>
+</head>
+<body>
+
+<div class="bp-sheet">
+
+
+    <!-- ========= BRAND BAR ========= -->
+    <a class="bp-brandbar" href="index.html" aria-label="목차로 이동">
+        <img class="bb-logo" src="assets/logos/logo1-transparent.png" alt="AI ROASTING">
+        <span>AI ROASTING · AX GUIDE TO COMPANY BRAIN OS</span>
+    </a>
+
+    <!-- ========= STEP NAVIGATION ========= -->
+    <nav class="bp-stepnav" aria-label="참고 자료">
+        <ol class="bp-steps">
+            <li class="bp-step"><a href="blueprint.html">진단</a></li>
+            <li class="bp-step"><a href="organization.html">1</a></li>
+            <li class="bp-step"><a href="pilot.html">2</a></li>
+            <li class="bp-step"><a href="criteria.html">3</a></li>
+            <li class="bp-step"><a href="resource.html">4</a></li>
+            <li class="bp-step"><a href="ainative.html">5</a></li>
+        </ol>
+        <a class="bp-back" href="index.html">← 목록으로</a>
+        <div class="bp-substeps" aria-label="참고 자료">
+            <a href="ai-services.html">AI 서비스 선택</a>
+            <span aria-current="page">AI 퍼스트 문제 정의력</span>
+        </div>
+    </nav>
+
+    <!-- ========= HERO ========= -->
+    <section class="bp-hero">
+        <div class="bp-hero-eyebrow">참고 자료 · 5단계 본문 외 부록 · 리더 역량과 에이전트 리더십</div>
+        <h1>'구현력'의 시대가 끝나고, '문제 정의력'의 시대가 시작됩니다</h1>
+        <p class="bp-lead">AI로 구현 비용이 0에 가까워지면 경쟁의 자리는 What과 Why로 이동합니다. 잘 만드는 능력만으로는 더 이상 차별되지 않으며, 리더는 사람만 이끌던 자리에서 사람과 에이전트를 함께 이끄는 자리로 옮겨갑니다.</p>
+        <div class="bp-summary">
+            <strong>이 페이지는 두 가지를 정리합니다.</strong> 첫째, 시대의 전환을 케이스 한 건과 4시대 비교로 설명합니다. 둘째, 그 전환을 견디는 인재의 5대 핵심 역량과, 리더가 새로 갖춰야 할 에이전트 리더십의 7가지 작업을 피플 리더십과 한 줄씩 대비해 보여드립니다. 본문 5단계 로드맵에 들어가기 전, 또는 4단계 업무 재설계에 들어가기 직전에 함께 펼쳐두면 좋은 참고 자료입니다.
+        </div>
+    </section>
+
+    <nav class="bp-hero-nav" aria-label="섹션 바로가기">
+        <a href="#shift">시대의 전환</a>
+        <a href="#why">Why의 시대</a>
+        <a href="#five">5대 핵심 역량</a>
+        <a href="#talent">인재의 모습</a>
+        <a href="#agent-leadership">에이전트 리더십</a>
+    </nav>
+
+    <!-- ========= 1. 시대의 전환 (Karpathy 사례) ========= -->
+    <section class="bp-section" id="shift">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">'구현력'의 시대에서 '문제 정의력'이 중요한 시대로 변화하고 있습니다</h2>
+            </div>
+            <div class="bp-section-meta">사례 · Andrej Karpathy · 2026.02</div>
+        </div>
+
+        <p class="bp-section-intro">한 줄로 위임한 일이 주말 풀타임 코딩을 30분으로 줄였습니다. 구현 비용이 0에 수렴하면 경쟁의 자리는 "잘 만드는 능력"에서 "잘 정의하는 능력"으로 옮겨갑니다.</p>
+
+        <div class="bp-twocol">
+            <div class="col-case">
+                <span class="bp-col-tag">사례</span>
+                <p class="bp-case-source">
+                    <strong>Andrej Karpathy</strong>
+                    <span class="meta">OpenAI 공동 창업자 · Tesla AI 총괄 · 2026.02.26 X/Twitter</span>
+                </p>
+
+                <div class="bp-case-block">
+                    <div class="bp-case-label">과제</div>
+                    <ul>
+                        <li>홈 보안카메라 영상 분석 대시보드 구축</li>
+                        <li>SSH 설정 → 비전 모델 다운로드 → 벤치마크 → 대시보드 → 시스템 서비스 → 리포트 작성</li>
+                    </ul>
+                </div>
+
+                <div class="bp-case-block">
+                    <div class="bp-case-label">방법</div>
+                    <ul>
+                        <li>영어 한 문장으로 AI 에이전트에 위임</li>
+                        <li>사람이 직접 쓴 코드: <strong>0줄</strong></li>
+                        <li>AI가 설계·구현·테스트·디버그를 자율 수행</li>
+                    </ul>
+                </div>
+
+                <div class="bp-case-block">
+                    <div class="bp-case-label">결과</div>
+                    <ul>
+                        <li>기존: 주말 이틀 풀타임 코딩</li>
+                        <li><strong>현재: 30분 (영어 한 문장 + 리뷰)</strong></li>
+                        <li>역할: 코더에서 검수자로</li>
+                    </ul>
+                </div>
+
+                <p class="bp-case-quote">"Programming has changed more in 2 months than in decades", Andrej Karpathy, X/Twitter, 2026.02</p>
+            </div>
+
+            <div class="col-implication">
+                <span class="bp-col-tag">시사점</span>
+                <ul class="bp-imp-list">
+                    <li>
+                        <div><span class="bp-imp-num">① 구현 비용</span><span class="bp-imp-key">0으로 수렴</span></div>
+                        <div class="bp-imp-desc">구현에 들이던 시간과 비용이 극적으로 사라지고 있습니다.</div>
+                    </li>
+                    <li>
+                        <div><span class="bp-imp-num">② 사람의 역할</span><span class="bp-imp-key">코더에서 매니저로 재정의</span></div>
+                        <div class="bp-imp-desc">정의하고, 위임하고, 검증하는 일이 사람의 자리로 남습니다.</div>
+                    </li>
+                    <li>
+                        <div><span class="bp-imp-num">③ 경쟁 우위</span><span class="bp-imp-key">How에서 Why · What으로 이동</span></div>
+                        <div class="bp-imp-desc">잘 만드는 능력이 아니라 무엇을, 왜 만들지 정의하는 능력이 차별점입니다.</div>
+                    </li>
+                </ul>
+
+                <div class="bp-imp-conclusion">
+                    <div class="bp-imp-conclusion-label">결론</div>
+                    <div class="bp-imp-conclusion-body">"잘 만드는 능력"만으로는 생존이 어렵습니다. <strong>AI 퍼스트 문제 정의력</strong>이 새 경쟁의 출발선입니다.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= 2. 4시대 매트릭스 (Why가 중요해진 이유) ========= -->
+    <section class="bp-section" id="why">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">AI로 구현 비용이 0에 가까워지면서, 'Why'가 중요해지고 있습니다</h2>
+            </div>
+            <div class="bp-section-meta">장인 · 대량 생산 · 인터넷 모바일 · AI</div>
+        </div>
+
+        <p class="bp-section-intro">시대마다 경쟁의 자리는 옮겨 왔습니다. 장인의 숙련도, 산업화의 표준화, 인터넷·모바일의 빠른 구현. 그리고 지금, AI가 구현을 가져가면서 사람에게 남은 자리는 Why를 정의하는 일뿐입니다.</p>
+
+        <div class="bp-era">
+            <div class="bp-era-corner"></div>
+            <div class="bp-era-head">장인의 시대</div>
+            <div class="bp-era-head">대량 생산 시대</div>
+            <div class="bp-era-head">인터넷·모바일</div>
+            <div class="bp-era-head">AI 시대</div>
+
+            <div class="bp-era-axis">전략<span class="axis-sub">Why</span></div>
+            <div class="bp-era-cell">
+                <ul>
+                    <li>전략 개념 부재 (전쟁에서만 주로 활용)</li>
+                    <li>필요한 걸 만드는 것 자체가 목적</li>
+                </ul>
+            </div>
+            <div class="bp-era-cell highlight">
+                <ul>
+                    <li>경영진이 문제 정의 독점</li>
+                    <li>테일러리즘으로 생각과 실행 분리, SOP 중요</li>
+                </ul>
+                <span class="era-key">→ 전략 기획 역량</span>
+            </div>
+            <div class="bp-era-cell">
+                <ul>
+                    <li>문제 정의 최소화</li>
+                    <li>"일단 만들어봐" → 고객 반응으로 필요성 검증</li>
+                </ul>
+            </div>
+            <div class="bp-era-cell heavy">
+                <ul>
+                    <li>Why가 사람의 유일한 역할</li>
+                    <li>문제 정의 없이 AI를 활용하면 무의미</li>
+                </ul>
+                <span class="era-key">→ 문제 정의 역량</span>
+            </div>
+
+            <div class="bp-era-axis">실행<span class="axis-sub">How</span></div>
+            <div class="bp-era-cell highlight">
+                <ul>
+                    <li>숙련도가 경쟁력의 전부</li>
+                    <li>마차 바퀴 장인 = 수십 년 수련</li>
+                </ul>
+            </div>
+            <div class="bp-era-cell">
+                <ul>
+                    <li>다수 노동자가 SOP 수행</li>
+                    <li>숙련도보다 표준화가 중요</li>
+                </ul>
+            </div>
+            <div class="bp-era-cell highlight">
+                <ul>
+                    <li>MVP로 PMF 검증</li>
+                    <li>온오프를 연계하는 O2O 붐</li>
+                    <li>제조 비용이 0으로 수렴, 개발자가 중요</li>
+                </ul>
+                <span class="era-key">→ Growth Hacking 역량</span>
+            </div>
+            <div class="bp-era-cell">
+                <ul>
+                    <li>AI가 전부 또는 상당 부문 대체 (구현 비용 0으로 수렴)</li>
+                    <li>구현력은 더 이상 차별적 경쟁력이 아닙니다</li>
+                </ul>
+            </div>
+
+            <div class="bp-era-foot">
+                <strong>용어 메모.</strong> 테일러리즘(Taylorism)은 프레데릭 테일러가 제창한 과학적 관리법으로, 노동자의 작업 동작과 시간을 분석·최적화해 생산성을 극대화하는 방식입니다. SOP(Standard Operating Procedure)는 표준 운영 절차, MVP(Minimum Viable Product)는 최소 기능 제품, PMF(Product-Market Fit)는 제품·시장 적합성을 의미합니다.
+            </div>
+        </div>
+
+        <div class="bp-handoff">
+            <div class="tag">읽는 방식</div>
+            오른쪽으로 갈수록 구현(How)의 가치는 떨어지고, 정의(Why)의 가치가 올라갑니다. 지금 우리 회사가 어느 칸에서 자원을 쓰고 있는지 점검해 볼 수 있습니다. <strong>대량 생산 시대의 전략 기획 역량과 인터넷·모바일의 그로스 해킹 역량은 그 시대를 만든 회사를 지배했지만, AI 시대의 차별점은 이미 다른 자리로 옮겨가고 있습니다.</strong>
+        </div>
+    </section>
+
+    <!-- ========= 3. 5대 핵심 역량 (3단 흐름) ========= -->
+    <section class="bp-section" id="five">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">AI 시대에 필요한 문제 정의력은 5대 핵심 역량으로 구성됩니다</h2>
+            </div>
+            <div class="bp-section-meta">AI가 바꾸는 현실 · 스스로에게 던질 질문 · 5대 핵심 역량</div>
+        </div>
+
+        <p class="bp-section-intro">"문제 정의력"은 단일 능력이 아니라 다섯 가지 작업 능력의 묶음입니다. 각 역량은 AI가 만든 새 현실에 대응하며, 그 현실 앞에서 스스로에게 던져야 할 질문 하나에서 출발합니다.</p>
+
+        <div class="bp-flow">
+            <div class="bp-flow-head">
+                <div>AI가 바꾸는 현실</div>
+                <div>스스로에게 던질 질문</div>
+                <div>5대 핵심 역량</div>
+            </div>
+
+            <div class="bp-flow-row">
+                <div class="reality">AI에게 <strong>무엇을 왜</strong> 시킬지 정하는 것이 더 중요해졌습니다.</div>
+                <div class="question">AI에게 무엇을 시킬지 스스로 고민하고 있는가?</div>
+                <div class="capability">
+                    <div>
+                        <div class="cap-num">01</div>
+                        <div class="cap-name">자기주도성</div>
+                        <div class="cap-sub">AI 활용 방향을 스스로 설계합니다.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bp-flow-row">
+                <div class="reality">전문 영역의 지식에 <strong>바로 접근</strong>할 수 있게 되었습니다.</div>
+                <div class="question">아직도 '안 해봤으니, 모르니까'라는 생각에 갇혀 있는가?</div>
+                <div class="capability">
+                    <div>
+                        <div class="cap-num">02</div>
+                        <div class="cap-name">Limitless Mindset</div>
+                        <div class="cap-sub">영역의 경계를 두지 않는 사고 방식입니다.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bp-flow-row">
+                <div class="reality">과거 경험 기반의 성공 방정식이 <strong>근본적으로</strong> 바뀌고 있습니다.</div>
+                <div class="question">과거 성공 공식에 여전히 의존하고 있지 않은가?</div>
+                <div class="capability">
+                    <div>
+                        <div class="cap-num">03</div>
+                        <div class="cap-name">Unlearn-Relearn</div>
+                        <div class="cap-sub">지속적으로 비우고 다시 배웁니다.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bp-flow-row">
+                <div class="reality">할루시네이션은 <strong>근본적으로 제거가 어렵습니다.</strong></div>
+                <div class="question">나는 AI 산출물의 오류를 주도적으로 검증하고 있는가?</div>
+                <div class="capability">
+                    <div>
+                        <div class="cap-num">04</div>
+                        <div class="cap-name">빠른 검증·반복</div>
+                        <div class="cap-sub">AI 산출물의 오류를 다회 교차 검증합니다.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bp-flow-row">
+                <div class="reality">자료 생성의 시간이 <strong>극도로 단축</strong>되고 있습니다.</div>
+                <div class="question">기존 방식 대비 시간을 1/10로 단축할 방법을 실험 중인가?</div>
+                <div class="capability">
+                    <div>
+                        <div class="cap-num">05</div>
+                        <div class="cap-name">1/10 데드라인</div>
+                        <div class="cap-sub">극한 속도의 실행을 기본값으로 둡니다.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= 4. 인재의 모습 (5 컬럼) ========= -->
+    <section class="bp-section" id="talent">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">AI 퍼스트 인재의 5대 핵심 역량</h2>
+            </div>
+            <div class="bp-section-meta">자기주도성 · Limitless · Unlearn · 검증 · 1/10 데드라인</div>
+        </div>
+
+        <p class="bp-section-intro">앞 절의 다섯 역량을 한 사람의 모습으로 풀면 다음과 같습니다. 각 카드 아래의 대비 박스가 "AI 이전의 일하던 방식"과 "AI 이후의 일하는 방식"의 결을 비춥니다.</p>
+
+        <div class="bp-cap5">
+            <article class="bp-cap5-card">
+                <div class="bp-cap5-num">01</div>
+                <span class="bp-cap5-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="9"/>
+                        <circle cx="12" cy="12" r="4"/>
+                        <line x1="12" y1="1.5" x2="12" y2="5"/>
+                        <line x1="12" y1="19" x2="12" y2="22.5"/>
+                        <line x1="1.5" y1="12" x2="5" y2="12"/>
+                        <line x1="19" y1="12" x2="22.5" y2="12"/>
+                    </svg>
+                </span>
+                <h3 class="bp-cap5-name">자기주도성</h3>
+                <p class="bp-cap5-desc">AI에게 <strong>무엇을 시킬지</strong> 스스로 정의하고 실행 방향을 설계하는 능력입니다.</p>
+                <div class="bp-cap5-vs">
+                    <span class="bp-cap5-vs-old">시키는 대로만</span>
+                    <span class="bp-cap5-vs-sep">VS</span>
+                    <span class="bp-cap5-vs-new">"무엇을 시키지?"</span>
+                </div>
+            </article>
+
+            <article class="bp-cap5-card">
+                <div class="bp-cap5-num">02</div>
+                <span class="bp-cap5-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6.5 8c-2.5 0-4 1.8-4 4s1.5 4 4 4c2 0 3.2-1.4 4.5-3l2-2.5C14.3 9 15.5 7.5 17.5 7.5c2.5 0 4 1.8 4 4s-1.5 4-4 4c-2 0-3.2-1.4-4.5-3"/>
+                    </svg>
+                </span>
+                <h3 class="bp-cap5-name">Limitless Mindset</h3>
+                <p class="bp-cap5-desc">AI가 실행을 대체하므로 <strong>"내 영역 밖"</strong>이라는 개념 자체가 소멸합니다.</p>
+                <div class="bp-cap5-vs">
+                    <span class="bp-cap5-vs-old">"이건 못 해"</span>
+                    <span class="bp-cap5-vs-sep">VS</span>
+                    <span class="bp-cap5-vs-new">"무엇을 물어볼까?"</span>
+                </div>
+            </article>
+
+            <article class="bp-cap5-card">
+                <div class="bp-cap5-num">03</div>
+                <span class="bp-cap5-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 12a9 9 0 0 1 15.5-6.2"/>
+                        <polyline points="19 2 19 6 15 6"/>
+                        <path d="M21 12a9 9 0 0 1-15.5 6.2"/>
+                        <polyline points="5 22 5 18 9 18"/>
+                    </svg>
+                </span>
+                <h3 class="bp-cap5-name">Unlearn-Relearn</h3>
+                <p class="bp-cap5-desc">과거 성공 방정식이 빠르게 무효화됩니다. 경력·직급보다 <strong>학습 속도</strong>가 경쟁력입니다.</p>
+                <div class="bp-cap5-vs">
+                    <span class="bp-cap5-vs-old">"내 경험상…"</span>
+                    <span class="bp-cap5-vs-sep">VS</span>
+                    <span class="bp-cap5-vs-new">"제로베이스로 다시"</span>
+                </div>
+            </article>
+
+            <article class="bp-cap5-card">
+                <div class="bp-cap5-num">04</div>
+                <span class="bp-cap5-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.5 12a8.5 8.5 0 1 1-2.5-6"/>
+                        <polyline points="20.5 4.5 20.5 9 16 9"/>
+                        <polyline points="8 12 11 15 16.5 9.5"/>
+                    </svg>
+                </span>
+                <h3 class="bp-cap5-name">빠른 검증·반복</h3>
+                <p class="bp-cap5-desc">AI 할루시네이션은 불가피. 완벽 1회보다 <strong>빠른 반복 검증</strong>이 품질을 결정합니다.</p>
+                <div class="bp-cap5-vs">
+                    <span class="bp-cap5-vs-old">AI 답변 그대로 사용</span>
+                    <span class="bp-cap5-vs-sep">VS</span>
+                    <span class="bp-cap5-vs-new">반드시 교차 검증</span>
+                </div>
+            </article>
+
+            <article class="bp-cap5-card">
+                <div class="bp-cap5-num">05</div>
+                <span class="bp-cap5-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="13.5" r="8"/>
+                        <line x1="12" y1="13.5" x2="12" y2="8.5"/>
+                        <line x1="12" y1="13.5" x2="15" y2="15.5"/>
+                        <line x1="9" y1="2.5" x2="15" y2="2.5"/>
+                        <line x1="12" y1="2.5" x2="12" y2="5.5"/>
+                    </svg>
+                </span>
+                <h3 class="bp-cap5-name">1/10 데드라인</h3>
+                <p class="bp-cap5-desc">기존 소요 시간을 측정한 뒤, AI로 <strong>1/10 이내 달성</strong>을 기본값으로 설정합니다.</p>
+                <div class="bp-cap5-vs">
+                    <span class="bp-cap5-vs-old">기획서 10일</span>
+                    <span class="bp-cap5-vs-sep">VS</span>
+                    <span class="bp-cap5-vs-new">기획서 1일</span>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- ========= 5. 에이전트 리더십 ========= -->
+    <section class="bp-section" id="agent-leadership">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">앞으로 에이전트 리더십 역량의 중요성이 강하게 부각될 것입니다</h2>
+            </div>
+            <div class="bp-section-meta">피플 리더십 vs 에이전트 리더십 · 7개 작업 단위 대비</div>
+        </div>
+
+        <p class="bp-section-intro">리더의 일은 사람을 움직이게 하는 일에서, 사람과 에이전트를 함께 움직이게 하는 일로 확장됩니다. 채용·교육·발령·평가·승진·보상의 모든 작업 단위에서 두 가지 리더십이 동시에 요구됩니다.</p>
+
+        <div class="bp-leadership">
+            <div class="bp-lead-head">
+                <div class="axis-corner">원칙</div>
+                <div>① 채용</div>
+                <div>② 교육</div>
+                <div>③ 발령</div>
+                <div>④ 평가</div>
+                <div>⑤ 승진</div>
+                <div>⑥ 보상</div>
+            </div>
+
+            <div class="bp-lead-row people">
+                <div class="row-axis">피플 리더십</div>
+                <div>
+                    <span class="cell-key">업무 정의, JD 작성, 채용</span>
+                    <span class="cell-sub">적합한 사람을 발견합니다</span>
+                </div>
+                <div>
+                    <span class="cell-key">온보딩, 코칭</span>
+                    <span class="cell-sub">점진적 내면화</span>
+                </div>
+                <div>
+                    <span class="cell-key">역할·팀 배정</span>
+                    <span class="cell-sub">공간적 (어느 팀)</span>
+                </div>
+                <div class="cell-highlight">
+                    <span class="cell-key">OKR, 1:1, 피드백</span>
+                    <span class="cell-sub">한 사람을 다면적으로</span>
+                </div>
+                <div>
+                    <span class="cell-key">역량별 승진·재배치</span>
+                    <span class="cell-sub">책임 범위 확대</span>
+                </div>
+                <div>
+                    <span class="cell-key">성과 인센티브</span>
+                    <span class="cell-sub">동기 지속</span>
+                </div>
+            </div>
+
+            <div class="bp-lead-row agent">
+                <div class="row-axis">에이전트 리더십</div>
+                <div class="cell-highlight">
+                    <span class="cell-key">태스크 정의, 시스템 프롬프트 작성</span>
+                    <span class="cell-sub">적합한 역할을 발명합니다</span>
+                </div>
+                <div>
+                    <span class="cell-key">프롬프트 엔지니어링·파인튜닝</span>
+                    <span class="cell-sub">즉시 주입·내면화</span>
+                </div>
+                <div>
+                    <span class="cell-key">워크플로우 설계·배치</span>
+                    <span class="cell-sub">시간적 (어느 순서). 오케스트레이션</span>
+                </div>
+                <div>
+                    <span class="cell-key">평가기준 설계</span>
+                    <span class="cell-sub">정량적·반복 측정</span>
+                </div>
+                <div>
+                    <span class="cell-key">신뢰 임계값 도달 여부 판단</span>
+                    <span class="cell-sub">자율성 범위 확대</span>
+                </div>
+                <div>
+                    <span class="cell-key">지속·폐기 결정</span>
+                    <span class="cell-sub">학습 신호 설계 (수용·거부)</span>
+                </div>
+            </div>
+
+            <div class="bp-lead-foot">
+                <strong>핵심 차이.</strong> 피플 리더십은 "사람은 <strong>왜 하는지</strong> 알아야 움직인다"는 동기 부여의 문제이고, 에이전트 리더십은 "에이전트는 <strong>무엇을 하는지</strong> 알아야 움직인다"는 정의의 문제입니다. 두 리더십은 대체가 아니라 병행입니다. 사람과 에이전트가 같은 워크플로우 안에서 함께 일하는 시대에는 한쪽만 잘하는 리더로는 운영이 어렵습니다.
+        </div>
+    </div>
+
+    </section>
+
+    <!-- ========= FOOTER ========= -->
+    <footer class="bp-footer">
+        <p class="bp-footer-summary">구현 능력 위에 문제 정의 능력을 핵심 평가축으로 추가하고, 피플 리더십 위에 에이전트 리더십 7가지 작업을 분기 점검 항목으로 얹습니다.</p>
+        <div class="bp-footer-bar">
+            <span class="bp-footer-copy">&copy; 2026 AI ROASTING. All rights reserved.</span>
+            <span class="bp-footer-author">
+                <span class="bp-footer-author-name">강정구 · Jayden Kang</span>
+                <a class="bp-footer-social bp-footer-fb" href="https://www.facebook.com/jayden.kang" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V13h2.7v8h3.4z"/></svg></a>
+                <a class="bp-footer-social bp-footer-in" href="https://www.linkedin.com/in/jayden-kang/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.4v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.59 0 4.25 2.36 4.25 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
+            </span>
+        </div>
+    </footer>
+
+</div>
+
+<script>
+(function() {
+    'use strict';
+    var navLinks = document.querySelectorAll('.bp-hero-nav a');
+    if (!navLinks.length) return;
+
+    var linkMap = {};
+    var sectionIds = [];
+    navLinks.forEach(function(link) {
+        var id = (link.getAttribute('href') || '').replace('#', '');
+        if (!id) return;
+        var el = document.getElementById(id);
+        if (!el) return;
+        linkMap[id] = { link: link, el: el };
+        sectionIds.push(id);
+    });
+    if (!sectionIds.length) return;
+
+    function setActive(id) {
+        sectionIds.forEach(function(k) {
+            if (k === id) linkMap[k].link.classList.add('active');
+            else linkMap[k].link.classList.remove('active');
+        });
+    }
+
+    function update() {
+        var nav = document.querySelector('.bp-hero-nav');
+        var navH = nav ? nav.offsetHeight : 0;
+        var trigger = navH + 60;
+        var currentId = null;
+        for (var i = 0; i < sectionIds.length; i++) {
+            var rect = linkMap[sectionIds[i]].el.getBoundingClientRect();
+            if (rect.top <= trigger) currentId = sectionIds[i];
+            else break;
+        }
+        setActive(currentId);
+    }
+
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(function() {
+            update();
+            ticking = false;
+        });
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+})();
+</script>
+
+</body>
+</html>

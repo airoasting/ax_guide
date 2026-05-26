@@ -99,7 +99,7 @@ CSS 클래스명·SVG ID 같은 비가시 식별자(`.bp-liner`, `.bp-kal`, `#li
 |---|---|---|---|
 | ① 추진 체계 | `organization.html` · `operations.html` · `capability.html` | 조직 세팅 · 운영 계획 · 90일 부트캠프 | B-1 |
 | ② 파일럿 실행 | `pilot.html` · `insights.html` | 대상 선정과 실행 · 핵심 시사점 도출 | B-2 |
-| ③ 과제 우선순위화 | `criteria.html` · `evaluation.html` · `bets.html` | 기준 설정 · 후보 평가 · 빅 베팅 선정 | B-3 |
+| ③ 과제 우선순위화 | `criteria.html` · `evaluation.html` · `bets.html` | 기준 설정 · 후보 평가 · 전략 과제 선정 | B-3 |
 | ④ 업무 방식 재설계 (★ 심장) | `resource.html` · `reshape.html` | 자원 재배분(B-4-1) · 업무 재설계(B-4-2) | B-4 |
 | ⑤ 운영 내재화 | (미구현) | 살아있는 플랫폼 · 에이전트 운영모델 · 거버넌스 인프라 | B-5 |
 

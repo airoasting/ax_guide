@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>B-1-3 AI 부트캠프 · 교육과 Quick Win, 해커톤으로 챔피언을 만듭니다</title>
+<title>AI 부트캠프 · AI ROASTING</title>
 <meta name="description" content="AX 1단계 추진체계 구축의 세 번째 작업. TF 5~9명을 90일 부트캠프 교육, 자기 도메인 Quick Win 제작, 4개월차 사내 해커톤 세 가지로 회사의 첫 AI 챔피언으로 만듭니다.">
 <link rel="stylesheet" href="assets/style.css">
 <style>
@@ -405,6 +405,7 @@ body {
 .bp-principles.bp-4d {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto auto 1fr auto;
     border: 1px solid var(--bp-line);
     background: var(--bp-paper-2);
 }
@@ -414,8 +415,10 @@ body {
     background: var(--bp-paper-2);
     transition: background .25s ease, transform .25s ease, box-shadow .25s ease;
     position: relative;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 5;
+    row-gap: 0;
 }
 .bp-principle:last-child { border-right: none; }
 .bp-principle:hover {
@@ -434,6 +437,23 @@ body {
     transition: color .25s ease, letter-spacing .25s ease;
 }
 .bp-principle:hover .bp-principle-num { color: var(--bp-line); letter-spacing: 0.24em; }
+.bp-principle-icon {
+    width: 36px;
+    height: 36px;
+    color: var(--bp-accent);
+    margin-bottom: 14px;
+    transition: color .25s ease, transform .25s ease;
+}
+.bp-principle-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.bp-principle:hover .bp-principle-icon { color: var(--bp-line); transform: translateY(-2px); }
 .bp-principle-name {
     font-size: 18px;
     font-weight: 700;
@@ -457,9 +477,28 @@ body {
     line-height: 1.7;
     color: var(--ink-soft);
     margin-bottom: 18px;
-    flex: 1;
 }
 .bp-principle-body strong { color: var(--bp-ink); }
+.bp-principle-body ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.bp-principle-body li {
+    position: relative;
+    padding-left: 14px;
+    margin-bottom: 10px;
+}
+.bp-principle-body li:last-child { margin-bottom: 0; }
+.bp-principle-body li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 5px;
+    height: 1px;
+    background: var(--bp-accent);
+}
 .bp-principle-evidence {
     padding-top: 16px;
     border-top: 1px solid var(--bp-rule);
@@ -973,7 +1012,7 @@ body {
     .bp-section { padding: 40px 32px; }
     .bp-compare-head, .bp-compare-row { grid-template-columns: 120px 1fr 1fr; }
     .bp-measure-head, .bp-measure-row { grid-template-columns: 130px 1fr 1fr; }
-    .bp-principles.bp-4d { grid-template-columns: repeat(2, 1fr); }
+    .bp-principles.bp-4d { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto auto auto 1fr auto auto auto auto 1fr auto; }
     .bp-principle { border-right: 1px solid var(--bp-rule); border-bottom: 1px solid var(--bp-rule); }
     .bp-principles.bp-4d .bp-principle:nth-child(2n) { border-right: none; }
     .bp-principles.bp-4d .bp-principle:nth-last-child(-n+2) { border-bottom: none; }
@@ -989,8 +1028,9 @@ body {
     .bp-measure-head, .bp-measure-row { grid-template-columns: 1fr; }
     .bp-measure-head > div, .bp-measure-row > div { border-right: none; }
     .bp-measure-row .layer { text-align: left; }
-    .bp-principles.bp-4d { grid-template-columns: 1fr; }
-    .bp-principles.bp-4d .bp-principle { border-right: none; }
+    .bp-principles.bp-4d { grid-template-columns: 1fr; grid-template-rows: none; }
+    .bp-principles.bp-4d .bp-principle { display: flex; flex-direction: column; grid-row: auto; border-right: none; }
+    .bp-principles.bp-4d .bp-principle .bp-principle-body { flex: 1; }
     .bp-principles.bp-4d .bp-principle:last-child { border-bottom: none; }
     .bp-anti-head, .bp-anti-row { grid-template-columns: 1fr; }
     .bp-check-row { grid-template-columns: 1fr; gap: 6px; }
@@ -1029,7 +1069,7 @@ body {
     <!-- ========= HERO ========= -->
     <section class="bp-hero">
         <div class="bp-hero-eyebrow">Step 1 · 추진체계 구축 · AI 부트캠프 · BRAIN OS 첫 챔피언</div>
-        <h1>90일 부트캠프와 해커톤으로 COMPANY BRAIN OS의 첫 챔피언을 만듭니다.</h1>
+        <h1>90일 부트캠프와 해커톤으로 AX 챔피언을 만듭니다</h1>
         <p class="bp-lead">5~9명 TF의 90일 부트캠프를 교육·Quick Win·해커톤 세 활동에만 집중해 BRAIN OS의 첫 챔피언을 키웁니다.</p>
         <div class="bp-summary">
             <strong>AI 부트캠프는 세 활동으로만 구성됩니다.</strong> 첫째, 90일 부트캠프로 학습합니다. 둘째, 부트캠프 29일차부터 자기 도메인에서 Quick Win을 만들어 봅니다. 셋째, 4개월차에 사내 해커톤을 열어 챔피언 후보군을 전사로 확장합니다. 그 외 활동(전사 동시 교육, 강사 양성 트랙, 외부 컨퍼런스 파견)은 본 단계의 범위에 두지 않습니다.
@@ -1057,9 +1097,17 @@ body {
         <div class="bp-principles bp-4d">
             <div class="bp-principle">
                 <div class="bp-principle-num">1~14일차</div>
+                <div class="bp-principle-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M3 5.5C3 4.67 3.67 4 4.5 4H11v15H4.5a1.5 1.5 0 0 1-1.5-1.5v-12z"/><path d="M21 5.5C21 4.67 20.33 4 19.5 4H13v15h6.5a1.5 1.5 0 0 0 1.5-1.5v-12z"/><line x1="5.5" y1="8" x2="8.5" y2="8"/><line x1="5.5" y1="11" x2="8.5" y2="11"/><line x1="15.5" y1="8" x2="18.5" y2="8"/><line x1="15.5" y1="11" x2="18.5" y2="11"/></svg>
+                </div>
                 <div class="bp-principle-name">AI 기본기</div>
                 <div class="bp-principle-body">
-                    초반 14일은 TF가 강의실로 출근하는 기간입니다. 모델의 종류와 한계, 비용 구조, 정보보안·개인정보 가이드를 집중 학습합니다. 도구 매뉴얼이 아니라 <strong>"이 일에 AI를 쓸지 말지"를 판단하는 기준</strong>을 다지는 시간입니다. 사내 보안·법무가 코티칭으로 참여해 회사의 실제 제약을 함께 전달합니다.
+                    <ul>
+                        <li>초반 14일은 TF가 강의실로 출근하는 기간</li>
+                        <li>모델의 종류와 한계, 비용 구조, 정보보안·개인정보 가이드를 집중 학습</li>
+                        <li>도구 매뉴얼이 아니라 <strong>"이 일에 AI를 쓸지 말지"를 판단하는 기준</strong>을 다지는 시간</li>
+                        <li>사내 보안·법무가 코티칭으로 참여해 회사의 실제 제약을 함께 전달</li>
+                    </ul>
                 </div>
                 <div class="bp-principle-evidence">
                     <b>산출물</b>자기 부서 업무 목록을 두고 "AI 위임 가능 / 일부 가능 / 사람 전담"으로 1차 분류한 표 1장.
@@ -1067,9 +1115,17 @@ body {
             </div>
             <div class="bp-principle">
                 <div class="bp-principle-num">15~28일차</div>
+                <div class="bp-principle-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>
+                </div>
                 <div class="bp-principle-name">4D 협업 역량</div>
                 <div class="bp-principle-body">
-                    4D 협업 프레임워크, 즉 <strong>위임(Delegation)·설명(Description)·분별(Discernment)·성실(Diligence)</strong>을 자기 도메인의 실제 의사결정 사례로 실습합니다. AI에게 무엇을 맡길지(Delegation), 어떻게 맥락을 전달할지(Description), 결과 품질을 어떻게 판별할지(Discernment), 책임을 어떻게 끝까지 지는지(Diligence)의 네 단어를 회사 공통 어휘로 정착시킵니다.
+                    <ul>
+                        <li>4D 프레임워크 <strong>위임(Delegation)·설명(Description)·분별(Discernment)·성실(Diligence)</strong>을 자기 도메인 의사결정 사례로 실습</li>
+                        <li>AI에게 무엇을 맡길지(Delegation), 어떻게 맥락을 전달할지(Description)</li>
+                        <li>결과 품질을 어떻게 판별할지(Discernment), 책임을 어떻게 끝까지 지는지(Diligence)</li>
+                        <li>네 단어를 회사 공통 어휘로 정착</li>
+                    </ul>
                 </div>
                 <div class="bp-principle-evidence">
                     <b>산출물</b>자기 도메인의 의사결정 사례 3건을 4D(Delegation·Description·Discernment·Diligence) 어휘로 분해한 케이스 노트.
@@ -1077,9 +1133,17 @@ body {
             </div>
             <div class="bp-principle">
                 <div class="bp-principle-num">29~60일차</div>
+                <div class="bp-principle-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><polygon points="13 2 4 14 11 14 10 22 20 10 13 10 13 2"/></svg>
+                </div>
                 <div class="bp-principle-name">Quick Win 제작</div>
                 <div class="bp-principle-body">
-                    초반 28일에서 분류한 use case 중 하나를 골라 <strong>자기 손으로 만들어 봅니다.</strong> 작은 자동화, Skill 문서 한두 개, 가벼운 에이전트 한 개 정도가 적정 단위입니다. 베테랑의 암묵지를 Skill로 옮기는 K1~K3 사이클을 직접 돌립니다. 멘토 1명과 도메인 자문 1명이 한 팀에 붙습니다.
+                    <ul>
+                        <li>초반 28일에 분류한 use case 중 하나를 골라 <strong>자기 손으로 제작</strong></li>
+                        <li>작은 자동화, Skill 문서 한두 개, 가벼운 에이전트 한 개가 적정 단위</li>
+                        <li>베테랑의 암묵지를 Skill로 옮기는 K1~K3 사이클을 직접 운영</li>
+                        <li>멘토 1명과 도메인 자문 1명이 한 팀에 동행</li>
+                    </ul>
                 </div>
                 <div class="bp-principle-evidence">
                     <b>산출물</b>30일 안에 동료 5명 이상이 직접 써본 흔적이 남는 Quick Win 1~2건.
@@ -1087,9 +1151,17 @@ body {
             </div>
             <div class="bp-principle">
                 <div class="bp-principle-num">61~90일차</div>
+                <div class="bp-principle-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="7" r="2.5"/><path d="M15.5 13.5c2.7.4 4.7 2.6 4.7 5.3"/></svg>
+                </div>
                 <div class="bp-principle-name">동료 코칭과 자산화</div>
                 <div class="bp-principle-body">
-                    만든 Quick Win을 옆자리 동료 1~2명에게 옮기는 코칭 실습입니다. 사내 위키에 Skill 문서로 자산화하고, 신규 사용자가 막히는 자리를 기록해 다음 버전에 반영합니다. <strong>여기서부터 챔피언으로 굳어지는 신호</strong>가 나옵니다. 동료가 챔피언의 이름을 부르며 묻기 시작하면 통과입니다.
+                    <ul>
+                        <li>만든 Quick Win을 옆자리 동료 1~2명에게 옮기는 코칭 실습</li>
+                        <li>사내 위키에 Skill 문서로 자산화</li>
+                        <li>신규 사용자가 막히는 자리를 기록해 다음 버전에 반영</li>
+                        <li><strong>여기서부터 챔피언으로 굳어지는 신호</strong> — 동료가 챔피언의 이름을 부르며 묻기 시작하면 통과</li>
+                    </ul>
                 </div>
                 <div class="bp-principle-evidence">
                     <b>산출물</b>코칭 완료 1명 + 사내 위키 등록 Skill 문서 + 다음 버전 백로그.
@@ -1122,7 +1194,7 @@ body {
                 <div class="bp-check-num">02</div>
                 <div class="bp-check-body">
                     <h4>자기 도메인에서만 고릅니다</h4>
-                    <p>옆 부서의 멋진 use case가 더 매력적으로 보일 때가 있습니다. 그러나 챔피언화의 핵심은 "옆자리 동료가 신뢰하는 사람"이 되는 일입니다. <strong>자기 부서의 실제 통증</strong>이 아니면 챔피언으로 자라지 않습니다.</p>
+                    <p>옆 부서의 멋진 use case가 더 매력적으로 보일 때가 있습니다. 그러나 챔피언화의 핵심은 "옆자리 동료가 신뢰하는 사람"이 되는 일입니다. <strong>자기 부서가 실제로 풀어야 할 문제</strong>가 아니면 챔피언으로 자라지 않습니다.</p>
                 </div>
             </div>
             <div class="bp-check-row">
@@ -1136,7 +1208,7 @@ body {
                 <div class="bp-check-num">04</div>
                 <div class="bp-check-body">
                     <h4>청사진 적합도를 1순위 채점 기준으로 둡니다</h4>
-                    <p>기술적으로 멋진가가 아니라 AI-Native 청사진에 다가가는가, 빅 베팅 후보 풀에 기여하는가를 1순위로 묻습니다. 부가 기준은 분별 가능성, 위임 가능성, 운영 안착 난이도입니다. 심사위원에 TF 리드와 도메인 임원을 포함합니다.</p>
+                    <p>기술 완성도가 아니라 AI-Native 청사진에 가까워지는가, 회사의 전략 과제 후보군을 채우는가를 1순위로 묻습니다. 부가 기준은 분별 가능성, 위임 가능성, 운영 안착 난이도입니다. 심사위원에 TF 리드와 도메인 임원을 포함합니다.</p>
                 </div>
             </div>
             <div class="bp-check-row">
@@ -1149,7 +1221,7 @@ body {
             <div class="bp-check-row">
                 <div class="bp-check-num">06</div>
                 <div class="bp-check-body">
-                    <h4>우수 Quick Win은 그대로 ③단계 입구로 보냅니다</h4>
+                    <h4>우수 Quick Win은 그대로 ③단계 후보로 올립니다</h4>
                     <p>상위 1~2건은 시상으로 끝내지 않습니다. ③단계 파일럿의 첫 후보로 자동 등록하고, 해당 챔피언에게 파일럿 기간의 시간 할당을 보장합니다. <strong>이 약속이 다음 TF 차수의 지원자 수를 결정합니다.</strong></p>
                 </div>
             </div>
@@ -1157,7 +1229,7 @@ body {
                 <div class="bp-check-num">07</div>
                 <div class="bp-check-body">
                     <h4>모든 Quick Win에 4D 한 줄을 남깁니다</h4>
-                    <p>산출물 옆에 "이 결과를 누가 위임받았고, 누가 분별했으며, 누가 끝까지 책임지는가" 한 줄을 적습니다. 양식이 어휘를 정착시킵니다. 이 한 줄이 PwC가 말하는 Responsible AI의 가장 작은 단위입니다.</p>
+                    <p>산출물 옆에 "이 결과를 누가 위임받았고, 누가 분별했으며, 누가 끝까지 책임지는가" 한 줄을 적습니다. 양식이 어휘를 정착시킵니다.</p>
                 </div>
             </div>
         </div>
@@ -1188,11 +1260,11 @@ body {
             <div class="bp-compare-row">
                 <div class="label">과제 폭</div>
                 <div>"자유 주제"로 출발하면 게임·재미 위주 작품이 절반을 차지합니다.</div>
-                <div class="preferred">빅 베팅 후보 3~5건과 직접 닿는 <strong>"실제 업무 미해결 문제 풀"</strong>에서 골라 출제합니다. 자유 주제는 전체의 30% 이하로 제한합니다.</div>
+                <div class="preferred">전략 과제 3~5건과 직접 닿는 <strong>"실제 업무 미해결 문제 풀"</strong>에서 골라 출제합니다. 자유 주제는 전체의 30% 이하로 제한합니다.</div>
             </div>
             <div class="bp-compare-row">
                 <div class="label">심사 기준</div>
-                <div>기술적 완성도와 발표 임팩트가 1순위가 됩니다. 가동되지 않을 데모가 우승합니다.</div>
+                <div>기술적 완성도와 발표 임팩트가 1순위가 됩니다. 실제로 쓰이지 않을 데모가 우승합니다.</div>
                 <div class="preferred">1순위 기준은 <strong>"30일 안에 부서 동료 5명이 직접 써볼 수 있는가"</strong>입니다. 기술 완성도는 2순위, 발표 형식은 채점 항목에서 뺍니다.</div>
             </div>
             <div class="bp-compare-row">
@@ -1214,8 +1286,8 @@ body {
             <div class="bp-check-row">
                 <div class="bp-check-num">01</div>
                 <div class="bp-check-body">
-                    <h4>출제 풀을 빅 베팅과 묶어 미리 공개합니다</h4>
-                    <p>해커톤 30일 전, 운영 계획의 빅 베팅 3~5건과 직접 닿는 <strong>"실제 미해결 문제 10~15건"</strong>을 사내에 공개합니다. 참가자가 출발선에서 자기 부서의 통증과 연결할 시간을 줍니다. 비공개로 두면 첫날을 주제 탐색으로 흘려보냅니다.</p>
+                    <h4>출제 풀을 전략 과제와 묶어 미리 공개합니다</h4>
+                    <p>해커톤 30일 전, 운영 계획의 전략 과제 3~5건과 직접 닿는 <strong>"실제 미해결 문제 10~15건"</strong>을 사내에 공개합니다. 참가자가 출발선에서 자기 부서가 풀어야 할 실제 문제와 연결할 시간을 줍니다. 비공개로 두면 첫날을 주제 탐색으로 흘려보냅니다.</p>
                 </div>
             </div>
             <div class="bp-check-row">
@@ -1236,14 +1308,14 @@ body {
                 <div class="bp-check-num">04</div>
                 <div class="bp-check-body">
                     <h4>심사위원에 도메인 임원과 TF 리드를 포함합니다</h4>
-                    <p>외부 전문가만 부르면 발표 임팩트 위주 채점이 됩니다. <strong>도메인 임원 2명, TF 리드 1명, 외부 자문 1명</strong>의 4인 구성을 권장합니다. 심사 가중치는 사용 가능성 50%, 빅 베팅 적합도 30%, 기술 완성도 20%로 못박습니다.</p>
+                    <p>외부 전문가만 부르면 발표 임팩트 위주 채점이 됩니다. <strong>도메인 임원 2명, TF 리드 1명, 외부 자문 1명</strong>의 4인 구성을 권장합니다. 심사 가중치는 사용 가능성 50%, 전략 과제 적합도 30%, 기술 완성도 20%로 못박습니다.</p>
                 </div>
             </div>
             <div class="bp-check-row">
                 <div class="bp-check-num">05</div>
                 <div class="bp-check-body">
-                    <h4>시상 항목에 "30일 후 가동 보장"을 포함합니다</h4>
-                    <p>대상·우수상의 시상 내용에 <strong>"수상 후 30일 안에 본인 부서에서 가동, TF가 운영 자산화 지원"</strong>을 명시합니다. 시상금만 받고 흩어지는 구조를 처음부터 막습니다. 가동 보장 약속이 다음 차수 지원자 수를 결정합니다.</p>
+                    <h4>시상 항목에 "30일 후 실사용 보장"을 포함합니다</h4>
+                    <p>대상·우수상의 시상 내용에 <strong>"수상 후 30일 안에 본인 부서에서 실사용, TF가 운영 자산화 지원"</strong>을 명시합니다. 시상금만 받고 흩어지는 구조를 처음부터 막습니다. 실사용 보장 약속이 다음 차수 지원자 수를 결정합니다.</p>
                 </div>
             </div>
             <div class="bp-check-row">
@@ -1269,7 +1341,7 @@ body {
 
         <div class="bp-anti">
             <div class="bp-anti-head">
-                <div>자주 나타나는 함정</div>
+                <div>자주 나타나는 실패 싸인</div>
                 <div>대응 방향</div>
             </div>
             <div class="bp-anti-row">
@@ -1281,38 +1353,23 @@ body {
                 <div class="good"><strong>30일 안 동료 5명 사용 흔적을 통과 조건</strong>으로 둡니다. 사용 흔적이 없는 산출물은 자산으로 등록하지 않고 실패 일지로 보냅니다.</div>
             </div>
             <div class="bp-anti-row">
-                <div class="bad"><strong>해커톤 · "발표 임팩트가 우승합니다."</strong> 화려한 시연이 1등을 가져가고, 다음 분기에는 가동되지 않은 채로 잊힙니다. 시상금만 남습니다.</div>
-                <div class="good"><strong>심사 가중치를 사용 가능성 50%로 못박고</strong>, 시상 항목에 "30일 안 본인 부서 가동"을 명시합니다. 가동 보장이 다음 차수 지원자 수를 결정합니다.</div>
+                <div class="bad"><strong>해커톤 · "발표 임팩트가 우승합니다."</strong> 화려한 시연이 1등을 가져가고, 다음 분기에는 실제로 쓰이지 않은 채로 잊힙니다. 시상금만 남습니다.</div>
+                <div class="good"><strong>심사 가중치를 사용 가능성 50%로 못박고</strong>, 시상 항목에 "30일 안 본인 부서 실사용"을 명시합니다. 실사용 보장이 다음 차수 지원자 수를 결정합니다.</div>
             </div>
         </div>
     </section>
 
     <!-- ========= FOOTER ========= -->
     <footer class="bp-footer">
-        <p style="margin:0 0 14px; font-size:11.5px; opacity:0.78;">* 이 페이지는 AX 5단계 로드맵의 1단계(추진체계 구축)를 세 작업으로 나눈 세 번째, AI 부트캠프를 다룹니다. 앞 두 페이지는 TF 조직 세팅과 운영 계획 수립(6개월 마일스톤과 LLM 선택)이며, 이어지는 단계는 2단계 우선순위화입니다. 본 페이지는 교육·Quick Win·해커톤 세 활동에만 한정합니다.</p>
-
-        <p style="margin:0 0 8px; font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(247, 245, 239, 0.7);">참고 문서</p>
-
-        <div class="bp-refs">
-            <div class="ref-item">
-                <div class="ref-tag">BCG · 2025</div>
-                <div class="ref-title"><a href="https://www.bcg.com/publications/2025/to-unlock-the-full-value-of-ai-invest-in-your-people" target="_blank" rel="noopener">To Unlock the Full Value of AI, Invest in Your People</a></div>
-                <div class="ref-note">"사람에 투자한 깊이"가 AX 가치 실현의 핵심 변수라는 근거.</div>
-            </div>
-            <div class="ref-item">
-                <div class="ref-tag">McKinsey · 2025</div>
-                <div class="ref-title"><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank" rel="noopener">The State of AI 2025 / Rewired</a></div>
-                <div class="ref-note">capability building 6요소 중 talent. AX 추진 변수에서 사람 투자의 비중.</div>
-            </div>
-            <div class="ref-item">
-                <div class="ref-tag">Anthropic</div>
-                <div class="ref-title"><a href="https://www.anthropic.com/ai-fluency" target="_blank" rel="noopener">AI Fluency · 4D Framework</a></div>
-                <div class="ref-note">부트캠프 협업 역량 모듈의 원전. 위임·설명·분별·성실.</div>
-            </div>
+        <p class="bp-footer-summary">90일 교육·도메인 Quick Win·사내 해커톤 세 트랙을 병렬 운영해, TF 5~9명을 한 분기 안에 회사 최초의 AI 챔피언으로 양성합니다.</p>
+        <div class="bp-footer-bar">
+            <span class="bp-footer-copy">&copy; 2026 AI ROASTING. All rights reserved.</span>
+            <span class="bp-footer-author">
+                <span class="bp-footer-author-name">강정구 · Jayden Kang</span>
+                <a class="bp-footer-social bp-footer-fb" href="https://www.facebook.com/jayden.kang" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V13h2.7v8h3.4z"/></svg></a>
+                <a class="bp-footer-social bp-footer-in" href="https://www.linkedin.com/in/jayden-kang/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.4v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.59 0 4.25 2.36 4.25 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
+            </span>
         </div>
-
-        <p style="margin:0; opacity:0.85;">부트캠프 커리큘럼과 Quick Win, 해커톤 운영 절차는 회사 규모와 산업, 기존 학습 인프라에 따라 달라집니다. 이 페이지는 일반 기업을 기준으로 한 권고이며, 실제 적용 시 사내 HR·교육·법무 부서 검토를 함께 거쳐야 합니다.</p>
-        <p style="margin:22px 0 0; padding-top:18px; border-top:1px solid rgba(247,245,239,0.18); font-size:11.5px; opacity:0.7; letter-spacing:0.04em;">&copy; 2026 AI ROASTING. All rights reserved.</p>
     </footer>
 
 </div>

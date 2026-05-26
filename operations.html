@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>B-1-2 운영 계획 수립 · TF의 6개월을 어떻게 굴릴 것인가</title>
-<meta name="description" content="AX 1단계 추진체계 구축의 두 번째 작업. TF의 6개월 운영 마일스톤과 LLM 표준 모델 선택을 한자리에서 결정합니다. 즉흥 실행과 운영 계획을 가르는 기준, 월별 산출물, 회의체 운영 리듬, 모델 후보 비교까지 다룹니다.">
+<title>운영 계획 수립 · AI ROASTING</title>
+<meta name="description" content="AX 1단계 추진체계 구축의 두 번째 작업. TF의 6개월 운영 마일스톤과 LLM 표준 모델 선택을 한자리에서 결정합니다. 즉흥 실행과 운영 계획을 가르는 기준, 월별 산출물, 회의체 운영 방식, 모델 후보 비교까지 다룹니다.">
 <link rel="stylesheet" href="assets/style.css">
 <style>
 /* ================== B-1-2 Operations Page Local Styles ================== */
@@ -23,7 +23,8 @@
     --bp-red: #8B2E1F;
 }
 
-html { scroll-behavior: smooth; scroll-padding-top: 50px; }
+html { scroll-behavior: smooth; scroll-padding-top: 68px; }
+section[id] { scroll-margin-top: 68px; }
 body {
     background:
         linear-gradient(var(--bp-grid) 1px, transparent 1px) 0 0 / 32px 32px,
@@ -467,6 +468,36 @@ body {
     background: var(--bp-accent);
 }
 .bp-tl-body .col li strong { color: var(--bp-ink); }
+.bp-tl-mission {
+    grid-column: 1 / -1;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--bp-ink);
+    margin: 0;
+    padding: 0 0 14px;
+    border-bottom: 1px dashed var(--bp-rule);
+}
+.bp-tl-mission strong { color: var(--bp-ink); }
+.bp-tl-gate {
+    grid-column: 1 / -1;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+    padding: 14px 0 0;
+    border-top: 1px dashed var(--bp-rule);
+}
+.bp-tl-gate strong { color: var(--bp-ink); }
+.bp-tl-gate .gate-label {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+}
 
 /* ===== LLM criteria cards (3-up) ===== */
 .bp-principles {
@@ -540,6 +571,7 @@ body {
 /* ===== LLM model matrix ===== */
 .bp-matrix {
     border: 1px solid var(--bp-line);
+    border-top: none;
     background: var(--bp-paper-2);
     overflow-x: auto;
 }
@@ -595,7 +627,7 @@ body {
 .bp-matrix-table td.fit { background: rgba(14, 59, 42, 0.04); }
 .bp-matrix-table td.fit strong { color: var(--bp-line); }
 
-/* ===== Composition diagram (운영 리듬) ===== */
+/* ===== Composition diagram (운영 체계) ===== */
 .bp-comp-diagram {
     border: 1px solid var(--bp-line);
     background: var(--bp-paper-2);
@@ -779,18 +811,16 @@ body {
     <section class="bp-hero">
         <div class="bp-hero-eyebrow">Step 1 · 추진체계 구축 · 운영 계획 수립 · BRAIN OS 운영 약속</div>
         <h1>TF의 6개월을 한 장의 운영 계획으로 확정합니다.</h1>
-        <p class="bp-lead">월별 마일스톤·표준 LLM·결정 회의체를 한 장에 묶어, COMPANY BRAIN OS의 첫 운영 리듬을 자리잡게 만듭니다.</p>
+        <p class="bp-lead">월별 마일스톤·표준 LLM·결정 회의체를 단일 문서로 통합해 COMPANY BRAIN OS의 첫 운영 체계를 정착시킵니다.</p>
         <div class="bp-summary">
-            <strong>운영 계획은 세 가지를 한자리에서 정합니다.</strong> 첫째, 6개월 마일스톤을 월 단위로 못박습니다. 둘째, 표준 LLM 1개와 보조 모델 1개를 선택하고 사용 가이드를 문서로 남깁니다. 셋째, 회의체 4종(데일리·주간·월간·분기)과 KPI 6개를 캘린더에 박아 둡니다. 이 세 가지가 임기 종료일에 무엇으로 끝낼지에 답을 줍니다.
+            <strong>운영 계획은 세 가지 의제를 단일 의사결정 회의에서 확정합니다.</strong> 첫째, 6개월 마일스톤을 월 단위로 정의합니다. 둘째, 표준 LLM 1개와 보조 모델 1개를 선정하고 사용 가이드를 문서로 남깁니다. 셋째, 회의체 4종(데일리·주간·월간·분기)과 KPI 6개를 캘린더에 고정합니다. 이 세 의제가 임기 종료 시점에 TF가 무엇을 산출해야 하는지를 정의합니다.
         </div>
     </section>
 
     <nav class="bp-hero-nav" aria-label="섹션 바로가기">
         <a href="#why">왜 운영 계획인가</a>
         <a href="#milestones">6개월 마일스톤</a>
-        <a href="#llm-criteria">LLM 선택 기준</a>
-        <a href="#llm-matrix">모델 비교와 권고</a>
-        <a href="#rhythm">운영 리듬과 KPI</a>
+        <a href="#rhythm">운영 체계와 KPI</a>
         <a href="#pitfalls">흔한 실패 패턴</a>
     </nav>
 
@@ -803,7 +833,7 @@ body {
             <div class="bp-section-meta">즉흥 실행 · 운영 계획 비교</div>
         </div>
 
-        <p class="bp-section-intro">TF가 모이자마자 "일단 해보자"로 시작하면 첫 분기가 흐른 뒤에야 무엇을 했는지 정리됩니다. 운영 계획은 속도를 늦추는 문서가 아니라, 첫 한 달 안에 결정 비용을 한꺼번에 치르는 도구입니다. 한 번 정해두면 그 뒤로 같은 질문을 반복하지 않습니다.</p>
+        <p class="bp-section-intro">TF 출범 직후 "일단 해보자"로 시작하면 첫 분기가 지난 뒤에야 무엇을 했는지 정리됩니다. 운영 계획은 속도를 늦추는 문서가 아니라, 첫 한 달 안에 의사결정 비용을 한꺼번에 처리하는 도구입니다. 한 번 정의하면 그 이후로 같은 질문이 반복되지 않습니다.</p>
 
         <div class="bp-compare">
             <div class="bp-compare-head">
@@ -813,13 +843,13 @@ body {
             </div>
             <div class="bp-compare-row">
                 <div class="label">출발 속도</div>
-                <div>회의를 잡고 도구를 깔며 첫 한 달이 흐릅니다. 결정해야 할 항목이 회의마다 다시 등장합니다.</div>
+                <div>회의 일정 조율과 도구 셋업에 첫 한 달이 소진됩니다. 결정해야 할 항목이 회의마다 다시 등장합니다.</div>
                 <div class="preferred">출범 1주 차에 계획을 확정하고, <strong>2주 차부터는 실행에만 집중</strong>합니다. 반복 결정 비용이 사라집니다.</div>
             </div>
             <div class="bp-compare-row">
                 <div class="label">LLM 결정</div>
-                <div>멤버 각자가 익숙한 도구를 씁니다. 사내 보안 검토가 산출물마다 다시 일어납니다.</div>
-                <div class="preferred">표준 모델 1개와 보조 1개를 처음에 합의합니다. <strong>보안·법무 검토를 한 번에 통과</strong>시켜 두면 이후 산출물은 같은 권한 위에서 굴러갑니다.</div>
+                <div>멤버 각자가 익숙한 도구를 사용합니다. 사내 보안 검토가 산출물마다 반복 발생합니다.</div>
+                <div class="preferred">표준 모델 1개와 보조 1개를 출범 시점에 합의합니다. <strong>보안·법무 검토를 한 번에 통과</strong>시키면 이후 산출물은 동일 권한 체계 위에서 수행됩니다.</div>
             </div>
             <div class="bp-compare-row">
                 <div class="label">월별 산출물</div>
@@ -829,17 +859,17 @@ body {
             <div class="bp-compare-row">
                 <div class="label">사람 의존도</div>
                 <div>TF 리드의 머릿속에 모든 계획이 있습니다. 리드가 자리를 비우면 진행이 멈춥니다.</div>
-                <div class="preferred">문서가 외장 두뇌 역할을 합니다. <strong>코어 멤버 누구든 한 페이지를 열어 다음 액션을 확인</strong>할 수 있습니다.</div>
+                <div class="preferred">문서가 외장 두뇌 역할을 합니다. <strong>TF 멤버 누구든 한 페이지를 열어 다음 액션을 확인</strong>할 수 있습니다.</div>
             </div>
             <div class="bp-compare-row">
                 <div class="label">실패 회수</div>
                 <div>임기 종료 즈음에 "계획대로 안 됐다"는 감정만 남습니다. 다음 차수에 같은 실수를 반복합니다.</div>
-                <div class="preferred">계획과 실제의 차이가 매월 기록됩니다. <strong>그 기록이 자산으로 남아, 다음 TF가 같은 자리에서 다시 부딪히지 않습니다.</strong></div>
+                <div class="preferred">계획과 실제의 차이가 매월 기록됩니다. <strong>그 기록이 자산으로 축적되어, 다음 TF가 동일 지점에서 다시 막히지 않습니다.</strong></div>
             </div>
             <div class="bp-compare-row">
                 <div class="label">적합한 상황</div>
                 <div>1~2명의 단발 실험. 사실상 TF가 아닌 사이드 프로젝트.</div>
-                <div class="preferred">5명에서 9명의 정예 TF가 <strong>6개월 임기를 들고 가는 모든 경우</strong>입니다. 임기가 명확한 만큼 계획이 의무가 됩니다.</div>
+                <div class="preferred">5명에서 9명의 정예 TF가 <strong>6개월 임기를 수행하는 모든 경우</strong>입니다. 임기가 명확한 만큼 계획이 의무가 됩니다.</div>
             </div>
         </div>
     </section>
@@ -850,311 +880,204 @@ body {
             <div>
                 <h2 class="bp-section-title">6개월 운영 마일스톤</h2>
             </div>
-            <div class="bp-section-meta">월별 테마 · 핵심 활동 · 끝낼 산출물</div>
+            <div class="bp-section-meta">월별 테마 · 핵심 활동 · 산출물</div>
         </div>
 
-        <p class="bp-section-intro">TF 임기 6개월을 월별 테마로 나눕니다. 각 달에는 한 가지 큰 테마만 둡니다. 두 가지 이상을 한 달에 묶으면 둘 다 어중간하게 끝납니다. 좌측은 그 달의 테마, 우측은 핵심 활동과 끝낼 산출물입니다. 산출물은 다음 달의 입력이 되도록 짭니다.</p>
+        <p class="bp-section-intro">6개월 임기를 월별 단일 테마로 분할합니다. 1~3개월차는 90일 부트캠프와 Quick Win 병행, 4개월차는 사내 해커톤, 5~6개월차는 자산 승격과 인계입니다(상세는 <a href="capability.html">AI 부트캠프</a> 페이지). 각 달은 "목표 → 주차별 활동 → 산출물 → 이행 게이트" 네 단으로, TF 리더가 캘린더에 그대로 옮겨 실행할 수 있게 설계했습니다.</p>
 
         <div class="bp-timeline">
             <div class="bp-tl-row">
                 <div class="bp-tl-head">
                     <div class="month">1개월차</div>
-                    <div class="theme">기반 정렬과 표준 모델 확정</div>
+                    <div class="theme">기반 정렬 · 표준 모델 확정 · 부트캠프 착수</div>
                 </div>
                 <div class="bp-tl-body">
+                    <p class="bp-tl-mission"><strong>목표.</strong> 표준 LLM·회의체·부트캠프 1차 모듈을 4주 안에 동시 출범. 2개월차부터 실행에만 집중할 기반을 확보합니다.</p>
                     <div class="col">
-                        <h5>핵심 활동</h5>
+                        <h5>주차별 활동</h5>
                         <ul>
-                            <li>킥오프 미팅과 TF 헌장 서명</li>
-                            <li>LLM 후보 2~3종 PoC 비교 (보안·성능·비용)</li>
-                            <li>회의체 4종 캘린더 고정과 권한 발급</li>
-                            <li>빅 베팅 후보 영역 10개로 좁히기</li>
+                            <li><strong>1주차.</strong> 킥오프와 TF 헌장 서명, 부트캠프 Day 1 시작</li>
+                            <li><strong>2주차.</strong> LLM 후보 2~3종에 사내 업무 샘플 5~10건으로 PoC 비교(보안·성능·비용)</li>
+                            <li><strong>3주차.</strong> 표준 LLM 1개 + 보조 1개 선정, 회의체 4종 캘린더 고정, Quick-win AI 프로젝트 후보 20→10건 압축</li>
+                            <li><strong>4주차.</strong> 사내 보안·법무 가이드 1.0 배포, 부트캠프 1차 모듈(AI 기본기) 수료</li>
                         </ul>
                     </div>
                     <div class="col">
-                        <h5>끝낼 산출물</h5>
+                        <h5>산출물</h5>
                         <ul>
-                            <li><strong>운영 계획 한 페이지</strong> 확정</li>
-                            <li>표준 LLM 1개 + 보조 1개 선정 보고서</li>
+                            <li><strong>운영 계획 한 페이지</strong> (TF 리더 서명)</li>
+                            <li>표준 LLM 선정 보고서</li>
                             <li>사내 보안·법무 가이드 1.0</li>
-                            <li>빅 베팅 후보 10건 리스트</li>
+                            <li>부트캠프 1차 모듈(AI 기본기) 수료 기록: 분류표·케이스 노트</li>
+                            <li>AI 프로젝트 후보 10건 리스트</li>
                         </ul>
                     </div>
+                    <p class="bp-tl-gate"><span class="gate-label">다음 달 이행 게이트</span>표준 LLM 사내 계정 보급 · 회의체 4종 캘린더 등록 · AI 프로젝트 후보 10건 정리. 미충족 시 2개월차 1주를 잔여 항목에 배정.</p>
                 </div>
             </div>
             <div class="bp-tl-row">
                 <div class="bp-tl-head">
                     <div class="month">2개월차</div>
-                    <div class="theme">빅 베팅 압축과 데이터 정비</div>
+                    <div class="theme">부트캠프 협업 · Quick Win 착수 · AI 프로젝트 압축</div>
                 </div>
                 <div class="bp-tl-body">
+                    <p class="bp-tl-mission"><strong>목표.</strong> 부트캠프 협업 모듈과 동시에 TF 멤버 전원이 첫 Quick Win을 착수합니다. AI 프로젝트는 10→3~5건으로 압축해 다음 분기 자원 배분의 윤곽을 정의합니다.</p>
                     <div class="col">
-                        <h5>핵심 활동</h5>
+                        <h5>주차별 활동</h5>
                         <ul>
-                            <li>빅 베팅 후보 10건을 3~5건으로 압축</li>
-                            <li>각 베팅별 DRI 1명 지정과 책임 합의</li>
-                            <li>데이터 접근 권한과 원천 데이터 점검</li>
-                            <li>부트캠프 1차 모듈 가동 (역량 강화 페이지와 연결)</li>
+                            <li><strong>5주차 (Day 29~35).</strong> 부트캠프 협업 모듈 시작, TF 멤버 1인당 Quick Win 1~2건 착수</li>
+                            <li><strong>6주차.</strong> AI 프로젝트 10→3~5건 압축(스폰서 참석), 각 프로젝트에 DRI(Directly Responsible Individual, 1차 책임자) 1명 지정</li>
+                            <li><strong>7주차.</strong> 사내 데이터 자산 리스트·접근 권한 발급, Quick Win 동료 5명 테스트 착수</li>
+                            <li><strong>8주차.</strong> Quick Win 1차 중간 점검, DRI 매트릭스 1.0 합의</li>
                         </ul>
                     </div>
                     <div class="col">
-                        <h5>끝낼 산출물</h5>
+                        <h5>산출물</h5>
                         <ul>
-                            <li><strong>빅 베팅 3~5건</strong> 확정 문서</li>
+                            <li><strong>AI 프로젝트 3~5건 확정 문서</strong> (스폰서 서명)</li>
                             <li>DRI 매트릭스 1.0</li>
-                            <li>데이터 자산 인벤토리</li>
-                            <li>부트캠프 학습 일지 (코어 전원)</li>
+                            <li>사내 데이터 자산 리스트</li>
+                            <li>Quick Win 1차 5~8건 실행 기록</li>
                         </ul>
                     </div>
+                    <p class="bp-tl-gate"><span class="gate-label">다음 달 이행 게이트</span>AI 프로젝트 3~5건 스폰서 서명 · TF 멤버 전원 Quick Win 1건 이상 운영. 미충족 시 3개월차 1주를 압축에 추가 배정.</p>
                 </div>
             </div>
             <div class="bp-tl-row">
                 <div class="bp-tl-head">
                     <div class="month">3개월차</div>
-                    <div class="theme">Quick Win 가동과 사내 공유</div>
+                    <div class="theme">부트캠프 수료 · Quick Win 검증 · 해커톤 준비</div>
                 </div>
                 <div class="bp-tl-body">
+                    <p class="bp-tl-mission"><strong>목표.</strong> 90일 부트캠프를 완주하고, Quick Win이 TF 외부 동료의 손에서 작동하는지 검증합니다. 해커톤은 이번 달에 사전 설계를 마칩니다.</p>
                     <div class="col">
-                        <h5>핵심 활동</h5>
+                        <h5>주차별 활동</h5>
                         <ul>
-                            <li>코어 멤버별 Quick Win 1건 가동</li>
-                            <li>부서 동료 5명 사용 흔적 확보</li>
-                            <li>전사 공지 2차 (TF 진척 공유)</li>
-                            <li>스폰서 분기 보고 1회</li>
+                            <li><strong>9~10주차.</strong> 부트캠프 코칭 모듈, Quick Win 동료 5명 사용 기록 확보</li>
+                            <li><strong>11주차.</strong> 부트캠프 수료식, Skill 문서 사내 위키 1차 등록</li>
+                            <li><strong>12주차.</strong> 해커톤 운영안 확정(일정·심사 루브릭·시간 할당), 전사 공지 2차, 스폰서 분기 보고</li>
                         </ul>
                     </div>
                     <div class="col">
-                        <h5>끝낼 산출물</h5>
+                        <h5>산출물</h5>
                         <ul>
-                            <li><strong>Quick Win 5~8건</strong> 실가동</li>
-                            <li>사내 위키 Skill 문서 등록 1차</li>
+                            <li><strong>부트캠프 수료 노트</strong>와 Skill 문서 1차</li>
+                            <li>Quick Win 동료 사용 기록 (1건당 5명 이상)</li>
                             <li>실패 일지 1.0</li>
+                            <li>해커톤 운영 계획서와 심사 루브릭</li>
                             <li>스폰서 분기 보고 슬라이드</li>
                         </ul>
                     </div>
+                    <p class="bp-tl-gate"><span class="gate-label">다음 달 이행 게이트</span>Quick Win 1건당 TF 외부 5명 사용 기록 · 해커톤 일정 한 페이지 정리. 미충족 시 해커톤을 1주 지연해 13주차에 보강.</p>
                 </div>
             </div>
             <div class="bp-tl-row">
                 <div class="bp-tl-head">
                     <div class="month">4개월차</div>
-                    <div class="theme">사내 해커톤과 확산</div>
+                    <div class="theme">사내 해커톤 · 챔피언 후보 식별</div>
                 </div>
                 <div class="bp-tl-body">
+                    <p class="bp-tl-mission"><strong>목표.</strong> 1~3개월차 Quick Win을 전사 차원에서 검증·확장합니다. 외부 행사처럼 키우지 않습니다. 2박 3일 또는 평일 5일이면 충분합니다.</p>
                     <div class="col">
-                        <h5>핵심 활동</h5>
+                        <h5>주차별 활동</h5>
                         <ul>
-                            <li>전사 사내 해커톤 1회 운영 (2박 3일 또는 1주 단축)</li>
-                            <li>우수 작품 3~5건 채택과 후속 자원 배정</li>
-                            <li>챔피언 후보군 1차 식별</li>
-                            <li>LLM 사용 패턴 재검토와 모델 조정</li>
+                            <li><strong>13주차.</strong> 출품 신청 마감, 사전 멘토링 1회(TF 멤버가 멘토)</li>
+                            <li><strong>14주차.</strong> 해커톤 본 행사(<strong>2박 3일 또는 평일 5일</strong>), 출품 20건+ 중 3~5건 채택</li>
+                            <li><strong>15주차.</strong> 채택작 후속 자원 배정 회의(스폰서·인사·IT 동반), 챔피언 후보 1차 면담</li>
+                            <li><strong>16주차.</strong> LLM 사용 패턴 재검토와 모델 조정, 해커톤 회고</li>
                         </ul>
                     </div>
                     <div class="col">
-                        <h5>끝낼 산출물</h5>
+                        <h5>산출물</h5>
                         <ul>
-                            <li><strong>해커톤 출품작 20건 이상</strong> 가운데 3~5건 채택</li>
-                            <li>챔피언 후보 명단</li>
-                            <li>모델 사용량과 비용 리포트</li>
+                            <li><strong>채택작 3~5건</strong>과 후속 자원 배정안</li>
+                            <li>챔피언 후보 명단 (TF 외부 절반 이상)</li>
+                            <li>모델 사용량·비용 리포트</li>
                             <li>해커톤 회고 문서</li>
                         </ul>
                     </div>
+                    <p class="bp-tl-gate"><span class="gate-label">다음 달 이행 게이트</span>채택작 3~5건에 투입 시간·1차 책임자 배정 · 챔피언 후보 명단 확정. 투입 시간 미확보 시 5개월차 승격 트랙이 정지하므로 4개월차 안에 결착.</p>
                 </div>
             </div>
             <div class="bp-tl-row">
                 <div class="bp-tl-head">
                     <div class="month">5개월차</div>
-                    <div class="theme">운영 매뉴얼화와 자산 이관 준비</div>
+                    <div class="theme">채택작 정식 자산 승격 · 운영 매뉴얼화</div>
                 </div>
                 <div class="bp-tl-body">
+                    <p class="bp-tl-mission"><strong>목표.</strong> 채택작 3~5건을 다음 분기 운영 자산으로 공식화합니다. TF 종료 후에도 동일 방식이 재생산되도록 운영 매뉴얼 1.0을 확정합니다.</p>
                     <div class="col">
-                        <h5>핵심 활동</h5>
+                        <h5>주차별 활동</h5>
                         <ul>
-                            <li>우수 Quick Win을 정식 운영 자산으로 승격</li>
-                            <li>운영 매뉴얼 1.0 작성 (회의체·KPI·LLM 가이드)</li>
-                            <li>2단계 우선순위화 페이지 입력 자료 정리</li>
-                            <li>코어 멤버 복귀 부서장과 인계 협의</li>
+                            <li><strong>17~18주차.</strong> 채택작별 자산 승격 킥오프(출품자 시간 할당·챔피언 인증), 운영팀 인계 매핑</li>
+                            <li><strong>19주차.</strong> 운영 매뉴얼 1.0 작성(회의체·KPI·LLM 가이드 통합본), 사내 위키 등록</li>
+                            <li><strong>20주차.</strong> 2단계 우선순위화 입력 자료 정리, 복귀 부서장과 인계 협의</li>
                         </ul>
                     </div>
                     <div class="col">
-                        <h5>끝낼 산출물</h5>
+                        <h5>산출물</h5>
                         <ul>
-                            <li><strong>운영 매뉴얼 1.0</strong></li>
+                            <li><strong>정식 운영 자산 승격 트랙</strong> 출범 (채택작 3~5건, 운영팀 인계 일정 포함)</li>
+                            <li>운영 매뉴얼 1.0 (사내 위키 등록)</li>
                             <li>2단계 입력 자료 (우선순위 후보 풀)</li>
-                            <li>인계 계획서 (자산·폐기 구분)</li>
+                            <li>인계 계획서 (자산·정리 대상 구분)</li>
                             <li>챔피언 인증 후보 최종 명단</li>
                         </ul>
                     </div>
+                    <p class="bp-tl-gate"><span class="gate-label">다음 달 이행 게이트</span>채택작 운영팀 이관 일정 확정 · 운영 매뉴얼 1.0 사내 위키 등재. 미완성 시 6개월차 인계식 1주 지연.</p>
                 </div>
             </div>
             <div class="bp-tl-row">
                 <div class="bp-tl-head">
                     <div class="month">6개월차</div>
-                    <div class="theme">인계와 차기 TF 설계</div>
+                    <div class="theme">인계 · 차기 TF 설계</div>
                 </div>
                 <div class="bp-tl-body">
+                    <p class="bp-tl-mission"><strong>목표.</strong> TF 임기를 형식 종료가 아닌 인계 절차로 마무리합니다. TF 멤버는 원소속 부서로 복귀하되 챔피언 인증을 인수합니다.</p>
                     <div class="col">
-                        <h5>핵심 활동</h5>
+                        <h5>주차별 활동</h5>
                         <ul>
-                            <li>산출물 인계식과 챔피언 인증서 발급</li>
-                            <li>코어 멤버 원소속 부서로 복귀</li>
-                            <li>차기 TF 후보군 선발과 헌장 초안</li>
-                            <li>임원 보고 (성과와 다음 6개월 제안)</li>
+                            <li><strong>21주차.</strong> 산출물 인계식(스폰서·차기 TF 후보 참석), 챔피언 인증서 발급</li>
+                            <li><strong>22주차.</strong> TF 멤버 원소속 부서 복귀, 차기 TF 후보 1차 인터뷰</li>
+                            <li><strong>23주차.</strong> 차기 TF 헌장 0.5 작성, 6개월 종합 회고 정리</li>
+                            <li><strong>24주차.</strong> 임원 보고(성과·실패·다음 6개월 제안), 스폰서 최종 보고</li>
                         </ul>
                     </div>
                     <div class="col">
-                        <h5>끝낼 산출물</h5>
+                        <h5>산출물</h5>
                         <ul>
                             <li><strong>인계식 회의록</strong>과 챔피언 인증서</li>
-                            <li>차기 TF 헌장 0.5</li>
+                            <li>차기 TF 헌장 0.5 (스폰서 1차 검토)</li>
                             <li>6개월 종합 회고 문서</li>
                             <li>스폰서 최종 보고 슬라이드</li>
                         </ul>
                     </div>
+                    <p class="bp-tl-gate"><span class="gate-label">차기 TF 이행 게이트</span>차기 TF 헌장 0.5 스폰서 검토 통과 · 정식 운영 자산 3~5건 운영팀 인수 완료. 미충족 시 차기 TF 출범 지연, 7개월차 1주에 재점검.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ========= 3. LLM 선택 기준 ========= -->
-    <section class="bp-section" id="llm-criteria">
-        <div class="bp-section-head">
-            <div>
-                <h2 class="bp-section-title">LLM 선택 기준 3가지</h2>
-            </div>
-            <div class="bp-section-meta">보안 적합성 · 도메인 성능 · 운영 비용</div>
-        </div>
-
-        <p class="bp-section-intro">표준 LLM 선정은 출범 1개월 안에 끝냅니다. 멤버마다 다른 모델을 쓰면 보안 검토를 매번 다시 받아야 하고, 산출물의 품질 편차도 커집니다. 선택 기준은 세 가지로 충분합니다. 보안 적합성이 통과 조건이고, 도메인 성능과 운영 비용이 가중치입니다. 세 가지를 한 번에 점수화해 표준 1개와 보조 1개를 정합니다.</p>
-
-        <div class="bp-principles">
-            <div class="bp-principle">
-                <div class="bp-principle-num">기준 1</div>
-                <div class="bp-principle-name">보안 적합성으로<br>1차 거릅니다</div>
-                <div class="bp-principle-body">
-                    영업기밀과 개인정보를 다루는 회사라면 <strong>학습 비활용 옵션, 데이터 처리 위치(리전), 사내 SSO 연동, 감사 로그</strong>가 1차 통과 조건입니다. 한 항목이라도 막히면 후보에서 빼고 다음으로 넘어갑니다. 사내 정보보안·법무가 처음부터 결정 회의에 참여해야 같은 검토를 두 번 받지 않습니다.
-                </div>
-                <div class="bp-principle-evidence">
-                    <b>점검 항목</b>학습 비활용, 데이터 리전, SSO/SCIM, 감사 로그, DLP 연동, 모델 카드 공개 여부.
-                </div>
-            </div>
-            <div class="bp-principle">
-                <div class="bp-principle-num">기준 2</div>
-                <div class="bp-principle-name">도메인 성능을<br>실제 업무로 평가합니다</div>
-                <div class="bp-principle-body">
-                    벤치마크 점수보다 자기 회사의 실제 업무 샘플로 평가합니다. 빅 베팅 후보 영역에서 <strong>대표 과제 5~10건을 PoC 데이터셋</strong>으로 묶어 두 모델 이상에 같은 프롬프트로 돌립니다. 한국어 품질, 도구 호출(Function Call), 컨텍스트 윈도우, 추론 안정성을 함께 봅니다. 회의실 시연이 아니라 데이터 기반 비교 문서가 결과입니다.
-                </div>
-                <div class="bp-principle-evidence">
-                    <b>비교 차원</b>한국어 자연스러움, 도구 호출 안정성, 긴 문맥(20만 토큰 이상) 처리, 코딩 능력, 추론 일관성.
-                </div>
-            </div>
-            <div class="bp-principle">
-                <div class="bp-principle-num">기준 3</div>
-                <div class="bp-principle-name">운영 비용을<br>월간 예측치로 봅니다</div>
-                <div class="bp-principle-body">
-                    토큰 단가만 비교하지 않습니다. 빅 베팅이 본격 가동되면 월 사용량이 PoC의 10~50배가 됩니다. <strong>월간 예측 비용, 캐싱 적용 여부, 배치 할인, 멤버십(엔터프라이즈)·종량제 구조</strong>를 함께 산정합니다. 표준 모델은 본 작업 대다수를, 보조 모델은 비용 절감이나 특수 과제에 한정해 쓰는 이원 구조가 일반적입니다.
-                </div>
-                <div class="bp-principle-evidence">
-                    <b>비용 변수</b>토큰 단가, 캐시 할인, 배치 할인, 엔터프라이즈 정액제, 한도 초과 정책, 환율 변동.
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========= 4. 모델 비교와 권고 ========= -->
-    <section class="bp-section" id="llm-matrix">
-        <div class="bp-section-head">
-            <div>
-                <h2 class="bp-section-title">주요 LLM 비교와 권고 구성</h2>
-            </div>
-            <div class="bp-section-meta">상용 모델 4종 · 강점 · 주의점 · 적합한 자리</div>
-        </div>
-
-        <p class="bp-section-intro">아래 표는 2026년 기준 일반 기업 TF가 가장 자주 후보로 올리는 상용 모델 네 종을 정리한 것입니다. 모델 성능은 분기마다 빠르게 바뀌므로 절대 순위로 받지 않습니다. 자기 회사 PoC 결과와 함께 가중치를 매기는 비교 시작점으로 씁니다. 권고 구성은 표준 모델 1개와 보조 모델 1개를 두는 단순한 이원 구조이며, 멀티 모델 라우팅은 2단계 이후 도입을 권장합니다.</p>
-
-        <div class="bp-matrix">
-            <table class="bp-matrix-table">
-                <thead>
-                    <tr>
-                        <th>모델</th>
-                        <th>강점</th>
-                        <th>주의점</th>
-                        <th>적합한 자리</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="name">Claude<span class="vendor">Anthropic</span></td>
-                        <td class="strength">긴 문맥 추론과 코드·문서 작성 안정성이 강점입니다. 도구 호출과 에이전트 워크플로우에서 결과 일관성이 높습니다. Constitutional AI 기반의 안전성 정책이 분명합니다.</td>
-                        <td class="watch">한국 리전이 아직 제한적입니다. 일본·미국 리전 사용 시 사내 데이터 정책 검토가 필요합니다. 가격대가 GPT 계열보다 일반적으로 높습니다.</td>
-                        <td class="fit"><strong>긴 보고서·계약서·코드 작성</strong>과 에이전트 워크플로우의 표준 모델로 적합합니다. AX 1단계 표준 1순위 후보.</td>
-                    </tr>
-                    <tr>
-                        <td class="name">GPT<span class="vendor">OpenAI</span></td>
-                        <td class="strength">생태계가 가장 넓고 사내 도구 연동(Microsoft 365·Copilot) 사례가 가장 많습니다. 멀티모달(이미지·음성)과 실시간 API가 강합니다. Azure OpenAI를 통한 엔터프라이즈 계약이 성숙합니다.</td>
-                        <td class="watch">모델 버전 교체 주기가 빠르고 출력 톤이 자주 바뀝니다. 동일 프롬프트의 일관성을 회사 기준선으로 잡으려면 버전을 명시적으로 고정해야 합니다.</td>
-                        <td class="fit"><strong>Microsoft 365가 사내 표준</strong>인 회사의 표준 모델로 적합합니다. 멀티모달이 필요한 자리에 잘 맞습니다.</td>
-                    </tr>
-                    <tr>
-                        <td class="name">Gemini<span class="vendor">Google</span></td>
-                        <td class="strength">Google Workspace 연동과 초장문맥(200만 토큰급)이 강점입니다. 검색·지도 등 구글 자체 데이터 연결이 손쉽습니다. Vertex AI를 통한 데이터 거버넌스 옵션이 풍부합니다.</td>
-                        <td class="watch">한국어 톤이 모델 버전별로 편차가 큽니다. 도구 호출과 함수 응답의 일관성이 GPT·Claude보다 낮다는 평이 자주 보입니다. 엔터프라이즈 도입 사례 폭이 좁습니다.</td>
-                        <td class="fit"><strong>Google Workspace가 사내 표준</strong>이거나 초장문맥이 핵심인 자리에 적합합니다. 보조 모델로 두는 회사가 많습니다.</td>
-                    </tr>
-                    <tr>
-                        <td class="name">국산·sLLM<span class="vendor">HyperCLOVA X 등</span></td>
-                        <td class="strength">국내 데이터 리전과 한국어 문화 맥락의 처리가 강점입니다. 정부·공공·금융 규제 환경에서 사내 IT 검토 통과가 빠릅니다. 도메인 특화 파인튜닝의 사례가 늘고 있습니다.</td>
-                        <td class="watch">고난도 추론과 영어 코드 작성에서 글로벌 상위 모델과 격차가 있습니다. 도구 호출 API 성숙도가 아직 후발입니다. 자체 호스팅 옵션은 운영 부담이 큽니다.</td>
-                        <td class="fit"><strong>국내 개인정보·금융 규제 적용 업무</strong>의 보조 모델로 적합합니다. 단독 표준보다는 글로벌 모델과 이원 구성을 권장합니다.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="bp-comp-diagram" style="margin-top: 28px;">
-            <div class="bp-comp-row">
-                <div class="bp-comp-tier">권고 1</div>
-                <div class="bp-comp-detail">
-                    <h4>1단계는 표준 1개 + 보조 1개의 이원 구조</h4>
-                    <p>표준 모델 하나를 두면 회의 어휘와 산출물 톤이 통일됩니다. 보조 모델은 표준이 약한 영역(비용 절감, 특정 모달리티, 규제 업무)에만 한정해 씁니다. <strong>처음부터 3개 이상을 동시에 굴리면 운영 비용이 학습 비용보다 빠르게 증가합니다.</strong></p>
-                </div>
-            </div>
-            <div class="bp-comp-row">
-                <div class="bp-comp-tier">권고 2</div>
-                <div class="bp-comp-detail">
-                    <h4>멀티 모델 라우팅은 2단계 이후로 미룹니다</h4>
-                    <p>라우터 게이트웨이(예: LiteLLM, OpenRouter, 사내 자체 게이트웨이)로 모델을 동적으로 분기하는 구조는 매력적입니다. 다만 1단계에서는 라우팅 정책을 검증할 데이터가 부족합니다. <strong>2단계 우선순위화 이후 빅 베팅별 요구가 분명해진 시점</strong>에 도입을 검토합니다.</p>
-                </div>
-            </div>
-            <div class="bp-comp-row">
-                <div class="bp-comp-tier">권고 3</div>
-                <div class="bp-comp-detail">
-                    <h4>모델 사용 가이드를 한 페이지로 못박습니다</h4>
-                    <p>표준 모델 선정 후 즉시 사내 가이드를 1.0으로 작성합니다. <strong>어떤 데이터까지 입력 가능한지, 어떤 산출물에 사용할 수 있는지, 외부 공유 시 어떤 표기를 붙이는지</strong> 세 가지가 핵심입니다. 가이드가 없는 모델은 도입한 적이 없는 모델과 같습니다.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========= 5. 운영 리듬과 KPI ========= -->
+    <!-- ========= 3. 운영 체계와 KPI ========= -->
     <section class="bp-section" id="rhythm">
         <div class="bp-section-head">
             <div>
-                <h2 class="bp-section-title">운영 리듬과 KPI</h2>
+                <h2 class="bp-section-title">운영 체계와 KPI</h2>
             </div>
             <div class="bp-section-meta">회의체 4종 · KPI 6개</div>
         </div>
 
-        <p class="bp-section-intro">운영 계획의 마지막 한 장은 회의 캘린더와 KPI 한 묶음입니다. 회의는 네 가지 주기로 충분하고, KPI는 여섯 개를 넘기지 않습니다. 회의가 늘기 시작하면 그 시점에 회의 자체를 안건으로 올리고, KPI가 늘기 시작하면 가장 약한 두 개를 골라 일단 폐기합니다.</p>
+        <p class="bp-section-intro">운영 계획의 마지막 한 장은 회의 캘린더와 KPI 한 페이지입니다. 회의는 네 가지 주기로 충분하고, KPI는 여섯 개를 상한선으로 둡니다. 회의가 증가하기 시작하면 그 시점에 회의 자체를 안건으로 상정하고, KPI가 증가하기 시작하면 가장 약한 두 개를 우선 정리합니다.</p>
 
         <div class="bp-comp-diagram">
             <div class="bp-comp-row">
                 <div class="bp-comp-tier">회의 1</div>
                 <div class="bp-comp-detail">
-                    <h4>코어 데일리 (15분)</h4>
-                    <p>매일 오전 같은 시간에 15분으로 끊습니다. <strong>오늘 끝낼 한 가지, 막혀 있는 한 가지, 도움 요청 한 가지</strong>만 돌아가며 말합니다. 안건이 있으면 별도 회의로 빼고 데일리 시간을 늘리지 않습니다.</p>
+                    <h4>TF 데일리 (30분)</h4>
+                    <p>매일 오전 같은 시간에 30분으로 운영합니다. <strong>오늘 진척 사항, 막혀 있는 과제, 도움 요청 안건</strong>을 순번제로 공유합니다. 안건이 있으면 별도 회의로 분리하고 데일리 시간을 늘리지 않습니다.</p>
                     <div class="roles">
-                        <span class="role-chip">매일 15분</span>
-                        <span class="role-chip">코어 전원</span>
+                        <span class="role-chip">매일 30분</span>
+                        <span class="role-chip">TF 멤버 전원</span>
                     </div>
                 </div>
             </div>
@@ -1162,10 +1085,10 @@ body {
                 <div class="bp-comp-tier">회의 2</div>
                 <div class="bp-comp-detail">
                     <h4>주간 회고 (60분)</h4>
-                    <p>금요일 오후에 한 주를 닫습니다. KPI 6개의 변화를 숫자로 보고, 다음 주 우선순위 3개를 합의합니다. <strong>회고의 마지막 10분은 항상 "이번 주에 폐기할 일"을 정하는 데 씁니다.</strong></p>
+                    <p>금요일 오후에 한 주를 마감합니다. KPI 6개의 변화를 숫자로 검토하고, 다음 주 우선순위 3개를 합의합니다. <strong>회고의 마지막 10분은 항상 "이번 주에 종료할 활동"을 정의하는 데 배정합니다.</strong></p>
                     <div class="roles">
                         <span class="role-chip">주 1회 60분</span>
-                        <span class="role-chip">코어 + 멘토</span>
+                        <span class="role-chip">TF 멤버 + 멘토</span>
                     </div>
                 </div>
             </div>
@@ -1173,7 +1096,7 @@ body {
                 <div class="bp-comp-tier">회의 3</div>
                 <div class="bp-comp-detail">
                     <h4>월간 스폰서 보고 (45분)</h4>
-                    <p>월 1회 스폰서에 직접 보고합니다. 보고 형식은 항상 같은 한 장입니다. <strong>이번 달 끝낸 산출물, 다음 달 약속, 보류·가속 결정이 필요한 항목.</strong> 45분 안에 끝나지 않으면 운영 계획이 흐려진 신호입니다.</p>
+                    <p>월 1회 스폰서에 직접 보고합니다. 보고 형식은 항상 동일한 한 장입니다. <strong>당월 진척 사항·차월 핵심 과제·CEO 의사결정 요청 안건</strong>의 3단 구성입니다. 45분 안에 종료되지 않으면 운영 계획이 흐트러졌다는 신호로 진단합니다.</p>
                     <div class="roles">
                         <span class="role-chip">월 1회 45분</span>
                         <span class="role-chip">스폰서 + 리드</span>
@@ -1184,17 +1107,17 @@ body {
                 <div class="bp-comp-tier">회의 4</div>
                 <div class="bp-comp-detail">
                     <h4>분기 외부 사례 학습 (반나절)</h4>
-                    <p>분기 1회 반나절을 외부 사례 학습에 씁니다. 컨설팅펌 리포트 1편, 동종 산업 사례 1편, 글로벌 빅테크 발표 1편을 코어가 돌아가며 발제합니다. <strong>같은 자리에 스폰서가 동석</strong>해야 학습이 다음 분기 계획에 반영됩니다.</p>
+                    <p>분기 1회 반나절을 외부 사례 학습에 할애합니다. 컨설팅펌 리포트 1편, 동종 산업 사례 1편, 글로벌 빅테크 발표 1편을 TF 멤버가 순번제로 발제합니다. <strong>동일 자리에 스폰서가 동석</strong>해야 학습이 다음 분기 계획에 반영됩니다.</p>
                     <div class="roles">
                         <span class="role-chip">분기 1회 반나절</span>
-                        <span class="role-chip">코어 + 스폰서</span>
+                        <span class="role-chip">TF 멤버 + 스폰서</span>
                     </div>
                 </div>
             </div>
         </div>
 
         <h3 style="margin: 44px 0 18px; font-size: 19px; font-weight: 700; color: var(--bp-ink); letter-spacing: -0.005em;">KPI 6개 (월간 갱신)</h3>
-        <p style="margin: 0 0 22px; font-size: 14px; line-height: 1.75; color: var(--ink-soft);">한 페이지에 들어가는 6개로 한정합니다. 셋은 활동량, 셋은 결과입니다. 7개부터는 추적이 무너집니다.</p>
+        <p style="margin: 0 0 22px; font-size: 14px; line-height: 1.75; color: var(--ink-soft);">한 페이지에 들어가는 6개로 한정합니다. 3개는 활동 지표, 3개는 결과 지표입니다.</p>
 
         <div class="bp-anti">
             <div class="bp-anti-head">
@@ -1202,16 +1125,16 @@ body {
                 <div>결과 KPI 3개</div>
             </div>
             <div class="bp-anti-row">
-                <div class="good"><strong>Quick Win 신규 가동 건수</strong><br>월별로 가동된 신규 Quick Win 수. 5건 미만이면 부트캠프와의 짝이 풀린 신호입니다.</div>
-                <div class="good"><strong>Quick Win 30일 동료 사용 흔적</strong><br>가동된 Quick Win 중 동료 5명 이상이 직접 써본 비율. 60% 미만이면 다음 달 산출물 단위를 줄입니다.</div>
+                <div class="good"><strong>Quick Win 신규 착수 건수</strong><br>월별 신규 착수된 Quick Win 수. 5건 미만이면 부트캠프와의 연계가 약화되었다는 신호로 진단합니다.</div>
+                <div class="good"><strong>Quick Win 30일 동료 사용률</strong><br>실행 중인 Quick Win 중 동료 5명 이상이 직접 사용한 비율. 60% 미만이면 다음 달 산출물 단위를 축소합니다.</div>
             </div>
             <div class="bp-anti-row">
-                <div class="good"><strong>Skill 문서 등록 수</strong><br>사내 위키에 신규 등록된 Skill 문서 누적 수. 자산이 회사 안에 남는 속도입니다.</div>
-                <div class="good"><strong>채택된 빅 베팅 후보 수</strong><br>코어가 만든 자료 중 다음 단계 후보로 채택된 건수. 임기 종료 시 3~5건이 목표입니다.</div>
+                <div class="good"><strong>Skill 문서 등록 수</strong><br>사내 위키에 신규 등록된 Skill 문서 누적 수. 자산이 회사 내부에 축적되는 속도입니다.</div>
+                <div class="good"><strong>채택된 AI 프로젝트 후보 수</strong><br>TF 멤버가 만든 자료 중 다음 단계 후보로 채택된 건수. 임기 종료 시 3~5건이 목표입니다.</div>
             </div>
             <div class="bp-anti-row">
                 <div class="good"><strong>월간 LLM 사용량과 비용</strong><br>표준·보조 모델 합산 토큰과 비용. 한도의 80% 도달 시 다음 달 사용 패턴을 재설계합니다.</div>
-                <div class="good"><strong>챔피언 후보 식별 수</strong><br>임기 종료 시 자기 부서로 복귀시킬 챔피언 후보 누적 수. 6개월 임기 기준 5~9명이 정상 범위입니다.</div>
+                <div class="good"><strong>챔피언 후보 식별 수</strong><br>임기 종료 시 원소속 부서로 복귀시킬 챔피언 후보 누적 수. 6개월 임기 기준 5~9명이 정상 범위입니다.</div>
             </div>
         </div>
     </section>
@@ -1225,42 +1148,47 @@ body {
             <div class="bp-section-meta">운영 계획을 무너뜨리는 5가지 함정</div>
         </div>
 
-        <p class="bp-section-intro">아래는 운영 계획을 짜고도 첫 90일 안에 자주 보이는 실패 패턴입니다. 좌측은 흔히 나타나는 모습, 우측은 같은 상황을 다르게 푸는 방법입니다. 3개 이상이 동시에 보이면 운영 계획 자체를 다시 점검할 신호입니다.</p>
+        <p class="bp-section-intro">아래는 운영 계획을 수립하고도 첫 90일 안에 자주 관측되는 실패 패턴입니다. 좌측은 전형적 증상, 우측은 동일 상황을 다르게 해결하는 방법입니다. 3개 이상이 동시에 관측되면 운영 계획 자체를 재점검해야 할 신호입니다.</p>
 
         <div class="bp-anti">
             <div class="bp-anti-head">
-                <div>자주 나타나는 함정</div>
+                <div>자주 나타나는 실패 싸인</div>
                 <div>대응 방향</div>
             </div>
             <div class="bp-anti-row">
-                <div class="bad"><strong>"운영 계획이 PPT 50장이 됩니다."</strong> 형식이 두꺼워지면 정작 코어가 한 번도 펴보지 않습니다. 보고용 문서로 굳어 운영에서 멀어집니다.</div>
-                <div class="good"><strong>운영 계획은 한 페이지로 묶습니다.</strong> 마일스톤·LLM·회의체·KPI 네 블록이 한 화면에 들어가야 매일 참고됩니다. 부속 자료는 별첨으로 둡니다.</div>
+                <div class="bad"><strong>"운영 계획이 PPT 50장이 됩니다."</strong> 형식이 두꺼워지면 정작 TF 멤버가 한 번도 열어보지 않습니다. 보고용 문서로 고착되어 운영과 분리됩니다.</div>
+                <div class="good"><strong>운영 계획은 한 페이지로 압축합니다.</strong> 마일스톤·LLM·회의체·KPI 네 블록이 한 화면에 배치되어야 매일 참조됩니다. 부속 자료는 별첨으로 분리합니다.</div>
             </div>
             <div class="bp-anti-row">
-                <div class="bad"><strong>"LLM 선정이 한 분기를 잡아먹습니다."</strong> 모델 비교에 두 달, 보안 검토에 한 달이 흐릅니다. 그 사이 멤버 각자가 익숙한 도구를 임시로 쓰며 검토 부담만 누적됩니다.</div>
-                <div class="good"><strong>선정 기한을 1개월로 못박습니다.</strong> 보안·법무·IT를 같은 회의에 부르고, PoC 비교는 사내 업무 샘플 5~10건으로 한정합니다. 완벽한 비교가 아니라 첫 선택을 빠르게 합니다.</div>
+                <div class="bad"><strong>"LLM 선정이 한 분기를 소진합니다."</strong> 모델 비교에 두 달, 보안 검토에 한 달이 소요됩니다. 그 사이 멤버 각자가 익숙한 도구를 임시로 사용하며 검토 부담만 누적됩니다.</div>
+                <div class="good"><strong>선정 기한을 1개월로 확정합니다.</strong> 보안·법무·IT를 동일 회의에 소집하고, PoC 비교는 사내 업무 샘플 5~10건으로 한정합니다. 완벽한 비교가 아니라 첫 선택을 신속히 확정합니다.</div>
             </div>
             <div class="bp-anti-row">
-                <div class="bad"><strong>"마일스톤이 임기 종료까지 그대로 갑니다."</strong> 3개월 차에 외부 환경이 바뀌었는데도 1개월차에 적은 계획을 그대로 들고 갑니다.</div>
-                <div class="good"><strong>분기마다 마일스톤을 다시 봅니다.</strong> 외부 환경(모델 출시·규제·경쟁사)과 내부 학습(부트캠프·Quick Win)에 따라 남은 3개월을 조정합니다. 다만 KPI는 함부로 갈지 않습니다.</div>
+                <div class="bad"><strong>"마일스톤이 임기 종료까지 그대로 유지됩니다."</strong> 3개월차에 외부 환경이 변동되었는데도 1개월차에 작성한 계획을 그대로 유지합니다.</div>
+                <div class="good"><strong>분기마다 마일스톤을 재점검합니다.</strong> 외부 환경(모델 출시·규제·경쟁사)과 내부 학습(부트캠프·Quick Win)에 따라 잔여 3개월을 조정합니다. 다만 KPI는 함부로 교체하지 않습니다.</div>
             </div>
             <div class="bp-anti-row">
                 <div class="bad"><strong>"회의가 늘어납니다."</strong> 데일리·주간·월간·분기 외에 정기 외 회의가 생기고, 한 주에 회의가 8건을 넘기 시작합니다.</div>
-                <div class="good"><strong>회의 추가는 주간 회고에서만 결정</strong>합니다. 새 회의를 더하려면 기존 회의 하나를 폐기해야 합니다. 회의 합계가 늘면 그 자체를 다음 회고 안건으로 올립니다.</div>
+                <div class="good"><strong>회의 추가는 주간 회고에서만 결정</strong>합니다. 새 회의를 더하려면 기존 회의 하나를 종료해야 합니다. 회의 합계가 늘면 그 자체를 다음 회고 안건으로 올립니다.</div>
             </div>
             <div class="bp-anti-row">
                 <div class="bad"><strong>"KPI가 14개로 늘어납니다."</strong> 보고할 때마다 측정 지표가 추가되고, 추적 자체가 풀타임 업무가 됩니다.</div>
-                <div class="good"><strong>KPI 상한을 6개로 못박습니다.</strong> 새 지표를 더하려면 기존 지표 하나를 일단 폐기합니다. 추적 비용이 측정 가치를 넘기는 순간 KPI는 함정이 됩니다.</div>
+                <div class="good"><strong>KPI 상한을 6개로 고정합니다.</strong> 새 지표를 더하려면 기존 지표 하나를 정리합니다. 추적 비용이 측정 가치를 넘기는 순간 KPI는 함정이 됩니다.</div>
             </div>
         </div>
     </section>
 
     <!-- ========= FOOTER ========= -->
     <footer class="bp-footer">
-        <p style="margin:0 0 10px; font-size:11.5px; opacity:0.78;">* 이 페이지는 AX 5단계 로드맵의 1단계(추진체계 구축)를 세 작업으로 나눈 두 번째, 운영 계획 수립을 다룹니다. 앞 페이지는 TF 조직 세팅이고, 다음 페이지는 AI 부트캠프(교육·Quick Win·해커톤)입니다.</p>
-        <p style="margin:0 0 10px;"><strong>참고 자료.</strong> McKinsey(The State of AI 2025, Rewired), BCG(AI Radar 2026, Build for the Future 2025), Bain(Technology Report 2024), a16z(How 100 Enterprise CIOs Are Building and Buying Gen AI, 2025), Anthropic(Model Card · Enterprise Security), OpenAI(Azure OpenAI Enterprise Deployment), Google Cloud(Vertex AI Data Governance), 네이버 클라우드(HyperCLOVA X Enterprise).</p>
-        <p style="margin:0; opacity:0.85;">LLM 선택과 운영 매뉴얼의 구체 절차는 산업 규제, 데이터 민감도, 기존 IT 인프라에 따라 달라집니다. 이 페이지는 일반 기업을 기준으로 한 권고이며, 실제 적용 시 사내 정보보안·법무·재무 검토를 함께 거쳐야 합니다.</p>
-        <p style="margin:22px 0 0; padding-top:18px; border-top:1px solid rgba(247,245,239,0.18); font-size:11.5px; opacity:0.7; letter-spacing:0.04em;">&copy; 2026 AI ROASTING. All rights reserved.</p>
+        <p class="bp-footer-summary">TF의 6개월 마일스톤·회의체·월별 산출물·LLM 표준 모델을 단일 운영 계획서로 통합해, 임의 실행 여지를 사전에 제거합니다.</p>
+        <div class="bp-footer-bar">
+            <span class="bp-footer-copy">&copy; 2026 AI ROASTING. All rights reserved.</span>
+            <span class="bp-footer-author">
+                <span class="bp-footer-author-name">강정구 · Jayden Kang</span>
+                <a class="bp-footer-social bp-footer-fb" href="https://www.facebook.com/jayden.kang" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V13h2.7v8h3.4z"/></svg></a>
+                <a class="bp-footer-social bp-footer-in" href="https://www.linkedin.com/in/jayden-kang/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.4v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.59 0 4.25 2.36 4.25 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
+            </span>
+        </div>
     </footer>
 
 </div>

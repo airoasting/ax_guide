@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AX 역량 진단 · 6영역 24문항 자가진단</title>
+<title>현재 수준 진단 · AI ROASTING</title>
 <meta name="description" content="McKinsey·BCG·Bain·PwC·KPMG·Deloitte 6사 프레임워크에서 공통으로 추출한 6영역 AX 역량 자가진단. 24문항을 1~5점으로 채점해 우리 회사의 위치를 잰다.">
 <link rel="stylesheet" href="assets/style.css">
 <style>
@@ -439,6 +439,18 @@ body {
 .bp-dim-cell:hover .bp-dim-num { color: var(--bp-line); letter-spacing: 0.24em; }
 .bp-dim-cell .bp-dim-name { transition: color .25s ease; }
 .bp-dim-cell:hover .bp-dim-name { color: var(--bp-line); }
+.bp-dim-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    margin: 0 auto 10px;
+    color: var(--ink-soft);
+    transition: color .25s ease, transform .25s ease;
+}
+.bp-dim-icon svg { width: 26px; height: 26px; display: block; }
+.bp-dim-cell:hover .bp-dim-icon { color: var(--bp-line); transform: translateY(-1px); }
 .bp-dim-num {
     font-family: var(--sans);
     font-size: 11px;
@@ -743,9 +755,21 @@ body {
     padding: 18px 16px 20px;
     border-right: 1px solid var(--bp-rule);
     background: var(--bp-paper-2);
-    transition: background .25s ease;
+    transition: background .25s ease, transform .25s ease, box-shadow .25s ease;
+    position: relative;
+    cursor: default;
 }
 .bp-ladder-cell:last-child { border-right: none; }
+.bp-ladder-cell:not(.active):hover {
+    background: rgba(27, 110, 79, 0.06);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px -10px rgba(6, 32, 24, 0.25);
+    z-index: 2;
+}
+.bp-ladder-cell .bp-ladder-num { transition: color .25s ease, letter-spacing .25s ease; }
+.bp-ladder-cell:not(.active):hover .bp-ladder-num { color: var(--bp-line); letter-spacing: 0.24em; }
+.bp-ladder-cell .bp-ladder-name { transition: color .25s ease; }
+.bp-ladder-cell:not(.active):hover .bp-ladder-name { color: var(--bp-line); }
 .bp-ladder-cell.active {
     background: linear-gradient(180deg, rgba(14, 59, 42, 0.22) 0%, rgba(27, 110, 79, 0.18) 100%);
     box-shadow: inset 0 4px 0 var(--bp-line), inset 0 -4px 0 var(--bp-line);
@@ -955,7 +979,7 @@ body {
     <!-- ========= HERO ========= -->
     <section class="bp-hero">
         <div class="bp-hero-eyebrow">Diagnosis · COMPANY BRAIN OS 결손 진단</div>
-        <h1>AX를 추진하기 전,<br>우리 조직의 두뇌가 어느 지점에 있는지부터 진단합니다.</h1>
+        <h1>AX를 추진하기 전,<br>우리 조직이 어느 지점에 있는지부터 진단합니다.</h1>
         <p class="bp-lead">여섯 영역 24개 질문으로 30분 안에 COMPANY BRAIN OS의 어느 층이 비어 있는지를 점수로 확인하고 다음 행동을 정합니다.</p>
         <div class="bp-summary">
             <strong>사용 방법은 단순합니다.</strong> 각 문항을 1점(전혀 아니다)에서 5점(완전히 그렇다)으로 매깁니다. 24문항을 모두 응답하면 영역별 평균과 총점, 5단계 성숙도, 가장 약한 두 영역이 자동으로 정리됩니다. 입력값은 본 브라우저에만 저장되며 외부로 전송되지 않습니다.
@@ -966,7 +990,6 @@ body {
         <a href="#common">AX 6대 영역</a>
         <a href="#questions">24문항 진단</a>
         <a href="#result">결과와 가이드</a>
-        <a href="#firms">컨설팅펌 참고자료</a>
     </nav>
 
     <!-- ========= 1. 공통 6영역 ========= -->
@@ -982,31 +1005,75 @@ body {
 
         <div class="bp-dims">
             <div class="bp-dim-cell">
+                <div class="bp-dim-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="9"/>
+                        <circle cx="12" cy="12" r="5"/>
+                        <circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/>
+                        <path d="M12 1.5 V4 M12 20 V22.5 M1.5 12 H4 M20 12 H22.5"/>
+                    </svg>
+                </div>
                 <div class="bp-dim-num">D° 1</div>
                 <div class="bp-dim-name">전략</div>
                 <div class="bp-dim-desc">AI가 전략의 한가운데에 자리하고, CEO가 직접 책임지고 있습니까?</div>
             </div>
             <div class="bp-dim-cell">
+                <div class="bp-dim-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="8.5" cy="8" r="3"/>
+                        <circle cx="16" cy="9.5" r="2.4"/>
+                        <path d="M3 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/>
+                        <path d="M14.5 18c.3-2.3 2-3.7 4-3.7 1.6 0 2.8.8 3.5 2"/>
+                    </svg>
+                </div>
                 <div class="bp-dim-num">D° 2</div>
                 <div class="bp-dim-name">인재와 문화</div>
                 <div class="bp-dim-desc">전 직원이 AI와 협업하는 공통 언어와 역량을 갖추고 있습니까?</div>
             </div>
             <div class="bp-dim-cell">
+                <div class="bp-dim-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="9" r="3.2"/>
+                        <circle cx="16" cy="15.5" r="2.6"/>
+                        <path d="M9 4.2 V6 M9 12 V13.8 M3.8 9 H5.6 M12.4 9 H14.2 M5.4 5.4 l1.3 1.3 M11.3 11.3 l1.3 1.3 M5.4 12.6 l1.3-1.3 M11.3 6.7 l1.3-1.3"/>
+                        <path d="M16 11.3 V13 M16 18 V19.7 M11.8 15.5 H13.4 M18.6 15.5 H20.2"/>
+                    </svg>
+                </div>
                 <div class="bp-dim-num">D° 3</div>
                 <div class="bp-dim-name">운영모델과 프로세스</div>
                 <div class="bp-dim-desc">핵심 워크플로우를 AI 전제로 재설계했습니까, 아니면 부분 자동화에 머물고 있습니까?</div>
             </div>
             <div class="bp-dim-cell">
+                <div class="bp-dim-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                        <ellipse cx="12" cy="5.5" rx="7" ry="2.6"/>
+                        <path d="M5 5.5 V12 c0 1.4 3.1 2.6 7 2.6 s7-1.2 7-2.6 V5.5"/>
+                        <path d="M5 12 V18.5 c0 1.4 3.1 2.6 7 2.6 s7-1.2 7-2.6 V12"/>
+                    </svg>
+                </div>
                 <div class="bp-dim-num">D° 4</div>
                 <div class="bp-dim-name">데이터</div>
                 <div class="bp-dim-desc">AI가 활용할 수 있는 데이터가 갖춰져 있고, 출처 추적과 품질 관리가 작동하고 있습니까?</div>
             </div>
             <div class="bp-dim-cell">
+                <div class="bp-dim-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="6" y="6" width="12" height="12" rx="1.2"/>
+                        <rect x="9.5" y="9.5" width="5" height="5"/>
+                        <path d="M9 6 V3.5 M12 6 V3.5 M15 6 V3.5 M9 20.5 V18 M12 20.5 V18 M15 20.5 V18 M6 9 H3.5 M6 12 H3.5 M6 15 H3.5 M20.5 9 H18 M20.5 12 H18 M20.5 15 H18"/>
+                    </svg>
+                </div>
                 <div class="bp-dim-num">D° 5</div>
                 <div class="bp-dim-name">AI 도구</div>
                 <div class="bp-dim-desc">모델, API, 에이전트, 보안, 비용이 단일 플랫폼 위에서 통합 운영되고 있습니까?</div>
             </div>
             <div class="bp-dim-cell">
+                <div class="bp-dim-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2.5 L20 5.2 V12 c0 4.6-3.3 8.2-8 9.5 -4.7-1.3-8-4.9-8-9.5 V5.2 Z"/>
+                        <path d="M8.5 12 L11 14.5 L15.8 9.7"/>
+                    </svg>
+                </div>
                 <div class="bp-dim-num">D° 6</div>
                 <div class="bp-dim-name">거버넌스와 책임</div>
                 <div class="bp-dim-desc">사고 발생 전에 위험 매트릭스가 마련되어 있고, 사고 발생 시 추적이 가능합니까?</div>
@@ -1058,7 +1125,7 @@ body {
                         </div>
                     </div>
                     <div class="bp-q" data-q="s3">
-                        <div class="bp-q-text"><span class="bp-q-num">Q03</span>분산된 PoC가 아니라 회사의 가치 창출에 직결되는 빅 베팅 3에서 5건에 자원이 집중되어 있고, 나머지는 의도적으로 보류합니다.</div>
+                        <div class="bp-q-text"><span class="bp-q-num">Q03</span>분산된 PoC가 아니라 회사의 가치 창출에 직결되는 전략 과제 3에서 5건에 자원이 집중되어 있고, 나머지는 의도적으로 보류합니다.</div>
                         <div class="bp-scale">
                             <input type="radio" name="s3" value="1" id="s3-1"><label for="s3-1"><span class="num">1</span>전혀</label>
                             <input type="radio" name="s3" value="2" id="s3-2"><label for="s3-2"><span class="num">2</span>아니다</label>
@@ -1197,7 +1264,7 @@ body {
                 </div>
                 <div class="bp-diag-body">
                     <div class="bp-q" data-q="d1">
-                        <div class="bp-q-text"><span class="bp-q-num">Q13</span>핵심 빅 베팅에 필요한 사내 데이터(고객, 제품, 운영 기록)가 검색과 인용이 가능한 형태로 정리되어 있습니다.</div>
+                        <div class="bp-q-text"><span class="bp-q-num">Q13</span>핵심 전략 과제에 필요한 사내 데이터(고객, 제품, 운영 기록)가 검색과 인용이 가능한 형태로 정리되어 있습니다.</div>
                         <div class="bp-scale">
                             <input type="radio" name="d1" value="1" id="d1-1"><label for="d1-1"><span class="num">1</span>전혀</label>
                             <input type="radio" name="d1" value="2" id="d1-2"><label for="d1-2"><span class="num">2</span>아니다</label>
@@ -1447,7 +1514,7 @@ body {
                         <div class="bp-ladder-num">Lv 3</div>
                         <div class="bp-ladder-name">AI-Aware</div>
                         <div class="bp-ladder-range">63 ~ 81점</div>
-                        <div class="bp-ladder-desc">청사진과 빅 베팅이 정의됐고 기본 교육이 돌고 있으나, 운영모델 재설계가 아직 본격화되지 않았습니다.</div>
+                        <div class="bp-ladder-desc">청사진과 전략 과제가 정의됐고 기본 교육이 돌고 있으나, 운영모델 재설계가 아직 본격화되지 않았습니다.</div>
                     </div>
                     <div class="bp-ladder-cell" data-level="4">
                         <div class="bp-ladder-num">Lv 4</div>
@@ -1550,10 +1617,15 @@ body {
 
     <!-- ========= FOOTER ========= -->
     <footer class="bp-footer">
-        <p style="margin:0 0 10px; font-size:11.5px; opacity:0.78;">* 본 진단은 6개 컨설팅사의 공개 프레임워크에서 공통 영역을 추출해 24문항으로 재구성한 자가진단입니다. 진단 결과는 의사결정의 출발점일 뿐 결론이 아니며, 실제 투자 결정은 사내 데이터와 외부 검토를 거쳐 내려야 합니다.</p>
-        <p style="margin:0 0 10px;"><strong>입력값은 이 브라우저에만 저장됩니다.</strong> 외부 서버로 전송하지 않으며, 다른 사람과 비교가 필요하면 "결과를 클립보드로 복사" 또는 "텍스트 파일로 내보내기" 버튼을 눌러 직접 공유합니다.</p>
-        <p style="margin:0; opacity:0.85;">참고 자료. McKinsey(Rewired 2023, State of AI 2025), BCG(Build for the Future 2025, AI Radar 2026), Bain(Technology Report 2024), PwC(Agent OS, Responsible AI), KPMG(Trusted AI 10 Pillars), Deloitte(State of Generative AI in the Enterprise). 각 사의 원문 강조점이 다르나, 진단 영역은 본 가이드의 6영역으로 정렬했습니다.</p>
-        <p style="margin:22px 0 0; padding-top:18px; border-top:1px solid rgba(247,245,239,0.18); font-size:11.5px; opacity:0.7; letter-spacing:0.04em;">&copy; 2026 AI ROASTING. All rights reserved.</p>
+        <p class="bp-footer-summary">6개 영역 24문항으로 BRAIN OS 성숙도를 정량화하고, 가장 취약한 두 축을 다음 분기 우선 투자 영역으로 지정합니다.</p>
+        <div class="bp-footer-bar">
+            <span class="bp-footer-copy">&copy; 2026 AI ROASTING. All rights reserved.</span>
+            <span class="bp-footer-author">
+                <span class="bp-footer-author-name">강정구 · Jayden Kang</span>
+                <a class="bp-footer-social bp-footer-fb" href="https://www.facebook.com/jayden.kang" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V13h2.7v8h3.4z"/></svg></a>
+                <a class="bp-footer-social bp-footer-in" href="https://www.linkedin.com/in/jayden-kang/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.4v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.59 0 4.25 2.36 4.25 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
+            </span>
+        </div>
     </footer>
 
 </div>
@@ -1588,7 +1660,7 @@ body {
           ] },
         { id: 3, min: 63, max: 81, name: 'AI-Aware', stage: '청사진 확정 단계',
           actions: [
-              '<strong>빅 베팅 3에서 5건에 자원의 70%를 사람·프로세스</strong>로 배분합니다. 라이선스 예산보다 교육·재설계 예산이 커야 합니다.',
+              '<strong>전략 과제 3에서 5건에 자원의 70%를 사람·프로세스</strong>로 배분합니다. 라이선스 예산보다 교육·재설계 예산이 커야 합니다.',
               '<strong>위임·성실 루프</strong>로 신뢰 검증을 정착시킵니다. 과거 데이터로 AI를 시험하고, 검증된 작업만 위임 영역으로 확장합니다.',
               '<strong>데이터 출처 표기와 사용 매트릭스</strong>를 사내 위키 1면에 게시합니다. 사고 전에 규칙이 보이도록 합니다.'
           ] },
@@ -1600,18 +1672,18 @@ body {
           ] },
         { id: 5, min: 101, max: 120, name: 'AI-Native', stage: '내재화 단계',
           actions: [
-              '<strong>다음 빅 베팅 후보</strong>를 발굴합니다. 한 번 자리잡은 워크플로우는 6개월마다 재설계 여부를 점검합니다.',
+              '<strong>다음 전략 과제 후보</strong>를 발굴합니다. 한 번 자리잡은 워크플로우는 6개월마다 재설계 여부를 점검합니다.',
               '<strong>거버넌스를 외부 표준</strong>(국내 AI 기본법, EU AI Act, 산업별 가이드)에 맞춰 정기적으로 갱신합니다.',
               '<strong>학습 자산</strong>(COMPANY BRAIN OS 워크시트, Skill, 프롬프트 라이브러리)을 회사의 정식 IP로 등재하고, 신규 입사자 온보딩에 포함합니다.'
           ] }
     ];
 
     var AXIS_GUIDES = {
-        strategy: '청사진 한 장과 빅 베팅 3에서 5건을 정의합니다. CEO 직속 어젠다로 격상하고, 단기 ROI가 잡히지 않더라도 멈추지 않는다는 결정을 임원회의 기록에 남깁니다.',
+        strategy: '청사진 한 장과 전략 과제 3에서 5건을 정의합니다. CEO 직속 어젠다로 격상하고, 단기 ROI가 잡히지 않더라도 멈추지 않는다는 결정을 임원회의 기록에 남깁니다.',
         people: '라이선스 예산보다 교육과 업스킬링 예산을 더 키웁니다. 위임·설명·분별·성실의 4D를 전사 공통 언어로 정착시키고, 절감된 시간이 더 가치 있는 업무로 이동했는지 분기마다 확인합니다.',
         process: '핵심 워크플로우 하나를 골라 끝에서 끝까지 AI 전제로 다시 그립니다. 부분 자동화를 멈추고, 예산과 인력의 약 70%를 알고리즘이 아니라 사람과 프로세스 재설계에 씁니다.',
         tech: '사내 AI 플랫폼을 한 곳에 모읍니다. 모델 호출, 보안 통제, 비용 추적, 로그를 통합하고, 부서별로 흩어진 도구 계약을 정리합니다. 추상화 계층을 두어 모델 교체 비용을 낮춥니다.',
-        data: '빅 베팅에 필요한 사내 데이터부터 정리합니다. 베테랑의 암묵지를 문서·룰·액션 단위로 구조화하고, AI가 인용 가능한 형태로 축적합니다. 출처 표기와 데이터 사용 매트릭스를 함께 깔아 둡니다.',
+        data: '전략 과제에 필요한 사내 데이터부터 정리합니다. 베테랑의 암묵지를 문서·룰·액션 단위로 구조화하고, AI가 인용 가능한 형태로 축적합니다. 출처 표기와 데이터 사용 매트릭스를 함께 깔아 둡니다.',
         governance: '사고 발생 전에 가이드라인을 게시합니다. 위험 점검 책임자를 명시하고, 임원회의 정기 안건으로 등재합니다. 국내 AI 기본법과 EU AI Act 같은 외부 규제 변화를 사내 정책에 반영하는 절차를 명문화합니다.'
     };
 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>B-4-2 AX 캔버스 · 한 직무를 10칸으로 해부합니다</title>
+<title>AX 캔버스 · AI ROASTING</title>
 <meta name="description" content="AX 4단계 업무 방식 재설계의 두 번째 작업. 한 직무를 10칸으로 해부하고 암묵지의 Mark-down화(T·C·R·A)와 Human-Agent Team(Meta Harness)을 한 장에 그립니다.">
 <link rel="stylesheet" href="assets/style.css">
 <style>
@@ -351,16 +351,87 @@ body {
     position: relative;
     display: flex;
     flex-direction: column;
+    transition:
+        transform .28s cubic-bezier(.2,.7,.2,1),
+        box-shadow .28s cubic-bezier(.2,.7,.2,1),
+        border-color .28s ease,
+        background-color .28s ease;
+    will-change: transform;
+    overflow: hidden;
 }
+.bp-cell::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(27, 110, 79, 0.10), transparent 55%);
+    opacity: 0;
+    transition: opacity .35s ease;
+    pointer-events: none;
+}
+.bp-cell::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 0;
+    background: var(--bp-accent);
+    transition: width .4s cubic-bezier(.2,.7,.2,1);
+}
+.bp-cell .cell-num,
+.bp-cell .cell-name,
+.bp-cell .cell-desc {
+    position: relative;
+    z-index: 1;
+    transition: letter-spacing .28s ease, color .28s ease, transform .28s ease;
+}
+.bp-cell:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 36px -18px rgba(6, 32, 24, 0.55);
+    border-color: var(--bp-accent);
+    z-index: 2;
+}
+.bp-cell:hover::before { opacity: 1; }
+.bp-cell:hover::after { width: 100%; }
+.bp-cell:hover .cell-num { letter-spacing: 0.22em; }
+.bp-cell:hover .cell-name { color: var(--bp-line); transform: translateX(2px); }
 .bp-cell.center {
     background: var(--bp-line);
     color: var(--bp-paper);
     border-color: var(--bp-line);
     box-shadow: 0 4px 14px -6px rgba(6, 32, 24, 0.5);
 }
+.bp-cell.center::before {
+    background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(232, 215, 139, 0.18), transparent 55%);
+}
+.bp-cell.center::after { background: var(--bp-gold); }
+.bp-cell.center:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 24px 40px -16px rgba(6, 32, 24, 0.75);
+    border-color: var(--bp-gold);
+}
+.bp-cell.center:hover .cell-name { color: var(--bp-paper); }
 .bp-cell.center .cell-num { color: rgba(247, 245, 239, 0.7); }
 .bp-cell.center .cell-name { color: var(--bp-paper); }
 .bp-cell.center .cell-desc { color: rgba(247, 245, 239, 0.78); }
+.bp-cell.bridge::before {
+    background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(154, 123, 10, 0.14), transparent 55%);
+}
+.bp-cell.bridge::after { background: var(--bp-gold); }
+.bp-cell.bridge:hover {
+    border-color: var(--bp-gold);
+    box-shadow: 0 20px 36px -18px rgba(154, 123, 10, 0.5);
+}
+.bp-cell.bridge:hover .cell-name { color: var(--bp-gold); }
+.bp-cell.dimmed { pointer-events: none; }
+@media (prefers-reduced-motion: reduce) {
+    .bp-cell,
+    .bp-cell::before,
+    .bp-cell::after,
+    .bp-cell .cell-num,
+    .bp-cell .cell-name { transition: none; }
+    .bp-cell:hover { transform: none; }
+}
 .bp-cell .cell-num {
     font-family: var(--sans);
     font-size: 11px;
@@ -1063,7 +1134,7 @@ body {
             <div class="bp-section-meta">캔버스의 위치와 단위</div>
         </div>
 
-        <p class="bp-section-intro">3단계까지는 후보 베팅을 점수로 선별했습니다. 4단계는 분석 단위가 다릅니다. 베팅을 실행하려면 해당 직무를 끝에서 끝까지 분해해야 합니다.</p>
+        <p class="bp-section-intro">3단계까지는 후보 전략 과제를 점수로 선별했습니다. 4단계는 분석 단위가 다릅니다. 전략 과제를 실행하려면 해당 직무를 끝에서 끝까지 분해해야 합니다.</p>
 
         <div class="bp-handoff">
             <div class="tag">캔버스가 답하는 한 가지 질문</div>
@@ -1471,7 +1542,7 @@ body {
                 </div>
                 <div class="bp-order-fail">
                     <span class="fail-tag">실패 싸인</span>
-                    책임자가 부서명으로 기재되어 있습니다. 사고 발생 시 책임 소재 확인이 지연되며, 그동안 에이전트는 계속 가동됩니다.
+                    책임자가 부서명으로 기재되어 있습니다. 사고 발생 시 책임 소재 확인이 지연되며, 그동안 에이전트는 계속 작동합니다.
                 </div>
             </div>
         </div>
@@ -1479,10 +1550,15 @@ body {
 
     <!-- ========= FOOTER ========= -->
     <footer class="bp-footer">
-        <p style="margin:0 0 10px; font-size:11.5px; opacity:0.78;">* 이 페이지는 AX 4단계 업무 방식 재설계의 두 번째 작업, AX 캔버스를 다룹니다. 앞 페이지는 자원 재배분, 다음 페이지는 업무 재설계이며, 세 페이지의 산출물이 합쳐져 5단계 운영 내재화로 인계됩니다.</p>
-        <p style="margin:0 0 10px;"><strong>참고 자료.</strong> 본 가이드의 미시 엔진 10문항(C 영역), 자산 축적 4단계 순환의 추출·구조화·자산화 단계(D 영역), Anthropic AI Fluency의 4D(위임·설명·분별·성실)와 Skill 형식. 캔버스 양식은 미시 엔진의 직무 버전이며, T·C·R·A 마크다운과 Meta Harness는 본 가이드의 고유 작업 양식입니다.</p>
-        <p style="margin:0 0 10px; opacity:0.85;">실제 직무에 캔버스를 적용하기 전, 사내 법무·정보보안·인사 부서의 검토를 함께 거칩니다. 권한·결재선 변경은 다음 페이지(업무 재설계)에서 가치 사슬 단위로 한 번 더 확인됩니다.</p>
-        <p style="margin:22px 0 0; padding-top:18px; border-top:1px solid rgba(247,245,239,0.18); font-size:11.5px; opacity:0.7; letter-spacing:0.04em;">&copy; 2026 AI ROASTING. All rights reserved.</p>
+        <p class="bp-footer-summary">한 직무를 10칸 캔버스로 분해하고, 암묵지를 T·C·R·A 마크다운으로 구조화해 Human-Agent Team의 역할 분담을 한 장에 설계합니다.</p>
+        <div class="bp-footer-bar">
+            <span class="bp-footer-copy">&copy; 2026 AI ROASTING. All rights reserved.</span>
+            <span class="bp-footer-author">
+                <span class="bp-footer-author-name">강정구 · Jayden Kang</span>
+                <a class="bp-footer-social bp-footer-fb" href="https://www.facebook.com/jayden.kang" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V13h2.7v8h3.4z"/></svg></a>
+                <a class="bp-footer-social bp-footer-in" href="https://www.linkedin.com/in/jayden-kang/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.4v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.59 0 4.25 2.36 4.25 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
+            </span>
+        </div>
     </footer>
 
 </div>
@@ -1536,6 +1612,27 @@ body {
     }, { passive: true });
     window.addEventListener('resize', update);
     update();
+})();
+
+(function() {
+    'use strict';
+    var cells = document.querySelectorAll('.bp-cell');
+    if (!cells.length) return;
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) return;
+    cells.forEach(function(cell) {
+        cell.addEventListener('mousemove', function(e) {
+            var rect = cell.getBoundingClientRect();
+            var x = ((e.clientX - rect.left) / rect.width) * 100;
+            var y = ((e.clientY - rect.top) / rect.height) * 100;
+            cell.style.setProperty('--mx', x + '%');
+            cell.style.setProperty('--my', y + '%');
+        });
+        cell.addEventListener('mouseleave', function() {
+            cell.style.removeProperty('--mx');
+            cell.style.removeProperty('--my');
+        });
+    });
 })();
 </script>
 
