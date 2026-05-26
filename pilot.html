@@ -409,6 +409,8 @@ body {
     background: var(--bp-paper-2);
     transition: background .25s ease, transform .25s ease, box-shadow .25s ease;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 .bp-principle:last-child { border-right: none; }
 .bp-principle:hover {
@@ -417,6 +419,21 @@ body {
     box-shadow: 0 8px 24px -10px rgba(6, 32, 24, 0.25);
     z-index: 2;
 }
+.bp-principle-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 18px;
+    color: var(--bp-line);
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.bp-principle-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.bp-principle:hover .bp-principle-icon { color: var(--bp-accent); }
 .bp-principle-num {
     font-family: var(--sans);
     font-size: 11px;
@@ -440,6 +457,7 @@ body {
     line-height: 1.7;
     color: var(--ink-soft);
     margin-bottom: 18px;
+    flex: 1 1 auto;
 }
 .bp-principle-body strong { color: var(--bp-ink); }
 .bp-principle-evidence {
@@ -766,69 +784,73 @@ body {
     <!-- ========= HERO ========= -->
     <section class="bp-hero">
         <div class="bp-hero-eyebrow">Step 2 · 파일럿 실행 · 대상 선정과 실행 · BRAIN OS 첫 모듈</div>
-        <h1>책상에서의 분석을 멈추고, COMPANY BRAIN OS의 첫 모듈을 손으로 한 번 돌려봅니다.</h1>
+        <h1>작지만 의미 있는 AI 파일럿 프로젝트를 수행합니다.</h1>
         <p class="bp-lead">과제 우선순위화 이전에 BRAIN OS의 첫 모듈을 짧고 안전한 자리에서 직접 돌려보며 현장 데이터를 모으는 단계입니다.</p>
         <div class="bp-summary">
-            <strong>이 단계의 결론은 단순합니다.</strong> 1단계에서 꾸린 TF가 6개월 임기 안에서 소수의 파일럿을 직접 손으로 돌립니다. 전략 과제를 정하는 자리가 아니라 학습용 샘플을 돌리는 자리입니다. 전략적 중요도가 높은 후보가 아니라 빠르고 저위험한 후보를 먼저 고릅니다. 짧은 사이클, 안전한 실험 환경, 가벼운 신뢰 점검의 세 원칙으로 돌리고, 전략 과제 확정은 다음 단계(3단계 과제 우선순위화)로 미룹니다.
+            <strong>이 단계의 결론은 명확합니다.</strong> 1단계에서 구성한 TF가 6개월 임기 동안 소수의 파일럿을 직접 운영합니다. 단, 이 파일럿은 학습 샘플에 머무르지 않습니다. <strong>반드시 성공시켜, 다른 부서가 그대로 적용 가능한 확산의 첫 사례로 정형화해야 합니다.</strong> 후보 선정 기준은 전략적 중요도가 아니라 "성공시킬 수 있는 유의미한 사례인가"입니다. 짧은 실행 기간, 안정된 수행 환경, 낮은 보안 리스크의 세 기준으로 프로젝트를 선정하여 운영하고, 프로젝트가 끝나면 다른 팀이 동일 방식으로 적용 가능한 표준 사례 한 건을 산출물로 남깁니다.
         </div>
     </section>
 
     <nav class="bp-hero-nav" aria-label="섹션 바로가기">
-        <a href="#why">왜 파일럿 실행이 먼저인가</a>
+        <a href="#why">성공시켜 확산 사례로</a>
         <a href="#framework">참고 프레임워크</a>
         <a href="#selection">대상 선정 기준</a>
         <a href="#execution">실행 3원칙</a>
         <a href="#pitfalls">경계할 함정</a>
-        <a href="#refs">참고 자료</a>
     </nav>
 
-    <!-- ========= 1. 왜 파일럿 실행이 먼저인가 ========= -->
+    <!-- ========= 1. 성공시켜 확산 사례로 ========= -->
     <section class="bp-section" id="why">
         <div class="bp-section-head">
             <div>
-                <h2 class="bp-section-title">왜 우선순위화보다 파일럿 실행이 먼저인가</h2>
+                <h2 class="bp-section-title">이 파일럿을 성공시켜 확산의 첫 사례로 정형화합니다</h2>
             </div>
-            <div class="bp-section-meta">책상 분석 · 현장 실험 비교</div>
+            <div class="bp-section-meta">내부 학습용 · 확산 사례용 비교</div>
         </div>
 
-        <p class="bp-section-intro">기존 컨설팅펌의 권고는 "파일럿 난립을 피하라"는 것이었고, 그 자체는 옳습니다. 다만 BCG·Bain이 경고하는 난립은 방향 없이 수백 개를 산발적으로 벌이는 모습입니다. 의도적으로 소수의 학습용 파일럿을 먼저 돌리는 것과는 다릅니다. 책상에서만 따진 우선순위는 전략 과제의 가짜 확신을 만들기 쉽습니다.</p>
+        <p class="bp-section-intro">파일럿의 당위는 더 이상 쟁점이 아닙니다. TF가 6개월 임기 동안 수행할 과제는 분명합니다. 선정한 후보를 반드시 성공시켜, 다른 부서가 그대로 적용 가능한 첫 성공 사례로 정형화하는 것입니다. 학습은 그 과정에서 자연히 축적됩니다. 반대로 "TF 내부에서 가능성만 확인한다"는 목표로 설계하면, 사이클 종료 후 조직에 남는 자산은 거의 없습니다. 같은 자원과 시간을 투입하는 만큼, 결과물의 활용 범위를 처음부터 달리 설계해야 합니다.</p>
 
         <div class="bp-compare">
             <div class="bp-compare-head">
                 <div>비교 항목</div>
-                <div>책상 분석으로 우선순위 먼저</div>
-                <div class="pick">소수의 파일럿 실행 먼저</div>
+                <div>TF 내부 학습에 머무는 파일럿</div>
+                <div class="pick">확산 사례로 정형화하는 파일럿</div>
             </div>
             <div class="bp-compare-row">
-                <div class="label">판단 근거</div>
-                <div>회의실에서 정리한 사업 우선순위와 추정 ROI에 의지합니다. 데이터·도구·현장 반응은 가정으로 둡니다.</div>
-                <div class="preferred">실제로 몇 건을 돌려본 <strong>현장 데이터</strong>를 근거로 둡니다. 가정이 적을수록 전략 과제의 정확도가 올라갑니다.</div>
+                <div class="label">목표 설정</div>
+                <div>"이 업무를 AI로 처리할 수 있는가"를 TF가 확인하면 종료됩니다. 결과는 내부 회고 자료로 남습니다.</div>
+                <div class="preferred"><strong>"다른 부서가 보고 적용할 첫 사례를 만든다"</strong>는 목표가 동시에 부여됩니다. 학습과 확산이 한 사이클의 두 산출물이 됩니다.</div>
             </div>
             <div class="bp-compare-row">
-                <div class="label">AI 적합성 판단</div>
-                <div>"이건 AI로 잘 될 것"이라는 직관에 의존합니다. 정작 돌려보면 "의외로 안 되는" 영역이 다수 발견됩니다.</div>
-                <div class="preferred">잘 되는 영역과 안 되는 영역의 윤곽이 한 사이클 안에서 드러납니다. <strong>전략 과제 후보군이 사실에 가깝게 정리</strong>됩니다.</div>
+                <div class="label">후보 선정</div>
+                <div>학습 가치가 큰 후보를 중심으로 선정합니다. 결과가 모호해도 "배운 점이 있으면 성공"으로 평가합니다.</div>
+                <div class="preferred">학습 가치와 <strong>가시적 성과를 동시에 입증 가능한 후보</strong>를 우선합니다. 성과 가시성이 높은 영역부터 착수합니다.</div>
             </div>
             <div class="bp-compare-row">
-                <div class="label">조직 역량</div>
-                <div>데이터 상태, 직원 수용도, 현장 병목은 분석 시점에 잘 보이지 않습니다.</div>
-                <div class="preferred">한 건만 돌려도 우리 데이터의 결손, 권한 충돌, 현장 저항 같은 <strong>운영의 실제 모습</strong>이 노출됩니다.</div>
+                <div class="label">실행 강도</div>
+                <div>"시제품이니 이 정도면 충분하다"에서 멈추기 쉽습니다. 마무리 디테일은 다음 사이클로 이연합니다.</div>
+                <div class="preferred">한 사이클 안에서 <strong>"외부에 공개 가능한 수준"</strong>까지 완성도를 끌어올립니다. 확산 대상의 검토를 전제로 다듬습니다.</div>
             </div>
             <div class="bp-compare-row">
-                <div class="label">위험 통제</div>
-                <div>큰 전략 과제를 큰 자원으로 시작하면, 실패가 드러나는 시점이 늦고 비용이 큽니다.</div>
-                <div class="preferred">짧고 작은 단위로 실패를 빨리 노출시킵니다. <strong>학습 비용이 작고 회복이 빠릅니다.</strong></div>
+                <div class="label">사용자 범위</div>
+                <div>코어 TF 인원만 활용합니다. 외부 부서는 결과 보고만 받을 뿐 직접 활용하지 않습니다.</div>
+                <div class="preferred">코어 TF와 <strong>인접 부서의 핵심 사용자 1~2명</strong>이 운영에 공동 참여합니다. 확산의 첫 채널이 사이클 안에서 자연스럽게 형성됩니다.</div>
             </div>
             <div class="bp-compare-row">
-                <div class="label">난립과의 차이</div>
-                <div>방향 없는 PoC 수백 건. 부서별 개인기 단위로 흩어지고, 학습이 회사 자산으로 남지 않습니다.</div>
-                <div class="preferred">TF가 의도적으로 고른 <strong>한 자리 수의 학습용 파일럿</strong>. 학습 결과가 다음 단계의 입력값으로 그대로 흘러갑니다.</div>
+                <div class="label">산출물</div>
+                <div>됨·안 됨·조직 역량 발견의 학습 리포트로 종료됩니다. TF 내부 자료로 보관됩니다.</div>
+                <div class="preferred">학습 리포트와 별도로 <strong>1페이지 확산 사례서</strong>를 남깁니다. 업무 전·후, 절감 시간, 사용자 반응, 복제 절차까지 포함합니다.</div>
             </div>
             <div class="bp-compare-row">
-                <div class="label">기간</div>
-                <div>분석과 워크숍에 1~2개월을 소비한 뒤 본격 사업화로 들어갑니다.</div>
-                <div class="preferred">TF 임기(6개월) 안에서 <strong>1~2개월 안에 한 사이클</strong>을 끝내고 시사점을 정리합니다.</div>
+                <div class="label">다음 단계 연결</div>
+                <div>3단계 과제 우선순위화의 학습 입력값으로만 활용됩니다.</div>
+                <div class="preferred">3단계 우선순위화, 4단계 업무 재설계, <strong>5단계 AI Native 확산</strong>까지 동일 사례 한 건이 공통 입력값으로 활용됩니다.</div>
             </div>
+        </div>
+
+        <div class="bp-handoff" style="margin-top: 28px;">
+            <div class="tag">유의 사항</div>
+            <strong>확산 사례의 정형화는 외부 PR이나 사내 홍보 자료 제작과 다릅니다.</strong> 같은 업무를 수행하는 다른 팀이 결과물을 검토한 뒤 "우리도 동일하게 적용하면 되겠다"고 판단할 수 있는 수준의 사례 한 건을 남기는 작업입니다. 사이클의 모든 의사결정은 다음 질문 하나로 압축됩니다. "이 결과를 인접 부서에 공유했을 때, 다음 주에 그대로 적용 가능한가."
         </div>
     </section>
 
@@ -895,6 +917,13 @@ body {
 
         <div class="bp-principles">
             <div class="bp-principle">
+                <div class="bp-principle-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12a9 9 0 1 1-3.2-6.9"/>
+                        <polyline points="21 4 21 9 16 9"/>
+                        <polyline points="12 7 12 12 15.5 14"/>
+                    </svg>
+                </div>
                 <div class="bp-principle-num">기준 1</div>
                 <div class="bp-principle-name">사이클이<br>짧을 것</div>
                 <div class="bp-principle-body">
@@ -905,6 +934,12 @@ body {
                 </div>
             </div>
             <div class="bp-principle">
+                <div class="bp-principle-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3 4 6v6c0 5 3.4 8.5 8 9 4.6-.5 8-4 8-9V6l-8-3z"/>
+                        <path d="M9 12.5l2 2 4-4"/>
+                    </svg>
+                </div>
                 <div class="bp-principle-num">기준 2</div>
                 <div class="bp-principle-name">실패해도<br>타격이 작을 것</div>
                 <div class="bp-principle-body">
@@ -915,6 +950,17 @@ body {
                 </div>
             </div>
             <div class="bp-principle">
+                <div class="bp-principle-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="11" r="7"/>
+                        <line x1="12" y1="11" x2="12" y2="11.01"/>
+                        <circle cx="12" cy="11" r="3"/>
+                        <path d="M12 1.5v2"/>
+                        <path d="M12 18.5v2"/>
+                        <path d="M1.5 11h2"/>
+                        <path d="M20.5 11h2"/>
+                    </svg>
+                </div>
                 <div class="bp-principle-num">기준 3</div>
                 <div class="bp-principle-name">학습 가치가<br>분명할 것</div>
                 <div class="bp-principle-body">

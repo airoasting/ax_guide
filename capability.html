@@ -405,7 +405,6 @@ body {
 .bp-principles.bp-4d {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: auto auto auto 1fr auto;
     border: 1px solid var(--bp-line);
     background: var(--bp-paper-2);
 }
@@ -415,10 +414,8 @@ body {
     background: var(--bp-paper-2);
     transition: background .25s ease, transform .25s ease, box-shadow .25s ease;
     position: relative;
-    display: grid;
-    grid-template-rows: subgrid;
-    grid-row: span 5;
-    row-gap: 0;
+    display: flex;
+    flex-direction: column;
 }
 .bp-principle:last-child { border-right: none; }
 .bp-principle:hover {
@@ -477,6 +474,7 @@ body {
     line-height: 1.7;
     color: var(--ink-soft);
     margin-bottom: 18px;
+    flex: 1;
 }
 .bp-principle-body strong { color: var(--bp-ink); }
 .bp-principle-body ul {
@@ -1012,7 +1010,7 @@ body {
     .bp-section { padding: 40px 32px; }
     .bp-compare-head, .bp-compare-row { grid-template-columns: 120px 1fr 1fr; }
     .bp-measure-head, .bp-measure-row { grid-template-columns: 130px 1fr 1fr; }
-    .bp-principles.bp-4d { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto auto auto 1fr auto auto auto auto 1fr auto; }
+    .bp-principles.bp-4d { grid-template-columns: repeat(2, 1fr); }
     .bp-principle { border-right: 1px solid var(--bp-rule); border-bottom: 1px solid var(--bp-rule); }
     .bp-principles.bp-4d .bp-principle:nth-child(2n) { border-right: none; }
     .bp-principles.bp-4d .bp-principle:nth-last-child(-n+2) { border-bottom: none; }
@@ -1070,9 +1068,9 @@ body {
     <section class="bp-hero">
         <div class="bp-hero-eyebrow">Step 1 · 추진체계 구축 · AI 부트캠프 · BRAIN OS 첫 챔피언</div>
         <h1>90일 부트캠프와 해커톤으로 AX 챔피언을 만듭니다</h1>
-        <p class="bp-lead">5~9명 TF의 90일 부트캠프를 교육·Quick Win·해커톤 세 활동에만 집중해 BRAIN OS의 첫 챔피언을 키웁니다.</p>
+        <p class="bp-lead">TF 5~9명에게 교육·Quick Win·해커톤 세 활동만 부여해, 90일 안에 BRAIN OS의 첫 챔피언으로 키웁니다.</p>
         <div class="bp-summary">
-            <strong>AI 부트캠프는 세 활동으로만 구성됩니다.</strong> 첫째, 90일 부트캠프로 학습합니다. 둘째, 부트캠프 29일차부터 자기 도메인에서 Quick Win을 만들어 봅니다. 셋째, 4개월차에 사내 해커톤을 열어 챔피언 후보군을 전사로 확장합니다. 그 외 활동(전사 동시 교육, 강사 양성 트랙, 외부 컨퍼런스 파견)은 본 단계의 범위에 두지 않습니다.
+            <strong>AI 부트캠프는 세 활동으로 구성됩니다.</strong> 첫째, 90일 부트캠프에서 집중 학습합니다. 둘째, 29일차부터 자기 도메인에서 Quick Win을 직접 제작합니다. 셋째, 4개월차에 사내 해커톤을 열어 챔피언 후보군을 전사로 확장합니다. 전사 동시 교육·강사 양성 트랙·외부 컨퍼런스 파견은 본 단계의 범위에서 제외합니다.
         </div>
     </section>
 
@@ -1089,10 +1087,10 @@ body {
             <div>
                 <h2 class="bp-section-title">90일 부트캠프 · TF는 무엇을 학습하는가</h2>
             </div>
-            <div class="bp-section-meta">시간의 70%+ 할당 · 4개 모듈 · 학습과 만들기의 짝</div>
+            <div class="bp-section-meta">시간의 70% 이상 할당 · 4개 모듈 · 학습과 제작의 짝</div>
         </div>
 
-        <p class="bp-section-intro">TF 5~9명에게 일과의 70% 이상을 부트캠프와 자기 도메인 적용에 보장합니다. 90일은 학습과 만들기를 짝으로 한 번 완주할 수 있는 최소 기간입니다. 4개 모듈이 순차적으로 전개됩니다. 기본기로 시작해 협업 역량을 익히고, 29일차부터 자기 도메인에서 Quick Win을 만든 다음, 마지막에 동료에게 옮기는 코칭 연습으로 마무리합니다.</p>
+        <p class="bp-section-intro">TF 5~9명의 일과 70% 이상을 부트캠프와 자기 도메인 적용에 배정합니다. 90일은 학습과 제작을 한 사이클로 완주할 수 있는 최소 기간입니다. 4개 모듈을 순차적으로 운영합니다. 기본기로 시작해 협업 역량을 익히고, 29일차부터 자기 도메인에서 Quick Win을 제작한 뒤, 마지막에는 동료에게 옮기는 코칭 실습으로 마무리합니다.</p>
 
         <div class="bp-principles bp-4d">
             <div class="bp-principle">
@@ -1103,10 +1101,10 @@ body {
                 <div class="bp-principle-name">AI 기본기</div>
                 <div class="bp-principle-body">
                     <ul>
-                        <li>초반 14일은 TF가 강의실로 출근하는 기간</li>
-                        <li>모델의 종류와 한계, 비용 구조, 정보보안·개인정보 가이드를 집중 학습</li>
-                        <li>도구 매뉴얼이 아니라 <strong>"이 일에 AI를 쓸지 말지"를 판단하는 기준</strong>을 다지는 시간</li>
-                        <li>사내 보안·법무가 코티칭으로 참여해 회사의 실제 제약을 함께 전달</li>
+                        <li>초반 14일은 TF가 강의실에 모여 집중 학습하는 구간</li>
+                        <li>모델 종류와 한계, 비용 구조, 정보보안·개인정보 가이드를 학습</li>
+                        <li>도구 매뉴얼이 아니라 <strong>"이 일에 AI를 쓸지 말지"를 판단하는 기준</strong>을 정립하는 구간</li>
+                        <li>사내 보안·법무가 공동 강사로 참여해 회사의 실제 제약을 함께 전달</li>
                     </ul>
                 </div>
                 <div class="bp-principle-evidence">
@@ -1123,8 +1121,8 @@ body {
                     <ul>
                         <li>4D 프레임워크 <strong>위임(Delegation)·설명(Description)·분별(Discernment)·성실(Diligence)</strong>을 자기 도메인 의사결정 사례로 실습</li>
                         <li>AI에게 무엇을 맡길지(Delegation), 어떻게 맥락을 전달할지(Description)</li>
-                        <li>결과 품질을 어떻게 판별할지(Discernment), 책임을 어떻게 끝까지 지는지(Diligence)</li>
-                        <li>네 단어를 회사 공통 어휘로 정착</li>
+                        <li>결과 품질을 어떻게 판별할지(Discernment), 책임을 어떻게 끝까지 가져갈지(Diligence)</li>
+                        <li>네 어휘를 회사 공통 언어로 정착</li>
                     </ul>
                 </div>
                 <div class="bp-principle-evidence">
@@ -1139,9 +1137,9 @@ body {
                 <div class="bp-principle-name">Quick Win 제작</div>
                 <div class="bp-principle-body">
                     <ul>
-                        <li>초반 28일에 분류한 use case 중 하나를 골라 <strong>자기 손으로 제작</strong></li>
-                        <li>작은 자동화, Skill 문서 한두 개, 가벼운 에이전트 한 개가 적정 단위</li>
-                        <li>베테랑의 암묵지를 Skill로 옮기는 K1~K3 사이클을 직접 운영</li>
+                        <li>초반 28일에 분류한 후보 중 하나를 골라 <strong>자기 손으로 제작</strong></li>
+                        <li>작은 자동화 1건, Skill 문서 1~2개, 가벼운 에이전트 1개가 적정 단위</li>
+                        <li>베테랑의 암묵지를 Skill 문서로 이전하는 사이클을 직접 운영</li>
                         <li>멘토 1명과 도메인 자문 1명이 한 팀에 동행</li>
                     </ul>
                 </div>
@@ -1160,7 +1158,7 @@ body {
                         <li>만든 Quick Win을 옆자리 동료 1~2명에게 옮기는 코칭 실습</li>
                         <li>사내 위키에 Skill 문서로 자산화</li>
                         <li>신규 사용자가 막히는 자리를 기록해 다음 버전에 반영</li>
-                        <li><strong>여기서부터 챔피언으로 굳어지는 신호</strong> — 동료가 챔피언의 이름을 부르며 묻기 시작하면 통과</li>
+                        <li><strong>여기서부터 챔피언으로 굳어지는 신호.</strong> 동료가 챔피언의 이름을 먼저 부르며 묻기 시작하면 통과</li>
                     </ul>
                 </div>
                 <div class="bp-principle-evidence">
@@ -1177,52 +1175,52 @@ body {
             <div>
                 <h2 class="bp-section-title">Quick Win 운영 체크리스트</h2>
             </div>
-            <div class="bp-section-meta">29일차부터 만들고 30일 안에 동료가 직접 써보게 하는 7개 항목</div>
+            <div class="bp-section-meta">29일차부터 제작하고 30일 안에 동료가 직접 사용하게 하는 7개 항목</div>
         </div>
 
-        <p class="bp-section-intro">Quick Win은 "재미있는 데모"가 아닙니다. 부트캠프와 짝을 이룬 작은 실전입니다. 29일차 시점에 한 명당 한두 개를 자기 도메인에서 만들고, 30일 안에 동료 5명 이상이 직접 써본 흔적이 남아야 다음 모듈로 넘어갑니다. 아래 7개 항목은 Quick Win을 PoC로 굳히지 않기 위한 운영 규약입니다.</p>
+        <p class="bp-section-intro">Quick Win은 "재미있는 데모"가 아닙니다. 부트캠프와 짝을 이루는 작은 실전입니다. 29일차에 한 명당 한두 개를 자기 도메인에서 제작하고, 30일 안에 동료 5명 이상의 사용 흔적을 남겨야 다음 모듈로 넘어갑니다. 아래 7개 항목은 Quick Win이 PoC로 굳지 않게 하는 운영 규약입니다.</p>
 
         <div class="bp-checklist">
             <div class="bp-check-row">
                 <div class="bp-check-num">01</div>
                 <div class="bp-check-body">
-                    <h4>산출물 단위를 미리 못박습니다</h4>
-                    <p>한 사람당 적정 단위는 <strong>자기 도메인의 작은 자동화 1건 또는 Skill 문서 1~2개</strong>입니다. 화려한 멀티 에이전트 데모는 1단계의 산출물이 아닙니다. 단위를 처음에 못박지 않으면 "조금만 더"를 반복하다 임기 종료를 맞습니다.</p>
+                    <h4>산출물 단위를 사전에 확정합니다</h4>
+                    <p>한 사람당 적정 단위는 <strong>자기 도메인의 작은 자동화 1건 또는 Skill 문서 1~2개</strong>입니다. 화려한 멀티 에이전트 데모는 1단계의 산출물이 아닙니다. 단위를 처음에 확정하지 않으면 "조금만 더"를 반복하다 임기 종료를 맞습니다.</p>
                 </div>
             </div>
             <div class="bp-check-row">
                 <div class="bp-check-num">02</div>
                 <div class="bp-check-body">
-                    <h4>자기 도메인에서만 고릅니다</h4>
-                    <p>옆 부서의 멋진 use case가 더 매력적으로 보일 때가 있습니다. 그러나 챔피언화의 핵심은 "옆자리 동료가 신뢰하는 사람"이 되는 일입니다. <strong>자기 부서가 실제로 풀어야 할 문제</strong>가 아니면 챔피언으로 자라지 않습니다.</p>
+                    <h4>자기 도메인에서만 선정합니다</h4>
+                    <p>옆 부서의 멋진 사례가 더 매력적으로 보일 때가 있습니다. 그러나 챔피언의 본질은 "옆자리 동료가 가장 먼저 찾는 사람"이 되는 데 있습니다. <strong>자기 부서가 실제로 풀어야 할 문제</strong>가 아니면 챔피언으로 자라지 않습니다.</p>
                 </div>
             </div>
             <div class="bp-check-row">
                 <div class="bp-check-num">03</div>
                 <div class="bp-check-body">
-                    <h4>30일 안에 동료 5명이 직접 써보게 합니다</h4>
-                    <p>완성도가 아니라 사용 흔적이 통과 기준입니다. 자기 부서 동료 5명에게 직접 써보게 하고, 막힌 자리를 받아 적습니다. 5명을 못 채운 Quick Win은 다시 짭니다. <strong>사용된 적 없는 산출물은 자산이 아닙니다.</strong></p>
+                    <h4>30일 안에 동료 5명이 직접 사용하게 합니다</h4>
+                    <p>완성도가 아니라 사용 흔적이 통과 기준입니다. 자기 부서 동료 5명에게 직접 사용하게 하고, 막힌 자리를 받아 기록합니다. 5명을 채우지 못한 Quick Win은 다시 설계합니다. <strong>사용된 적 없는 산출물은 자산이 아닙니다.</strong></p>
                 </div>
             </div>
             <div class="bp-check-row">
                 <div class="bp-check-num">04</div>
                 <div class="bp-check-body">
-                    <h4>청사진 적합도를 1순위 채점 기준으로 둡니다</h4>
-                    <p>기술 완성도가 아니라 AI-Native 청사진에 가까워지는가, 회사의 전략 과제 후보군을 채우는가를 1순위로 묻습니다. 부가 기준은 분별 가능성, 위임 가능성, 운영 안착 난이도입니다. 심사위원에 TF 리드와 도메인 임원을 포함합니다.</p>
+                    <h4>청사진 적합도를 1순위 채점 기준으로 적용합니다</h4>
+                    <p>기술 완성도가 아니라 AI-Native 청사진에 가까워지는지, 회사의 전략 과제 후보군을 채우는지를 1순위로 평가합니다. 부가 기준은 분별 가능성, 위임 가능성, 운영 안착 난이도입니다. 심사위원에 TF 리드와 도메인 임원을 포함합니다.</p>
                 </div>
             </div>
             <div class="bp-check-row">
                 <div class="bp-check-num">05</div>
                 <div class="bp-check-body">
                     <h4>실패한 Quick Win은 실패 일지로 등록합니다</h4>
-                    <p>탈락 산출물도 "쓸모 없음"으로 버리지 않습니다. 어떤 가설로 시작해 어디서 막혔는지를 짧게 정리해 사내 실패 일지에 보관합니다. <strong>다음 TF가 같은 자리에 다시 부딪히지 않게 하는 자산</strong>입니다.</p>
+                    <p>탈락 산출물도 "쓸모 없음"으로 폐기하지 않습니다. 어떤 가설로 출발해 어디에서 막혔는지를 짧게 정리해 사내 실패 일지에 보관합니다. <strong>다음 TF가 같은 자리에서 다시 막히지 않게 하는 자산</strong>입니다.</p>
                 </div>
             </div>
             <div class="bp-check-row">
                 <div class="bp-check-num">06</div>
                 <div class="bp-check-body">
-                    <h4>우수 Quick Win은 그대로 ③단계 후보로 올립니다</h4>
-                    <p>상위 1~2건은 시상으로 끝내지 않습니다. ③단계 파일럿의 첫 후보로 자동 등록하고, 해당 챔피언에게 파일럿 기간의 시간 할당을 보장합니다. <strong>이 약속이 다음 TF 차수의 지원자 수를 결정합니다.</strong></p>
+                    <h4>우수 Quick Win은 그대로 파일럿 후보로 올립니다</h4>
+                    <p>상위 1~2건은 시상으로 종결하지 않습니다. 파일럿 단계의 첫 후보로 자동 등록하고, 해당 챔피언에게 파일럿 기간의 시간 할당을 보장합니다. <strong>이 약속이 다음 TF 차수의 지원자 규모를 결정합니다.</strong></p>
                 </div>
             </div>
             <div class="bp-check-row">
@@ -1244,7 +1242,7 @@ body {
             <div class="bp-section-meta">4개월차 1회 · 2~3일 단축 운영 · 출품 20건 채택 3~5건</div>
         </div>
 
-        <p class="bp-section-intro">해커톤은 운영 계획의 4개월차에 한 번 엽니다. 1~3개월차에 TF가 만든 Quick Win이 충분히 쌓인 시점이라야 좋은 출품작이 나오고, 5~6개월차의 인계 자산으로 자연스럽게 연결됩니다. 외부 행사처럼 화려하게 키우지 않습니다. <strong>2박 3일 또는 평일 5일 짧은 일정</strong>으로 줄이고, "재미있는 데모"가 아니라 "회사가 다음 분기에 쓸 후보"를 가린다는 목적을 처음부터 명시합니다.</p>
+        <p class="bp-section-intro">해커톤은 운영 계획의 4개월차에 한 번 엽니다. 1~3개월차에 TF가 제작한 Quick Win이 충분히 쌓여야 좋은 출품작이 나오고, 5~6개월차의 인계 자산으로 자연스럽게 연결됩니다. 외부 행사처럼 규모를 키우지 않습니다. <strong>2박 3일 또는 평일 5일</strong>의 짧은 일정으로 운영하고, "재미있는 데모"가 아니라 "회사가 다음 분기에 쓸 후보"를 선별한다는 목적을 처음부터 명시합니다.</p>
 
         <div class="bp-compare">
             <div class="bp-compare-head">
@@ -1254,28 +1252,28 @@ body {
             </div>
             <div class="bp-compare-row">
                 <div class="label">참가 단위</div>
-                <div>지원 부서가 자율적으로 팀을 짭니다. 비슷한 사람끼리 모이는 경향이 강합니다.</div>
-                <div class="preferred">각 팀에 TF 코어 멤버 1명을 멘토로 강제 배치합니다. 신청 단계부터 <strong>도메인 전문가와 기술 인력을 한 팀에 묶어</strong> 짝짓습니다.</div>
+                <div>지원 부서가 자율적으로 팀을 구성합니다. 비슷한 인력끼리 모이는 경향이 강합니다.</div>
+                <div class="preferred">각 팀에 TF 코어 멤버 1명을 멘토로 의무 배치합니다. 신청 단계부터 <strong>도메인 전문가와 기술 인력을 한 팀으로 편성</strong>합니다.</div>
             </div>
             <div class="bp-compare-row">
                 <div class="label">과제 폭</div>
-                <div>"자유 주제"로 출발하면 게임·재미 위주 작품이 절반을 차지합니다.</div>
-                <div class="preferred">전략 과제 3~5건과 직접 닿는 <strong>"실제 업무 미해결 문제 풀"</strong>에서 골라 출제합니다. 자유 주제는 전체의 30% 이하로 제한합니다.</div>
+                <div>"자유 주제"로 출발하면 게임·재미 위주 출품이 절반을 차지합니다.</div>
+                <div class="preferred">전략 과제 3~5건과 직접 연결된 <strong>"실제 업무 미해결 문제 풀"</strong>에서 출제합니다. 자유 주제는 전체의 30% 이하로 제한합니다.</div>
             </div>
             <div class="bp-compare-row">
                 <div class="label">심사 기준</div>
-                <div>기술적 완성도와 발표 임팩트가 1순위가 됩니다. 실제로 쓰이지 않을 데모가 우승합니다.</div>
-                <div class="preferred">1순위 기준은 <strong>"30일 안에 부서 동료 5명이 직접 써볼 수 있는가"</strong>입니다. 기술 완성도는 2순위, 발표 형식은 채점 항목에서 뺍니다.</div>
+                <div>기술 완성도와 발표 임팩트가 1순위가 됩니다. 실제로 사용되지 않을 데모가 우승합니다.</div>
+                <div class="preferred">1순위 기준은 <strong>"30일 안에 부서 동료 5명이 직접 사용할 수 있는가"</strong>입니다. 기술 완성도는 2순위로 두고, 발표 형식은 채점 항목에서 제외합니다.</div>
             </div>
             <div class="bp-compare-row">
                 <div class="label">후속 처리</div>
-                <div>시상금과 사진으로 끝납니다. 다음 분기에는 이름이 잊힙니다.</div>
+                <div>시상금과 사진 촬영으로 종결됩니다. 다음 분기에는 이름이 잊힙니다.</div>
                 <div class="preferred">상위 3~5건은 운영 계획 5개월차의 <strong>정식 운영 자산 승격 트랙</strong>으로 자동 진입합니다. 출품자는 시간 할당과 챔피언 후보 인증을 함께 받습니다.</div>
             </div>
             <div class="bp-compare-row">
                 <div class="label">LLM 사용</div>
-                <div>참가자 각자 익숙한 도구를 임의로 씁니다. 보안 검토가 사후에 다시 필요합니다.</div>
-                <div class="preferred">사용 도구를 표준 LLM 1개와 보조 1개로 한정합니다. <strong>운영 계획 페이지에서 정한 가이드</strong> 안에서만 사용을 허용해, 사후 검토 부담을 없앱니다.</div>
+                <div>참가자가 각자 익숙한 도구를 임의로 사용합니다. 보안 검토가 사후에 다시 필요합니다.</div>
+                <div class="preferred">사용 도구를 표준 LLM 1개와 보조 1개로 한정합니다. <strong>운영 계획 페이지에서 정한 가이드</strong> 안에서만 허용해, 사후 검토 부담을 제거합니다.</div>
             </div>
         </div>
 
@@ -1286,43 +1284,43 @@ body {
             <div class="bp-check-row">
                 <div class="bp-check-num">01</div>
                 <div class="bp-check-body">
-                    <h4>출제 풀을 전략 과제와 묶어 미리 공개합니다</h4>
-                    <p>해커톤 30일 전, 운영 계획의 전략 과제 3~5건과 직접 닿는 <strong>"실제 미해결 문제 10~15건"</strong>을 사내에 공개합니다. 참가자가 출발선에서 자기 부서가 풀어야 할 실제 문제와 연결할 시간을 줍니다. 비공개로 두면 첫날을 주제 탐색으로 흘려보냅니다.</p>
+                    <h4>출제 풀을 전략 과제와 묶어 사전에 공개합니다</h4>
+                    <p>해커톤 30일 전, 운영 계획의 전략 과제 3~5건과 직접 연결된 <strong>"실제 미해결 문제 10~15건"</strong>을 사내에 공개합니다. 참가자가 출발선에서 자기 부서의 실제 문제와 연결할 시간을 확보합니다. 비공개로 두면 첫날을 주제 탐색으로 소진합니다.</p>
                 </div>
             </div>
             <div class="bp-check-row">
                 <div class="bp-check-num">02</div>
                 <div class="bp-check-body">
-                    <h4>팀당 멤버 3~5명과 TF 멘토 1명을 강제 배치합니다</h4>
-                    <p>한 팀은 멤버 3~5명으로 짜고, 그 안에 TF 코어 멤버 1명을 멘토로 붙입니다. 멘토는 산출물에 손을 대지 않습니다. <strong>4D 어휘로 막힌 자리를 풀어 주는 역할</strong>만 맡습니다. 한 부서 인원이 한 팀의 절반을 넘지 않도록 짝지어, 부서 정치가 끼어들 여지를 차단합니다.</p>
+                    <h4>팀당 멤버 3~5명과 TF 멘토 1명을 의무 배치합니다</h4>
+                    <p>한 팀은 멤버 3~5명으로 구성하고, 그 안에 TF 코어 멤버 1명을 멘토로 배치합니다. 멘토는 산출물에 직접 손대지 않습니다. <strong>4D 어휘로 막힌 자리를 풀어 주는 역할</strong>만 맡습니다. 한 부서 인원이 한 팀의 절반을 넘지 않도록 편성해, 부서 정치가 끼어들 여지를 차단합니다.</p>
                 </div>
             </div>
             <div class="bp-check-row">
                 <div class="bp-check-num">03</div>
                 <div class="bp-check-body">
                     <h4>LLM·데이터 권한을 행사 전에 일괄 발급합니다</h4>
-                    <p>표준 LLM 1개와 보조 1개의 접근 권한, 그리고 출제와 직접 관련된 데이터 권한을 행사 D-3일까지 일괄 발급합니다. 행사 첫 날을 권한 신청으로 보내면 다음 이틀이 무너집니다. <strong>출제 풀과 묶인 데이터셋</strong>은 사내 보안 가이드 안에서 미리 정제해 둡니다.</p>
+                    <p>표준 LLM 1개와 보조 1개의 접근 권한, 출제와 직접 관련된 데이터 권한을 행사 D-3일까지 일괄 발급합니다. 첫날을 권한 신청으로 소진하면 다음 이틀의 일정이 무너집니다. <strong>출제 풀과 연결된 데이터셋</strong>은 사내 보안 가이드 안에서 미리 정제합니다.</p>
                 </div>
             </div>
             <div class="bp-check-row">
                 <div class="bp-check-num">04</div>
                 <div class="bp-check-body">
                     <h4>심사위원에 도메인 임원과 TF 리드를 포함합니다</h4>
-                    <p>외부 전문가만 부르면 발표 임팩트 위주 채점이 됩니다. <strong>도메인 임원 2명, TF 리드 1명, 외부 자문 1명</strong>의 4인 구성을 권장합니다. 심사 가중치는 사용 가능성 50%, 전략 과제 적합도 30%, 기술 완성도 20%로 못박습니다.</p>
+                    <p>외부 전문가만 초빙하면 발표 임팩트 위주의 채점이 됩니다. <strong>도메인 임원 2명, TF 리드 1명, 외부 자문 1명</strong>의 4인 구성을 권장합니다. 심사 가중치는 사용 가능성 50%, 전략 과제 적합도 30%, 기술 완성도 20%로 고정합니다.</p>
                 </div>
             </div>
             <div class="bp-check-row">
                 <div class="bp-check-num">05</div>
                 <div class="bp-check-body">
                     <h4>시상 항목에 "30일 후 실사용 보장"을 포함합니다</h4>
-                    <p>대상·우수상의 시상 내용에 <strong>"수상 후 30일 안에 본인 부서에서 실사용, TF가 운영 자산화 지원"</strong>을 명시합니다. 시상금만 받고 흩어지는 구조를 처음부터 막습니다. 실사용 보장 약속이 다음 차수 지원자 수를 결정합니다.</p>
+                    <p>대상·우수상의 시상 내용에 <strong>"수상 후 30일 안에 본인 부서에서 실사용, TF가 운영 자산화 지원"</strong>을 명시합니다. 시상금만 받고 흩어지는 구조를 처음부터 차단합니다. 실사용 보장 약속이 다음 차수 지원자 규모를 결정합니다.</p>
                 </div>
             </div>
             <div class="bp-check-row">
                 <div class="bp-check-num">06</div>
                 <div class="bp-check-body">
                     <h4>출품작 전체를 실패 일지에 자산화합니다</h4>
-                    <p>채택되지 않은 출품작도 사내 위키의 실패 일지에 짧게 정리합니다. 어떤 가설로 시작해 어디에서 막혔는지를 두세 문단으로 적어 두면, 다음 분기에 다른 부서가 같은 자리에서 다시 부딪히지 않습니다. <strong>해커톤의 진짜 자산은 우승작이 아니라 시도 전체의 기록</strong>입니다.</p>
+                    <p>채택되지 않은 출품작도 사내 위키의 실패 일지에 짧게 정리합니다. 어떤 가설로 출발해 어디에서 막혔는지 두세 문단으로 기록해 두면, 다음 분기에 다른 부서가 같은 자리에서 다시 막히지 않습니다. <strong>해커톤의 진짜 자산은 우승작이 아니라 시도 전체의 기록</strong>입니다.</p>
                 </div>
             </div>
         </div>
@@ -1337,7 +1335,7 @@ body {
             <div class="bp-section-meta">교육 · Quick Win · 해커톤에서 자주 보이는 3가지</div>
         </div>
 
-        <p class="bp-section-intro">아래는 세 활동을 운영하며 첫 90일 안에 가장 자주 보이는 실패 패턴입니다. 각 활동에 한 가지씩 골라 두었습니다. 좌측이 흔한 모습, 우측이 같은 상황을 다르게 푸는 방법입니다.</p>
+        <p class="bp-section-intro">아래는 세 활동을 운영하면서 첫 90일 안에 가장 자주 나타나는 실패 패턴입니다. 각 활동에서 한 가지씩 선별했습니다. 좌측이 흔한 모습, 우측이 같은 상황을 다르게 푸는 방법입니다.</p>
 
         <div class="bp-anti">
             <div class="bp-anti-head">
@@ -1345,16 +1343,16 @@ body {
                 <div>대응 방향</div>
             </div>
             <div class="bp-anti-row">
-                <div class="bad"><strong>교육 · "이수증으로 끝납니다."</strong> 4개 모듈을 다 들었다는 출석률만 남고, 자기 도메인 적용 흔적은 없습니다. 강의실 안에서 학습이 멈춥니다.</div>
-                <div class="good"><strong>모듈마다 산출물을 통과 조건으로 둡니다.</strong> 부트캠프 출석률이 아니라 모듈별 산출물(분류표·케이스 노트·Quick Win·Skill 문서)을 다음 모듈 진입 게이트로 씁니다.</div>
+                <div class="bad"><strong>교육 · "이수증으로 종결됩니다."</strong> 4개 모듈을 모두 들었다는 출석률만 남고, 자기 도메인 적용 흔적은 없습니다. 강의실 안에서 학습이 멈춥니다.</div>
+                <div class="good"><strong>모듈마다 산출물을 통과 조건으로 부여합니다.</strong> 출석률이 아니라 모듈별 산출물(분류표·케이스 노트·Quick Win·Skill 문서)을 다음 모듈 진입 게이트로 적용합니다.</div>
             </div>
             <div class="bp-anti-row">
-                <div class="bad"><strong>Quick Win · "PoC로 굳습니다."</strong> 데모는 멋진데 실제로 쓰는 동료가 없어 임기 종료와 함께 잊힙니다. 시상으로 끝나고 자산으로 남지 않습니다.</div>
-                <div class="good"><strong>30일 안 동료 5명 사용 흔적을 통과 조건</strong>으로 둡니다. 사용 흔적이 없는 산출물은 자산으로 등록하지 않고 실패 일지로 보냅니다.</div>
+                <div class="bad"><strong>Quick Win · "PoC로 굳습니다."</strong> 데모는 화려하지만 실제로 사용하는 동료가 없어 임기 종료와 함께 잊힙니다. 시상으로 종결될 뿐 자산으로 남지 않습니다.</div>
+                <div class="good"><strong>30일 안에 동료 5명의 사용 흔적을 통과 조건</strong>으로 부여합니다. 사용 흔적이 없는 산출물은 자산으로 등록하지 않고 실패 일지로 분류합니다.</div>
             </div>
             <div class="bp-anti-row">
-                <div class="bad"><strong>해커톤 · "발표 임팩트가 우승합니다."</strong> 화려한 시연이 1등을 가져가고, 다음 분기에는 실제로 쓰이지 않은 채로 잊힙니다. 시상금만 남습니다.</div>
-                <div class="good"><strong>심사 가중치를 사용 가능성 50%로 못박고</strong>, 시상 항목에 "30일 안 본인 부서 실사용"을 명시합니다. 실사용 보장이 다음 차수 지원자 수를 결정합니다.</div>
+                <div class="bad"><strong>해커톤 · "발표 임팩트가 우승합니다."</strong> 화려한 시연이 1등을 가져가고, 다음 분기에는 실제로 사용되지 않은 채 잊힙니다. 시상금만 남습니다.</div>
+                <div class="good"><strong>심사 가중치를 사용 가능성 50%로 고정하고</strong>, 시상 항목에 "30일 안에 본인 부서 실사용"을 명시합니다. 실사용 보장이 다음 차수 지원자 규모를 결정합니다.</div>
             </div>
         </div>
     </section>
