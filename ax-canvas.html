@@ -431,6 +431,11 @@ body {
     .bp-cell .cell-num,
     .bp-cell .cell-name { transition: none; }
     .bp-cell:hover { transform: none; }
+    .bp-overlay-label,
+    .bp-overlay-label::after,
+    .bp-overlay-label .ov-title,
+    .bp-overlay-label .ov-formula { transition: none; }
+    .bp-overlay-label:hover { transform: none; }
 }
 .bp-cell .cell-num {
     font-family: var(--sans);
@@ -518,7 +523,35 @@ body {
     width: 100%;
     box-sizing: border-box;
     position: relative;
+    cursor: default;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.4s ease,
+                background 0.4s ease;
 }
+.bp-overlay-label::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--bp-accent);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.bp-overlay-label:hover {
+    transform: translateY(-6px);
+    border-color: var(--bp-accent);
+    background: rgba(247, 245, 239, 0.94);
+    box-shadow: 0 22px 48px -14px rgba(6, 32, 24, 0.55);
+}
+.bp-overlay-label:hover::after { transform: scaleX(1); }
+.bp-overlay-label:hover .ov-title { color: var(--bp-accent); }
+.bp-overlay-label:hover .ov-formula { color: var(--bp-ink); }
+.bp-overlay-label .ov-title,
+.bp-overlay-label .ov-formula { transition: color 0.4s ease; }
 .bp-overlay-label .ov-tag {
     font-family: var(--sans);
     font-size: 10.5px;
@@ -1109,7 +1142,7 @@ body {
     <!-- ========= HERO ========= -->
     <section class="bp-hero">
         <div class="bp-hero-eyebrow">Step 4 · 두 번째 작업 · 직무를 10칸으로 해부합니다 · BRAIN OS 전사 확장</div>
-        <h1>한 직무를 10칸으로 해부해, 사람과 에이전트의 자리를 한 장에 그립니다.</h1>
+        <h1>하나의 직무를 상세하게 해부하여, 사람과 에이전트의 협업 구조를 한 장에 그릴 수 있어야 합니다.</h1>
         <p class="bp-lead">AX 캔버스는 직무를 10칸 프레임으로 해부해 인간과 에이전트의 역할 분담을 한 장에 그리는 표준 양식입니다.</p>
         <div class="bp-summary">
             <strong>좌측은 업무 구조, 우측은 인간·에이전트의 역할 분담입니다.</strong> 좌측 2·3·4번을 T·C·R·A 마크다운으로 정리하고, 우측 5·6·7번을 Human Harness와 AI Harness로 정의해 Meta Harness 한 장으로 통합합니다. 8번은 두 영역을 연결하는 기술 매핑, 9·10번은 통제 기준과 다음 사이클의 입력입니다.
@@ -1117,7 +1150,7 @@ body {
     </section>
 
     <nav class="bp-hero-nav" aria-label="섹션 바로가기">
-        <a href="#why">왜 직무 단위인가</a>
+        <a href="#why">왜 AX 캔버스인가</a>
         <a href="#map">AX 캔버스</a>
         <a href="#tcra">암묵지 Mark-down화</a>
         <a href="#harness">Human-Agent Team</a>
@@ -1294,7 +1327,7 @@ body {
 
         <div class="bp-handoff" style="margin-top: 28px;">
             <div class="tag">캔버스를 읽는 두 가지 시선</div>
-            <strong>좌우는 일의 모양과 분업</strong>, <strong>위아래는 진단과 실행</strong>. 위 일곱 칸이 안 채워지면 아래 세 칸은 작동하지 않습니다.
+            <strong>좌우는 일의 모양과 분업</strong>, <strong>위아래는 진단과 실행</strong>입니다.
         </div>
     </section>
 
@@ -1498,7 +1531,7 @@ body {
                 </div>
                 <div class="bp-order-fail">
                     <span class="fail-tag">실패 싸인</span>
-                    "여러 가치를 만드는 종합 역할" 같은 무난한 문장. 어디가 비었는지 가려지지 않습니다.
+                    1번을 "여러 가치를 만드는 종합 역할"처럼 두루뭉술하게 적으면, 어느 칸이 비었는지 드러나지 않습니다.
                 </div>
             </div>
             <div class="bp-order-row">
@@ -1509,7 +1542,7 @@ body {
                 </div>
                 <div class="bp-order-fail">
                     <span class="fail-tag">실패 싸인</span>
-                    시간 배분 칸이 비었습니다. 정형·비정형이 안 갈리면 5번이 짐작으로 채워집니다.
+                    3번 시간 배분 칸을 비워 두면 정형 업무와 비정형 업무가 구분되지 않고, 결국 5번 AI 대체 가능성을 짐작으로 채우게 됩니다.
                 </div>
             </div>
             <div class="bp-order-row">
@@ -1520,7 +1553,7 @@ body {
                 </div>
                 <div class="bp-order-fail">
                     <span class="fail-tag">실패 싸인</span>
-                    Human과 AI 사이 결재선·형식이 어긋났습니다. 다음 페이지에서 권한 표를 새로 그려야 합니다.
+                    사람과 에이전트가 무엇을 맡고 누가 결재하는지 어긋나게 정의하면, 다음 단계에서 권한 표를 처음부터 다시 그려야 합니다.
                 </div>
             </div>
             <div class="bp-order-row">
@@ -1531,7 +1564,7 @@ body {
                 </div>
                 <div class="bp-order-fail">
                     <span class="fail-tag">실패 싸인</span>
-                    매핑표가 100% 채워졌습니다. 직무의 핵심 가치를 식별하지 못한 지표입니다. 1번 정의를 재검토합니다.
+                    매핑표가 빈칸 없이 100% 채워졌다면, 오히려 직무의 핵심 가치를 짚지 못했다는 신호입니다. 1번 정의로 돌아가 다시 살펴봅니다.
                 </div>
             </div>
             <div class="bp-order-row">
@@ -1542,7 +1575,7 @@ body {
                 </div>
                 <div class="bp-order-fail">
                     <span class="fail-tag">실패 싸인</span>
-                    책임자가 부서명으로 기재되어 있습니다. 사고 발생 시 책임 소재 확인이 지연되며, 그동안 에이전트는 계속 작동합니다.
+                    책임자를 사람이 아니라 부서명으로 적어 두면, 문제가 생겼을 때 누구 책임인지 가리는 데 시간이 걸리고 그사이 에이전트는 멈추지 않고 계속 작동합니다.
                 </div>
             </div>
         </div>

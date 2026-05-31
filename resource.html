@@ -429,7 +429,7 @@ body {
     color: var(--ink-mute);
 }
 
-/* ===== 70% 세 갈래 카드 ===== */
+/* ===== 70% 세 축 카드 ===== */
 .bp-three {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -441,6 +441,8 @@ body {
     border-right: 1px solid var(--bp-rule);
     transition: background .25s ease, transform .25s ease, box-shadow .25s ease;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 .bp-three-cell:last-child { border-right: none; }
 .bp-three-cell:hover {
@@ -473,6 +475,7 @@ body {
 }
 .bp-three-body strong { color: var(--bp-ink); }
 .bp-three-action {
+    margin-top: auto;
     padding-top: 14px;
     border-top: 1px solid var(--bp-rule);
     font-family: var(--sans);
@@ -742,53 +745,52 @@ body {
     <!-- ========= HERO ========= -->
     <section class="bp-hero">
         <div class="bp-hero-eyebrow">Step 4 · 첫 번째 작업 · 자원을 다시 배분합니다 · BRAIN OS 투자 비율 전환</div>
-        <h1>BRAIN OS의 벽을 넘으려면, 먼저 돈과 사람이 어디로 가는지를 뒤집어야 합니다.</h1>
-        <p class="bp-lead">AI 예산의 70~90퍼센트가 도구로 쏠리는 비율을 의도적으로 뒤집어, 사람·프로세스·문화에 70퍼센트를 배분하는 것이 4단계의 첫 작업입니다.</p>
+        <h1>BRAIN OS에 닿으려면, 먼저 자원을 어디에 쓸지부터 다시 정해야 합니다.</h1>
+        <p class="bp-lead">지금은 AI 예산의 70~90퍼센트가 도구에 쏠려 있습니다. 이 비율을 일부러 뒤집어 사람·프로세스·문화에 70퍼센트를 쓰는 것이 4단계의 첫 작업입니다.</p>
         <div class="bp-summary">
-            <strong>이 페이지의 결론은 한 줄입니다.</strong> 알고리즘 10퍼센트, 데이터·기술 20퍼센트, 사람·프로세스·문화 70퍼센트. 맥킨지가 정리한 10-20-70은 회계 분류표가 아니라 의사결정의 우선순위 표입니다. 70퍼센트 자리에는 세 갈래가 들어갑니다. 리더십과 거버넌스를 같은 방향으로 정렬하는 일, 직원이 매일 새 방식으로 일하게 만드는 도입과 행동 변화, 그리고 야심찬 업스킬링. 이 비율과 세 갈래가 다음 페이지 "업무 재설계"의 입력값이 됩니다.
+            <strong>이 페이지의 결론은 한 줄입니다.</strong> AI 투자는 기술이 아니라 사람에 무게를 둬야 합니다. 10-20-70, 즉 알고리즘 10퍼센트·데이터와 기술 20퍼센트·사람과 프로세스와 문화 70퍼센트는 어디에 힘을 더 줄지 정하는 우선순위입니다. 가장 큰 70퍼센트는 다시 세 가지로 나뉩니다. 리더십과 거버넌스를 한 방향으로 맞추고, 직원이 매일 새 방식으로 일하도록 행동을 바꾸고, 업스킬링에 투자하는 일입니다. 이 비율과 세 축이 다음 페이지 "업무 재설계"의 출발점이 됩니다.
         </div>
     </section>
 
     <nav class="bp-hero-nav" aria-label="섹션 바로가기">
         <a href="#why">확장의 벽</a>
         <a href="#ratio">10-20-70 비율</a>
-        <a href="#three">70% 안의 세 갈래</a>
+        <a href="#three">70% 안의 세 축</a>
         <a href="#pitfalls">경계할 함정</a>
-        <a href="#output">산출물과 인계</a>
-        <a href="#refs">참고 자료</a>
+        <a href="#output">산출물</a>
     </nav>
 
     <!-- ========= 1. 확장의 벽 ========= -->
     <section class="bp-section" id="why">
         <div class="bp-section-head">
             <div>
-                <h2 class="bp-section-title">왜 자원부터 다시 배분하는가</h2>
+                <h2 class="bp-section-title">왜 자원부터 다시 배분해야 하는가</h2>
             </div>
             <div class="bp-section-meta">95%가 멈추는 자리 · 5%만 넘는 자리</div>
         </div>
 
-        <p class="bp-section-intro">4단계 두 갈래(자원 재배분·업무 재설계) 가운데 자원이 먼저 와야 하는 이유는 단순합니다. 업무를 다시 그리려면 사람과 시간이 같이 가야 하고, 사람과 시간은 예산이 풀려야 모입니다. 예산 비율이 그대로면 새로 그린 워크플로우도 다시 같은 벽 앞으로 끌려옵니다.</p>
+        <p class="bp-section-intro">일하는 방식을 바꾸는 것보다 돈을 어디에 쓸지부터 정하는 게 먼저입니다. 이유는 간단합니다. 방식을 바꾸려면 사람과 시간이 들고, 사람과 시간은 예산이 있어야 확보됩니다. 예산을 그대로 두면 아무리 좋은 계획을 세워도 결국 돈이 없어 멈춥니다.</p>
 
         <div class="bp-wall">
             <div class="bp-wall-head">확장의 벽 · 자원 분포로 본 두 풍경</div>
             <div class="bp-wall-grid">
                 <div class="bp-wall-side before">
                     <h4>벽 앞의 회사 (자원이 거꾸로)</h4>
-                    <p>AI 예산의 70~90퍼센트가 도구 라이선스, 인프라, 모델 비용으로 들어갑니다. 사람·프로세스에 닿는 예산은 한 자리 수에서 막힙니다. 도입률 보고서에는 라이선스 발급 수만 올라가고, "그래서 무엇이 달라졌는가"는 적혀 있지 않습니다.</p>
-                    <p>경영진은 한 번 더 도구를 사거나 한 번 더 라이선스 수를 늘리는 카드를 꺼냅니다. 같은 카드가 같은 자리에서 다시 멈춥니다.</p>
+                    <p>AI 예산의 70~90퍼센트가 도구 사용료, 인프라, 모델 비용으로 나갑니다. 사람과 프로세스에 쓰는 돈은 한 자리 수에 그칩니다. 보고서에는 라이선스를 몇 개 발급했는지만 올라오고, 그래서 일이 어떻게 달라졌는지는 빠져 있습니다.</p>
+                    <p>경영진은 도구를 하나 더 사거나 라이선스를 더 늘립니다. 같은 선택이 같은 자리에서 또 막힙니다.</p>
                 </div>
                 <div class="bp-wall-arrow">→</div>
                 <div class="bp-wall-side after">
                     <h4>벽 뒤의 회사 (10-20-70으로 뒤집힘)</h4>
-                    <p>알고리즘 10·데이터 기술 20·사람 프로세스 70의 비율이 예산 코드에 박혀 있습니다. 도구는 빠르게 결정되고, 회의실의 긴 토론은 업스킬링·행동 변화·거버넌스 정렬 쪽으로 옮겨 갑니다.</p>
-                    <p>그 결과로 3년 총주주수익률이 후발주자보다 4배 높게 나옵니다. 도구가 같아도 자원 비율이 다르면 격차가 복리로 벌어집니다.</p>
+                    <p>알고리즘 10·데이터 기술 20·사람 프로세스 70이라는 비율이 예산에 처음부터 정해져 있습니다. 도구는 빠르게 정하고, 회의의 긴 논의는 직원 교육·행동 변화·거버넌스 정렬에 씁니다.</p>
+                    <p>그 결과 3년 총주주수익률이 뒤처진 회사보다 4배 높게 나옵니다. 같은 도구를 써도 돈을 어디에 쓰느냐에 따라 격차는 갈수록 크게 벌어집니다.</p>
                 </div>
             </div>
         </div>
 
         <div class="bp-handoff" style="margin-top: 28px;">
             <div class="tag">AX 특화 진단 · 왜 IT 투자와 자원 비율이 다른가</div>
-            <strong>전통적인 IT 투자는 시스템을 사람보다 먼저 두지만, AI 전환은 사람을 시스템보다 먼저 둡니다.</strong> AI는 도구가 아니라 사람과 같이 일하는 또 한 명의 동료에 가깝습니다. 동료가 늘었다고 회사가 좋아지지 않습니다. 그 동료에게 무엇을 맡기고, 어디서 사람이 다시 키를 잡는지가 매일 결정되어야 합니다. 그 결정을 매일 하는 주체는 시스템이 아니라 사람이고, 그래서 70퍼센트가 사람·프로세스 쪽에 가야 합니다.
+            <strong>예전의 IT 투자는 시스템을 사람보다 먼저 챙겼지만, AI 전환은 사람을 먼저 챙깁니다.</strong> AI는 단순한 도구가 아니라 함께 일하는 새 동료에 가깝습니다. 동료가 한 명 늘었다고 회사가 저절로 좋아지지는 않습니다. 그 동료에게 무엇을 맡기고 어디서 사람이 다시 판단할지를 매일 정해야 합니다. 그 판단을 내리는 건 시스템이 아니라 사람이고, 그래서 70퍼센트를 사람과 프로세스에 써야 합니다.
         </div>
     </section>
 
@@ -801,7 +803,7 @@ body {
             <div class="bp-section-meta">알고리즘 · 데이터 기술 · 사람 프로세스 문화</div>
         </div>
 
-        <p class="bp-section-intro">아래 막대는 4단계가 가져가야 하는 AI 자원의 목표 분포입니다. 각 칸의 폭은 의사결정의 무게와 같습니다. 예산뿐 아니라 임원의 회의 시간, 외부 컨설팅 의뢰의 비중, 내부 인력의 시간 배정까지 같은 비율로 움직여야 합니다.</p>
+        <p class="bp-section-intro">아래 차트는 AI에 쓰이는 자원이 어떻게 나뉘어야 하는지를 보여 줍니다. 칸이 넓을수록 더 중요하다는 뜻입니다. 돈뿐 아니라 경영진이 쓰는 회의 시간, 외부 컨설팅에 맡기는 비중, 직원이 쓰는 시간까지 모두 이 비율을 따라야 합니다.</p>
 
         <div class="bp-ratio">
             <div class="bp-ratio-bar">
@@ -822,49 +824,49 @@ body {
             <div class="bp-ratio-flip">
                 <div class="now">
                     <h5>실제로 자주 보이는 비율</h5>
-                    <p>알고리즘과 도구 라이선스에 <strong>70~90퍼센트</strong>. 데이터 정리·연결에 <strong>5~15퍼센트</strong>. 사람과 프로세스에는 <strong>한 자리 수</strong>. 회의 의제도 도구 선정과 모델 비교에 시간이 가장 많이 들어갑니다. 분기마다 새 모델이 나올 때마다 같은 회의가 반복됩니다.</p>
+                    <p>알고리즘과 도구 사용료에 <strong>70~90퍼센트</strong>, 데이터 정리·연결에 <strong>5~15퍼센트</strong>, 사람과 프로세스에는 <strong>한 자리 수</strong>를 씁니다. 회의 시간도 어떤 도구를 살지, 어떤 모델이 나은지 따지는 데 가장 많이 들어갑니다. 새 모델이 나올 때마다 같은 회의가 되풀이됩니다.</p>
                 </div>
                 <div class="target">
                     <h5>4단계가 목표로 두는 비율</h5>
-                    <p>알고리즘은 <strong>10퍼센트</strong>로 빠르게 결정합니다. 데이터·기술은 <strong>20퍼센트</strong>로, 우리 일에 도구를 붙이는 데까지만 씁니다. 나머지 <strong>70퍼센트</strong>를 사람·프로세스·문화에 의도적으로 묶어 둡니다. 임원의 시간 배정도 같은 비율로 흘러가야 합니다.</p>
+                    <p>알고리즘은 <strong>10퍼센트</strong>로 빠르게 정합니다. 데이터·기술은 <strong>20퍼센트</strong>로, 우리 일에 도구를 붙이는 데까지만 씁니다. 나머지 <strong>70퍼센트</strong>는 사람·프로세스·문화에 미리 묶어 둡니다. 경영진이 쓰는 시간도 이 비율대로 흘러가야 합니다.</p>
                 </div>
             </div>
         </div>
 
         <div class="bp-handoff" style="margin-top: 28px;">
             <div class="tag">왜 이 비율이 흔들리지 않는가</div>
-            <strong>AI 도구는 모방이 쉽고, 사람과 프로세스에 묻은 학습은 모방이 어렵습니다.</strong> 경쟁사가 같은 도구를 같은 가격에 사 와도, 그 도구를 우리 회사의 일에 묶어 둔 사람과 프로세스는 따라 옮길 수 없습니다. 그래서 4단계의 70퍼센트는 비용 항목이 아니라 자산 항목입니다. 이 항목이 바로 COMPANY BRAIN OS가 누적하는 조직 지식의 토대가 됩니다.
+            <strong>AI 도구는 누구나 따라 살 수 있지만, 사람과 프로세스에 쌓인 노하우는 따라 할 수 없습니다.</strong> 경쟁사가 같은 도구를 같은 값에 사 와도, 그 도구를 우리 회사 일에 맞게 길들인 사람과 방식까지 가져갈 수는 없습니다. 그래서 4단계의 70퍼센트는 그냥 쓰고 사라지는 비용이 아니라 회사에 남는 자산입니다. 이 자산이 COMPANY BRAIN OS가 쌓아 가는 조직 지식의 바탕이 됩니다.
         </div>
     </section>
 
-    <!-- ========= 3. 70% 안의 세 갈래 ========= -->
+    <!-- ========= 3. 70% 안의 세 축 ========= -->
     <section class="bp-section" id="three">
         <div class="bp-section-head">
             <div>
-                <h2 class="bp-section-title">70% 안의 세 갈래</h2>
+                <h2 class="bp-section-title">70% 안의 세 축</h2>
             </div>
             <div class="bp-section-meta">리더십 정렬 · 도입과 행동 변화 · 야심찬 업스킬링</div>
         </div>
 
-        <p class="bp-section-intro">70퍼센트를 "사람·프로세스"라는 큰 항목 하나로 두면 분기 회의에서 다시 잘립니다. 70퍼센트를 세 갈래로 나누고, 각 갈래의 책임자와 매월 측정 지표를 박아 두어야 비로소 살아남습니다.</p>
+        <p class="bp-section-intro">70퍼센트를 "사람·프로세스"라는 큰 덩어리 하나로 두면 여전히 애매모호할 수 있습니다. 70퍼센트를 세 축으로 쪼개고 각 축마다 책임자와 매달 확인할 지표를 정해 두어야 합니다.</p>
 
         <div class="bp-three">
             <div class="bp-three-cell">
-                <div class="bp-three-num">갈래 1</div>
+                <div class="bp-three-num">축 1</div>
                 <div class="bp-three-name">리더십과<br>거버넌스 정렬</div>
                 <div class="bp-three-body">
-                    임원이 직접 워크플로우 재설계 회의에 들어옵니다. AI 거버넌스, 데이터 권한, 책임 있는 AI(RAI) 원칙이 같은 방향을 가리키도록 정렬합니다. <strong>임원의 시간이 가지 않으면 직원의 행동도 가지 않습니다.</strong> 예산 회의에서 70퍼센트의 첫 줄이 여기 들어갑니다.
+                    경영진이 업무 재설계 회의에 직접 참여합니다. AI 거버넌스, 데이터 권한, 책임 있는 AI(RAI) 원칙이 서로 어긋나지 않고 같은 방향을 가리키도록 맞춥니다. <strong>경영진이 시간을 쓰지 않으면 직원도 움직이지 않습니다.</strong>
                 </div>
                 <div class="bp-three-action">
                     <b>월 측정 지표</b>
-                    임원의 AI 관련 회의 참여 시간 · 거버넌스 룰 위반 처리 사이클 타임 · RAI 원칙의 의사결정 반영 사례 수
+                    경영진의 AI 관련 회의 참여 시간 · 거버넌스 룰 위반 처리 사이클 타임 · RAI 원칙의 의사결정 반영 사례 수
                 </div>
             </div>
             <div class="bp-three-cell">
-                <div class="bp-three-num">갈래 2</div>
+                <div class="bp-three-num">축 2</div>
                 <div class="bp-three-name">도입과<br>행동 변화 촉발</div>
                 <div class="bp-three-body">
-                    직원이 새 방식으로 매일 일하게 만드는 자리입니다. 동기 부여 메시지뿐 아니라 인센티브 구조, 평가 항목, 회고 양식이 같이 움직여야 행동이 따라옵니다. <strong>슬로건 하나로 사람이 바뀌지 않습니다.</strong> 평가 양식이 바뀌어야 사람이 바뀝니다.
+                    직원이 매일 새 방식으로 일하게 만드는 자리입니다. 격려하는 말만으로는 부족하고, 보상 방식·평가 항목·회고 양식이 함께 바뀌어야 행동이 따라옵니다. <strong>구호 하나로는 사람이 바뀌지 않습니다.</strong> 평가 양식이 바뀌어야 사람이 바뀝니다.
                 </div>
                 <div class="bp-three-action">
                     <b>월 측정 지표</b>
@@ -872,10 +874,10 @@ body {
                 </div>
             </div>
             <div class="bp-three-cell">
-                <div class="bp-three-num">갈래 3</div>
+                <div class="bp-three-num">축 3</div>
                 <div class="bp-three-name">야심찬<br>업스킬링</div>
                 <div class="bp-three-body">
-                    가장 큰 가치를 실현한 기업이 가장 큰 인재 투자를 동시에 합니다. 부트캠프 한 번이 아니라, <strong>직무별로 다른 강도의 커리큘럼을 분기마다 갱신하는 살아있는 체계</strong>여야 합니다. 외부 강의 청취가 아니라 사내 사례를 매주 정리하는 자리까지 포함해야 학습이 회사에 남습니다.
+                    가장 큰 성과를 낸 기업이 인재 교육에도 가장 많이 투자합니다. 한 번의 특강으로 끝내지 말고, <strong>직무마다 난이도를 달리한 교육 과정을 분기마다 새로 고치는 체계</strong>를 갖춰야 합니다. 외부 강의를 듣는 것에 그치지 말고 사내 사례를 매주 정리하는 자리까지 넣어야 배운 것이 회사에 남습니다.
                 </div>
                 <div class="bp-three-action">
                     <b>월 측정 지표</b>
@@ -894,7 +896,7 @@ body {
             <div class="bp-section-meta">예산 회의에서 70%가 다시 잘리는 자리</div>
         </div>
 
-        <p class="bp-section-intro">아래 세 가지는 자원 재배분을 시작한 회사 거의 모두가 한 번씩 만나는 함정입니다. 좌측은 흔히 나타나는 모습, 우측은 그 자리를 다르게 푸는 방법입니다.</p>
+        <p class="bp-section-intro">아래 세 가지는 자원 재배분을 시작한 회사 대부분이 한 번씩 겪는 함정입니다. 왼쪽은 흔히 나타나는 모습이고, 오른쪽은 그것을 다르게 푸는 방법입니다.</p>
 
         <div class="bp-anti">
             <div class="bp-anti-head">
@@ -902,16 +904,16 @@ body {
                 <div>대응 방향</div>
             </div>
             <div class="bp-anti-row">
-                <div class="bad"><strong>"도구 보급률만 봅니다."</strong> 라이선스 발급 수, 가입자 수, 로그인 수를 핵심 지표로 둡니다. 보고서에는 "도입률 70퍼센트"가 올라가지만, 그 70퍼센트가 어떤 의사결정을 바꿨는지는 적혀 있지 않습니다.</div>
-                <div class="good"><strong>예산의 70퍼센트가 도달한 자리를 지표로 둡니다.</strong> 업스킬링 수료자가 실제 전략 과제 업무에 투입된 비율, 거버넌스 룰이 의사결정에 반영된 사례 수, 사이클 타임 변화. 도구 보급률은 보조 지표로 내립니다.</div>
+                <div class="bad"><strong>"도구를 얼마나 깔았는지만 봅니다."</strong> 라이선스 발급 수, 가입자 수, 로그인 수를 핵심 지표로 삼습니다. 보고서에는 "도입률 70퍼센트"가 올라오지만, 그 70퍼센트가 어떤 결정을 바꿨는지는 빠져 있습니다.</div>
+                <div class="good"><strong>예산의 70퍼센트가 실제로 닿은 결과를 지표로 삼습니다.</strong> 교육을 마친 직원이 실제 핵심 과제에 투입된 비율, 거버넌스 원칙이 결정에 반영된 사례 수, 업무 처리 시간의 변화를 봅니다. 도구를 얼마나 깔았는지는 보조 지표로 내립니다.</div>
             </div>
             <div class="bp-anti-row">
-                <div class="bad"><strong>"70%를 다시 10%로 미룹니다."</strong> 예산 회의에서 사람·프로세스 항목이 가장 먼저 잘립니다. "도구 라이선스는 즉시 효과가 보이고 업스킬링은 효과가 늦다"는 논리에 밀립니다. 결국 다음 분기에 다시 같은 벽 앞에서 멈춥니다.</div>
-                <div class="good"><strong>10-20-70 비율을 예산 분류 체계 자체에 박아 둡니다.</strong> AI 예산 회계 코드를 세 갈래로 나누고, 각 비율의 하한을 거버넌스 룰로 명시합니다. 비율이 무너지면 임원 결재가 필요한 구조로 만듭니다.</div>
+                <div class="bad"><strong>"70퍼센트를 슬그머니 10퍼센트로 줄입니다."</strong> 예산 회의에서 사람·프로세스 항목이 가장 먼저 깎입니다. "도구는 효과가 바로 보이고 교육은 효과가 늦다"는 말에 밀립니다. 결국 다음 분기에 또 같은 벽 앞에서 멈춥니다.</div>
+                <div class="good"><strong>10-20-70 비율을 예산 양식 자체에 못 박아 둡니다.</strong> AI 예산을 세 축으로 나눠 적게 하고, 각 비율의 최저선을 규칙으로 정합니다. 비율이 무너지면 경영진의 결재를 받아야만 바꿀 수 있게 만듭니다.</div>
             </div>
             <div class="bp-anti-row">
-                <div class="bad"><strong>"업스킬링이 외부 강의 수강으로 끝납니다."</strong> 직원이 외부 온라인 강의를 들은 시간을 업스킬링 실적으로 보고합니다. 강의 수료증은 쌓이지만, 사내 업무에 그 학습이 묻어 있지 않습니다. 학습이 개인의 이력서에는 남고 회사 자산에는 남지 않습니다.</div>
-                <div class="good"><strong>사내 사례 자산화를 업스킬링의 1순위 지표로 둡니다.</strong> 매주 한 명이 자기 업무의 AI 적용 사례를 한 장의 마크다운으로 정리해 사내에 공유하게 합니다. 그 마크다운 묶음이 곧 BRAIN OS 자산 축적 4단계 순환의 구조화 단계 입력값이 됩니다. 외부 강의는 보조 자료입니다.</div>
+                <div class="bad"><strong>"교육이 외부 강의 듣기로 끝납니다."</strong> 직원이 외부 온라인 강의를 들은 시간을 교육 실적으로 보고합니다. 수료증은 쌓이지만 실제 업무에는 그 배움이 묻어나지 않습니다. 배운 것이 개인 이력서에는 남고 회사 자산에는 남지 않습니다.</div>
+                <div class="good"><strong>사내 사례를 자산으로 남기는 일을 교육의 1순위 지표로 삼습니다.</strong> 매주 한 명이 자기 업무에 AI를 적용한 사례를 한 장짜리 문서로 정리해 사내에 공유하게 합니다. 그렇게 모인 문서가 BRAIN OS의 자산 축적 4단계 순환 중 구조화 단계의 재료가 됩니다. 외부 강의는 보조 수단입니다.</div>
             </div>
         </div>
     </section>
@@ -920,107 +922,40 @@ body {
     <section class="bp-section" id="output">
         <div class="bp-section-head">
             <div>
-                <h2 class="bp-section-title">이 페이지가 남기는 산출물</h2>
+                <h2 class="bp-section-title">이 단계에서 고민할 것</h2>
             </div>
             <div class="bp-section-meta">예산 재배분 · 책임자 매핑 · 다음 페이지 입력값</div>
         </div>
 
-        <p class="bp-section-intro">자원 재배분 작업이 끝나면 두 가지가 손에 들립니다. 한 가지는 숫자, 한 가지는 사람 매핑입니다. 둘이 같이 있어야 다음 페이지 "업무 재설계"가 책상 그림에서 끝나지 않고 실제로 굴러갑니다.</p>
+        <p class="bp-section-intro">자원 재배분이 끝나면 두 가지가 손에 들어옵니다. 하나는 숫자(다시 짠 예산), 하나는 사람(축별 책임자)입니다. 이 둘이 같이 있어야 다음 페이지 "업무 재설계"가 그림으로 끝나지 않고 실제로 돌아갑니다.</p>
 
         <div class="bp-output">
             <div class="bp-output-row">
                 <div class="bp-output-num">산출 1</div>
                 <div class="bp-output-body">
                     <h4>10-20-70 기준으로 다시 짜인 예산</h4>
-                    <p>다음 해 AI 예산이 알고리즘 10·데이터 기술 20·사람 프로세스 70의 비율로 분류 코드에 박혀 있습니다. 비율의 하한을 거버넌스 룰로 두어, <strong>예산 회의에서 가장 먼저 잘리는 항목이 거꾸로 가장 먼저 지켜지는 구조</strong>를 만듭니다.</p>
+                    <p>다음 해 AI 예산이 알고리즘 10·데이터 기술 20·사람 프로세스 70의 비율로 양식에 정해져 있습니다. 각 비율의 최저선을 규칙으로 정해, <strong>예산 회의에서 가장 먼저 깎이던 항목이 오히려 가장 먼저 지켜지게</strong> 만듭니다.</p>
                 </div>
             </div>
             <div class="bp-output-row">
                 <div class="bp-output-num">산출 2</div>
                 <div class="bp-output-body">
-                    <h4>70% 안의 세 갈래 책임자 매핑</h4>
-                    <p>리더십 정렬, 도입과 행동 변화, 야심찬 업스킬링 각 갈래에 임원급 책임자 한 명과 월 측정 지표 한 줄이 붙어 있습니다. <strong>책임자가 없는 70퍼센트는 다음 분기에 다시 10퍼센트로 줄어듭니다.</strong></p>
+                    <h4>70% 안의 세 축 책임자 매핑</h4>
+                    <p>리더십 정렬, 도입과 행동 변화, 야심찬 업스킬링 세 축마다 경영진급 책임자 한 명과 매달 확인할 지표 한 줄이 붙어 있습니다. <strong>책임자가 없는 70퍼센트는 다음 분기에 다시 10퍼센트로 줄어듭니다.</strong></p>
                 </div>
             </div>
         </div>
 
         <div class="bp-handoff" style="margin-top: 28px;">
-            <div class="tag">다음 페이지로 인계</div>
-            예산과 책임자가 정해지면 다음 페이지 <strong>"업무 재설계"</strong>로 넘어갑니다. 거기서는 전략 과제 워크플로우를 끝에서 끝까지 다시 그립니다. 부분 자동화의 한계를 짚고, 4D를 전사 공통 언어로 세우며, 미시 엔진을 COMPANY BRAIN OS의 전사 자산 구조로 확장합니다. 자원이 풀려야 그 자리에 사람과 시간이 따라옵니다.
+            <div class="tag">Next Step</div>
+            예산과 책임자가 정해지면 다음 페이지 <strong>"업무 재설계"</strong>로 넘어갑니다. 거기서는 핵심 과제의 일하는 순서를 처음부터 끝까지 다시 그립니다. 일부만 자동화했을 때의 한계를 짚고, 4D를 회사 공통 언어로 세우며, 작은 단위의 방식을 COMPANY BRAIN OS의 전사 자산으로 키웁니다. 자원이 풀려야 그 자리에 사람과 시간이 따라옵니다.
         </div>
     </section>
 
-    <!-- ========= 6. 참고 자료 ========= -->
-    <section class="bp-section" id="refs">
-        <div class="bp-section-head">
-            <div>
-                <h2 class="bp-section-title">참고 자료</h2>
-            </div>
-            <div class="bp-section-meta">10-20-70의 원형과 자원 비율 권고</div>
-        </div>
-
-        <p class="bp-section-intro">10-20-70 비율과 70퍼센트의 세 갈래는 다음 자료의 공통 결론을 모은 것입니다. 비율의 원형은 BCG, 70퍼센트 안의 세 갈래는 맥킨지, 야심찬 업스킬링의 효과는 베인의 분석에서 가져왔습니다.</p>
-
-        <div class="bp-refs">
-            <div class="bp-refs-head">
-                <div>구분</div>
-                <div>출처</div>
-                <div>참고 항목</div>
-            </div>
-            <div class="bp-refs-row">
-                <div class="kind">컨설팅펌</div>
-                <div class="source">
-                    <strong>BCG</strong>, Build for the Future / AI Radar
-                    <span class="sub">BCG, 2025 · 2026</span>
-                </div>
-                <div>10-20-70 자원 배분 원칙의 원형. "확장 단계에서 사람·프로세스 비중 70퍼센트" 권고와 AI 도입·전환의 구분.</div>
-            </div>
-            <div class="bp-refs-row">
-                <div class="kind">컨설팅펌</div>
-                <div class="source">
-                    <strong>McKinsey</strong>, The State of AI / Rewired
-                    <span class="sub">McKinsey &amp; Co., 2025 · 2023</span>
-                </div>
-                <div>70퍼센트 안의 세 갈래(리더십 정렬·도입 변화·업스킬링) 권고. 고성과 5퍼센트의 3년 총주주수익률 4배 격차 데이터.</div>
-            </div>
-            <div class="bp-refs-row">
-                <div class="kind">컨설팅펌</div>
-                <div class="source">
-                    <strong>Bain &amp; Company</strong>, Technology Report
-                    <span class="sub">Bain, 2024</span>
-                </div>
-                <div>가장 큰 가치를 실현한 기업이 가장 큰 인재 투자를 동시에 한다는 분석. 업스킬링 강도와 ROI의 상관 관계 데이터.</div>
-            </div>
-            <div class="bp-refs-row">
-                <div class="kind">컨설팅펌</div>
-                <div class="source">
-                    <strong>Deloitte</strong>, State of Generative AI in the Enterprise
-                    <span class="sub">Deloitte, 2025</span>
-                </div>
-                <div>전사 확장 시 가장 자주 인용되는 자원 분포의 장벽 목록. 거버넌스·조직 변화관리 권고.</div>
-            </div>
-            <div class="bp-refs-row">
-                <div class="kind">컨설팅펌</div>
-                <div class="source">
-                    <strong>PwC</strong>, AI Jobs Barometer
-                    <span class="sub">PwC, 2025</span>
-                </div>
-                <div>AI 도입 후 일자리·일하는 방식의 변화 데이터. 업스킬링 강도와 직무 가치 변화의 산업별 차이.</div>
-            </div>
-            <div class="bp-refs-row">
-                <div class="kind">고유 방법론</div>
-                <div class="source">
-                    <strong>본 가이드</strong>, COMPANY BRAIN OS · 자산 축적 4단계 순환 · 5-Color Harness
-                    <span class="sub">본 가이드의 D 영역</span>
-                </div>
-                <div>COMPANY BRAIN OS의 자산 축적 4단계 순환(추출·구조화·자산화·검증)에서 70퍼센트 사람·프로세스 투자가 구조화 단계의 입력값으로 묶이는 구조.</div>
-            </div>
-        </div>
-    </section>
 
     <!-- ========= FOOTER ========= -->
     <footer class="bp-footer">
-        <p class="bp-footer-summary">투입 비율을 알고리즘 10·데이터 기술 20·사람 프로세스 70으로 재배분하고, 70%를 확장 병목의 1순위 해소 자원으로 재투입합니다.</p>
+        <p class="bp-footer-summary">예산을 알고리즘 10·데이터 기술 20·사람 프로세스 70으로 다시 나누고, 가장 큰 70퍼센트를 확산을 가로막는 첫 번째 걸림돌부터 푸는 데 씁니다.</p>
         <div class="bp-footer-bar">
             <span class="bp-footer-copy">&copy; 2026 AI ROASTING. All rights reserved.</span>
             <span class="bp-footer-author">

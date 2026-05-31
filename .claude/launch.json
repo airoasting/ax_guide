@@ -1,0 +1,6 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "ax-guide-static", "runtimeExecutable": "node", "runtimeArgs": [".claude/serve.cjs", "."], "port": 4178 }
+  ]
+}

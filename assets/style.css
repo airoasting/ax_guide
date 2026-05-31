@@ -846,3 +846,41 @@ a.bp-brandbar:focus-visible { outline: 2px solid rgba(247, 245, 239, 0.6); outli
     .bp-footer-summary { font-size: 13.5px; }
 }
 
+/* ================== 페이지 로딩 등장 애니메이션 (전 페이지 공통) ================== */
+/* sticky 내비게이션이 깨지지 않도록 그 조상(.bp-sheet)에는 transform을 걸지 않고
+   전체는 페이드, 히어로·첫 섹션만 살짝 떠오르게 한다. */
+@keyframes bpPageFade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@keyframes bpRise {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+body {
+    animation: bpPageFade 0.5s ease both;
+}
+.bp-hero {
+    animation: bpRise 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+    animation-delay: 0.06s;
+}
+.bp-section:first-of-type {
+    animation: bpRise 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+    animation-delay: 0.16s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    body,
+    .bp-hero,
+    .bp-section:first-of-type {
+        animation: none !important;
+    }
+    *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+

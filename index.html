@@ -222,30 +222,45 @@ body {
 .bp-hero-nav a {
     flex: 1 1 0;
     font-family: var(--sans);
-    font-size: 14px;
-    font-weight: 600;
     color: var(--bp-ink);
-    padding: 10px 16px;
+    padding: 9px 16px;
     border: 1px solid var(--bp-line);
+    border-radius: 999px;
     background: var(--bp-paper);
     text-decoration: none;
     transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
     letter-spacing: -0.005em;
     text-align: center;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 2px;
+}
+.bp-hero-nav .hn-step {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--bp-accent);
+    transition: color 0.18s ease;
+}
+.bp-hero-nav .hn-title {
+    font-size: 13.5px;
+    font-weight: 600;
+    line-height: 1.2;
 }
 .bp-hero-nav a:hover {
     background: var(--bp-line);
     color: var(--bp-paper);
     border-color: var(--bp-line);
 }
+.bp-hero-nav a:hover .hn-step { color: var(--bp-paper); }
 .bp-hero-nav a.is-active {
     background: var(--bp-line);
     color: var(--bp-paper);
     border-color: var(--bp-line);
 }
+.bp-hero-nav a.is-active .hn-step { color: var(--bp-paper); opacity: 0.85; }
 
 /* ===== Section frame ===== */
 .bp-section {
@@ -696,7 +711,8 @@ a.bp-substep:hover .bp-substep-arrow {
     .bp-titleblock { grid-template-columns: repeat(3, 1fr); }
     .bp-titleblock--single > div { padding: 16px 32px; }
     .bp-hero-nav { padding: 10px 16px; flex-wrap: wrap; }
-    .bp-hero-nav a { font-size: 12px; padding: 8px 12px; flex: 1 1 calc(50% - 8px); }
+    .bp-hero-nav a { padding: 8px 12px; flex: 1 1 calc(50% - 8px); }
+    .bp-hero-nav .hn-title { font-size: 12px; }
     .bp-thesis-block { padding: 28px 24px; }
     .bp-thesis-quote { font-size: 20px; }
     .bp-footer { padding: 32px; }
@@ -716,6 +732,34 @@ a.bp-substep:hover .bp-substep-arrow {
     .bp-substep-tag { grid-column: 1 / -1; justify-self: start; }
     .bp-substep-desc { grid-column: 1; }
     .bp-substep-arrow { grid-column: 2; }
+}
+
+/* ===== Keyboard focus visibility ===== */
+.bp-hero-nav a:focus-visible,
+a.bp-gate:focus-visible,
+a.bp-substep:focus-visible {
+    outline: 2px solid var(--bp-accent);
+    outline-offset: 2px;
+}
+.tb-link:focus-visible,
+.bp-footer a:focus-visible {
+    outline: 2px solid rgba(247, 245, 239, 0.85);
+    outline-offset: 3px;
+}
+
+/* ===== Footer summary: 넓은 화면에서는 한 줄로, 좁은 화면에서는 자연 줄바꿈 ===== */
+@media (min-width: 1025px) {
+    .bp-footer-summary { max-width: none; white-space: nowrap; }
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
 }
 </style>
 </head>
@@ -748,12 +792,12 @@ a.bp-substep:hover .bp-substep-arrow {
 
     <!-- ========= STICKY NAV ========= -->
     <nav class="bp-hero-nav" aria-label="단계 바로가기">
-        <a href="#diagnosis">진단</a>
-        <a href="#step-1">1단계</a>
-        <a href="#step-2">2단계</a>
-        <a href="#step-3">3단계</a>
-        <a href="#step-4">4단계</a>
-        <a href="#step-5">5단계</a>
+        <a href="#diagnosis"><span class="hn-step">진단</span><span class="hn-title">현재 수준 판단</span></a>
+        <a href="#step-1"><span class="hn-step">1단계</span><span class="hn-title">AX TF 세팅</span></a>
+        <a href="#step-2"><span class="hn-step">2단계</span><span class="hn-title">파일럿 실행</span></a>
+        <a href="#step-3"><span class="hn-step">3단계</span><span class="hn-title">과제 우선순위화</span></a>
+        <a href="#step-4"><span class="hn-step">4단계</span><span class="hn-title">업무 방식 재설계</span></a>
+        <a href="#step-5"><span class="hn-step">5단계</span><span class="hn-title">AI 네이티브 컴퍼니</span></a>
     </nav>
 
     <!-- ========= PROOF · 현 시장 상태 ========= -->
@@ -1053,7 +1097,7 @@ a.bp-substep:hover .bp-substep-arrow {
 
     <!-- ========= FOOTER ========= -->
     <footer class="bp-footer">
-        <p class="bp-footer-summary">진단 2종, 5단계 로드맵 16개 작업, 부록 2건을 단일 진입점으로 통합해, AX 실행의 우선순위와 다음 행동을 임원이 한자리에서 판단합니다.</p>
+        <p class="bp-footer-summary">복잡한 AX, 리더가 정해야 하는 건 두 가지입니다. 무엇을 먼저 하고, 그다음 무엇을 할지. 진단과 5단계 로드맵을 이 한 페이지에 모은 이유입니다.</p>
         <div class="bp-footer-bar">
             <span class="bp-footer-copy">&copy; 2026 AI ROASTING. All rights reserved.</span>
             <span class="bp-footer-author">
@@ -1081,7 +1125,8 @@ a.bp-substep:hover .bp-substep-arrow {
         const titleRect = (titleEl || target).getBoundingClientRect();
         const gap = 32;
         const top = titleRect.top + window.pageYOffset - navHeight - gap;
-        window.scrollTo({ top, behavior: 'smooth' });
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top, behavior: reduce ? 'auto' : 'smooth' });
     }
 
     links.forEach(link => {
@@ -1104,36 +1149,35 @@ a.bp-substep:hover .bp-substep-arrow {
     }
 })();
 
-// Scroll spy: 스크롤 위치에 따라 sticky nav의 해당 메뉴를 강조
+// Scroll spy: 스크롤 위치 기준으로 항상 하나의 메뉴를 강조 (사각지대 없음)
 (function () {
-    const navLinks = Array.from(document.querySelectorAll('.bp-hero-nav a'));
-    const sections = navLinks
-        .map(link => document.querySelector(link.getAttribute('href')))
-        .filter(Boolean);
+    const nav = document.querySelector('.bp-hero-nav');
+    if (!nav) return;
+    const navLinks = Array.from(nav.querySelectorAll('a[href^="#"]'));
+    const targets = navLinks
+        .map(link => ({ link, section: document.getElementById(link.getAttribute('href').slice(1)) }))
+        .filter(t => t.section);
+    if (!targets.length) return;
 
-    if (!sections.length) return;
-
-    function setActive(id) {
-        navLinks.forEach(link => {
-            link.classList.toggle('is-active', link.getAttribute('href') === '#' + id);
-        });
+    function update() {
+        const line = nav.getBoundingClientRect().height + 40; // sticky nav 바로 아래 기준선
+        let active = null; // 첫 섹션에 도달하기 전(히어로·proof)에는 활성 메뉴 없음
+        for (const t of targets) {
+            if (t.section.getBoundingClientRect().top <= line) active = t.link;
+            else break;
+        }
+        navLinks.forEach(l => l.classList.toggle('is-active', l === active));
     }
 
-    const observer = new IntersectionObserver((entries) => {
-        const visible = entries
-            .filter(e => e.isIntersecting)
-            .map(e => e.target);
-
-        if (visible.length === 0) return;
-
-        visible.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
-        setActive(visible[0].id);
-    }, {
-        rootMargin: '-90px 0px -55% 0px',
-        threshold: 0
-    });
-
-    sections.forEach(s => observer.observe(s));
+    let ticking = false;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(() => { update(); ticking = false; });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
 })();
 </script>
 </body>
