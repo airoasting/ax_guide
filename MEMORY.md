@@ -19,6 +19,51 @@
 
 ## 최근 세션 변경 로그
 
+### 2026-06-14 (현재 세션) — 부록 페이지 신설 (`cost-output.html`, AI 네이티브로의 여정)
+
+진단 다음에 읽을 거리로, "AI를 쓴다는 사실은 더 이상 차별점이 아니다. 사용량(입력)이 아니라 산출(출력)을 같은 장부에 적어야 한다"는 관점 전환 페이지를 신설했다. 외부 콘텐츠(짐 반데헤이·우버·MS·스타벅스 사례)를 기반으로 하되, SSOT 규칙에 따라 `plan.md` 부록에 먼저 박고 HTML로 옮겼다.
+
+| # | 명령 | 범위 | 결과 |
+|---|---|---|---|
+| 1 | `plan.md` 부록-2 신설 (SSOT 먼저) | `plan.md` 부록 표 + 부록-2 절 | 새 주장·수치(짐GPT, 우버 4개월, MS 코파일럿 선회, 스타벅스 9개월)를 부록에 먼저 정착. 네 섹션 구조·본문 연결(`diagnosis`→이 페이지, `insights`·`criteria`에서 인용)·금지 사항(사례 수치는 "보도 종합"으로 표기, 특정 매체·날짜 임의 생성 금지) 명문화 |
+| 2 | `cost-output.html` 신규 작성 | 부록 페이지 (5단계 본문 외) | `problem-definition.html`의 bp-* 시각 시스템 클론. 네 섹션: 세 가지 질문(`bp-flow` 3단)·리더의 손끝(`bp-twocol` 사례/시사점)·비용의 장부(`bp-cost` 3카드 VS 박스)·입력과 출력(`bp-twocol` 입력/출력 대비). sticky sub-menu + scrollspy IIFE 포함 |
+| 3 | 형제 부록 네비 일괄 갱신 (Rule 7) | `ai-services.html`·`problem-definition.html`·`index.html` | 세 곳의 substep 목록에 "비용과 산출의 장부" 칩 추가. index `#refs` 섹션에 substep 카드 추가 |
+| 4 | 한국어·디자인 원칙 적용 | 본문 | em dash 0개(렌더 검증), 합쇼체 통일, AI 시각 클리셰(좌측 컬러 바·이모지·형광 강조) 0개. 섹션 제목 형광 마커는 `assets/style.css`의 사이트 공통 스타일(`.bp-section-title`)이라 일관 |
+| 5 | 브라우저 검증 | 프리뷰 | 4섹션·3카드·3 flow row·2 twocol 렌더 확인, 콘솔 오류 0건, 공통 자산(brandbar·footer-bar) 로드 확인. 모바일 375px 가로 오버플로 0, 세 그리드 모두 1열 스택 정상 |
+| 6 | 출처 검증 + 본문 보강 | `plan.md` 부록-2 · `cost-output.html` | "축약 느낌" 피드백에 대응해 웹 검색으로 네 사례를 1차 매체로 검증(Axios·Fortune·TechCrunch·Windows Central·Reuters/CNBC). 검증된 구체 수치로 본문 보강(우버 32%→84%·월 500~2,000달러·1,500달러 상한·COO 인용, MS 6/30 회수·5,000명 6개월 벤치마크, 스타벅스 Automated Counting·라이다·9개월, 반데헤이 짐GPT 한 시간 제작·경영진 절반). 하단에 링크 달린 '출처와 원문' 섹션(`bp-sources`) 신설, sticky 네비에 #sources 추가. plan.md 부록-2에 검증된 출처 목록 명문화 |
+| 7 | 사실 정합 교정 | `cost-output.html` 리더 섹션 | 원본의 "보안 정책·사내 시스템·보고 체계가 발목" 표현은 칼럼이 직접 적시한 인용으로 확인되지 않아, 검증된 'mind-blowing and messy' 프레이밍과 개인↔조직 속도 격차로 재서술. 직접 인용처럼 단정하지 않도록 plan.md 금지 사항에도 기록 |
+| 8 | 페이지명 재조정 + 부록 맨 앞 배치 | `cost-output.html`·`ai-services.html`·`problem-definition.html`·`index.html`·`plan.md` | 이 페이지는 기업들이 AI 네이티브로 가는 길에서 부딪힌 사례 모음이라, 라벨을 "비용과 산출의 장부" → "AI 네이티브로의 여정"으로 변경(브라우저 타이틀·eyebrow·네 곳 substep 칩). h1 후킹("'우리도 쓰고 있다'는…")은 유지. 부록 노출 순서를 cost-output → ai-services → problem-definition으로 통일(네 곳). 파일명은 `cost-output` 유지. plan.md 부록 표·부록-2 제목·노출 순서 명문화. 5단계 도착지 `ainative`(AI-Native 조직)와는 다른 자리(여정 vs 도착지)임을 plan.md에 구분 기록. 렌더·순서·콘솔 0건 검증 |
+| 13 | 푸터 윤문 + 하단 CTA + 반데헤이 사례 심화 | `cost-output.html`·`plan.md` | (1) 푸터 요약 번역투("다음 라운드를 가져갑니다") → "얼마나 썼는지는 누구나 셀 수 있습니다 … 비용과 성과를 한 장부에 나란히 적는 회사가 결국 앞서갑니다"로 자연화. (2) 맨 하단(출처 다음·푸터 앞)에 `.bp-cta` 밴드 신설 → blueprint.html 연결("그래서, 우리는 어디쯤일까요?" + "AX 청사진으로 가기"). 도입부→진단 동선 완결. (3) 반데헤이 사례 심화: Axios 원문 'Confessions of an AI lab rat'(2026.06.08) 재검증으로 디테일 보강 — 매일 새벽 1~2시간, 의료 기록·혈액 검사·식단까지 학습, 폰 상시 에이전트 개인 운영체계, 조직의 벽(보안·시스템 연결·에이전트 협업, 경영진조차 "무엇을 알고·공유·실행해도 되는지"에서 막힘)이 이제 원문으로 검증돼 복원, 그리고 핵심 통찰 추가: "비용 절감이 아니라 새 사업"(Axios가 AI 없이는 불가능했던 새 수익 사업 셋 시작). 시사점 3개를 매일·직접/막히는 건 조직/진짜 기회=새 사업으로 재구성. plan.md 부록-2 섹션·출처·금지 사항(조직 벽 미검증 보류 해제), 페이지 출처 Axios 항목 갱신. em dash 0, 데스크톱·모바일 오버플로 0, 콘솔 0건 |
+
+| 12 | 라벨 수정 + 사례별 구체 수치 보강 | `cost-output.html`·`plan.md` | (1) 서브 메뉴 "비용의 장부" → "비용 장부", plan.md 부록-2 섹션명도 동기화. (2) 마이크로소프트 카드에 빠져 있던 비용 수치 추가(웹 재검증): 1인당 월 500~2,000달러·4월 사용률 84~95%·약 5,000명. 우버는 비용 범위를 500~2,000달러 전체로 명시. 스타벅스는 북미 1만 1,000여 개 매장·'99% 정확도' 표방·스캔 재확인 부담 추가(NomadGo 발표 2025.09 + Reuters·CNBC·Fortune). plan.md 부록-2 검증 출처·금지 사항에 신규 수치 반영, 출처 섹션 캡션도 갱신. "우버 AI 예산 34억 달러"는 1인당 비용과 모순돼 코딩 지출 아님으로 판단, 미채택. em dash 0, 숫자·인용 보존 검증 |
+
+| 11 | 윤문(korean 스킬): 어색 표현 외과 교정 | `cost-output.html` 본문 | 사용자 플래그(그림을 그렸다·쥐여주고·셈을 틀리면서)와 전반 톤을 "일상적이지만 프로페셔널"로 다듬음. "같은 그림을 그렸다→같은 계산을 했다", "그림에 금을 냈다→그 계산이 틀렸다는 걸 보여줬다", "쥐여주고→열어주고", "거둬들이고→회수하고", "셈을 틀리면서→수량을 잘못 세는 일이 잦아지자", "바리스타를 붙잡았다→바리스타의 일손을 늦췄다", "헛다리를 짚습니다→착각합니다", "구독을 많이 깔았는지→늘렸는지", "거창한 정비→거창한 준비", "적게 하십시오→적게 하면 됩니다", "앞세우지 못합니다→앞서갈 수 없습니다". 의미·숫자(88%·32/84%·2,000·1,500·4/6/9개월·5,000명)·직접 인용("아직 그 연결고리는 없다")·고유명사 100% 보존. em dash 0, 합쇼체 유지. 데스크톱·콘솔 0건 검증 |
+
+| 10 | 위치 프레이밍 반전: 진단 다음 → 진단의 도입부 | `cost-output.html` 히어로 요약 · `plan.md` 부록-2 | 사용자가 강의·발표에서 이 이야기를 맨 앞(오프닝)으로 꺼낸다고 함. 히어로 요약을 "진단을 마친 뒤 이어서 읽기 좋은 자료" → "그래서 이 이야기로 시작합니다 … 그제야 '그럼 우리는 어디쯤인가'라는 진단이 절실해집니다. 이 페이지가 진단의 출발선입니다"로 반전. plan.md 부록-2 본문·본문 연결도 "진단 직후 읽을 거리" → "진단 도입부(오프닝), 진단의 동기를 만든다"로 동기화. 네비·구조는 부록 유지(노출 순서·stepnav 불변). 리로드 후 렌더·em dash 0 검증 |
+
+| 9 | 서브 메뉴 정리 + 스토리텔링 10점화 | `cost-output.html` | (1) sticky 서브 메뉴(`bp-hero-nav`)에서 #sources 링크 제거(4칸), 하단 출처 섹션은 유지. (2) 비즈니스 리더(GOLD·RED·BLUE·SILVER) 관점 평가 후 "telling→showing"으로 본문 재서술. 히어로에 회의실 장면("우리도 쓰고 있다") 도입, 섹션1에 88%(plan.md A-1 SSOT 회수)로 긴장 부여, 반데헤이를 'AI 실험용 쥐' 1년 자가 실험 서사로, 우버 카드에 "청구서도 불었다"+COO "아직 그 연결고리는 없다", MS "발목 잡은 건 청구서", 스타벅스 "바리스타를 붙잡았다" 장면화. 섹션3 핸드오프를 "비용 칸은 또박또박, 성과 칸은 비어 있다"로 다듬어 섹션4 장부 은유와 연결. 섹션4에 같은 토큰 두 팀 대비 강화 + "다음 한 걸음"(비용 옆 빈 칸에 '무엇이 달라졌나' 한 줄) 구체 행동 추가. 새 사실 0건(검증·SSOT 범위 내), em dash 0, 합쇼체, 과장어·AI 마무리 명언 없음. 데스크톱·모바일(오버플로 0)·콘솔 0건 검증 |
+
+### 2026-06-14 (현재 세션) — 강의용 재편 패턴 도입 (`blueprint.html` 대표 적용)
+
+사이트를 빔으로 띄워 강의하기에 적합하도록 페이지 자체를 재편하는 작업을 시작했다. 별도 슬라이드 덱이나 발표자 모드를 만들지 않고, 페이지의 비주얼 위계를 다시 잡는 A안으로 확정했다. 패턴 정의와 전 페이지 롤아웃 절차는 [lecture-blueprint.md](lecture-blueprint.md)에 둔다.
+
+| # | 명령 | 범위 | 결과 |
+|---|---|---|---|
+| 1 | 강의용 재편 패턴(A안) 정의 | `lecture-blueprint.md` | 세 요소 확정: 강의 발문(`.bp-beat-lead`) · 밀도 종속화(`.bp-cite`) · beat 리듬(`scroll-margin-top`). 발문 작성 원칙(긴장 먼저, 기존 사실만 재구성, 한 섹션 한 메시지)과 전 페이지 롤아웃 체크리스트 포함 |
+| 2 | `blueprint.html` 패턴 적용 | 다섯 섹션 + 증거 차트 3개 | 섹션마다 강의 발문 한 줄 삽입(성과 분석·다섯 함정·도착지·다섯 원칙·자가 진단). 증거 섹션 차트 3개의 "표본·출처"를 `.bp-cite`로 종속화. CSS 세 블록은 현재 인라인 |
+| 3 | 검증 | 브라우저 프리뷰 | 발문 5개·종속화 3개 렌더 확인, 콘솔 오류 0건, 스크롤스파이 정상. 발문은 페이지에 이미 있는 사실(6%·94곳·5함정·5원칙·6차원)만 재구성해 SSOT 새 주장 금지 준수 |
+| 4 | 후속 과제 명시 | `lecture-blueprint.md` | CSS를 `assets/style.css` 공통으로 승격 후 나머지 페이지로 전이. README.md 불일치(다른 프로젝트 커리큘럼) 정리 대상 기록 |
+| 5 | COMPANY BRAIN OS 명명 섹션 신설 | `blueprint.html` `#brain-os` | 푸터가 "COMPANY BRAIN OS = AX의 도착지"라 선언하는데 페이지에 정의가 없던 갭을 메움. 도착지(AI-Native 조직 비교)와 다섯 원칙 사이에 삽입. 강의 발문 + 정의 문단 + 3개 기둥 카드(구조화된 지식·에이전트 실행·협업 루프, `.bp-os-grid`) + 5단계 빌드업 한 줄(`.bp-os-build`). 정의는 AGENTS.md North Star·plan.md D의 SSOT 문구를 그대로 끌어옴(새 주장 없음). sticky 네비에 `#brain-os` 링크 추가, 스크롤스파이 정상 |
+| 6 | AI 클리셰 제거 + 라벨 단순화 | `blueprint.html` | `.bp-beat-lead`·`.bp-os-build`의 좌측 컬러 바(border-left accent) 제거 — AGENTS.md 금지 클리셰("좌측 컬러 바") 위반 교정. `.bp-os-build`는 중립 1px 보더로 교체. 증거 섹션 차트 2·3의 "읽는 법" 박스(`.bp-read-hint`)와 해당 CSS 삭제. `#blueprint` 나브·제목을 "우리가 가야 할 도착지, AI-Native 조직" → "AI-Native 조직"으로 단순화(도착지 프레이밍은 `#brain-os`가 전담) |
+| 7 | 도착지 두 섹션 순서 재배열(엔진→겉모습) | `blueprint.html` | `#brain-os`(COMPANY BRAIN OS, 도착지 정의)를 `#blueprint`(AI-Native 조직, 도착지의 일상) 앞으로 스왑. "도착지" 명명은 BRAIN OS만 전담. AI-Native 발문을 다리 문장으로 교체("이 두뇌가 자리 잡으면, 회사의 하루가 이렇게 달라집니다"), meta도 "두뇌가 만드는 일상 · 7개 영역 비교"로. 나브 순서 동기화. 흐름: 6%→함정→BRAIN OS(무엇)→AI-Native(어떻게 일하나)→원칙→진단 |
+| 8 | MECE 정리: 비교표 중복 행 디듀프 | `blueprint.html` `#blueprint` | 두 축을 직교화. BRAIN OS 3기둥=자산 구조(무엇을 짓는가), AI-Native 7행=운영 행동(어떻게 일하나). 자산 구조 어휘를 다시 쓰던 두 행의 after를 결과 톤으로 교체. "AI와의 관계": "작업별로 신뢰 수준이 다릅니다" → "일을 맡기는 강도를 업무 성격에 따라 다르게 잡습니다". "에이전트": "여러 에이전트가 한 작업을 이어서 처리합니다"(메커니즘) → "재고 확인·고객 안내·배송 예약이 한 흐름으로 이어집니다. 사람이 단계마다 끼어들지 않아도 업무 한 건이 끝까지 굴러갑니다"(결과). 의미(조정된 신뢰·오케스트레이션)는 SSOT 보존, 표면 어휘만 조정 |
+| 9 | 강의용 재편 패턴 규약화 (전 md 정합) | `AGENTS.md`·`plan.md`·`CLAUDE.md`·`MEMORY.md`·`lecture-blueprint.md` | 패턴을 거버넌스 문서에 박아 앞으로 강의용 작업이 반드시 참조하게 함. AGENTS.md에 §12 신설(세 요소·발문 원칙·도착지 MECE 두 축, lecture-blueprint.md 참조 필수). plan.md A-2에 엔진(BRAIN OS)/겉모습(AI-Native) 두 축 명문화. CLAUDE.md 진입점에 §12·lecture-blueprint 포인터 추가. MEMORY 기준 페이지에 blueprint.html 명시. lecture-blueprint.md 예시 CSS의 좌측 바 제거(클리셰 재유입 차단). README.md는 타 프로젝트 내용이라 손대지 않음(별도 정리 대상) |
+| 10 | 강의용 재편 전이 1번: `ax-canvas.html` | `ax-canvas.html` (Step 4 · AX 캔버스) | 임팩트 우선 롤아웃의 첫 페이지. 6개 섹션(왜 10칸·캔버스 한눈에·암묵지 Mark-down화·Human-Agent Team·가드레일과 성장·작성 순서)에 강의 발문 삽입. `.bp-beat-lead` CSS 인라인 추가(좌측 바 없음, §4.7-A 준수). beat 리듬은 기존 `scroll-padding-top: 50px`로 이미 충족돼 scroll-margin 미추가. 밀도 종속화는 이 페이지에 출처 캡션이 없고 "패션 커머스 A사 예시"가 핵심 교보재라 미적용(패턴의 적응적 적용). 발문 6개·26px·좌측 바 0px 렌더 확인, 콘솔 0건 |
+| 11 | 강의 동선 변경: 블루프린트 → AX 캔버스 → 진단 | `blueprint.html`·`ax-canvas.html` | 하단 NEXT STEP 게이트 재배선. 블루프린트 하단 #diagnosis(→diagnosis.html) 섹션을 #to-canvas로 바꿔 AX 캔버스로 보냄(발문·카피를 캔버스 핸드오프로 재작성, "이 캔버스가 BRAIN OS 지식을 한 직무씩 채우는 양식" 회수 추가). ax-canvas 하단(#order 다음, 푸터 앞)에 #to-diagnosis 게이트 신설(→diagnosis.html, "이제 우리는 어디쯤인가"). 블루프린트의 진단 마무리 발문이 ax-canvas 하단으로 이동. `.bp-roadmap-gate` CSS를 ax-canvas에 이식. 글로벌 stepnav·substeps는 미변경(구조 지도 유지, 하단 CTA만 강의 동선). 링크·렌더·콘솔 0건 검증 |
+| 12 | 검증 사례 회사명 익명화 | `plan.md`·`ax-canvas.html`·`blueprint.html`·`AGENTS.md`·`MEMORY.md` | 실명 노출 방지. `게스코리아` → `패션 커머스 A사`(컨설팅 표준 익명 라벨), 채널 예시의 타사명 `무신사` → `입점몰`, SKILL.md 식별자 `guess-cs-return-handling` → `fashion-cs-return-handling`. 사례의 운영 디테일(채널별 처리·14일·핏 불만 등)은 그대로 유지. SSOT(plan.md) 포함 전 파일 일괄 치환. 잔존 0건(게스·GUESS·무신사), 가시 페이지 ex-tag·채널 렌더 확인, 콘솔 0건 |
+| 13 | 강의 트리오: 인덱스 3카드 + 서브 메뉴 3개 통일 | `index.html`·`blueprint.html`·`ax-canvas.html`·`diagnosis.html` | 강의 동선(블루프린트 → AX 캔버스 → 진단)을 1급 네비로. index `#diagnosis` 게이트 그리드를 2열→3열로 바꾸고 가운데 AX 캔버스 카드 신설(순서: AX 추진 원칙 → AX 캔버스 → 현재 수준 진단). 섹션 제목/메타/인트로를 3걸음 흐름으로 재작성("청사진에서 진단까지, 세 걸음"). 세 페이지의 `bp-substeps`를 동일 트리오 3칩으로 통일(aria-label "강의 동선"). ax-canvas는 기존 4단계 그룹(자원·AX캔버스·업무재설계) 대신 트리오로 교체 — resource/reshape는 미변경. 데스크톱 3열(377px)·콘솔 0건 검증 |
+| 14 | 4C 프레임워크 신설: 컴퍼니 브레인 작동 4조건 | `plan.md`(SSOT)·`ax-canvas.html` | TCRA 대체가 아니라 별도 프레임워크로. 4C(Context·Connections·Capabilities·Cadence)를 조직 레벨로 번역해 "컴퍼니 브레인이 잘 작동하는 네 가지 조건"으로. SSOT 먼저: plan.md D-0 신설(4조건 표 + 3기둥과의 관계 명시: 지식=Context·Connections 두 층, 실행=Capabilities, 순환=Cadence). ax-canvas `#order` 다음·`#to-diagnosis` 앞에 `#conditions` 섹션 신설(발문 + 세컨드 브레인/운영체계 2그룹 밴드 + 4카드 `.bp-cond-grid`). 핵심 기여는 C2 Connections(살아 있는 데이터) 층 보강. 캔버스=Context 한 장이라는 미시-거시 연결 명시. hero-nav에 "작동 4조건" 링크 추가(7개). 좌측 바 0px(§4.7-A), 4카드·콘솔 0건 검증 |
+
 ### 2026-05-25 (현재 세션, 4차) — 참고 자료 페이지 신설 (`problem-definition.html`)
 
 | # | 명령 | 범위 | 결과 |
@@ -110,7 +155,7 @@
 | C | `c2-method-exec.html` | ⏸ 미착수 | plan.md C-3 (하단 3문항) |
 | D | `d1-kal-loop.html` | ⏸ 미착수 | plan.md D-1 (K1~K4 순환) |
 | D | `d2-kal-edge.html` | ⏸ 미착수 | plan.md D-2, D-3 |
-| E | `e1-casestudy.html` | ⏸ 미착수 | plan.md E 전체 (게스코리아 CS) |
+| E | `e1-casestudy.html` | ⏸ 미착수 | plan.md E 전체 (패션 커머스 A사 CS) |
 | E | `e2-templates.html` | ⏸ 미착수 | 인터랙티브 입력 폼 (로컬 저장) |
 | E | `e3-playbook.html` | ⏸ 미착수 | 운영 매뉴얼 |
 
@@ -151,6 +196,11 @@
 - 2-menu 기준 페이지 선정 필요
 - 3-menu 기준 페이지 선정 필요
 - 그 외 메뉴 수가 등장하면 그때 기준 페이지를 정한다
+
+### 강의용 재편 기준 페이지 (확정)
+- `blueprint.html`이 강의용 재편 표준 구현이다 (강의 발문 `.bp-beat-lead`·밀도 종속화 `.bp-cite`·beat 리듬·도착지 두 축 MECE 적용 완료).
+- 패턴 규약은 [AGENTS.md](AGENTS.md) §12, 상세 패턴과 전 페이지 롤아웃은 [lecture-blueprint.md](lecture-blueprint.md). 강의용 작업은 두 문서를 반드시 따른다.
+- 좌측 컬러 바는 AGENTS.md §4.7-A 금지 클리셰. 발문·요약 박스에 쓰지 않는다.
 
 ---
 
