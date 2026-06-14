@@ -466,6 +466,17 @@ html, body {
 .close-next .nt { font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #6FBF9B; margin-bottom: 8px; }
 .close-next .nb { font-size: 22px; font-weight: 700; line-height: 1.45; color: var(--paper); }
 
+.decide-wrap { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 70px; }
+.decide-eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #8FD3B4; margin-bottom: 14px; }
+.decide-title { font-size: 36px; font-weight: 800; letter-spacing: -0.02em; color: var(--paper); margin-bottom: 30px; }
+.decide { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 28px; }
+.decide-card { border: 1px solid rgba(143,211,180,0.4); background: rgba(143,211,180,0.08); border-radius: 10px; padding: 26px 24px; }
+.decide-q { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; color: #8FD3B4; margin-bottom: 12px; }
+.decide-h { font-size: 24px; font-weight: 800; color: var(--paper); margin-bottom: 11px; letter-spacing: -0.01em; }
+.decide-d { font-size: 14px; line-height: 1.62; color: rgba(247,245,239,0.78); }
+.decide-do { padding: 18px 26px; border: 1px solid rgba(247,245,239,0.22); border-radius: 10px; font-size: 18px; color: var(--paper); text-align: center; }
+.decide-do .tag { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #8FD3B4; margin-right: 12px; }
+.decide-do strong { color: #BFEAD5; font-weight: 800; }
 .thanks-wrap { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 80px; }
 .thanks-h { font-size: 60px; font-weight: 800; letter-spacing: -0.02em; color: var(--paper); margin-bottom: 22px; }
 .thanks-sub { font-size: 19px; line-height: 1.6; color: rgba(247,245,239,0.85); max-width: 760px; }
@@ -541,6 +552,8 @@ html, body {
 /* ===== APPROACH 4-CARD ===== */
 .appr { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
 .appr-card { border: 1.5px solid var(--green); background: var(--paper-2); padding: 20px 20px; display: flex; flex-direction: column; }
+.appr-bridge { margin-top: 14px; padding-top: 13px; border-top: 1.5px solid var(--green); font-size: 14.5px; line-height: 1.5; color: var(--ink-soft); text-align: center; }
+.appr-bridge strong { color: var(--green); font-weight: 700; }
 .appr-num { font-size: 32px; font-weight: 800; color: var(--accent); letter-spacing: -0.02em; line-height: 1; }
 .appr-title { font-size: 17px; font-weight: 800; color: var(--ink); line-height: 1.32; margin: 8px 0 12px; }
 .appr-desc { font-size: 12.5px; line-height: 1.6; color: var(--ink-soft); }
@@ -996,6 +1009,14 @@ html, body {
       </div>
     </section>
 
+    <!-- ===== Q1 → Q2 다리 ===== -->
+    <section class="slide slide--dark" data-tone="dark">
+      <div class="stmt-wrap">
+        <div class="stmt-eyebrow">Q1 → Q2</div>
+        <h2 class="stmt-h">측정은 시작일 뿐입니다.<br><span class="em">6%를 가른 건, 측정 위에 세운 운영체계였습니다.</span></h2>
+      </div>
+    </section>
+
     <!-- ===== AGENDA TRACKER · Q2 ===== -->
     <section class="slide slide--agenda" data-tone="light">
       <div class="s-head">
@@ -1231,6 +1252,7 @@ html, body {
             </div>
           </div>
         </div>
+        <p class="appr-bridge">이 네 가지 접근을 <strong>한 직무 위에서 한 장으로 실행하는 도구</strong>가 지금부터 볼 AX 캔버스입니다.</p>
       </div>
     </section>
 
@@ -1247,7 +1269,7 @@ html, body {
         <div class="qcard">
           <div class="qtag">AX 캔버스가 답하는 한 가지 질문</div>
           <div class="qtext">"이 직무가 만드는 가치는 무엇이고, 사람과 에이전트는 그 가치를 어떻게 함께 만드는가."</div>
-          <div class="qnote">직무가 만드는 가치, 사람과 에이전트의 역할 분담, 그 위의 통제와 재투입을 한 장에 담습니다. <strong>같은 양식이 직무마다 쌓이면 전사 지식 자산이 됩니다.</strong> 이 한 장이 지금부터 살펴볼 AX 캔버스입니다.</div>
+          <div class="qnote">직무가 만드는 가치, 사람과 에이전트의 역할 분담, 그 위의 통제와 재투입을 한 장에 담습니다. <strong>같은 양식이 직무마다 쌓이면 전사 지식 자산이 됩니다.</strong> 이 한 장이 지금부터 살펴볼 AX 캔버스입니다. 뒤따르는 작성 규약은 실무 참고이니, 리더는 <strong>'한 직무가 한 장으로 분해된다'</strong>는 그림만 잡으셔도 충분합니다.</div>
         </div>
       </div>
     </section>
@@ -1329,7 +1351,7 @@ html, body {
     <!-- ===== 22. Q3-3 T·C·R·A ===== -->
     <section class="slide slide--content" data-tone="light">
       <div class="s-head">
-        <div class="s-eyebrow"><span class="qbadge">Q3-3</span>2·3·4번 좌측 · Terminology → Context → Rule → Action</div>
+        <div class="s-eyebrow"><span class="qbadge">Q3-3</span>실무 작성 디테일 · 리더는 개념만 · 2·3·4번 좌측 T·C·R·A</div>
         <div class="s-titlerow">
           <h2 class="s-title">좌측 · 암묵지의 Mark-down화</h2>
           <div class="s-meta">예시 · 패션 커머스 A사 CS</div>
@@ -1554,6 +1576,20 @@ html, body {
         <div class="close-row"><div class="close-q">Q1</div><div class="close-a">모두가 AI를 쓰는데, 왜 6%만 성과를 낼까? → <strong>사용량(입력)이 아니라 산출(출력)을 기록</strong>해야 합니다.</div></div>
         <div class="close-row"><div class="close-q">Q2</div><div class="close-a">성공과 실패를 가르는 기준점은 무엇일까? → <strong>다섯 함정을 피하고 다섯 원칙으로 COMPANY BRAIN OS</strong>를 키워야 합니다.</div></div>
         <div class="close-row"><div class="close-q">Q3</div><div class="close-a">어디서부터 AX를 시작해야 할까? → <strong>직무 하나를 골라 AX 캔버스 한 장으로 해부</strong>해야 합니다.</div></div>
+      </div>
+    </section>
+
+    <!-- ===== 리더의 결정 + 첫 행동 ===== -->
+    <section class="slide slide--dark" data-tone="dark">
+      <div class="decide-wrap">
+        <div class="decide-eyebrow">리더가 결정할 세 가지</div>
+        <h2 class="decide-title">AX는 복잡하지만, 리더가 정할 것은 셋입니다</h2>
+        <div class="decide">
+          <div class="decide-card"><div class="decide-q">무엇을 먼저</div><div class="decide-h">직무 하나</div><div class="decide-d">가장 큰 가치를 만드는 직무 하나를 골라, 캔버스 한 장으로 시작합니다.</div></div>
+          <div class="decide-card"><div class="decide-q">어디에 쓸까</div><div class="decide-h">사람과 프로세스</div><div class="decide-d">예산을 도구가 아니라 사람·프로세스에 더 씁니다. 알고리즘 10, 데이터 20, 사람 70.</div></div>
+          <div class="decide-card"><div class="decide-q">누가 책임지나</div><div class="decide-h">책임자 한 명</div><div class="decide-d">부서가 아니라 이름으로. 통제와 성과, 다음 사이클을 한 사람이 책임집니다.</div></div>
+        </div>
+        <div class="decide-do"><span class="tag">첫 행동</span>이번 분기, <strong>비용 옆에 산출 칸 하나</strong>와 <strong>직무 한 장</strong>부터 시작합니다.</div>
       </div>
     </section>
 
