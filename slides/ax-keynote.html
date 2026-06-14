@@ -302,6 +302,9 @@ html, body {
 .pillar-num { font-size: 13px; font-weight: 700; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px; }
 .pillar-h { font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 12px; }
 .pillar-body { font-size: 14.5px; line-height: 1.65; color: var(--ink-soft); }
+.pillar-ico { width: 34px; height: 34px; color: var(--accent); margin-bottom: 14px; }
+.five-ico { width: 26px; height: 26px; color: var(--accent); margin-bottom: 10px; }
+.pillar-ico svg, .five-ico svg { width: 100%; height: 100%; display: block; }
 .os-build { margin-top: 20px; padding: 18px 24px; background: rgba(14,59,42,0.05); border-top: 1px solid var(--green); border-bottom: 1px solid var(--green); font-size: 15.5px; line-height: 1.65; color: var(--ink); }
 .os-build strong { color: var(--green); }
 
@@ -411,8 +414,12 @@ html, body {
 .curr-body { padding: 52px 60px 66px; gap: 0; justify-content: flex-start; }
 .curr-band { display: grid; grid-template-columns: 130px 1fr; align-items: center; gap: 16px; border: 1px solid var(--green); background: rgba(14,59,42,0.035); padding: 10px 18px; }
 .curr-band-label { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); line-height: 1.3; }
-.curr-chips { display: flex; gap: 10px; flex-wrap: wrap; }
-.curr-chips span { font-size: 13px; font-weight: 600; color: var(--ink); padding: 5px 14px; background: var(--paper-2); border: 1px solid var(--rule); }
+.curr-chips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.curr-chips a { display: block; font-size: 13px; font-weight: 600; color: var(--ink); padding: 5px 14px; background: var(--paper-2); border: 1px solid var(--rule); text-align: center; text-decoration: none; }
+/* 31쪽 로드맵 박스 링크 + 호버 */
+.curr-chips a, .curr-stage, .curr-goal { cursor: pointer; text-decoration: none; color: inherit; transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease; }
+.curr-dark .curr-chips a:hover, .curr-dark .curr-stage:hover { transform: translateY(-3px); background: rgba(247,245,239,0.15); border-color: #8FD3B4; box-shadow: 0 14px 30px -16px rgba(0,0,0,0.7); }
+.curr-dark .curr-goal:hover { transform: translateY(-2px); box-shadow: 0 16px 32px -16px rgba(0,0,0,0.7); }
 .curr-chips span b { color: var(--green); font-weight: 700; }
 .curr-road { display: grid; grid-template-columns: repeat(5, 1fr); gap: 9px; margin: 12px 0; }
 .curr-stage { border: 1.5px solid var(--green); background: var(--paper-2); padding: 13px 13px 0; display: flex; flex-direction: column; position: relative; }
@@ -423,6 +430,24 @@ html, body {
 .cs-items { font-size: 11px; line-height: 1.5; color: var(--ink-mute); margin-top: 9px; padding-top: 8px; border-top: 1px dashed var(--rule); }
 .cs-asset { margin: 10px -13px 0; padding: 8px 13px; background: rgba(14,59,42,0.06); border-top: 1px solid var(--green); font-size: 11px; line-height: 1.4; color: var(--green); font-weight: 600; }
 .cs-asset b { display: block; font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 2px; }
+/* page 31 (roadmap) dark variant — inverted from page 30 */
+.curr-dark .s-eyebrow { color: #6FBF9B; }
+.curr-dark .s-title { color: var(--paper); }
+.curr-dark .s-titlerow { border-bottom-color: rgba(247,245,239,0.28); }
+.curr-dark .curr-band { background: rgba(247,245,239,0.06); border-color: rgba(247,245,239,0.22); }
+.curr-dark .curr-band-label { color: #6FBF9B; }
+.curr-dark .curr-chips a { background: rgba(247,245,239,0.08); border-color: rgba(247,245,239,0.2); color: var(--paper); }
+.curr-dark .curr-stage { background: rgba(247,245,239,0.05); border-color: rgba(247,245,239,0.22); }
+.curr-dark .cs-num { color: #8FD3B4; border-color: rgba(143,211,180,0.55); }
+.curr-dark .cs-title { color: var(--paper); }
+.curr-dark .cs-sub { color: rgba(247,245,239,0.8); }
+.curr-dark .cs-items { color: rgba(247,245,239,0.55); border-top-color: rgba(247,245,239,0.18); }
+.curr-dark .cs-asset { background: rgba(247,245,239,0.08); border-top-color: rgba(247,245,239,0.22); color: #B8E2CE; }
+.curr-dark .cs-asset b { color: #8FD3B4; }
+.curr-dark .curr-goal { background: var(--paper); }
+.curr-dark .curr-goal .glbl { color: var(--accent); }
+.curr-dark .curr-goal .gbody { color: var(--green); }
+.curr-dark .curr-goal .gbody span { color: var(--accent); }
 .curr-goal { margin-top: 12px; padding: 12px 22px; background: var(--green); color: var(--paper); display: flex; align-items: center; gap: 16px; }
 .curr-goal .glbl { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6FBF9B; white-space: nowrap; }
 .curr-goal .gbody { font-size: 15px; font-weight: 700; line-height: 1.4; }
@@ -446,7 +471,8 @@ html, body {
 .thanks-sub { font-size: 19px; line-height: 1.6; color: rgba(247,245,239,0.85); max-width: 760px; }
 .thanks-foot { margin-top: 40px; font-size: 16px; color: rgba(247,245,239,0.8); display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
 .thanks-foot strong { color: var(--paper); }
-.li-btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border: 1.5px solid rgba(247,245,239,0.45); border-radius: 100px; color: var(--paper); text-decoration: none; font-size: 13px; font-weight: 600; transition: background 0.2s, border-color 0.2s; }
+.li-btn { display: inline-flex; align-items: center; justify-content: center; padding: 9px; border: 1.5px solid rgba(247,245,239,0.45); border-radius: 50%; color: var(--paper); text-decoration: none; transition: background 0.2s, border-color 0.2s; }
+.li-btn .sr-only { display: none; }
 .li-btn:hover { background: rgba(247,245,239,0.12); border-color: var(--paper); }
 .li-btn svg { display: block; }
 .copyright { margin-top: 34px; max-width: 760px; font-size: 11.5px; line-height: 1.65; color: rgba(247,245,239,0.5); }
@@ -536,6 +562,8 @@ html, body {
 /* ===== CANVAS OVERLAY (slide after 24) ===== */
 .canvas-wrap { position: relative; flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
 .canvas-wrap > .cgrid, .canvas-wrap > .cgrid-bottom { flex: 1 1 auto; min-height: 0; }
+/* 24·25쪽 캔버스: 상단(7칸)·하단(3칸) 그리드 세로 길이 통일 */
+.s-body > .cgrid, .s-body > .cgrid-bottom, .canvas-wrap > .cgrid, .canvas-wrap > .cgrid-bottom { flex-basis: 0; }
 .ccell.dimmed { opacity: 0.3; }
 .cv-overlay { position: absolute; top: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center; padding: 24px; z-index: 5; }
 .cv-overlay.left { left: 0; width: 41.5%; background: rgba(14,59,42,0.72); }
@@ -871,8 +899,8 @@ html, body {
       <div class="s-head">
         <div class="s-eyebrow"><span class="qbadge">Q1-2</span>시사점 · 직접 써본 1년이 가리킨 세 가지</div>
         <div class="s-titlerow">
-          <h2 class="s-title">직접 1년을 써보니, AI의 진짜 기회는 비용 절감이 아니라 새로운 사업이었음</h2>
-          <div class="s-meta">Implications</div>
+          <h2 class="s-title">직접 1년을 써보니, AI는 비용 절감뿐 아니라 새로운 사업 기회를 제공 가능함</h2>
+          <div class="title-logo" style="flex-shrink:0; padding-bottom:3px;"><img src="../assets/logos/axios.svg" alt="Axios" style="height:30px; display:block;"></div>
         </div>
       </div>
       <div class="s-body">
@@ -940,7 +968,7 @@ html, body {
       <div class="s-head">
         <div class="s-eyebrow"><span class="qbadge">Q1-4</span>입력 vs 출력</div>
         <div class="s-titlerow">
-          <h2 class="s-title">경쟁력은 비용과 산출을 나란히 기록하는 능력에서 갈림</h2>
+          <h2 class="s-title">경쟁력은 비용과 산출을 나란히 기록하는 데서 확보 가능함</h2>
           <div class="s-meta">무엇을 기록하는가</div>
         </div>
       </div>
@@ -964,7 +992,7 @@ html, body {
             <div class="io-out-item"><div class="k"><span class="n">③ 봐야 할 신호</span>쓴 돈이 무엇으로 바뀌었는가</div><div class="d">비용 옆 칸에 산출을 나란히 적어야 두 팀이 비로소 갈라집니다.</div></div>
           </div>
         </div>
-        <div class="io-next"><span class="tag">다음 한 걸음</span>다음 AI 점검 회의에서 비용 옆에 빈 칸 하나를 만들고, 팀마다 <strong>"어떤 성과를 창출했는가?"</strong>를 한 줄로 적게 하면 됩니다. 그 칸이 채워지는 순간, 회사의 기록은 입력에서 출력으로 옮겨갑니다.</div>
+        <div class="io-next"><span class="tag">다음 한 걸음</span>비용 옆에 빈 칸 하나를 만들고, 팀마다 <strong>"어떤 성과를 창출했는가?"</strong>를 한 줄로 적게 하면 됩니다.</div>
       </div>
     </section>
 
@@ -1023,7 +1051,7 @@ html, body {
       <div class="s-head">
         <div class="s-eyebrow"><span class="qbadge">Q2-1</span>Chart 3 · BCG AI Radar 2026</div>
         <div class="s-titlerow">
-          <h2 class="s-title">AI 의사결정의 무게중심이 CEO 직속으로 이동했음</h2>
+          <h2 class="s-title">AI 의사결정의 무게중심이 CEO 직속으로 이동하고 있음</h2>
           <div class="s-meta">BCG · 2026.01</div>
         </div>
       </div>
@@ -1055,11 +1083,11 @@ html, body {
       </div>
       <div class="s-body">
         <div class="five">
-          <div class="five-cell"><div class="five-num">No. 1</div><h4 class="five-h">도구부터 논의하는 함정</h4><ul><li>회의는 첫 의제부터 도구 선택에 매달립니다. "ChatGPT냐, Claude냐, Gemini냐."</li><li>두 달을 도구 벤치마크와 라이선스 협상, 보안 심사로 흘려보냅니다.</li><li>일하는 방식은 그대로 둔 채, 도구 도입을 AX로 착각합니다.</li></ul></div>
-          <div class="five-cell"><div class="five-num">No. 2</div><h4 class="five-h">PoC 범람 함정</h4><ul><li>분기마다 "AI로 무엇을 해보겠다"는 신청서가 수십 건 쌓입니다.</li><li>전부 승인하면 한정된 인력과 예산이 30~50갈래로 흩어집니다.</li><li>1년 뒤 진척을 한 줄로 요약해 달라는 요청에 누구도 답하지 못합니다.</li></ul></div>
-          <div class="five-cell"><div class="five-num">No. 3</div><h4 class="five-h">환각 맹신 함정</h4><ul><li>단정적인 어조로 내놓은 답을 그대로 보고서에 옮깁니다.</li><li>매끄러운 문장은 정확한 사실을 보증하지 않습니다.</li><li>사고가 터진 뒤에야 출처 규정을 만들지만, 피해는 이미 쌓여 있습니다.</li></ul></div>
-          <div class="five-cell"><div class="five-num">No. 4</div><h4 class="five-h">시간 비효율 함정</h4><ul><li>직원 50명이 보고서 작성 시간을 각자 두 시간씩 줄입니다.</li><li>그러나 그 시간은 메신저와 즉흥 회의로 금세 채워집니다.</li><li>시간을 재배치할 장치가 없어 재무 효과는 측정 전에 사라집니다.</li></ul></div>
-          <div class="five-cell"><div class="five-num">No. 5</div><h4 class="five-h">거버넌스 누수 함정</h4><ul><li>직원이 분기 매출 데이터를 무료 AI에 입력한 사실이 외부 감사에서 드러납니다.</li><li>사고가 터진 뒤에야 사용 지침을 마련합니다.</li><li>지침이 퍼질 무렵이면 비슷한 사례가 이미 수십 건 쌓여 있습니다.</li></ul></div>
+          <div class="five-cell"><div class="five-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div class="five-num">No. 1</div><h4 class="five-h">도구부터 논의하는 함정</h4><ul><li>회의는 첫 의제부터 도구 선택에 매달립니다. "ChatGPT냐, Claude냐, Gemini냐."</li><li>두 달을 도구 벤치마크와 라이선스 협상, 보안 심사로 흘려보냅니다.</li><li>일하는 방식은 그대로 둔 채, 도구 도입을 AX로 착각합니다.</li></ul></div>
+          <div class="five-cell"><div class="five-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v5l-5 10a1.5 1.5 0 0 0 1.34 2.2h11.32A1.5 1.5 0 0 0 19 18l-5-10V3"/><path d="M7 14h10"/></svg></div><div class="five-num">No. 2</div><h4 class="five-h">PoC 범람 함정</h4><ul><li>분기마다 "AI로 무엇을 해보겠다"는 신청서가 수십 건 쌓입니다.</li><li>전부 승인하면 한정된 인력과 예산이 30~50갈래로 흩어집니다.</li><li>1년 뒤 진척을 한 줄로 요약해 달라는 요청에 누구도 답하지 못합니다.</li></ul></div>
+          <div class="five-cell"><div class="five-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="five-num">No. 3</div><h4 class="five-h">환각 맹신 함정</h4><ul><li>단정적인 어조로 내놓은 답을 그대로 보고서에 옮깁니다.</li><li>매끄러운 문장은 정확한 사실을 보증하지 않습니다.</li><li>사고가 터진 뒤에야 출처 규정을 만들지만, 피해는 이미 쌓여 있습니다.</li></ul></div>
+          <div class="five-cell"><div class="five-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg></div><div class="five-num">No. 4</div><h4 class="five-h">시간 비효율 함정</h4><ul><li>직원 50명이 보고서 작성 시간을 각자 두 시간씩 줄입니다.</li><li>그러나 그 시간은 메신저와 즉흥 회의로 금세 채워집니다.</li><li>시간을 재배치할 장치가 없어 재무 효과는 측정 전에 사라집니다.</li></ul></div>
+          <div class="five-cell"><div class="five-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="five-num">No. 5</div><h4 class="five-h">거버넌스 누수 함정</h4><ul><li>직원이 분기 매출 데이터를 무료 AI에 입력한 사실이 외부 감사에서 드러납니다.</li><li>사고가 터진 뒤에야 사용 지침을 마련합니다.</li><li>지침이 퍼질 무렵이면 비슷한 사례가 이미 수십 건 쌓여 있습니다.</li></ul></div>
         </div>
         <p class="cap" style="border:none; padding-top:10px;">* PoC (Proof of Concept). 본격 도입 전, 아이디어가 실제로 작동하는지 작게 시험해 보는 단계입니다.</p>
       </div>
@@ -1077,9 +1105,9 @@ html, body {
       <div class="s-body">
         <p class="intro">회사의 암묵지를 구조화된 지식으로 저장하고, 그 지식 위에서 에이전트가 일하며, 사람과 에이전트가 함께 도는 협업 루프가 자산을 분기마다 두껍게 만드는 운영체계입니다. <strong>AX의 도착지는 더 나은 도구의 도입이 아니라 이 두뇌의 구축에 있습니다.</strong></p>
         <div class="pillars">
-          <div class="pillar"><div class="pillar-num">01 · 지식</div><div class="pillar-h">구조화된 조직 지식</div><p class="pillar-body">베테랑의 머릿속에만 있던 암묵지를 용어·맥락·규칙·행동 네 계층으로 구조화해 저장합니다. 도구는 사 올 수 있어도, 우리 회사의 지식은 사 올 수 없습니다.</p></div>
-          <div class="pillar"><div class="pillar-num">02 · 실행</div><div class="pillar-h">지식 위에서 일하는 에이전트</div><p class="pillar-body">에이전트가 그 지식을 바탕으로 실제 업무를 수행합니다. 같은 모델이라도 우리 지식을 얹은 에이전트만이 우리 방식으로 일합니다.</p></div>
-          <div class="pillar"><div class="pillar-num">03 · 순환</div><div class="pillar-h">사람과 에이전트의 협업 루프</div><p class="pillar-body">사람과 에이전트가 한 팀으로 일하며, 에이전트가 아직 못 하는 부분이 다음 지식으로 다시 쌓입니다. 루프를 돌릴수록 두뇌는 더 두꺼워집니다.</p></div>
+          <div class="pillar"><div class="pillar-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 12 12 17 22 12"/><polyline points="2 17 12 22 22 17"/></svg></div><div class="pillar-num">01 · 지식</div><div class="pillar-h">구조화된 조직 지식</div><p class="pillar-body">베테랑의 머릿속에만 있던 암묵지를 용어·맥락·규칙·행동 네 계층으로 구조화해 저장합니다. 도구는 사 올 수 있어도, 우리 회사의 지식은 사 올 수 없습니다.</p></div>
+          <div class="pillar"><div class="pillar-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg></div><div class="pillar-num">02 · 실행</div><div class="pillar-h">지식 위에서 일하는 에이전트</div><p class="pillar-body">에이전트가 그 지식을 바탕으로 실제 업무를 수행합니다. 같은 모델이라도 우리 지식을 얹은 에이전트만이 우리 방식으로 일합니다.</p></div>
+          <div class="pillar"><div class="pillar-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></div><div class="pillar-num">03 · 순환</div><div class="pillar-h">사람과 에이전트의 협업 루프</div><p class="pillar-body">사람과 에이전트가 한 팀으로 일하며, 에이전트가 아직 못 하는 부분이 다음 지식으로 다시 쌓입니다. 루프를 돌릴수록 두뇌는 더 두꺼워집니다.</p></div>
         </div>
       </div>
     </section>
@@ -1118,11 +1146,11 @@ html, body {
       </div>
       <div class="s-body">
         <div class="five">
-          <div class="five-cell"><div class="five-num">N° 1 · 업무 재설계</div><h4 class="five-h">업무 자체를 다시 짜는 회의를 엽니다</h4><ul><li>"어떤 AI를 살까" 회의에 두 시간을 쓰지 않습니다.</li><li>업무 단계를 먼저 화이트보드에 분해합니다.</li><li>도구는 분해가 끝난 다음에 고릅니다.</li></ul></div>
-          <div class="five-cell"><div class="five-num">N° 2 · 예산 배분</div><h4 class="five-h">예산의 70%를 사람과 프로세스에 씁니다</h4><ul><li>라이선스 5천만 + 교육 5백만 → "쓸 줄 아는 사람이 없다".</li><li>같은 라이선스 + 교육 1억 → "토큰이 모자라다".</li><li>알고리즘 10%, 데이터·기술 20%, 사람 70%가 기준선.</li></ul></div>
-          <div class="five-cell"><div class="five-num">N° 3 · 집중 투자</div><h4 class="five-h">수십 건 시도 대신 굵직한 서너 건만</h4><ul><li>분기마다 올라오는 PoC 30~50건을 전부 승인하지 않습니다.</li><li>경영진이 직접 3~5건만 통과시킵니다.</li><li>통과한 과제에 인력의 30%를 우선 붙입니다.</li></ul></div>
-          <div class="five-cell"><div class="five-num">N° 4 · 검증 강도</div><h4 class="five-h">업무마다 검증 강도를 다르게 둡니다</h4><ul><li>마케팅 카피: 한 번 읽고 게재합니다.</li><li>분기 재무 코멘트: 두 명 대조 + CFO 결재.</li><li>같은 도구라도 업무가 다르면 검증도 달라집니다.</li></ul></div>
-          <div class="five-cell"><div class="five-num">N° 5 · 선제 거버넌스</div><h4 class="five-h">사고가 터지기 전에 거버넌스를 먼저</h4><ul><li>도입 첫 주에 데이터 반출 매트릭스를 게시합니다.</li><li>책임자·승인 절차·감사 기록을 함께 정합니다.</li><li>외부 감사에서 사고가 드러난 뒤에 만들지 않습니다.</li></ul></div>
+          <div class="five-cell"><div class="five-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div><div class="five-num">N° 1 · 업무 재설계</div><h4 class="five-h">업무 자체를 다시 짜는 회의를 엽니다</h4><ul><li>"어떤 AI를 살까" 회의에 두 시간을 쓰지 않습니다.</li><li>업무 단계를 먼저 화이트보드에 분해합니다.</li><li>도구는 분해가 끝난 다음에 고릅니다.</li></ul></div>
+          <div class="five-cell"><div class="five-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg></div><div class="five-num">N° 2 · 예산 배분</div><h4 class="five-h">예산의 70%를 사람과 프로세스에 씁니다</h4><ul><li>라이선스 5천만 + 교육 5백만 → "쓸 줄 아는 사람이 없다".</li><li>같은 라이선스 + 교육 1억 → "토큰이 모자라다".</li><li>알고리즘 10%, 데이터·기술 20%, 사람 70%가 기준선.</li></ul></div>
+          <div class="five-cell"><div class="five-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg></div><div class="five-num">N° 3 · 집중 투자</div><h4 class="five-h">수십 건 시도 대신 굵직한 서너 건만</h4><ul><li>분기마다 올라오는 PoC 30~50건을 전부 승인하지 않습니다.</li><li>경영진이 직접 3~5건만 통과시킵니다.</li><li>통과한 과제에 인력의 30%를 우선 붙입니다.</li></ul></div>
+          <div class="five-cell"><div class="five-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div class="five-num">N° 4 · 검증 강도</div><h4 class="five-h">업무마다 검증 강도를 다르게 둡니다</h4><ul><li>마케팅 카피: 한 번 읽고 게재합니다.</li><li>분기 재무 코멘트: 두 명 대조 + CFO 결재.</li><li>같은 도구라도 업무가 다르면 검증도 달라집니다.</li></ul></div>
+          <div class="five-cell"><div class="five-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div><div class="five-num">N° 5 · 선제 거버넌스</div><h4 class="five-h">사고가 터지기 전에 거버넌스를 먼저</h4><ul><li>도입 첫 주에 데이터 반출 매트릭스를 게시합니다.</li><li>책임자·승인 절차·감사 기록을 함께 정합니다.</li><li>외부 감사에서 사고가 드러난 뒤에 만들지 않습니다.</li></ul></div>
         </div>
       </div>
     </section>
@@ -1152,24 +1180,6 @@ html, body {
             <div class="agenda-qmark">어디서부터 AX를 시작해야 할까?</div>
             <div class="agenda-tag">AX 캔버스</div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== 20. Q3-1 왜 직무 단위 ===== -->
-    <section class="slide slide--content" data-tone="light">
-      <div class="s-head">
-        <div class="s-eyebrow"><span class="qbadge">Q3-1</span>캔버스의 위치와 단위</div>
-        <div class="s-titlerow">
-          <h2 class="s-title">왜 직무 하나에서 시작해야 하는가</h2>
-          <div class="s-meta">4단계 · 분석 단위</div>
-        </div>
-      </div>
-      <div class="s-body">
-        <div class="qcard">
-          <div class="qtag">캔버스가 답하는 한 가지 질문</div>
-          <div class="qtext">"이 직무가 만드는 가치는 무엇이고, 사람과 에이전트는 그 가치를 어떻게 함께 만드는가."</div>
-          <div class="qnote">직무가 만드는 가치, 사람과 에이전트의 역할 분담, 그 위의 통제와 재투입을 한 장에 담습니다. <strong>같은 양식이 직무마다 쌓이면 전사 지식 자산이 됩니다.</strong> 이 한 장이 지금부터 살펴볼 AX 캔버스입니다.</div>
         </div>
       </div>
     </section>
@@ -1220,6 +1230,24 @@ html, body {
               <ul><li>두려움 → 역할 재정의</li><li>관성 → 기회 비용</li><li>불신 → 가드레일</li><li>낮은 확신 → 작은 성공 경험</li></ul>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 20. Q3-1 왜 직무 단위 ===== -->
+    <section class="slide slide--content" data-tone="light">
+      <div class="s-head">
+        <div class="s-eyebrow"><span class="qbadge">Q3-1</span>캔버스의 위치와 단위</div>
+        <div class="s-titlerow">
+          <h2 class="s-title">왜 직무 하나에서 시작해야 하는가</h2>
+          <div class="s-meta">4단계 · 분석 단위</div>
+        </div>
+      </div>
+      <div class="s-body">
+        <div class="qcard">
+          <div class="qtag">AX 캔버스가 답하는 한 가지 질문</div>
+          <div class="qtext">"이 직무가 만드는 가치는 무엇이고, 사람과 에이전트는 그 가치를 어떻게 함께 만드는가."</div>
+          <div class="qnote">직무가 만드는 가치, 사람과 에이전트의 역할 분담, 그 위의 통제와 재투입을 한 장에 담습니다. <strong>같은 양식이 직무마다 쌓이면 전사 지식 자산이 됩니다.</strong> 이 한 장이 지금부터 살펴볼 AX 캔버스입니다.</div>
         </div>
       </div>
     </section>
@@ -1446,10 +1474,9 @@ html, body {
       </div>
     </section>
 
-    <!-- ===== 28. CURRICULUM (진단~참고) ===== -->
-    <section class="slide slide--content" data-tone="light">
+    <!-- ===== 28. CURRICULUM (진단~참고) · 다크 ===== -->
+    <section class="slide slide--dark curr-dark" data-tone="dark">
       <div class="s-head">
-        <div class="s-eyebrow">Curriculum · 진단부터 참고까지 · COMPANY BRAIN OS 구축 경로</div>
         <div class="s-titlerow">
           <h2 class="s-title">한 장으로 보는 AX 실행 로드맵</h2>
           <div class="s-meta">각 단계가 한 층씩 완성</div>
@@ -1459,63 +1486,63 @@ html, body {
         <div class="curr-band diag">
           <div class="curr-band-label">진단 · 시작 전</div>
           <div class="curr-chips">
-            <span>AX 추진 원칙</span>
-            <span>AX 캔버스</span>
-            <span>현재 수준 진단</span>
+            <a href="https://ax-guide.vercel.app/blueprint.html" target="_blank" rel="noopener">AX 추진 원칙</a>
+            <a href="https://ax-guide.vercel.app/ax-canvas.html" target="_blank" rel="noopener">AX 캔버스</a>
+            <a href="https://ax-guide.vercel.app/diagnosis.html" target="_blank" rel="noopener">현재 수준 진단</a>
           </div>
         </div>
 
         <div class="curr-road">
-          <div class="curr-stage">
+          <a class="curr-stage" href="https://ax-guide.vercel.app/organization.html" target="_blank" rel="noopener">
             <div class="cs-num">1단계</div>
             <div class="cs-title">AX 실행 조직</div>
-            <div class="cs-sub">경영진이 먼저 매일 직접 쓰고, 그 확신 위에서 TF·6개월 계획·90일 부트캠프로 첫 인재를 만듭니다.</div>
-            <div class="cs-items">경영진의 하루 · TF 구성 · 운영 계획 · 역량 부트캠프</div>
+            <div class="cs-sub">경영진이 먼저 매일 직접 써 보고, 그 확신 위에서 전담팀과 6개월 운영 계획, 90일 교육 과정으로 첫 인재를 길러냅니다.</div>
+            <div class="cs-items">경영진의 하루 · 전담팀 구성 · 운영 계획 · 역량 교육</div>
             <div class="cs-asset"><b>남기는 자산</b>AX를 끌고 갈 사람과 조직</div>
-          </div>
-          <div class="curr-stage">
+          </a>
+          <a class="curr-stage" href="https://ax-guide.vercel.app/pilot.html" target="_blank" rel="noopener">
             <div class="cs-num">2단계</div>
             <div class="cs-title">파일럿 실행</div>
-            <div class="cs-sub">분석만 반복하지 말고 후보 업무를 실제로 한 번 실행한 뒤, 결과를 다음 단계 현장 데이터로 정리합니다.</div>
+            <div class="cs-sub">분석만 반복하지 말고, 후보 업무 하나를 실제로 한 번 돌려 본 뒤 그 결과를 다음 단계가 쓸 현장 데이터로 정리합니다.</div>
             <div class="cs-items">대상 선정·실행 · 핵심 시사점</div>
             <div class="cs-asset"><b>남기는 자산</b>처음 자동화할 업무 후보</div>
-          </div>
-          <div class="curr-stage">
+          </a>
+          <a class="curr-stage" href="https://ax-guide.vercel.app/criteria.html" target="_blank" rel="noopener">
             <div class="cs-num">3단계</div>
             <div class="cs-title">과제 우선순위화</div>
-            <div class="cs-sub">두 축(전략 기여도·실현 가능성)에 합의하고, 미시 엔진 7문항·DRI 매트릭스로 3~5개로 압축합니다.</div>
+            <div class="cs-sub">전략에 얼마나 보탬이 되는지와 실제로 해낼 수 있는지, 두 기준에 합의한 뒤 후보 과제를 3~5개로 추립니다.</div>
             <div class="cs-items">기준 설정 · 후보 평가 · 전략 과제 선정</div>
             <div class="cs-asset"><b>남기는 자산</b>우선순위 과제 3~5건과 책임자</div>
-          </div>
-          <div class="curr-stage">
+          </a>
+          <a class="curr-stage" href="https://ax-guide.vercel.app/reshape.html" target="_blank" rel="noopener">
             <div class="cs-num">4단계</div>
             <div class="cs-title">업무 방식 재설계</div>
-            <div class="cs-sub">10·20·70 원칙으로 자원을 다시 배분하고, 끝에서 끝까지 흐름을 재설계해 4D를 전사 언어로 정착시킵니다.</div>
+            <div class="cs-sub">예산을 도구보다 사람과 프로세스에 더 쓰고, 업무 흐름을 처음부터 끝까지 새로 설계해 전사로 퍼뜨립니다.</div>
             <div class="cs-items">자원 재배분 · 업무 재설계</div>
             <div class="cs-asset"><b>남기는 자산</b>전사가 함께 쓰는 일하는 방식</div>
-          </div>
-          <div class="curr-stage">
+          </a>
+          <a class="curr-stage" href="https://ax-guide.vercel.app/ainative.html" target="_blank" rel="noopener">
             <div class="cs-num">5단계</div>
             <div class="cs-title">AI 네이티브 컴퍼니</div>
-            <div class="cs-sub">닫힌 루프·AI 소프트웨어 팩토리가 작동하고, 직원은 빌더·DRI·AI 파운더로, 확장 단위는 토큰이 됩니다.</div>
-            <div class="cs-items">도착지 정의 · BRAIN OS 완성도 · 지속 운영</div>
+            <div class="cs-sub">회사가 스스로 배우며 돌아가고, 직원은 AI와 함께 만드는 사람이 되며, 성장의 단위는 인원이 아니라 AI 사용량이 됩니다.</div>
+            <div class="cs-items">도착지 정의 · 완성도 점검 · 지속 운영</div>
             <div class="cs-asset"><b>남기는 자산</b>스스로 굴러가는 회사의 두뇌</div>
-          </div>
+          </a>
         </div>
 
         <div class="curr-band ref">
           <div class="curr-band-label">참고 자료 · 부록</div>
           <div class="curr-chips">
-            <span>AI 네이티브로의 여정</span>
-            <span>AI 퍼스트 문제 정의력</span>
-            <span>AI 서비스 비교</span>
+            <a href="https://ax-guide.vercel.app/cost-output.html" target="_blank" rel="noopener">AI 네이티브로의 여정</a>
+            <a href="https://ax-guide.vercel.app/problem-definition.html" target="_blank" rel="noopener">AI 퍼스트 문제 정의력</a>
+            <a href="https://ax-guide.vercel.app/ai-services.html" target="_blank" rel="noopener">AI 서비스 비교</a>
           </div>
         </div>
 
-        <div class="curr-goal">
+        <a class="curr-goal" href="https://ax-guide.vercel.app/brainos.html" target="_blank" rel="noopener">
           <div class="glbl">궁극적 목표</div>
-          <div class="gbody">COMPANY BRAIN OS <span>· 자산 축적 4단계 순환으로 분기마다 역량이 쌓이는 회사의 두뇌.</span></div>
-        </div>
+          <div class="gbody">COMPANY BRAIN OS <span>· 쓸수록 지식이 쌓여 분기마다 더 똑똑해지는 회사의 두뇌.</span></div>
+        </a>
       </div>
     </section>
 
@@ -1540,8 +1567,8 @@ html, body {
         <h2 class="thanks-h">감사합니다</h2>
         <div class="thanks-foot"><strong>강정구 · Jayden Kang</strong>
           <a class="li-btn" href="https://www.linkedin.com/in/jayden-kang" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
-            LinkedIn
+            <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+            <span class="sr-only" aria-label="LinkedIn"></span>
           </a>
         </div>
         <div class="copyright">
@@ -1606,6 +1633,7 @@ html, body {
     });
 
     document.getElementById('viewport').addEventListener('click', function (e) {
+        if (e.target.closest('a')) return;
         var mid = window.innerWidth / 2;
         if (e.clientX < mid * 0.6) prev(); else next();
     });
