@@ -889,3 +889,28 @@ body {
     }
 }
 
+/* ===== 강의용 재편 패턴 (lecture-blueprint §1) — 공통 승격 ===== */
+/* 1. 강의 발문:화면을 지배하는 한 줄. 좌측 컬러 바 금지(AGENTS.md §4.7-A). */
+.bp-beat-lead {
+    font-size: 26px;
+    line-height: 1.42;
+    letter-spacing: -0.012em;
+    font-weight: 600;
+    color: var(--ink-soft);
+    margin: 0 0 32px;
+}
+.bp-beat-lead strong { color: var(--bp-ink); font-weight: 700; }
+/* 2. 밀도 종속화:표본·출처는 메시지·차트 뒤로 물러난다. 정보는 유지. */
+.bp-cite {
+    display: block;
+    margin-top: 10px;
+    font-size: 11px;
+    line-height: 1.6;
+    color: var(--ink-mute);
+    opacity: 0.85;
+}
+.bp-cite a { border-bottom-style: dotted; }
+@media (max-width: 600px) {
+    .bp-beat-lead { font-size: 20px; line-height: 1.45; margin: 0 0 24px; }
+}
+

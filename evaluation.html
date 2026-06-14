@@ -5,6 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>후보 평가 · AI ROASTING</title>
 <meta name="description" content="AX 3단계 과제 우선순위화의 두 번째 작업. 후보 풀을 미시 엔진 7문항으로 정밀 해부하고, DRI 매트릭스로 성격을 가르며, 전략 기여도와 실현 가능성으로 점수화해 COMPANY BRAIN OS의 우선 적재 자산을 결정하는 방법.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://airoasting.github.io/claude_guide/evaluation.html">
+<meta property="og:title" content="후보 평가 · AI ROASTING">
+<meta property="og:description" content="AX 3단계 과제 우선순위화의 두 번째 작업. 후보 풀을 미시 엔진 7문항으로 정밀 해부하고, DRI 매트릭스로 성격을 가르며, 전략 기여도와 실현 가능성으로 점수화해 COMPANY BRAIN OS의 우선 적재 자산을 결정하는 방법.">
+<meta property="og:site_name" content="AI ROASTING">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://airoasting.github.io/claude_guide/assets/thumbnails/thumbnail.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="후보 평가 · AI ROASTING">
+<meta name="twitter:description" content="AX 3단계 과제 우선순위화의 두 번째 작업. 후보 풀을 미시 엔진 7문항으로 정밀 해부하고, DRI 매트릭스로 성격을 가르며, 전략 기여도와 실현 가능성으로 점수화해 COMPANY BRAIN OS의 우선 적재 자산을 결정하는 방법.">
+<meta name="twitter:image" content="https://airoasting.github.io/claude_guide/assets/thumbnails/thumbnail.png">
 <link rel="stylesheet" href="assets/style.css">
 <style>
 /* ================== B-3-2 Evaluation Page Local Styles ================== */
@@ -530,7 +543,7 @@ body {
     <nav class="bp-stepnav" aria-label="전체 단계">
         <ol class="bp-steps">
             <li class="bp-step"><a href="blueprint.html">진단</a></li>
-            <li class="bp-step"><a href="organization.html">1</a></li>
+            <li class="bp-step"><a href="leader-first.html">1</a></li>
             <li class="bp-step"><a href="pilot.html">2</a></li>
             <li class="bp-step active" aria-current="step"><a href="criteria.html">3</a></li>
             <li class="bp-step"><a href="resource.html">4</a></li>
@@ -867,10 +880,10 @@ body {
                     </g>
 
                     <!-- Bars: 5 buckets (점수 합계 5~25 → 5칸) -->
-                    <!-- bucket 1: 5-9 (1 후보) -->
-                    <rect x="120" y="226" width="120" height="20" fill="url(#histBar)" opacity="0.55"/>
-                    <text x="180" y="222" text-anchor="middle" font-family="Pretendard Variable, sans-serif" font-size="11" font-weight="700" fill="#4A554F">2</text>
-                    <!-- bucket 2: 10-13 (6 후보) -->
+                    <!-- bucket 1: 5-9 (2 후보) -->
+                    <rect x="120" y="215" width="120" height="31" fill="url(#histBar)" opacity="0.55"/>
+                    <text x="180" y="209" text-anchor="middle" font-family="Pretendard Variable, sans-serif" font-size="11" font-weight="700" fill="#4A554F">2</text>
+                    <!-- bucket 2: 10-13 (7 후보) -->
                     <rect x="260" y="138" width="120" height="108" fill="url(#histBar)" opacity="0.7"/>
                     <text x="320" y="132" text-anchor="middle" font-family="Pretendard Variable, sans-serif" font-size="11" font-weight="700" fill="#4A554F">7</text>
                     <!-- bucket 3: 14-17 (12 후보) -->
@@ -879,9 +892,9 @@ body {
                     <!-- bucket 4: 18-21 (10 후보) -->
                     <rect x="540" y="92"  width="120" height="154" fill="url(#histBarTop)" opacity="0.95"/>
                     <text x="600" y="86" text-anchor="middle" font-family="Pretendard Variable, sans-serif" font-size="11" font-weight="700" fill="#0E3B2A">10</text>
-                    <!-- bucket 5: 22-25 (5 후보 — 전략 과제 후보) -->
-                    <rect x="680" y="168" width="120" height="78" fill="#9A7B0A" opacity="0.85"/>
-                    <text x="740" y="162" text-anchor="middle" font-family="Pretendard Variable, sans-serif" font-size="11" font-weight="700" fill="#9A7B0A">7</text>
+                    <!-- bucket 5: 22-25 (7 후보 · 전략 과제 후보) -->
+                    <rect x="680" y="139" width="120" height="107" fill="#9A7B0A" opacity="0.85"/>
+                    <text x="740" y="133" text-anchor="middle" font-family="Pretendard Variable, sans-serif" font-size="11" font-weight="700" fill="#9A7B0A">7</text>
 
                     <!-- Threshold line at score 18 (통과선 예시) -->
                     <line x1="540" y1="30" x2="540" y2="250" stroke="#8B2E1F" stroke-width="1.5" stroke-dasharray="6 4"/>
@@ -901,12 +914,12 @@ body {
                     <text x="28" y="140" text-anchor="middle" font-family="Pretendard Variable, sans-serif" font-size="11" font-weight="700" fill="#0E3B2A" letter-spacing="0.16em" transform="rotate(-90 28 140)">후보 수</text>
 
                     <!-- Annotation: 전략 과제 -->
-                    <line x1="740" y1="168" x2="740" y2="115" stroke="#9A7B0A" stroke-width="1"/>
+                    <line x1="740" y1="139" x2="740" y2="115" stroke="#9A7B0A" stroke-width="1"/>
                     <text x="740" y="108" text-anchor="middle" font-family="Pretendard Variable, sans-serif" font-size="10.5" font-weight="700" fill="#9A7B0A" letter-spacing="0.08em">전략 과제 후보 7건</text>
                     <text x="740" y="122" text-anchor="middle" font-family="Pretendard Variable, sans-serif" font-size="9.5" fill="#4A554F" letter-spacing="0.06em">→ 다음 페이지에서 3~5개로 압축</text>
                 </svg>
                 <div class="bp-chart-caption">
-                    <strong>읽는 방법.</strong> 38개 후보 풀의 가중 합산 점수 분포 예시입니다. 분포가 14~21점 구간에 두 봉우리로 모이는 종형이 건강한 모습입니다. 한쪽 끝(5~9점)에 몰리면 후보 정의가 모호한 신호, 양극단으로 갈리면 채점 기준이 흔들렸다는 신호입니다. 통과선 18점 위에 7건이 전략 과제 후보가 되며, 다음 페이지에서 D·R·I 비율을 섞어 3~5개로 압축합니다. <em>출처 영감: McKinsey "Where to Focus Your AI Investments"(2024)의 후보 풀 정렬 모델, Forrester AI Use Case Selection Wave(2024).</em>
+                    <strong>읽는 방법.</strong> 38개 후보 풀의 가중 합산 점수 분포 예시입니다. 14~17점에 봉우리가 서는 단봉 종형이 건강한 모습입니다. 한쪽 끝(5~9점)에 몰리면 후보 정의가 모호한 신호, 양극단으로 갈리면 채점 기준이 흔들렸다는 신호입니다. 통과선 18점 위로 17건이 통과하고, 그중 상위 22~25점 7건이 전략 과제 후보가 되어 다음 페이지에서 D·R·I 비율을 섞어 3~5개로 압축합니다. <em>출처 영감: McKinsey "Where to Focus Your AI Investments"(2024)의 후보 풀 정렬 모델, Forrester AI Use Case Selection Wave(2024).</em>
                 </div>
             </div>
         </div>

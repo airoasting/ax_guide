@@ -5,6 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>업무 재설계 · AI ROASTING</title>
 <meta name="description" content="AX 4단계 업무 방식 재설계의 두 번째 작업. 부분 자동화의 한계를 넘어 워크플로우를 끝에서 끝까지 다시 그리고, 4D를 전사 공통 언어로 세웁니다.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://airoasting.github.io/claude_guide/reshape.html">
+<meta property="og:title" content="업무 재설계 · AI ROASTING">
+<meta property="og:description" content="AX 4단계 업무 방식 재설계의 두 번째 작업. 부분 자동화의 한계를 넘어 워크플로우를 끝에서 끝까지 다시 그리고, 4D를 전사 공통 언어로 세웁니다.">
+<meta property="og:site_name" content="AI ROASTING">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://airoasting.github.io/claude_guide/assets/thumbnails/thumbnail.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="업무 재설계 · AI ROASTING">
+<meta name="twitter:description" content="AX 4단계 업무 방식 재설계의 두 번째 작업. 부분 자동화의 한계를 넘어 워크플로우를 끝에서 끝까지 다시 그리고, 4D를 전사 공통 언어로 세웁니다.">
+<meta name="twitter:image" content="https://airoasting.github.io/claude_guide/assets/thumbnails/thumbnail.png">
 <link rel="stylesheet" href="assets/style.css">
 <style>
 /* ================== B-4-2 Reshape Page Local Styles ================== */
@@ -231,6 +244,18 @@ body {
     line-height: 1.75;
 }
 .bp-hero .bp-summary strong { color: var(--bp-line); }
+
+/* ===== 강의 발문 (lecture beat-lead) ===== */
+/* 섹션 head 바로 아래, 발표자가 입으로 말하는 한 줄. 좌측 컬러 바 금지(§4.7-A). */
+.bp-beat-lead {
+    font-size: 26px;
+    line-height: 1.42;
+    letter-spacing: -0.012em;
+    font-weight: 600;
+    color: var(--ink-soft);
+    margin: 0 0 32px;
+}
+.bp-beat-lead strong { color: var(--bp-ink); font-weight: 700; }
 
 /* ===== Section submenu ===== */
 .bp-hero-nav {
@@ -738,7 +763,7 @@ body {
     <nav class="bp-stepnav" aria-label="전체 단계">
         <ol class="bp-steps">
             <li class="bp-step"><a href="blueprint.html">진단</a></li>
-            <li class="bp-step"><a href="organization.html">1</a></li>
+            <li class="bp-step"><a href="leader-first.html">1</a></li>
             <li class="bp-step"><a href="pilot.html">2</a></li>
             <li class="bp-step"><a href="criteria.html">3</a></li>
             <li class="bp-step active" aria-current="step"><a href="resource.html">4</a></li>
@@ -780,6 +805,8 @@ body {
             <div class="bp-section-meta">부분 자동화의 함정</div>
         </div>
 
+        <p class="bp-beat-lead">가장 눈에 띄는 한 단계만 빨라졌는데, 전체는 그대로입니다. <strong>일의 가치는 가장 느린 단계가 정하기 때문입니다.</strong></p>
+
         <p class="bp-section-intro">대부분의 회사가 가장 눈에 띄는 한 단계에 AI를 붙이는 데서 멈춥니다. 보고서 초안 작성, 회의록 요약, 견적 분류 같은 단계가 빨라지고, 그 결과가 경영진 보고에 올라갑니다. 그러나 인접 단계의 권한·결재 라인·산출 양식은 손대지 않습니다. 사이클 타임은 거의 줄지 않고, 절약된 시간은 다음 결재 대기열에서 소진됩니다.</p>
 
         <div class="bp-handoff">
@@ -796,6 +823,8 @@ body {
             </div>
             <div class="bp-section-meta">부분 자동화 · 가치 사슬 단위 재설계 비교</div>
         </div>
+
+        <p class="bp-beat-lead">한 단계만 자동화하면 병목은 사라지지 않고 옆 단계로 옮겨 갈 뿐입니다. <strong>흐름 전체를 한 도면에서 다시 그려야 합니다.</strong></p>
 
         <p class="bp-section-intro">아래는 5단계짜리 업무에 AI를 붙이는 두 가지 방식입니다. 좌측은 한 단계만 자동화한 모습, 우측은 흐름 자체를 다시 그린 모습입니다. 같은 도구를 써도 결과의 폭이 크게 벌어지는 자리가 여기입니다.</p>
 
@@ -836,6 +865,16 @@ body {
             <div class="tag">재설계의 세 가지 동시 변경</div>
             끝에서 끝까지의 재설계는 세 가지가 같이 움직여야 비로소 작동합니다. 첫째, <strong>권한 재정의</strong>입니다. 누가 어디까지 결정하고, 어디서 결재가 끝나는지를 새로 그립니다. 둘째, <strong>산출 양식 재정의</strong>입니다. 사람이 마지막에 한 번 보는 화면의 형식이 달라져야 판단의 질도 달라집니다. 셋째, <strong>책임 경계 재정의</strong>입니다. AI 산출물의 책임을 누가 지는지, 사고가 났을 때 어디까지 거슬러 올라가는지를 같은 도면에 표시합니다.
         </div>
+
+        <div class="bp-handoff" style="margin-top: 28px;">
+            <div class="tag">검증 사례로 본 같은 그림 · 패션 커머스 A사 CS</div>
+            <strong>위 도식은 추상이 아닙니다.</strong> 본 가이드의 검증 사례인 패션 커머스 A사의 반품·교환 응대에 그대로 포갭니다. 부분 자동화는 문의 분류만 AI로 빨라지고, 채널 확인과 기한 점검과 예외 판단은 사람 대기열에 그대로 쌓입니다. 끝에서 끝까지 재설계는 접수와 채널 분류를 한 묶음으로 합치고, 표준 응대 초안과 근거를 같이 만들어, 사람은 까다로운 예외 한 자리에서만 판단합니다. 정형 문의가 전체의 약 60퍼센트라, 이 한 번의 재설계가 CS팀 응대 공수의 약 4분의 1을 덜어 냅니다. 자세한 전개는 본 가이드 검증 사례의 K1부터 K4까지에서 봅니다.
+        </div>
+
+        <div class="bp-handoff" style="margin-top: 28px;">
+            <div class="tag">정직하게 짚을 것 · 사람의 자리는 어디로 가는가</div>
+            <strong>"사람의 자리가 한 군데로 모인다"는 말은, 나머지 자리가 사라진다는 뜻이기도 합니다.</strong> 4단계에서 경영진이 가장 민감하게 받는 질문이 여기입니다. 답은 감원이 먼저가 아니라 재배치가 먼저라는 것입니다. AI가 정형 업무를 가져가면 사람은 예외 판단, 고객과의 신뢰, 새로 생긴 검증과 조정 업무로 옮겨 갑니다. 미시 엔진 10번 문항이 묻는 "담당자는 이제 무엇에 집중하는가"가 이 자리의 설계 도구입니다. 성급한 감원이 어떻게 되돌아오는지는 이미 사례가 있습니다. 클라르나는 상담 인력 700명 몫을 에이전트로 대체했다고 발표했다가 품질 저하로 사람을 다시 뽑았고, 호주 커먼웰스은행은 콜센터 45명을 줄였다가 통화량이 오히려 늘어 감원을 "오류"로 인정하고 되돌렸습니다. 재배치 계획 없이 자리를 먼저 없애면, 같은 비용을 두 번 치릅니다.
+        </div>
     </section>
 
     <!-- ========= 3. 4D 전사 표준 ========= -->
@@ -846,6 +885,8 @@ body {
             </div>
             <div class="bp-section-meta">위임 · 설명 · 분별 · 성실</div>
         </div>
+
+        <p class="bp-beat-lead">새로 그린 흐름도, 사람이 매일 같은 기준으로 움직이지 않으면 멈춥니다. <strong>그 공통 언어가 위임·설명·분별·성실 네 글자입니다.</strong></p>
 
         <p class="bp-section-intro">새로 그린 워크플로우가 매일 작동하려면 직원 한 사람 한 사람이 같은 기준으로 AI와 일해야 합니다. 그 공통 언어가 4D입니다. Anthropic이 AI Fluency로 정리한 위임(Delegation)·설명(Description)·분별(Discernment)·성실(Diligence) 네 글자를 전사 표준으로 세웁니다. 자원 재배분에서 잡아 둔 70퍼센트의 "사람" 영역이 슬로건이 아니라 일상 행동이 되는 자리가 여기입니다.</p>
 
@@ -886,6 +927,8 @@ body {
             <div class="bp-section-meta">미시 엔진 · 자산 축적 4단계 순환의 자산화·검증 작동점</div>
         </div>
 
+        <p class="bp-beat-lead">맥킨지와 BCG의 권고는 워크플로우 재설계에서 멈춥니다. <strong>본 가이드는 거기서 한 걸음 더 나아가, COMPANY BRAIN OS의 자산으로 묶습니다.</strong></p>
+
         <p class="bp-section-intro">3단계까지 미시 엔진은 업무 한 건을 해부하는 도구로 호출됐습니다. 4단계의 두 번째 작업에서 이 엔진의 핵심 두 가지가 전사 자산으로 자라납니다. What 영역의 "암묵지의 Mark-down화"는 전사 지식 구조화 체계로, Why 영역의 "사람·에이전트 협업"은 전사 협업 모델로 확장됩니다. 이 두 확장이 자리잡는 순간, COMPANY BRAIN OS의 자산 축적 4단계 순환에서 자산화(에이전트 만들기)와 검증(루프 닫기)이 처음으로 본격적으로 돌기 시작합니다.</p>
 
         <div class="bp-bridge">
@@ -924,6 +967,8 @@ body {
             <div class="bp-section-meta">부분 자동화 · 슬로건 4D · 권한 정체</div>
         </div>
 
+        <p class="bp-beat-lead">도면을 새로 그려도 권한을 그대로 두면 흐름은 다시 늘어집니다. <strong>권한이 같이 가야 흐름이 같이 갑니다.</strong></p>
+
         <p class="bp-section-intro">아래 세 가지는 업무 재설계를 시작한 회사 거의 모두가 한 번씩 만나는 함정입니다. 좌측은 흔히 나타나는 모습, 우측은 그 자리를 다르게 푸는 방법입니다.</p>
 
         <div class="bp-anti">
@@ -954,6 +999,8 @@ body {
             </div>
             <div class="bp-section-meta">재설계 청사진 · 4D 교육 체계</div>
         </div>
+
+        <p class="bp-beat-lead">이 페이지가 남기는 건 도면과 교육 체계 둘입니다. <strong>앞 페이지의 예산·책임자까지 더해 넷이 모이면 5단계로 넘어갑니다.</strong></p>
 
         <p class="bp-section-intro">업무 재설계 작업이 끝나면 두 가지가 손에 들립니다. 한 가지는 도면, 한 가지는 교육 체계입니다. 앞 페이지에서 만든 예산 재배분과 책임자 매핑까지 합쳐 세 가지가 모이면 5단계 운영 내재화로 인계됩니다.</p>
 

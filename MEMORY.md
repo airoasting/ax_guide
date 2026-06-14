@@ -1,6 +1,6 @@
 # MEMORY.md: 변경 로그와 구축 진행 상황
 
-이 파일은 페이지별 변경 이력과 14페이지 웹사이트의 구축 진행 상황을 기록한다. 모든 작업 지침(SSOT 규칙, 코드 규약, 디자인 시스템, 한국어 작성 원칙, 페이지 인벤토리)은 [AGENTS.md](AGENTS.md)에 있다. 이 문서의 모든 문장도 AGENTS.md의 한국어 작성 원칙을 지킨다.
+이 파일은 페이지별 변경 이력과 21페이지 웹사이트의 구축 진행 상황을 기록한다. 모든 작업 지침(SSOT 규칙, 코드 규약, 디자인 시스템, 한국어 작성 원칙, 페이지 인벤토리)은 [AGENTS.md](AGENTS.md)에 있다. 이 문서의 모든 문장도 AGENTS.md의 한국어 작성 원칙을 지킨다.
 
 ---
 
@@ -8,16 +8,107 @@
 
 - **이름**: 비즈니스 리더를 위한 AX 실행 가이드
 - **부제(슈퍼타이틀)**: AI-Native 전환을 위한 5단계 프레임워크
-- **단일 진실 원천(SSOT)**: [plan.md](plan.md)
-- **목표 산출물**: 정적 HTML 14페이지 + 공통 자산 2개 (`assets/style.css`, `assets/nav.js`)
-- **디자인 톤**: BCG·Bain·McKinsey 류 컨설팅 보고서. 진중한 포레스트 그린 + 에디토리얼 세리프
-- **현재 단계**: A 영역 진단·청사진, B 영역 ①②③④ 단계 페이지 구현 완료. ⑤ 운영 내재화와 C·D·E 영역 미착수
+- **정본(SSOT)**: 라이브 사이트(HTML 페이지). 별도 원본 문서를 두지 않는다 (초기 기획안 `plan.md`는 `backups/`에 보관, 참조하지 않음)
+- **목표 산출물**: 정적 HTML 21페이지 + 단일 스타일시트 `assets/style.css` (JS는 페이지 인라인)
+- **디자인 톤**: BCG·Bain·McKinsey 류 컨설팅 보고서. 진중한 포레스트 그린 + Pretendard 산세리프
+- **현재 단계**: 진단 게이트(3) + 5단계 여정(①4·②2·③3·④2·⑤3) + 참고(3) = 21페이지 구현 완료. 옛 E 영역(검증 사례·인터랙티브 템플릿·운영 매뉴얼)만 미구현
+- **단계 순서**: 진단 → ① 실행 조직 → ② 파일럿 실행 → ③ 과제 우선순위화 → ④ 업무 재설계(★심장) → ⑤ AI 네이티브 컴퍼니 → 참고 (파일럿이 우선순위화보다 먼저. 사이트·AGENTS.md 일치)
 
-원본 가이드(`plan.md`)는 5층위(A 청사진 + B 5단계 + C 미시 메서드 + D 자산 축적 4단계 순환 + E 검증 사례) 구조로 완성되어 있고, 모든 층위는 **COMPANY BRAIN OS 구축**이라는 궁극 목표로 수렴한다. 본 저장소는 이 원본을 14페이지 웹사이트로 구현하는 작업을 담는다.
+이 가이드는 5층위(A 청사진 + B 5단계 + C 미시 메서드 + D 자산 축적 4단계 순환 + E 검증 사례) 구조이며, 모든 층위는 **COMPANY BRAIN OS 구축**이라는 궁극 목표로 수렴한다. 21페이지 웹사이트로 구현됐다(방법론 A~E는 진단 게이트·AX 캔버스·BRAIN OS로 단계 구조에 흡수). 초기 기획안 `plan.md`는 `backups/`에 보관하며 더 이상 참조하지 않는다.
 
 ---
 
 ## 최근 세션 변경 로그
+
+### 2026-06-14 (현재 세션) — md 문서 전면 현행화 (plan·AGENTS·MEMORY를 21페이지 단계 구조로 정렬)
+
+운영 3문서가 실제 사이트(21페이지 단계 구조)보다 뒤처져 있던 것을 현재 기준으로 맞췄다. 사이트·AGENTS·MEMORY는 이미 '파일럿 먼저 → 우선순위화 나중' 순서였고 plan.md만 옛 순서(우선순위화→파일럿)였는데, **사용자 결정에 따라 plan.md를 사이트 기준으로 재배열**해 전 문서를 한 방향으로 통일했다. [[ax-stage-order-divergence]] 해소.
+
+| # | 문서 | 변경 |
+|---|---|---|
+| 1 | `plan.md` | B-2를 '파일럿 실행'(탐색·Build-Measure-Learn·3칸 학습 리포트), B-3를 '과제 우선순위화'(두 축·게이트·DRI)로 재배열. 원칙 연결(②↔원칙4, ③↔원칙3), 미시 엔진 호출(7문항→③, 3문항→④), D-3 단계 연결, '전체 한눈에 보기' 다이어그램, 웹 구조 섹션을 모두 새 순서로 재작성 |
+| 2 | `plan.md` | 옛 '웹사이트 페이지 구조 계획'(14페이지 A~E 레터 체계)을 '웹사이트 페이지 구조 (구현 기준)'(21페이지 단계 구조)로 교체. ⑤ 순서(ainative→brainos), 미구현 E 영역, 단일 style.css 명시 |
+| 3 | `AGENTS.md` | §3 페이지 인벤토리를 실제 21페이지(진단 게이트 3 + ①4·②2·③3·④2·⑤3 + 참고 3)로 재작성. 미시 엔진=ax-canvas(진단 게이트), ⑤=ainative·brainos·perpetual, 옛 a1/c1/d1/e1~e3 명칭 제거 |
+| 4 | `AGENTS.md` | §3.2 공통 자산을 '단일 `assets/style.css`'로 정정(`assets/css/*`·`nav.js`는 레거시 미참조). §4.0 '통합 방향(다음 세션)'을 '통합 완료'로. 사이트 전반 '14개/14페이지' → '21개/21페이지' |
+| 5 | `MEMORY.md` | 프로젝트 개요·구축 진행 상황(0/14 미착수 → 21/21 구현)·타이포(serif 폐기, Pretendard 단일)·다음 액션을 현재 상태로 갱신 |
+
+검증: 세 문서의 ②③ 참조 일괄 grep으로 잔여 역순 0건 확인. 콘텐츠 본문(HTML)은 손대지 않음 — 문서만 현행화.
+
+### 2026-06-14 (현재 세션) — 2단계(pilot·insights) 콘텐츠 평가 8.2/10 + 정합성 업그레이드
+
+2단계 파일럿 실행 두 페이지를 plan.md·AGENTS.md 기준으로 평가하고, 페이지에 갇힌 콘텐츠 결함을 고쳤다. 강의 발문(.bp-beat-lead)은 B-단계 전 페이지가 미적용 상태라 별도 전사 사이클로 두고, 이번엔 내용 결함만 손봤다.
+
+| # | 항목 | 파일 | 결과 |
+|---|---|---|---|
+| 1 | 사실 오류 | `pilot` | "The Lean Startup(2011) ... 같은 해 권한 Do Things That Don't Scale(2013)"의 모순. "2013년 에세이에서 권한"으로 정정 |
+| 2 | 핵심 논리 충돌 | `pilot` | "저위험 학습 샘플 선정"과 "반드시 성공시켜 확산 사례로"의 모순. 히어로 요약·#why 본문·비교표 '실행 강도' 3곳을 "저위험 선정이 1순위, 확산은 성공 사이클의 둘째 산출"로 재정합. #execution의 "완성도 노리지 않는다"와의 충돌도 해소(공개 수준 완성은 성공 사이클의 사후 정형화로 한정) |
+| 3 | 과한 단정 출처 | `pilot`·`insights` | plan.md에 없는 맥킨지·Bain·BCG 특정 주장 3곳을 출처 유지하되 단정 강도 완화 |
+| 4 | 한 페이지 내 중복 | `insights` | #report(3칸 내용 정의)와 #template(한 장 배치)의 관계를 인트로에 명시해 중복감 제거 |
+
+검증: em dash 0, 제거 문구 0, 경어 유지. 새 주장 미추가(오히려 plan.md B-2/B-3 '저위험·학습 우선' 프레임에 더 근접)라 plan.md 수정 불필요.
+
+미결(사용자 결정 필요): 사이트 단계 순서가 plan.md와 역전(사이트 파일럿→우선순위화, plan.md B-2 우선순위화→B-3 파일럿)이고 AGENTS.md §3.1 출처 칸 교차 오기. 개인 메모 [[ax-stage-order-divergence]] 참조. **→ 같은 날 'md 문서 전면 현행화' 세션에서 plan.md를 사이트 기준으로 재배열해 해소.**
+
+### 2026-06-14 (현재 세션) — 1단계 비즈니스 리더 관점 평가(진단 3회) + 정합성·보강 9건
+
+1단계 4페이지(leader-first·organization·operations·capability)를 진단 3회(이성·분야 전문가·공감) 후 비즈니스 리더 관점 10점으로 평가했다. 종합 8.3/10. 강의·참조용 완성도는 9점대지만 임원 의사결정 도구로는 비용·조직 접점·독자 안내의 빈칸이 감점 요인. 돈 환산(비용 블록·금액 KPI)은 사용자 지시로 보류하고 나머지를 보강했다.
+
+| # | 항목 | 범위 | 결과 |
+|---|---|---|---|
+| 1 | 데일리 회의 시간 모순 해소 | `organization` | organization "코어 데일리(15분)"를 operations의 상세 서술값 30분으로 통일. plan.md는 데일리 길이 미정의(30분은 모두 반데헤이 개인 챌린지)라 충돌 없음 |
+| 2 | 딜로이트 오프닝 강도 정합 | `leader-first` | 오프닝 "보고서값을 토해냈습니다"(전액 뉘앙스)를 본문·plan.md의 부분 환불 사실에 맞춰 "받은 돈의 일부를 돌려줬습니다"로 |
+| 3 | "최강 예측 변수" 판정 | (변경 없음) | plan.md:118·139에 저자 SSOT 명제로 두 번 박혀 있어 근거 미표시 오류가 아님. 가짜 인용 부착은 SSOT 위반이라 유지 |
+| 4 | 기존 DX·IT 조직 관계 신설 | `plan.md` B-1-1 → `organization` | "TF는 DX·IT를 대체하지 않는다. 검증(TF)/운영(DX·IT)으로 역할 분리. CDO·CIO는 스폰서·협력자, 보고선은 CEO/위임 C-레벨" 앵커 추가 후 #why 비교표 아래 bp-section-intro 문단으로 반영. 좌측 컬러바 0(§4.7-A) |
+| 5 | 표준 LLM 예외 경로 | `plan.md` B-1-1 | "한 개로 좁히기 어려우면 용도별 2개까지 허용, 핵심은 각자 아무거나 막기" 앵커 추가(향후 HTML 반영 여지) |
+| 6 | 강사 주체·시간 단계 적용 | `plan.md` B-1-2 → `capability` | 1차수 외부 부트스트랩→수료자 강사 순환, 70% 기준이나 기본기 2주 집중 후 60~70% 조정·50% 하한 앵커 추가. capability intro에 70% 예외, AI 기본기 모듈에 강사 순환 li 반영 |
+| 7 | operations 독자 분기 | `operations` | 6개월 마일스톤 intro에 "경영진은 이행 게이트만, 주차별은 TF 리드·멤버용" 한 줄 추가 |
+| 8 | organization 4역할 다리 | `organization` | bp-roles-intro 앞에 "구성 청사진으로 TF 내부를 짰다면, 시선을 조직 전체로 넓힙니다" 전환 문장 |
+| 9 | "흔한 실패 패턴" 도입부 반복 완화 | `organization`·`operations`·`capability` | 세 페이지가 공유하던 "좌측은/우측은 ... 3개 이상" 보일러플레이트(열 헤더와 중복)를 각기 다른 문장으로 차별화. 표 구조·정보는 유지 |
+| 10 | 검증 | grep + 프리뷰 | HTML em dash 0건, 데일리 30/30 통일, operations 실패 표 5행("다섯" 정합), DX 문단 렌더·border-left 0px 육안 확인 |
+
+### 2026-06-14 (현재 세션) — leader-first 전용 디자인 도입 (참고 페이지와 포맷 차별) + h1 주술 정합
+
+사례를 새로 갈았어도 cost-output(참고)과 똑같은 컴포넌트(bp-twocol·bp-cost 카드·bp-pull)를 써서 포맷이 겹친다는 지적. 같은 메시지·골격을 유지하되 본문 컴포넌트를 leader-first 전용 `lf-*` 디자인으로 교체해 신선함을 줬다. 더불어 h1의 주술 구조(주어 "첫 행동은" + 보어 "하루입니다"의 격 불일치)를 정합으로 고쳤다.
+
+| # | 명령 | 범위 | 결과 |
+|---|---|---|---|
+| 1 | h1·푸터·index 주술 정합 | `leader-first`·`index` | "첫 행동은 ... 하루입니다"를 "가장 먼저 바꿀 것은 ... 하루입니다"로(것은=하루). 푸터·index 카드의 같은 오류도 정리("가장 먼저 움직일 사람은 ... 본인입니다") |
+| 2 | 컴포넌트 CSS 교체 | `leader-first.html` `<style>` | cost-output 차용분(bp-twocol·bp-cost·bp-pull·bp-imp·bp-case) 제거, 전용 `lf-*` 도입: lf-statement(인용 패널)·lf-facts(3칸 사실 스트립)·lf-ledger(약속 vs 현실 장부)·lf-day(하루 타임라인 rail). bp-srcline 유지 |
+| 3 | 본문 재구성 | `leader-first.html` | #leader는 lf-statement+lf-facts, #cost는 lf-ledger 3행(Klarna·CBA·Deloitte 약속/현실), #daily는 lf-day 타임라인 5노드. #why는 bp-compare 유지(organization 계열이라 참고 페이지와 안 겹침). em dash 0(주석 포함) |
+| 4 | 검증 | 프리뷰 | lf-statement·사실 3칸·장부 3행·타임라인 5노드(녹색 그라데이션)·옛 컴포넌트 0·콘솔 0건. 긴 뷰포트 캡처로 새 레이아웃 육안 확인. AGENTS 안티패턴(좌측 컬러바·이모지·본문 그라데이션) 위반 없음 |
+
+### 2026-06-14 (현재 세션) — leader-first 사례를 부록과 안 겹치게 전면 교체 + 서브메뉴 '다음 단계' 제거
+
+부록 cost-output과 같은 사례(반데헤이·우버·MS·스타벅스)를 leader-first가 다시 쓰니 재미가 없다는 지적. 메시지는 유지하고 사례만 웹에서 새로 찾아 통째로 교체했다. WebSearch로 1차 보도를 확인하고 plan.md B-1-0에 '근거 사례' 블록으로 먼저 박은 뒤 HTML에 반영했다(SSOT).
+
+| # | 명령 | 범위 | 결과 |
+|---|---|---|---|
+| 1 | 새 사례 웹 조사 + SSOT 정착 | `plan.md` B-1-0 | 쇼피파이 뤼트케(2025.03 메모, "AI는 모두의 기본 기대치", "나를 포함한 모두"), 클라르나(700명 몫 AI 상담→품질 저하 인정·사람 재고용), 커먼웰스은행(콜센터 45명 감원→통화 늘어 "오류" 인정·복귀), 딜로이트(GPT-4o가 가짜 판례 인용→44만 호주달러 보고서 환불). 출처 명시 |
+| 2 | leader-first 사례 전면 교체 | `leader-first.html` | #leader를 뤼트케(bp-twocol+bp-pull)로, #cost 3카드를 클라르나·커먼웰스은행·딜로이트로, #why·#daily의 옛 사례 인용을 새 사례로. 본문에서 반데헤이·우버·MS·스타벅스·짐GPT 0건. em dash 0 |
+| 3 | 서브메뉴 '다음 단계' 제거 | `leader-first.html` | bp-hero-nav를 5칸→4칸(리더가 기준을 세운다·안 써보면 생기는 일·보고서 vs 직접·매일 하는 다섯 가지). 인계 섹션(#stuck)은 본문에 유지하되 네비에서 뺌 |
+| 4 | 거버넌스 동기화 + 검증 | `AGENTS.md`·`MEMORY.md`·프리뷰 | AGENTS §3.1 ① 주석을 새 사례·서브메뉴 규약으로 갱신("부록과 사례 중복 금지" 명문화). 프리뷰: 네비 4칸·카드 Klarna/Commonwealth Bank/Deloitte·옛 사례 0건·풀쿼트 뤼트케·콘솔 0건 |
+
+### 2026-06-14 (현재 세션) — leader-first 사례 보강 + 1단계 명칭 '실행 체계'로 변경
+
+최고경영진이 읽었을 때 와닿도록 `leader-first.html`을 사례로 가득 채웠다. cost-output의 풍부한 컴포넌트(bp-twocol·bp-cost·bp-pull)를 차용해 반데헤이의 직접 쓴 1년, 우버·MS·스타벅스의 '안 써보면 생기는 일'을 구체 수치와 함께 넣었다. 더불어 1단계 명칭을 '추진 체계'에서 '실행 체계'로 바꾸고, "TF가 아니라" 같은 부정 프레이밍을 전부 긍정형으로 정리했다. 모든 사례·수치는 plan.md 부록-2가 SSOT다.
+
+| # | 명령 | 범위 | 결과 |
+|---|---|---|---|
+| 1 | "TF가 아니라" 부정 프레이밍 삭제 | `leader-first`·`index`·`plan.md`·`AGENTS`·`MEMORY` | 히어로 h1·푸터·메타·index 카드 설명·plan B-1-0·거버넌스 주석에서 "TF가 아니라"·"TF 발족이 아니라"를 긍정형으로. TF를 부정 대상이 아니라 다음 박자로 둠 |
+| 2 | leader-first 사례 보강 | `leader-first.html` | 본문을 5섹션으로 재구성. 직접 쓴 1년(반데헤이 bp-twocol 사례/시사점 + bp-pull 풀쿼트)·안 써보면 생기는 일(우버·MS·스타벅스 bp-cost 3카드)·보고서 vs 직접(bp-compare 5행)·매일 다섯 가지(bp-checklist, 사례 연결)·다음 단계(인계). cost-output CSS 차용분 주입. em dash 0 |
+| 3 | 1단계 명칭 '실행 체계'로 | 전 파일 | '추진 체계'·'추진체계' → '실행 체계'·'실행체계' 일괄(plan·AGENTS·MEMORY·organization·operations·capability·leader-first). 손으로 직접 하는 1단계 정체성에 맞춤. 잔여 0 |
+| 4 | 검증 | 프리뷰 | eyebrow '실행 체계 구축'·h1 '당신의 하루'·nav 5·섹션 5(leader·cost·why·daily·stuck)·사례 카드 Uber/MS/Starbucks·풀쿼트·투칼럼 visible 확인. "TF가 아니라"·"추진" 0건, em dash 0, 콘솔 0건 |
+
+### 2026-06-14 (현재 세션) — 1단계 첫 페이지 신설 (`leader-first.html`, CEO가 먼저 쓴다)
+
+비즈니스 리더 관점의 점검에서, 진단 다음 1단계가 곧장 "TF 세팅"으로 가는 순서가 어색하다는 지적이 나왔다. CEO에게 "먼저 써보라"고 한 상황이면 첫 행동은 경영진 본인이 매일 쓰는 것이어야 한다. 그 메시지는 이미 `cost-output.html`의 '리더의 손끝'(반데헤이 사례)에 있었으나 부록에 묻혀 있었다. 부록은 그대로 두고, 1단계에 "경영진이 먼저 쓴다"를 첫 박자로 세우는 새 페이지를 만들었다. 1단계는 4페이지가 됐다(리더가 먼저 쓴다 → TF 조직 세팅 → 운영 계획 → AI 부트캠프).
+
+| # | 명령 | 범위 | 결과 |
+|---|---|---|---|
+| 1 | `plan.md` B-1 재정의 (SSOT 먼저) | `plan.md` B-1 | 제목을 "실행 체계 구축. 경영진이 먼저 쓰고, 조직을 세운다"로. B-1-0 "경영진이 먼저 쓴다" 신설(위임의 함정 + 반데헤이 근거 + 매일의 규율 다섯 가지). B-1-1 TF 도입부를 "경영진이 이미 쓰고 있다는 전제 위에서"로 재서술. 산출물·로드맵 요약줄에 '경영진 채택' 반영 |
+| 2 | `leader-first.html` 신규 작성 | 1단계 첫 페이지 | `organization.html` bp-* 골격 클론. 세 섹션: 보고서로 받는 리더 vs 직접 쓰는 리더(`bp-compare` 5행)·경영진이 매일 하는 다섯 가지(`bp-checklist`)·막히는 곳이 TF의 첫 과제(`bp-handoff` 인계). 참고 자료 '리더의 손끝'으로 링크. em dash 0 |
+| 3 | 1단계 칩·진입점 갱신 | `organization`·`operations`·`capability`·`index` + 전 페이지 | 세 형제 페이지 `bp-substeps`에 "리더가 먼저 쓴다"를 첫 칩으로 추가(3칩→4칩). index 1단계 네비 라벨 "AX TF 세팅"→"리더가 먼저 쓴다", 카드 제목·설명 재작성, 첫 substep 추가. 전 페이지 단계 인디케이터 "1" 링크를 `organization.html`→`leader-first.html`로 일괄 치환(19개 파일) |
+| 4 | 검증 | 프리뷰 | leader-first 200·title·h1·섹션 3·칩 4(첫 칩 active)·인계/참고 링크·단계 1 자기링크 확인, 콘솔 0건. index 네비 라벨·카드 제목·substep 4개 확인. em dash 0 |
 
 ### 2026-06-14 (현재 세션) — AX 캔버스를 4단계에서 분리, 진단 트리오 전속
 
@@ -58,7 +149,7 @@
 
 ### 2026-06-14 (현재 세션) — 강의용 재편 패턴 도입 (`blueprint.html` 대표 적용)
 
-사이트를 빔으로 띄워 강의하기에 적합하도록 페이지 자체를 재편하는 작업을 시작했다. 별도 슬라이드 덱이나 발표자 모드를 만들지 않고, 페이지의 비주얼 위계를 다시 잡는 A안으로 확정했다. 패턴 정의와 전 페이지 롤아웃 절차는 [lecture-blueprint.md](lecture-blueprint.md)에 둔다.
+사이트를 빔으로 띄워 강의하기에 적합하도록 페이지 자체를 재편하는 작업을 시작했다. 별도 슬라이드 덱이나 발표자 모드를 만들지 않고, 페이지의 비주얼 위계를 다시 잡는 A안으로 확정했다. 패턴 정의와 전 페이지 롤아웃 절차는 [lecture-blueprint.md](backups/lecture-blueprint.md)에 둔다.
 
 | # | 명령 | 범위 | 결과 |
 |---|---|---|---|
@@ -153,33 +244,42 @@
 
 ---
 
-## 14페이지 구축 진행 상황
+## 21페이지 구축 진행 상황
 
-| 영역 | 페이지 | 상태 | 비고 |
+| 묶음 | 페이지 | 상태 | 비고 |
 |---|---|---|---|
-| 진입 | `index.html` | ⏸ 미착수 | 5층위 지도와 5분 요약 카드 |
-| A | `a1-blueprint.html` | ⏸ 미착수 | plan.md A-1·A-2·A-3 |
-| A | `a2-principles.html` | ⏸ 미착수 | plan.md A-4 (북극성 원칙 5) |
-| A | `a3-diagnosis.html` | ⏸ 미착수 | plan.md B-0 (6차원 진단, 진입 게이트) |
-| B | `b1-steps-1-2.html` | ⏸ 미착수 | plan.md B-1, B-2 |
-| B | `b2-steps-3-4.html` | ⏸ 미착수 | plan.md B-3, B-4 (★ 심장) |
-| B | `b3-step-5.html` | ⏸ 미착수 | plan.md B-5 |
-| C | `c1-method-intro.html` | ⏸ 미착수 | plan.md C-1, C-2 (상단 7문항) |
-| C | `c2-method-exec.html` | ⏸ 미착수 | plan.md C-3 (하단 3문항) |
-| D | `d1-kal-loop.html` | ⏸ 미착수 | plan.md D-1 (K1~K4 순환) |
-| D | `d2-kal-edge.html` | ⏸ 미착수 | plan.md D-2, D-3 |
-| E | `e1-casestudy.html` | ⏸ 미착수 | plan.md E 전체 (패션 커머스 A사 CS) |
-| E | `e2-templates.html` | ⏸ 미착수 | 인터랙티브 입력 폼 (로컬 저장) |
-| E | `e3-playbook.html` | ⏸ 미착수 | 운영 매뉴얼 |
+| 진입 | `index.html` | ✅ 구현 | 전체 여정 지도·요약·참고 진입점 |
+| 진단 | `blueprint.html` | ✅ 구현 | AX 추진 원칙 · 청사진 · 북극성 원칙 5 |
+| 진단 | `ax-canvas.html` | ✅ 구현 | AX 캔버스 = 미시 엔진 (한 직무 10칸 해부) |
+| 진단 | `diagnosis.html` | ✅ 구현 | 6영역 24문항 인터랙티브 진단 |
+| ① 실행 조직 | `leader-first.html` | ✅ 구현 | 경영진이 먼저 쓴다 |
+| ① 실행 조직 | `organization.html` | ✅ 구현 | TF 조직 세팅 |
+| ① 실행 조직 | `operations.html` | ✅ 구현 | 운영 계획 수립 |
+| ① 실행 조직 | `capability.html` | ✅ 구현 | 90일 부트캠프·해커톤 |
+| ② 파일럿 실행 | `pilot.html` | ✅ 구현 | 대상 선정과 실행 |
+| ② 파일럿 실행 | `insights.html` | ✅ 구현 | 핵심 시사점 도출 |
+| ③ 우선순위화 | `criteria.html` | ✅ 구현 | 우선순위 기준 설정 |
+| ③ 우선순위화 | `evaluation.html` | ✅ 구현 | 후보 평가 |
+| ③ 우선순위화 | `bets.html` | ✅ 구현 | 전략 과제 선정 |
+| ④ 업무 재설계 | `resource.html` | ✅ 구현 | 자원 재배분 (10-20-70) |
+| ④ 업무 재설계 | `reshape.html` | ✅ 구현 | 업무 재설계 ★심장 (4D·전사 확장) |
+| ⑤ AI 네이티브 | `ainative.html` | ✅ 구현 | AI 네이티브의 모습 · 도착지 |
+| ⑤ AI 네이티브 | `brainos.html` | ✅ 구현 | BRAIN OS 완성도 · 자산 축적 4단계 순환 |
+| ⑤ AI 네이티브 | `perpetual.html` | ✅ 구현 | 지속 운영과 출발선 |
+| 참고 | `cost-output.html` | ✅ 구현 | AI 네이티브로의 여정 |
+| 참고 | `problem-definition.html` | ✅ 구현 | AI 퍼스트 문제 정의력 |
+| 참고 | `ai-services.html` | ✅ 구현 | AI 서비스 비교 |
 
-진행률: 0 / 14
+진행률: 21 / 21 (옛 E 영역 검증 사례·템플릿·운영 매뉴얼은 미구현)
+
+별도: `slide.html` 한 장 요약 슬라이드 (네비 미연결).
 
 ### 공통 자산
 
 | 파일 | 상태 | 비고 |
 |---|---|---|
-| `assets/style.css` | ⏸ 미착수 | 디자인 토큰, `.container`, `.header-pages`, SM-HAMBURGER 공통 |
-| `assets/nav.js` | ⏸ 미착수 | 햄버거 메뉴와 스크롤 스파이 단일 IIFE |
+| `assets/style.css` | ✅ 사용 | 디자인 토큰, `.container`, 단계 네비·서브메뉴, SM-HAMBURGER, 카드·표 등 전부 |
+| `assets/nav.js`, `assets/css/*`, `assets/js/*` | ⚠ 레거시 | 1차 다중 파일 시도의 잔재. 현재 어떤 페이지도 미참조. 정리 대상 |
 
 ---
 
@@ -196,61 +296,51 @@
 - 형광·고채도 강조색 추가 금지. 컨설팅 보고서 톤 유지.
 
 ### 타이포그래피 (확정)
-- 본문 세리프: `Noto Serif KR` 또는 `Source Serif Pro`
-- UI 산세리프: `Pretendard Variable` 또는 `Inter`
-- h1·h2는 세리프, 메뉴·버튼·태그는 산세리프
+- 본문·UI·제목 모두 로컬 **Pretendard** 단일 (산세리프). 세리프 본문 안은 폐기됐다.
+- 폰트는 `assets/fonts/`의 로컬 Pretendard를 `@font-face`로 등록 (외부 CDN 불사용).
 
 ### 폭 규격 (확정)
 - `.container`: max-width 1080px, padding 32px 32px 80px
 - `.header-pages` 2-menu: 490px / 3-menu: 700px
 - 햄버거 브레이크포인트 768px, 드로어 320px
 
-### 기준 페이지 (미정)
-- 2-menu 기준 페이지 선정 필요
-- 3-menu 기준 페이지 선정 필요
-- 그 외 메뉴 수가 등장하면 그때 기준 페이지를 정한다
+### 기준 페이지 (메뉴 폭 통일)
+- 서브 메뉴 폭은 메뉴 개수별 기준 페이지를 따른다 (AGENTS.md Rule 3·§4.4).
+- 단계 네비는 진단·1·2·3·4·5·참고 7칸 고정.
 
 ### 강의용 재편 기준 페이지 (확정)
 - `blueprint.html`이 강의용 재편 표준 구현이다 (강의 발문 `.bp-beat-lead`·밀도 종속화 `.bp-cite`·beat 리듬·도착지 두 축 MECE 적용 완료).
-- 패턴 규약은 [AGENTS.md](AGENTS.md) §12, 상세 패턴과 전 페이지 롤아웃은 [lecture-blueprint.md](lecture-blueprint.md). 강의용 작업은 두 문서를 반드시 따른다.
+- 패턴 규약은 [AGENTS.md](AGENTS.md) §12, 상세 패턴과 전 페이지 롤아웃은 [lecture-blueprint.md](backups/lecture-blueprint.md). 강의용 작업은 두 문서를 반드시 따른다.
 - 좌측 컬러 바는 AGENTS.md §4.7-A 금지 클리셰. 발문·요약 박스에 쓰지 않는다.
 
 ---
 
-## plan.md 변환 시 점검 항목
+## 본문 작성 점검 항목
 
-원본 `plan.md`를 HTML로 옮길 때 다음을 자동으로 적용한다.
+새 카피를 본문에 넣거나 외부 초안을 옮길 때 다음을 자동으로 적용한다.
 
-| 변환 | 사유 |
+| 점검 | 사유 |
 |---|---|
-| em dash `—` 제거 | AGENTS.md 5.1 (em dash 절대 금지) |
-| 평어 → 경어 변환 | AGENTS.md 5.7 (콘텐츠 본문은 경어) |
+| em dash `—` 제거 (마침표·괄호·콜론으로 치환) | AGENTS.md 5.1 (em dash 절대 금지) |
+| 평어 초안은 경어로 변환 | AGENTS.md 5.7 (콘텐츠 본문은 경어) |
 | 번역투 점검 | AGENTS.md 5.3 |
 | 자기해설·마무리 명언 제거 | AGENTS.md 5.4, 5.8 |
 | 약어 유지 (COMPANY BRAIN OS·DRI·4D·TF·TSR·RAI·SSOT) | AGENTS.md 5.6 예외 목록 |
 
-원본 `plan.md`에는 em dash가 다수 남아 있다. HTML 변환 시 모두 마침표·괄호·콜론으로 치환하고, 가능하면 원본도 같이 정리한다 (SSOT 원칙).
-
 ---
 
-## 다음 액션 (Open Items, 다음 세션부터)
+## 다음 액션 (Open Items)
 
-순서대로 처리하면 한 사이클이 닫힌다.
+21페이지 본문은 구현 완료. 남은 일은 미구현 영역과 품질·정리다.
 
-### 1순위 · 통합 작업
-1. **`assets/css/tokens.css` 그린 재매핑**: `--strategy-primary` `#1E3A8A` → `--green` `#0E3B2A`, `--execution-primary` `#D97757` → `--green-accent` `#1B6E4F`. 베이지 배경(`#EDE8DF`) 유지 여부 결정.
-2. **컨테이너 폭 결정**: 기존 1280px 유지 + 본문 reading column 720~800px 별도 잡기 vs 1080px 단일. 컨설팅 톤 톤앤매너 기준으로 선택.
-3. **`diagnostic.js` 재작성**: 5축(vision·adoption·governance·people·workflow) → plan.md B-0의 6차원(전략·인재·운영모델·기술·데이터·도입). 추천 페이지 파일명을 `strategy-*`/`exec-*` → `a*`/`b*`/`c*`/`d*`/`e*`로 매핑.
-4. **임시 자산 정리**: `assets/style.css`, `assets/nav.js`, 임시 `a1-blueprint.html`를 기존 시스템에 흡수 또는 삭제. 햄버거 메뉴 패턴은 기존 `nav-wrapper`/`nav-btn`과 합쳐 단일 시스템으로.
+### 1순위 · 콘텐츠 품질
+1. **강의 발문(`.bp-beat-lead`) 전 페이지 롤아웃**: `blueprint.html`이 표준 구현. B 단계(①~⑤) 본문 전 페이지에 강의용 재편 패턴(발문·beat 리듬·도착지 두 축 MECE)을 아직 다 적용하지 않았다. AGENTS.md §12·[lecture-blueprint.md](backups/lecture-blueprint.md)를 따른다.
+2. **단계별 콘텐츠 평가 마무리**: 2단계(pilot·insights) 평가 8.2/10까지 진행. 1·3·4·5단계도 같은 기준으로 정합성·사실 검증을 돈다 (개인 메모 [[stage4-evaluation-gaps]] 참조).
 
-### 2순위 · 페이지 구현
-5. **공통 골격 템플릿**: 기존 `.site-header` + `.nav-wrapper` + `.nav-row` 위에 plan.md A~E 라우팅을 얹은 빈 HTML 템플릿 1장. 14개 페이지에 복제.
-6. **A 영역 3개 페이지 먼저**: `a1-blueprint`(청사진)·`a2-principles`(원칙 5)·`a3-diagnosis`(6차원 진단). a3는 `diagnostic.js`와 직결.
-7. **B·C·D·E 차례로 구현**: B 3개 → C 2개 → D 2개 → E 3개. 마지막에 `index.html`(라우팅 허브) 완성.
+### 2순위 · 미구현 영역
+3. **옛 E 영역 구현 여부 결정**: 검증 사례(패션 커머스 A사 CS)·인터랙티브 템플릿(로컬 저장)·운영 매뉴얼을 독립 페이지로 만들지, 기존 페이지에 흡수할지 결정.
+4. **`assets/downloads/` 매핑**: 워크북(roi-calculator·job-redesign-workbook·tool-decision-tree 등)을 어느 페이지의 다운로드 카드로 노출할지 정리.
 
-### 3순위 · 자산 활용
-8. **`assets/downloads/` 매핑**: 기존 워크북(roi-calculator, job-redesign-workbook, tool-decision-tree 등)을 plan.md의 어느 페이지에 노출할지 결정. `e2-templates`/`e3-playbook` 후보가 유력.
-9. **`assets/logos/` 활용**: `logo1-white.png`/`logo1-transparent.png`를 site-header에 배치할지 결정.
-
-### 인프라
-10. **첫 commit 여부 결정**: 운영 문서(AGENTS.md, MEMORY.md, plan.md) 정리분만 먼저 commit할지, 다음 세션 통합 작업과 같이 묶을지 사용자 컨펌 필요.
+### 3순위 · 자산 정리
+5. **레거시 자산 삭제**: 미참조 `assets/nav.js`·`assets/css/*`·`assets/js/*` 정리 (다운로드 빌드 스크립트 의존만 확인 후).
+6. **백업 파일 정리**: `*.backup-20260614-*.html`, `index.backup-*.html` 등 작업 백업 정리 여부 결정.

@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 네이티브 컴퍼니로 가는 길 · AX 발표 자료 · AI ROASTING</title>
+<meta name="description" content="50분 발표용 슬라이드. 세 가지 질문으로 AI 네이티브로의 여정, AX 추진 원칙, AX 캔버스를 다룹니다.">
+<style>
+@font-face {
+    font-family: 'Pretendard Variable';
+    font-weight: 45 920;
+    font-style: normal;
+    font-display: swap;
+    src: url('../assets/fonts/PretendardVariable.ttf') format('truetype-variations');
+}
+
+:root {
+    --ink: #0F1A16;
+    --ink-soft: #4A554F;
+    --ink-mute: #6E7872;
+    --paper: #F7F5EF;
+    --paper-2: #FBFAF6;
+    --green: #0E3B2A;
+    --green-deep: #062018;
+    --accent: #1B6E4F;
+    --gold: #9A7B0A;
+    --red: #8B2E1F;
+    --rule: #D6D2C5;
+    --grid: rgba(14, 59, 42, 0.06);
+    --grid-dark: rgba(247, 245, 239, 0.05);
+    --sans: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+    height: 100%;
+    background: #0a0a0a;
+    font-family: var(--sans);
+    color: var(--ink);
+    overflow: hidden;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+}
+
+/* ============ STAGE / SCALING ============ */
+#viewport { position: fixed; inset: 0; overflow: hidden; }
+#stage { position: absolute; top: 50%; left: 50%; width: 1280px; height: 720px; transform-origin: center center; }
+.slide { position: absolute; inset: 0; display: none; flex-direction: column; background: var(--paper); overflow: hidden; }
+.slide.active { display: flex; }
+
+.slide--content, .slide--agenda {
+    background:
+        linear-gradient(var(--grid) 1px, transparent 1px) 0 0 / 32px 32px,
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0 / 32px 32px,
+        var(--paper);
+}
+.slide--dark {
+    color: var(--paper);
+    background:
+        radial-gradient(ellipse at 100% 0%, rgba(27, 110, 79, 0.38), transparent 58%),
+        linear-gradient(120deg, #062018 0%, #0A2E22 34%, #0E3B2A 68%, #14523B 100%);
+}
+.slide--dark::before {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+        linear-gradient(var(--grid-dark) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-dark) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+}
+.slide--dark > * { position: relative; z-index: 1; }
+.slide--content::after, .slide--agenda::after {
+    content: ""; position: absolute; bottom: 26px; right: 30px;
+    width: 18px; height: 18px;
+    border-right: 1px solid var(--green); border-bottom: 1px solid var(--green); opacity: 0.5;
+}
+
+/* ============ SHARED HEADER ============ */
+.s-head { padding: 44px 64px 0; }
+.s-eyebrow { font-size: 13.5px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 11px; }
+.s-eyebrow .qbadge { display: inline-flex; align-items: center; justify-content: center; min-width: 28px; height: 28px; padding: 0 8px; background: var(--green); color: var(--paper); border-radius: 4px; font-size: 12.5px; letter-spacing: 0.05em; }
+.s-titlerow { display: flex; align-items: flex-end; justify-content: space-between; gap: 28px; margin-top: 15px; padding-bottom: 16px; border-bottom: 1.5px solid var(--green); }
+.s-title { font-size: 36px; line-height: 1.24; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); max-width: 1000px; }
+.s-title .sm { font-size: 24px; }
+.s-meta { font-size: 12px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-mute); text-align: right; line-height: 1.7; white-space: nowrap; }
+
+.s-body { flex: 1; padding: 22px 64px 52px; display: flex; flex-direction: column; justify-content: center; min-height: 0; }
+.beat-lead { font-size: 24px; line-height: 1.4; font-weight: 600; color: var(--ink-soft); margin-bottom: 22px; }
+.beat-lead strong { color: var(--ink); font-weight: 800; }
+.intro { font-size: 16px; line-height: 1.75; color: var(--ink-soft); margin-bottom: 22px; }
+.intro strong { color: var(--ink); font-weight: 700; }
+.cite { display: block; margin-top: 14px; font-size: 11.5px; line-height: 1.6; color: var(--ink-mute); }
+
+/* ============ TITLE ============ */
+.title-wrap { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 80px; }
+.title-brand { display: flex; align-items: center; gap: 14px; margin-bottom: 40px; }
+.title-brand img { height: 30px; opacity: 0.95; }
+.title-brand span { font-size: 14px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(247,245,239,0.78); }
+.title-eyebrow { font-size: 15px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #6FBF9B; margin-bottom: 24px; }
+.title-h1 { font-size: 62px; line-height: 1.18; font-weight: 800; letter-spacing: -0.025em; color: var(--paper); }
+.title-h1 .soft { color: rgba(247,245,239,0.6); font-weight: 700; }
+.title-sub { margin-top: 30px; font-size: 20px; line-height: 1.6; color: rgba(247,245,239,0.86); max-width: 820px; }
+.title-foot { display: flex; align-items: center; gap: 18px; margin-top: 56px; padding-top: 26px; border-top: 1px solid rgba(247,245,239,0.22); font-size: 15px; color: rgba(247,245,239,0.8); }
+.title-foot strong { color: var(--paper); font-weight: 700; }
+.title-foot .dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(247,245,239,0.5); }
+
+/* ============ QR ============ */
+.qr-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 36px 80px; text-align: center; }
+.qr-eyebrow { font-size: 15px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+.qr-h { font-size: 40px; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 8px; }
+.qr-sub { font-size: 17px; line-height: 1.6; color: var(--ink-soft); margin-bottom: 30px; }
+.qr-card { background: #fff; border: 1.5px solid var(--green); padding: 20px; box-shadow: 0 18px 50px -24px rgba(6,32,24,0.42); }
+.qr-card img { display: block; width: 290px; height: 290px; object-fit: contain; }
+.qr-card .qr-missing { width: 290px; height: 290px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--ink-mute); border: 1px dashed var(--rule); line-height: 1.6; }
+.qr-code { margin-top: 30px; display: inline-flex; align-items: baseline; gap: 12px; padding: 12px 28px; border: 1.5px solid var(--green); background: rgba(14,59,42,0.04); }
+.qr-code .lbl { font-size: 19px; font-weight: 600; color: var(--ink-soft); letter-spacing: 0.02em; }
+.qr-code .val { font-size: 32px; font-weight: 800; color: var(--green); letter-spacing: 0.14em; }
+
+/* ============ AGENDA ============ */
+.agenda-list { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.agenda-row { display: grid; grid-template-columns: 96px 1fr auto; align-items: center; gap: 28px; padding: 28px 4px; border-top: 1px solid var(--rule); }
+.agenda-row:last-child { border-bottom: 1px solid var(--rule); }
+.agenda-q { font-size: 44px; font-weight: 800; color: var(--green); letter-spacing: -0.02em; }
+.agenda-qmark { font-size: 30px; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; line-height: 1.25; }
+.agenda-qmark .sub { display: block; font-size: 15px; font-weight: 600; color: var(--ink-mute); letter-spacing: 0.02em; margin-top: 6px; }
+.agenda-tag { font-size: 16px; font-weight: 700; color: var(--accent); padding: 9px 18px; border: 1.5px solid var(--accent); border-radius: 100px; white-space: nowrap; }
+.agenda-note { margin-top: 24px; font-size: 15px; color: var(--ink-mute); line-height: 1.7; }
+.agenda-note strong { color: var(--ink-soft); }
+
+/* ============ DIVIDER ============ */
+.div-wrap { flex: 1; display: grid; grid-template-columns: 380px 1fr; align-items: center; padding: 0 80px; gap: 56px; }
+.div-num { font-size: 240px; font-weight: 800; line-height: 0.86; color: rgba(247,245,239,0.14); letter-spacing: -0.04em; }
+.div-eyebrow { font-size: 15px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #6FBF9B; margin-bottom: 18px; }
+.div-q { font-size: 50px; font-weight: 800; line-height: 1.16; letter-spacing: -0.025em; color: var(--paper); margin-bottom: 32px; }
+.div-subs { list-style: none; display: flex; flex-direction: column; }
+.div-subs li { display: flex; gap: 16px; align-items: baseline; padding: 13px 0; border-top: 1px solid rgba(247,245,239,0.2); font-size: 18px; line-height: 1.45; color: rgba(247,245,239,0.9); }
+.div-subs li:last-child { border-bottom: 1px solid rgba(247,245,239,0.2); }
+.div-subs .n { font-size: 14px; font-weight: 700; color: #6FBF9B; letter-spacing: 0.08em; min-width: 30px; }
+
+/* ============ PROSE + EVIDENCE ============ */
+.prose { font-size: 18px; line-height: 1.85; color: var(--ink-soft); }
+.prose strong { color: var(--ink); font-weight: 700; }
+.prose .hl { color: var(--green); font-weight: 800; }
+.evi-strip { margin-top: 26px; display: flex; border: 1px solid var(--green); background: var(--paper-2); }
+.evi-cell { flex: 1; padding: 16px 22px; border-right: 1px solid var(--rule); }
+.evi-cell:last-child { border-right: none; }
+.evi-num { font-size: 28px; font-weight: 800; color: var(--green); letter-spacing: -0.02em; }
+.evi-txt { font-size: 12.5px; line-height: 1.5; color: var(--ink-soft); margin-top: 4px; }
+
+/* ============ SHIFT ============ */
+.shift { display: grid; grid-template-columns: 1fr 1fr; border: 1.5px solid var(--green); }
+.shift-col { padding: 20px 24px; display: flex; flex-direction: column; }
+.shift-col.before { background: rgba(139,46,31,0.04); border-right: 1px solid var(--rule); }
+.shift-col.after { background: rgba(27,110,79,0.05); }
+.shift-tag { font-size: 12.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 7px; }
+.shift-col.before .shift-tag { color: var(--red); }
+.shift-col.after .shift-tag { color: var(--green); }
+.shift-h { font-size: 16px; font-weight: 700; line-height: 1.4; margin-bottom: 12px; color: var(--ink); }
+.shift-col ul { list-style: none; }
+.shift-col li { font-size: 12.8px; line-height: 1.5; color: var(--ink-soft); padding: 8px 0; border-top: 1px dashed var(--rule); }
+.shift-col li:first-child { border-top: none; }
+.shift-col li strong { color: var(--ink); font-weight: 700; }
+.shift-col.after li strong { color: var(--green); }
+
+/* ============ FEATURE (모습) ============ */
+.feat-en { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; color: var(--ink-mute); margin-bottom: 14px; text-transform: uppercase; }
+.feat-body { font-size: 16.5px; line-height: 1.8; color: var(--ink-soft); }
+.feat-body strong { color: var(--ink); font-weight: 700; }
+.feat-scene { margin-top: 20px; padding: 20px 26px; background: rgba(14,59,42,0.05); border-top: 1.5px solid var(--green); }
+.feat-scene .lbl { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--accent); margin-bottom: 9px; }
+.feat-scene p { font-size: 14.5px; line-height: 1.7; color: var(--ink); }
+.feat-scene strong { color: var(--green); font-weight: 700; }
+
+/* ============ MINI 3 ============ */
+.mini3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+.mini3 .m { border: 1.5px solid var(--green); background: var(--paper-2); padding: 24px 24px; display: flex; flex-direction: column; }
+.mini3 .mn { font-size: 13px; font-weight: 700; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; }
+.mini3 .mt { font-size: 19px; font-weight: 700; color: var(--ink); margin: 12px 0 7px; line-height: 1.35; }
+.mini3 .me { font-size: 12px; font-weight: 600; color: var(--ink-mute); letter-spacing: 0.04em; }
+
+/* ============ BLOCKS ============ */
+.blocks2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.block { border: 1.5px solid var(--green); background: var(--paper-2); padding: 26px 28px; display: flex; flex-direction: column; }
+.block-tag { font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+.block-h { font-size: 20px; font-weight: 700; line-height: 1.36; color: var(--ink); margin-bottom: 14px; }
+.block-body { font-size: 15px; line-height: 1.75; color: var(--ink-soft); }
+.block-body strong { color: var(--green); font-weight: 700; }
+
+/* one big quote card */
+.qcard { border: 1.5px solid var(--green); background: var(--paper-2); padding: 32px 40px; }
+.qcard .qtag { font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+.qcard .qtext { font-size: 28px; font-weight: 700; line-height: 1.45; color: var(--ink); letter-spacing: -0.01em; }
+.qcard .qnote { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--rule); font-size: 15px; line-height: 1.7; color: var(--ink-soft); }
+.qcard .qnote strong { color: var(--green); }
+
+/* ============ McKINSEY FUNNEL ============ */
+.funnel2 { display: flex; flex-direction: column; gap: 18px; }
+.f2-row { display: flex; align-items: center; gap: 20px; }
+.f2-track { flex: 0 0 440px; }
+.f2-bar { height: 50px; display: flex; align-items: center; padding-left: 18px; color: var(--paper); font-size: 26px; font-weight: 800; letter-spacing: -0.01em; }
+.f2-name { font-size: 16px; font-weight: 700; color: var(--ink); }
+.f2-desc { font-size: 13px; line-height: 1.55; color: var(--ink-soft); margin: 8px 0 0; }
+.cap { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--rule); font-size: 14px; line-height: 1.7; color: var(--ink); }
+.cap strong { color: var(--green); }
+
+/* ============ METRICS (BCG 배수) ============ */
+.metrics { display: flex; flex-direction: column; gap: 13px; }
+.metric { display: grid; grid-template-columns: 250px 1fr 72px; align-items: center; gap: 20px; }
+.metric-l { font-size: 14.5px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+.metric-l .sub { display: block; font-size: 11px; font-weight: 500; color: var(--ink-mute); letter-spacing: 0.02em; margin-top: 2px; }
+.metric-track { height: 32px; background: rgba(14,59,42,0.07); position: relative; }
+.metric-fill { height: 100%; background: var(--accent); }
+.metric-fill.lead { background: var(--green); }
+.metric-v { font-size: 23px; font-weight: 800; color: var(--green); text-align: right; letter-spacing: -0.02em; }
+
+/* ============ STATS + DISTRIBUTION (AI Radar) ============ */
+.stat-trio { display: flex; gap: 18px; }
+.stat-one { flex: 1; border: 1.5px solid var(--green); background: var(--paper-2); padding: 22px 24px; }
+.stat-one .v { font-size: 42px; font-weight: 800; color: var(--green); letter-spacing: -0.02em; }
+.stat-one .l { font-size: 13px; line-height: 1.55; color: var(--ink-soft); margin-top: 8px; }
+.dist-h { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin: 26px 0 10px; }
+.dist { display: flex; height: 42px; }
+.dist .seg { display: flex; align-items: center; justify-content: center; color: var(--paper); font-weight: 800; font-size: 14px; }
+.dist .s1 { background: var(--green); flex: 0 0 15%; }
+.dist .s2 { background: var(--accent); flex: 0 0 70%; }
+.dist .s3 { background: #9AA39D; flex: 0 0 15%; }
+.dist-legend { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 12px; }
+.dist-legend div { font-size: 12px; line-height: 1.5; color: var(--ink-soft); }
+.dist-legend strong { display: block; color: var(--ink); font-weight: 700; margin-bottom: 3px; }
+
+/* ============ FIVE ============ */
+.five { display: grid; grid-template-columns: repeat(5, 1fr); border: 1.5px solid var(--green); }
+.five-cell { padding: 16px 16px; border-right: 1px solid var(--rule); display: flex; flex-direction: column; }
+.five-cell:last-child { border-right: none; }
+.five-num { font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; }
+.five-h { font-size: 16px; font-weight: 700; line-height: 1.32; color: var(--ink); margin: 9px 0 11px; }
+.five-cell ul { list-style: none; }
+.five-cell li { font-size: 12px; line-height: 1.5; color: var(--ink-soft); padding: 6px 0; border-top: 1px dashed var(--rule); }
+.five-cell li:first-child { border-top: none; }
+
+/* ============ PILLARS ============ */
+.pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.pillar { border: 1.5px solid var(--green); background: var(--paper-2); padding: 24px 26px; }
+.pillar-num { font-size: 13px; font-weight: 700; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px; }
+.pillar-h { font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+.pillar-body { font-size: 14.5px; line-height: 1.65; color: var(--ink-soft); }
+.os-build { margin-top: 20px; padding: 18px 24px; background: rgba(14,59,42,0.05); border-top: 1px solid var(--green); border-bottom: 1px solid var(--green); font-size: 15.5px; line-height: 1.65; color: var(--ink); }
+.os-build strong { color: var(--green); }
+
+/* ============ COMPARE TABLE ============ */
+.cmp { border: 1.5px solid var(--green); display: flex; flex-direction: column; }
+.cmp-head, .cmp-row { display: grid; grid-template-columns: 140px 1fr 1fr; }
+.cmp-head { background: var(--green); color: var(--paper); }
+.cmp-head > div { padding: 10px 16px; font-size: 12.5px; font-weight: 700; letter-spacing: 0.04em; border-right: 1px solid rgba(247,245,239,0.2); }
+.cmp-head > div:last-child { border-right: none; }
+.cmp-row { border-top: 1px solid var(--rule); }
+.cmp-row > div { padding: 8px 16px; font-size: 12px; line-height: 1.45; border-right: 1px solid var(--rule); }
+.cmp-row > div:last-child { border-right: none; }
+.cmp-lbl { font-weight: 700; color: var(--ink); background: rgba(14,59,42,0.03); }
+.cmp-before { color: var(--ink-mute); background: rgba(139,46,31,0.03); }
+.cmp-after { color: var(--ink-soft); background: rgba(27,110,79,0.04); }
+.cmp-after strong { color: var(--green); font-weight: 700; }
+
+/* ============ CANVAS MAP ============ */
+.canvas-axis { display: grid; grid-template-columns: 1fr 1fr; margin-bottom: 8px; }
+.canvas-axis div { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); text-align: center; }
+.canvas-axis .as { display: block; font-size: 11px; font-weight: 500; color: var(--ink-mute); text-transform: none; letter-spacing: 0; margin-top: 2px; }
+.cgrid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 7px; }
+.cgrid-bottom { display: grid; grid-template-columns: 3fr 1fr 3fr; gap: 7px; margin-top: 7px; }
+.ccell { border: 1px solid var(--green); background: var(--paper-2); padding: 12px 12px; min-height: 92px; display: flex; flex-direction: column; }
+.ccell.center { background: var(--green); }
+.ccell.center .cc-n, .ccell.center .cc-name, .ccell.center .cc-d { color: var(--paper); }
+.ccell.bridge { background: rgba(154,123,10,0.12); border-color: var(--gold); }
+.cc-n { font-size: 11px; font-weight: 800; color: var(--accent); letter-spacing: 0.1em; }
+.cc-name { font-size: 14px; font-weight: 700; color: var(--ink); margin: 6px 0 5px; line-height: 1.25; }
+.cc-d { font-size: 11.5px; line-height: 1.45; color: var(--ink-mute); }
+.ccell.bridge .cc-n { color: var(--gold); }
+
+/* ============ TCRA ============ */
+.tcra { display: flex; flex-direction: column; gap: 9px; }
+.tcra-row { display: grid; grid-template-columns: 132px 1fr 1.15fr; border: 1px solid var(--green); background: var(--paper-2); align-items: stretch; }
+.tcra-stage { background: var(--green); color: var(--paper); padding: 12px 16px; display: flex; align-items: center; gap: 14px; }
+.tcra-letter { font-size: 30px; font-weight: 800; line-height: 1; }
+.tcra-sname { font-size: 14px; font-weight: 700; }
+.tcra-skor { font-size: 12px; color: rgba(247,245,239,0.78); margin-top: 2px; }
+.tcra-what { padding: 12px 18px; font-size: 13px; line-height: 1.5; color: var(--ink-soft); border-right: 1px dashed var(--rule); }
+.tcra-what strong { color: var(--ink); }
+.tcra-ex { padding: 12px 18px; font-size: 12px; line-height: 1.5; color: var(--ink-mute); }
+.tcra-ex .extag { display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 5px; }
+.tcra-foot { margin-top: 16px; padding: 16px 24px; background: rgba(14,59,42,0.05); border-top: 1px solid var(--green); border-bottom: 1px solid var(--green); font-size: 14px; line-height: 1.65; color: var(--ink); }
+.tcra-foot strong { color: var(--green); }
+
+/* ============ HARNESS ============ */
+.harness { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.harness-col { border: 1.5px solid var(--green); padding: 20px 24px; }
+.harness-col.human { background: rgba(14,59,42,0.03); }
+.harness-col.ai { background: rgba(27,110,79,0.05); }
+.harness-tag { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.harness-h { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 12px; line-height: 1.4; }
+.harness-col ul { list-style: none; }
+.harness-col li { padding: 8px 0; border-top: 1px dashed var(--rule); font-size: 12.8px; line-height: 1.5; color: var(--ink-soft); }
+.harness-col li:first-child { border-top: none; }
+.harness-col li strong { display: block; color: var(--ink); font-weight: 700; margin-bottom: 2px; }
+.meta-merge { margin-top: 16px; padding: 16px 26px; background: var(--green); color: var(--paper); display: flex; align-items: center; gap: 22px; }
+.meta-merge .mtag { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #6FBF9B; white-space: nowrap; }
+.meta-merge .mformula { font-size: 16px; font-weight: 600; line-height: 1.5; }
+.meta-merge .mformula em { color: #9FD7BE; font-style: normal; font-weight: 800; }
+
+/* ============ GUARD (9·10) ============ */
+.guard { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.guard-card { border: 1.5px solid var(--green); background: var(--paper-2); padding: 22px 26px; }
+.gc-num { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.gc-title { font-size: 21px; font-weight: 700; color: var(--ink); }
+.gc-q { font-size: 13px; color: var(--ink-mute); margin: 4px 0 12px; }
+.gc-body { font-size: 13.5px; line-height: 1.6; color: var(--ink-soft); margin-bottom: 12px; }
+.gc-body strong { color: var(--green); font-weight: 700; }
+.guard-card ul { list-style: none; }
+.guard-card li { padding: 7px 0; border-top: 1px dashed var(--rule); font-size: 13px; line-height: 1.5; color: var(--ink-soft); }
+
+/* ============ ORDER ============ */
+.order { display: flex; flex-direction: column; gap: 8px; }
+.order-row { display: grid; grid-template-columns: 50px 1.1fr 1fr; border: 1px solid var(--green); background: var(--paper-2); align-items: stretch; }
+.order-n { background: var(--green); color: var(--paper); font-size: 21px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.order-body { padding: 10px 18px; border-right: 1px dashed var(--rule); }
+.order-body h4 { font-size: 14.5px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+.order-body p { font-size: 12px; line-height: 1.45; color: var(--ink-soft); margin-top: 4px; }
+.order-fail { padding: 10px 18px; font-size: 11.5px; line-height: 1.45; color: var(--ink-mute); background: rgba(139,46,31,0.03); }
+.order-fail .ft { display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); margin-bottom: 4px; }
+
+/* ============ CONDITIONS ============ */
+.cond-band { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 16px; }
+.cond-band > div { text-align: center; padding: 12px; border: 1px solid var(--green); background: rgba(14,59,42,0.04); font-size: 16px; font-weight: 700; color: var(--green); }
+.cond-band > div span { font-weight: 500; color: var(--ink-mute); font-size: 13px; }
+.cond-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.cond-card { border: 1.5px solid var(--green); background: var(--paper-2); padding: 20px 20px; }
+.cond-num { font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px; }
+.cond-name { font-size: 21px; font-weight: 700; color: var(--ink); }
+.cond-name span { display: block; font-size: 12px; font-weight: 600; color: var(--ink-mute); letter-spacing: 0.04em; margin-top: 2px; }
+.cond-desc { font-size: 12.5px; line-height: 1.6; color: var(--ink-soft); margin-top: 12px; }
+
+/* ============ CLOSING ============ */
+.close-wrap { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 80px; }
+.close-eyebrow { font-size: 15px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #6FBF9B; margin-bottom: 16px; }
+.close-h { font-size: 46px; font-weight: 800; letter-spacing: -0.025em; color: var(--paper); margin-bottom: 32px; }
+.close-row { display: grid; grid-template-columns: 60px 1fr; gap: 22px; padding: 17px 0; border-top: 1px solid rgba(247,245,239,0.2); align-items: baseline; }
+.close-row:last-of-type { border-bottom: 1px solid rgba(247,245,239,0.2); }
+.close-q { font-size: 30px; font-weight: 800; color: #6FBF9B; }
+.close-a { font-size: 20px; line-height: 1.45; color: rgba(247,245,239,0.92); }
+.close-a strong { color: var(--paper); font-weight: 700; }
+.close-next { margin-top: 28px; padding: 22px 28px; background: rgba(247,245,239,0.08); border: 1px solid rgba(247,245,239,0.25); }
+.close-next .nt { font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #6FBF9B; margin-bottom: 8px; }
+.close-next .nb { font-size: 22px; font-weight: 700; line-height: 1.45; color: var(--paper); }
+
+.thanks-wrap { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 80px; }
+.thanks-h { font-size: 60px; font-weight: 800; letter-spacing: -0.02em; color: var(--paper); margin-bottom: 22px; }
+.thanks-sub { font-size: 19px; line-height: 1.6; color: rgba(247,245,239,0.85); max-width: 760px; }
+.thanks-foot { margin-top: 40px; font-size: 16px; color: rgba(247,245,239,0.8); }
+.thanks-foot strong { color: var(--paper); }
+
+/* ============ HUD ============ */
+#hud-progress { position: fixed; top: 0; left: 0; height: 4px; background: var(--accent); width: 0; z-index: 100; transition: width 0.3s ease; }
+#hud-counter { position: fixed; bottom: 18px; right: 22px; z-index: 100; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; color: rgba(255,255,255,0.55); background: rgba(6,32,24,0.55); padding: 6px 12px; border-radius: 100px; }
+#hud-counter .cur { color: #fff; }
+#hud-hint { position: fixed; bottom: 18px; left: 22px; z-index: 100; font-size: 12px; color: rgba(255,255,255,0.4); }
+.is-light #hud-counter { color: rgba(15,26,22,0.5); background: rgba(247,245,239,0.7); }
+.is-light #hud-counter .cur { color: var(--green); }
+.is-light #hud-hint { color: rgba(15,26,22,0.4); }
+</style>
+</head>
+<body>
+
+<div id="hud-progress"></div>
+
+<div id="viewport">
+  <div id="stage">
+
+    <!-- ===== 1. TITLE ===== -->
+    <section class="slide slide--dark active" data-tone="dark">
+      <div class="title-wrap">
+        <div class="title-brand">
+          <img src="../assets/logos/logo1-white.png" alt="AI ROASTING">
+          <span>AX Guide to Company Brain OS</span>
+        </div>
+        <div class="title-eyebrow">비즈니스 리더를 위한 AX 실행 가이드</div>
+        <h1 class="title-h1">AI 도구를 더 쓰는 회사가 아니라,<br><span class="soft">AI를 운영체계로 쓰는 회사</span>로.</h1>
+        <p class="title-sub">AI-Native 전환을 세 가지 질문으로 풉니다. 어디로 가는가, 무엇을 지키며 갈 것인가, 첫 한 걸음은 무엇인가.</p>
+        <div class="title-foot">
+          <strong>강정구 · Jayden Kang</strong>
+          <span class="dot"></span><span>AI ROASTING</span>
+          <span class="dot"></span><span>50분 세션</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 2. QR ACCESS ===== -->
+    <section class="slide slide--content" data-tone="light">
+      <div class="qr-wrap">
+        <div class="qr-eyebrow">오픈카톡방 · Open Chat</div>
+        <h2 class="qr-h">먼저, 오픈카톡방에 들어와 주세요</h2>
+        <p class="qr-sub">아래 QR을 휴대폰 카메라로 찍거나, 입장코드를 직접 입력해 들어오시면 됩니다.</p>
+        <div class="qr-card">
+          <img src="../assets/qr/0615.jpeg" alt="오픈카톡방 QR 코드"
+               onerror="this.style.display='none'; this.insertAdjacentHTML('afterend', '<div class=&quot;qr-missing&quot;>QR 이미지 자리<br>assets/qr/0615.jpeg</div>');">
+        </div>
+        <div class="qr-code"><span class="lbl">입장코드</span><span class="val">0615</span></div>
+      </div>
+    </section>
+
+    <!-- ===== 3. AGENDA ===== -->
+    <section class="slide slide--agenda" data-tone="light">
+      <div class="s-head">
+        <div class="s-eyebrow">Agenda · 오늘 다룰 세 가지 질문</div>
+        <div class="s-titlerow">
+          <h2 class="s-title">세 개의 질문으로 AX를 풉니다</h2>
+          <div class="s-meta">도착지 → 원칙 → 첫 실행<br>MECE</div>
+        </div>
+      </div>
+      <div class="s-body">
+        <div class="agenda-list">
+          <div class="agenda-row">
+            <div class="agenda-q">Q1</div>
+            <div class="agenda-qmark">우리는 어디로 가는가?<span class="sub">AI를 도입한 회사와 AI 네이티브 컴퍼니는 무엇이 다른가</span></div>
+            <div class="agenda-tag">AI 네이티브로의 여정</div>
+          </div>
+          <div class="agenda-row">
+            <div class="agenda-q">Q2</div>
+            <div class="agenda-qmark">무엇을 지키며 갈 것인가?<span class="sub">94곳이 빠지는 함정과 6%가 지키는 규칙</span></div>
+            <div class="agenda-tag">AX 추진 원칙</div>
+          </div>
+          <div class="agenda-row">
+            <div class="agenda-q">Q3</div>
+            <div class="agenda-qmark">첫 한 걸음은 무엇인가?<span class="sub">한 직무를 캔버스 한 장으로 해부하는 법</span></div>
+            <div class="agenda-tag">AX 캔버스</div>
+          </div>
+        </div>
+        <p class="agenda-note">세 질문은 직교합니다. <strong>먼저 도착지를 정의하고, 그 길에서 지킬 원칙을 세운 뒤, 첫 실행 단위를 한 장으로 좁힙니다.</strong></p>
+      </div>
+    </section>
+
+    <!-- ===== 4. DIVIDER 1 ===== -->
+    <section class="slide slide--dark" data-tone="dark">
+      <div class="div-wrap">
+        <div class="div-num">01</div>
+        <div>
+          <div class="div-eyebrow">Part 1 · AI 네이티브로의 여정</div>
+          <h2 class="div-q">우리는 어디로 가는가?</h2>
+          <ul class="div-subs">
+            <li><span class="n">1-1</span>AI를 도입한 회사와 AI 네이티브 컴퍼니는 무엇이 다른가?</li>
+            <li><span class="n">1-2</span>AI 네이티브는 무엇으로 확인되는가? (세 가지 모습)</li>
+            <li><span class="n">1-3</span>왜 신생 기업이 더 빠른가?</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 5. Q1-1a 도구가 아니라 운영체계 ===== -->
+    <section class="slide slide--content" data-tone="light">
+      <div class="s-head">
+        <div class="s-eyebrow"><span class="qbadge">Q1-1</span>도구 vs 운영체계 · YC Diana Hu</div>
+        <div class="s-titlerow">
+          <h2 class="s-title">대부분의 경영진은 AI를 생산성 도구로 다룹니다. 그러나 변화의 본질은 다릅니다</h2>
+          <div class="s-meta">McKinsey · BCG<br>2025</div>
+        </div>
+      </div>
+      <div class="s-body">
+        <p class="prose">엔지니어 속도를 올리고, 워크플로우에 코파일럿을 붙이고, 출시 건수를 늘리는 방식입니다. <strong>Diana Hu는 이 프레이밍이 핵심을 놓친다고 지적합니다.</strong> 지금 일어나는 변화는 같은 일을 더 빨리 하는 것이 아니라 <span class="hl">예전에는 불가능했던 새로운 작업 단위</span>가 가능해진 것이며, 그래서 AI는 도구가 아니라 회사의 운영체계로 다뤄야 한다는 결론입니다. 맥킨지가 이 진단을 수치로 확인합니다. <strong>5%와 60%의 격차가 곧 AI 네이티브 컴퍼니와 그 외 기업의 격차입니다.</strong></p>
+        <div class="evi-strip">
+          <div class="evi-cell"><div class="evi-num">88%</div><div class="evi-txt">한 가지 이상 영역에서 AI를 쓰지만</div></div>
+          <div class="evi-cell"><div class="evi-num">39%</div><div class="evi-txt">만 영업이익 영향, 그마저 대부분 5% 미만</div></div>
+          <div class="evi-cell"><div class="evi-num">60%</div><div class="evi-txt">는 AI 투자에서 의미 있는 가치를 못 만듦 (BCG)</div></div>
+          <div class="evi-cell"><div class="evi-num">5%</div><div class="evi-txt">만 규모 있는 가치를 만듦 (BCG)</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 6. Q1-1b OPEN vs CLOSED LOOP ===== -->
+    <section class="slide slide--content" data-tone="light">
+      <div class="s-head">
+        <div class="s-eyebrow"><span class="qbadge">Q1-1</span>운영 구조의 차이</div>
+        <div class="s-titlerow">
+          <h2 class="s-title">같은 도구를 써도, 루프가 닫혔는가에서 갈립니다</h2>
+          <div class="s-meta">Open Loop vs Closed Loop</div>
+        </div>
+      </div>
+      <div class="s-body">
+        <div class="shift">
+          <div class="shift-col before">
+            <div class="shift-tag">AI를 도입한 회사 · OPEN LOOP</div>
+            <div class="shift-h">AI를 기존 업무 옆에 붙이는 한 가지 도구로 다룹니다</div>
+            <ul>
+              <li><strong>코파일럿이 기존 워크플로우 옆에 붙어 있습니다.</strong> 작업 속도는 일부 올라가지만 결재 라인과 산출 양식은 바뀌지 않습니다.</li>
+              <li><strong>결정은 내리지만 결과를 체계적으로 측정하지 않습니다.</strong> 데이터가 부서별로 흩어져 있고, 사람이 매번 손으로 모아 해석합니다.</li>
+              <li><strong>회의·DM·이메일에 회사 지식이 갇혀 있습니다.</strong> 판단 근거가 담당자 머릿속에만 남아 다음 결정으로 이어지지 않습니다.</li>
+              <li><strong>중간 관리자가 정보를 위아래로 옮깁니다.</strong> 보고 단계마다 손실이 생기고, 의사결정 사이클이 길어집니다.</li>
+              <li><strong>확장 단위는 인원입니다.</strong> 일이 늘면 사람을 더 뽑고, 결과를 더 내려면 헤드카운트로 대응합니다.</li>
+            </ul>
+          </div>
+          <div class="shift-col after">
+            <div class="shift-tag">AI 네이티브 컴퍼니 · CLOSED LOOP</div>
+            <div class="shift-h">AI가 운영체계이고, 사람은 방향 설정과 책임 라인에 집중합니다</div>
+            <ul>
+              <li><strong>회의·결재·피드백·코드 변경·매출이 한 지능층에 통합 적재됩니다.</strong> 운영 데이터 전체가 AI 질의 가능 상태로 정리됩니다.</li>
+              <li><strong>결정은 측정되고, 측정 결과가 다음 결정의 입력값으로 자동 환류됩니다.</strong> 사람이 매번 손으로 다리를 놓지 않아도 개선 루프가 돕니다.</li>
+              <li><strong>회의는 AI 노트테이커가 받아 적고, 결재는 에이전트가 지나가는 표준 채널 위에서 일어납니다.</strong> 업무 행위가 빠짐없이 산출물로 남습니다.</li>
+              <li><strong>중간 관리자의 정보 라우팅 역할을 지능층이 대체합니다.</strong> 사람 미들웨어가 줄어드는 만큼 의사결정 사이클이 짧아집니다.</li>
+              <li><strong>확장 단위는 토큰입니다.</strong> 결과를 더 내야 할 때 채용 대신 API 사용량을 늘리는 결정이 먼저 검토됩니다.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 7. Q1-1c 왜 지금 경영진 ===== -->
+    <section class="slide slide--content" data-tone="light">
+      <div class="s-head">
+        <div class="s-eyebrow"><span class="qbadge">Q1-1</span>왜 지금 경영진이 이 질문을 들어야 하는가</div>
+        <div class="s-titlerow">
+          <h2 class="s-title">도착지는 워크플로우 재설계, 그다음에 있습니다</h2>
+          <div class="s-meta">McKinsey · BCG 2025</div>
+        </div>
+      </div>
+      <div class="s-body">
+        <div class="qcard">
+          <div class="qtag">고성과 기업이 다르게 하는 것</div>
+          <div class="qtext">맥킨지는 고성과 기업이 워크플로우 자체를 재설계할 확률이 평균 기업의 3배라고 보고합니다.</div>
+          <div class="qnote">BCG도 단발 파일럿이 아니라 끝에서 끝까지의 재설계에서 가치가 나온다는 결론을 2025년 다시 정리했습니다. 그러나 도착지는 그다음에 있습니다. 워크플로우를 다시 그렸더라도 회사가 여전히 사람 미들웨어와 헤드카운트 중심의 OPEN LOOP로 돌면, <strong>같은 작업을 다음 분기에 한 번 더 해야 합니다.</strong> AI 네이티브 컴퍼니는 이 반복을 끊는 자리이며, COMPANY BRAIN OS가 자산 축적 4단계 순환을 사람의 손이 빠진 상태에서 굴리기 시작하는 자리입니다.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 8. Q1-2 세 가지 모습 개요 ===== -->
+    <section class="slide slide--content" data-tone="light">
+      <div class="s-head">
+        <div class="s-eyebrow"><span class="qbadge">Q1-2</span>출처 · YC Diana Hu · a16z · Block · Anthropic</div>
+        <div class="s-titlerow">
+          <h2 class="s-title">AI 네이티브는 매일 일어나는 세 가지 변화로 확인됩니다</h2>
+          <div class="s-meta">세 가지 모습</div>
+        </div>
+      </div>
+      <div class="s-body">
+        <p class="intro">Diana Hu의 YC 플레이북, a16z 포트폴리오 신생 기업의 운영 방식, Jack Dorsey가 Block에서 추진하는 조직 개편에서 공통으로 관찰되는 변화를 한 묶음으로 재구성한 것입니다. <strong>한 가지만 자리잡힌 상태는 도구 도입 단계이고, 세 가지가 함께 돌 때 비로소 AI 네이티브라 부를 수 있습니다.</strong></p>
+        <div class="mini3">
+          <div class="m"><div class="mn">모습 1</div><div class="mt">회사 전체가 질의 가능한 닫힌 루프로 돕니다</div><div class="me">Queryable Organization</div></div>
+          <div class="m"><div class="mn">모습 2</div><div class="mt">사람은 스펙·평가 기준을 쓰고, 에이전트가 구현을 만듭니다</div><div class="me">AI Software Factory</div></div>
+          <div class="m"><div class="mn">모습 3</div><div class="mt">직원은 세 아키타입으로 정렬되고, 확장 단위는 토큰입니다</div><div class="me">Three Archetypes · Token Maxing</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 9. 모습 1 ===== -->
+    <section class="slide slide--content" data-tone="light">
+      <div class="s-head">
+        <div class="s-eyebrow"><span class="qbadge">모습 1</span>Queryable Organization · Closed Loops Everywhere</div>
+        <div class="s-titlerow">
+          <h2 class="s-title">회사 전체가 질의 가능한 닫힌 루프로 돕니다</h2>
+          <div class="s-meta">YC · 엔지니어링 스프린트</div>
+        </div>
+      </div>
+      <div class="s-body">
+        <p class="feat-body">회사의 주요 업무 행위가 빠짐없이 재사용 가능한 산출물로 남습니다. 회의는 AI 노트테이커가 받아 적고, 결재는 시스템 안에서 일어나고, 고객 피드백은 Pylon이나 메일에서 곧장 흘러 들어오고, 매출·채용·운영 지표가 한 대시보드에 모입니다. <strong>지능층이 매 순간 회사 상태를 최신으로 보유한 상태</strong>입니다. 결정은 측정되고, 측정 결과는 다음 결정의 입력값으로 환류됩니다. 닫힌 루프 위에서 중간 관리자의 정보 라우팅 역할이 사라지고, 의사결정 사이클이 정보 도달 속도와 같아집니다.</p>
+        <div class="feat-scene">
+          <span class="lbl">YC 사례 · 엔지니어링 스프린트</span>
+          <p>Linear · Slack · GitHub · Pylon · 영업 통화록 · 일일 스탠드업 로그를 한 에이전트가 통합 수집하면, 직전 스프린트가 무엇을 출하했고 어느 항목이 고객 니즈에 닿았는지를 자동 분석합니다. 다음 스프린트 계획은 담당자의 추측이 아니라 데이터에 근거한 에이전트의 제안에서 시작합니다. <strong>YC가 관찰한 기업들은 같은 작업을 절반의 시간에 끝내거나, 같은 시간에 10배의 산출을 냈습니다.</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 10. 모습 2 ===== -->
+    <section class="slide slide--content" data-tone="light">
+      <div class="s-head">
+        <div class="s-eyebrow"><span class="qbadge">모습 2</span>AI Software Factory · Spec-Driven Development</div>
+        <div class="s-titlerow">
+          <h2 class="s-title">사람은 스펙과 평가 기준을 쓰고, 에이전트가 구현을 만듭니다</h2>
+          <div class="s-meta">a16z · Pit · 2026.05</div>
+        </div>
+      </div>
+      <div class="s-body">
+        <p class="feat-body">테스트 주도 개발의 다음 단계입니다. 담당자는 무엇을 만들지(스펙)와 무엇이 합격인지(테스트·평가 기준)만 정의하고, 에이전트가 구현을 만들어 테스트가 통과할 때까지 반복합니다. <strong>일부 기업은 사람이 직접 작성한 코드를 거의 남기지 않고, 스펙과 테스트 하네스 중심으로 저장소를 운영한다고 보고됩니다.</strong> 이 방식이 영업 자료·운영 절차·법무 검토 같은 화이트칼라 산출물로 확장되면, 한 사람이 과거 팀 단위로 처리하던 일을 끝냅니다. Diana Hu가 말한 "1,000배 엔지니어"는 개인 천재가 아니라, 한 사람을 둘러싼 에이전트 시스템이 만드는 결과입니다.</p>
+        <div class="feat-scene">
+          <span class="lbl">a16z 사례 · Pit · 2026년 5월</span>
+          <p>a16z가 2026년 5월 1,600만 달러를 투자한 Pit은 자사를 "AI 제품팀 서비스(AI Product Team as a Service)"로 규정합니다. 엔터프라이즈 내부 운영 소프트웨어를 거버넌스 모듈이 결합된 상태로 자동 빌드·배포합니다. 물류·통신·이커머스·헬스케어 초기 도입처에서 <strong>캠페인 실행 시간이 약 85% 단축되고 도입처당 연 1만 시간 이상이 회수됐다</strong>고 a16z가 전했습니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 11. 모습 3 ===== -->
+    <section class="slide slide--content" data-tone="light">
+      <div class="s-head">
+        <div class="s-eyebrow"><span class="qbadge">모습 3</span>Three Archetypes · Token Maxing over Headcount</div>
+        <div class="s-titlerow">
+          <h2 class="s-title">직원은 세 아키타입으로 정렬되고, 확장 단위는 토큰입니다</h2>
+          <div class="s-meta">Block · Jack Dorsey</div>
+        </div>
+      </div>
+      <div class="s-body">
+        <p class="feat-body">지능층이 정보 라우팅 역할을 대체하면 위계가 평탄해지고, 직원은 세 아키타입으로 재정렬됩니다. 첫째는 <strong>빌더 운영자(IC)</strong>로, 영업·운영·CS·HR 모두 회의에 슬라이드 데크 대신 작동하는 프로토타입을 들고 옵니다. 둘째는 <strong>DRI(직접 책임자)</strong>로, 한 결과에 한 사람이 책임을 집니다. 셋째는 <strong>AI 파운더</strong>로, 창업자나 경영진이 에이전트를 직접 다루며 표준을 만듭니다. AI 전략을 다른 담당자에게 위임하는 순간 AI 네이티브의 명제는 무너집니다. 확장 단위는 인원이 아니라 API 사용량입니다.</p>
+        <div class="feat-scene">
+          <span class="lbl">Block · Jack Dorsey의 조직 개편</span>
+          <p>Jack Dorsey는 기존 조직도를 그대로 유지한 채 AI를 얹는 회사는 전환의 본질을 놓친다고 정리했습니다. 회사 자체를 지능층으로 재구축하고, 사람은 방향 설정과 책임 라인에 배치해야 한다는 결론입니다. <strong>토큰 사용 최대화(Token Maxing)가 헤드카운트 최대화를 대체합니다.</strong> 더 좋은 회사는 더 많이 채용한 회사가 아니라, 토큰을 더 잘 쓴 회사입니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 12. Q1-3 왜 신생 기업이 더 빠른가 ===== -->
+    <section class="slide slide--content" data-tone="light">
+      <div class="s-head">
+        <div class="s-eyebrow"><span class="qbadge">Q1-3</span>왜 신생 기업이 더 빠른가</div>
+        <div class="s-titlerow">
+          <h2 class="s-title">초기 단계 창업자가 구조적 우위를 가집니다</h2>
+          <div class="s-meta">레거시 없음 · 스컹크워크</div>
+        </div>
+      </div>
+      <div class="s-body">
+        <div class="blocks2">
+          <div class="block">
+            <div class="block-tag">신생 기업</div>
+            <div class="block-h">레거시도, 재교육 대상 수천 명도 없어 1일차부터 AI 네이티브로 설계합니다</div>
+            <p class="block-body">운영 중인 제품을 멈출 필요도, 수년간 누적된 표준 운영 절차를 풀어낼 필요도 없습니다. 처음부터 닫힌 루프 위에서 회사를 짓기 때문에 <strong>전환 속도가 구조적으로 빠릅니다.</strong></p>
+          </div>
+          <div class="block">
+            <div class="block-tag">기존 기업</div>
+            <div class="block-h">핵심 프로세스 하나를 바꿀 때마다 다른 프로세스가 깨질 위험을 안습니다</div>
+            <p class="block-body">운영 중인 제품을 멈추지 않고 수년 누적된 절차를 풀어야 합니다. 일부는 본체와 분리된 작은 스컹크워크 팀을 띄워 AI 네이티브 시스템을 처음부터 다시 짓는 우회 경로를 택합니다(<strong>Mutiny 사례</strong>). 대다수 본체는 이 제약 때문에 전환 속도가 느립니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 13. DIVIDER 2 ===== -->
+    <section class="slide slide--dark" data-tone="dark">
+      <div class="div-wrap">
+        <div class="div-num">02</div>
+        <div>
+          <div class="div-eyebrow">Part 2 · AX 추진 원칙</div>
+          <h2 class="div-q">무엇을 지키며 갈 것인가?</h2>
+          <ul class="div-subs">
+            <li><span class="n">2-1</span>지금 우리는 어디에 서 있는가? (성과 분석)</li>
+            <li><span class="n">2-2</span>왜 94곳은 6%에 들지 못하는가? (다섯 함정)</li>
+            <li><span class="n">2-3</span>도착지는 무엇인가? (COMPANY BRAIN OS)</li>
+            <li><span class="n">2-4</span>두뇌가 만드는 일상은? · <span class="n">2-5</span>6%가 지키는 규칙은?</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 14. Q2-1 McKinsey 깔때기 ===== -->
+    <section class="slide slide--content" data-tone="light">
+      <div class="s-head">
+        <div class="s-eyebrow"><span class="qbadge">Q2-1</span>Chart 1 · McKinsey State of AI 2025</div>
+        <div class="s-titlerow">
+          <h2 class="s-title">100곳 중 88곳이 AI를 도입했지만, 실질적 성과를 내는 곳은 6곳뿐입니다</h2>
+          <div class="s-meta">McKinsey · 2025.11</div>
+        </div>
+      </div>
+      <div class="s-body">
+        <div class="funnel2">
+          <div>
+            <div class="f2-row">
+              <div class="f2-track"><div class="f2-bar" style="background:var(--green); width:100%;">88%</div></div>
+              <div class="f2-name">AI 도입</div>
+            </div>
+            <p class="f2-desc">응답 기업의 88%가 최소 한 가지 업무 기능에서 AI를 정기적으로 운영합니다. 1년 전(78%) 대비 10%p 상승한 수치입니다.</p>
+          </div>
+          <div>
+            <div class="f2-row">
+              <div class="f2-track"><div class="f2-bar" style="background:var(--accent); width:48%;">39%</div></div>
+              <div class="f2-name">영업이익 영향</div>
+            </div>
+            <p class="f2-desc">영업이익에 어떤 형태로든 실질적 영향이 잡힌다고 응답한 비율은 39%입니다. 그러나 대부분은 그 영향이 전사 영업이익의 5%에 못 미친다고 보고했습니다.</p>
+          </div>
+          <div>
+            <div class="f2-row">
+              <div class="f2-track"><div class="f2-bar" style="background:var(--gold); width:16%;">6%</div></div>
+              <div class="f2-name">실질적 가치 창출</div>
+            </div>
+            <p class="f2-desc">전사 영업이익의 5% 이상을 AI가 창출한다고 응답한 'AI 고성과 그룹'은 단 6%입니다. 이들은 다른 기업 대비 에이전트 확장 속도가 약 3배 빠릅니다.</p>
+          </div>
+        </div>
+        <p class="cap"><strong>핵심 메시지.</strong> "AI를 도입했다"는 사실만으로는 더 이상 경쟁 우위가 되지 못합니다. 실질적 격차는 "AI가 전사 영업이익의 5% 이상을 창출하고 있는가"라는 한 줄에서 갈립니다.
+          <span class="cite">표본. 전 세계 약 1,400명의 경영진 응답 · 출처. McKinsey "The State of AI 2025: Agents, innovation, and transformation", 2025년 11월.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== 15. Q2-1 BCG 성과 배수 ===== -->
+    <section class="slide slide--content" data-tone="light">
+      <div class="s-head">
+        <div class="s-eyebrow"><span class="qbadge">Q2-1</span>Chart 2 · BCG Build for the Future 2025</div>
+        <div class="s-titlerow">
+          <h2 class="s-title">선도 기업(상위 5%)의 AI 매출은 후발주자의 5배, 주주 수익률은 3.6배</h2>
+          <div class="s-meta">BCG · 2025.09</div>
+        </div>
+      </div>
+      <div class="s-body">
+        <div class="metrics">
+          <div class="metric">
+            <div class="metric-l">AI 기인 매출 증가<span class="sub">AI-driven revenue uplift</span></div>
+            <div class="metric-track"><div class="metric-fill lead" style="width:100%;"></div></div>
+            <div class="metric-v">5.0배</div>
+          </div>
+          <div class="metric">
+            <div class="metric-l">총주주수익률 (3년)<span class="sub">Total Shareholder Return, 3-yr</span></div>
+            <div class="metric-track"><div class="metric-fill" style="width:72%;"></div></div>
+            <div class="metric-v">3.6배</div>
+          </div>
+          <div class="metric">
+            <div class="metric-l">AI 기인 비용 절감<span class="sub">AI-driven cost reduction</span></div>
+            <div class="metric-track"><div class="metric-fill" style="width:60%;"></div></div>
+            <div class="metric-v">3.0배</div>
+          </div>
+          <div class="metric">
+            <div class="metric-l">전사 매출 성장률<span class="sub">Overall revenue growth</span></div>
+            <div class="metric-track"><div class="metric-fill" style="width:34%;"></div></div>
+            <div class="metric-v">1.7배</div>
+          </div>
+          <div class="metric">
+            <div class="metric-l">영업이익률<span class="sub">EBIT margin</span></div>
+            <div class="metric-track"><div class="metric-fill" style="width:32%;"></div></div>
+            <div class="metric-v">1.6배</div>
+          </div>
+        </div>
+        <p class="cap"><strong>해석.</strong> 동일한 시장 조건에서도 AI를 운영 모델에 체계적으로 내재화한 상위 5%가 모든 지표에서 후발주자를 압도합니다.
+          <span class="cite">표본. Future-built(상위 5%)와 Laggards(후발주자) 평균 비교 · 출처. BCG "Build for the Future 2025: The Widening AI Value Gap", 2025년 9월.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== 16. Q2-1 BCG AI Radar ===== -->
+    <section class="slide slide--content" data-tone="light">
+      <div class="s-head">
+        <div class="s-eyebrow"><span class="qbadge">Q2-1</span>Chart 3 · BCG AI Radar 2026</div>
+        <div class="s-titlerow">
+          <h2 class="s-title">AI 의사결정의 무게중심이 CEO 직속으로 이동했습니다</h2>
+          <div class="s-meta">BCG · 2026.01</div>
+        </div>
+      </div>
+      <div class="s-body">
+        <div class="stat-trio">
+          <div class="stat-one"><div class="v">72%</div><div class="l">회사의 AI 최종 의사결정권자가 CEO 본인이라고 응답. 1년 전 대비 정확히 두 배입니다.</div></div>
+          <div class="stat-one"><div class="v">94%</div><div class="l">단기 ROI가 가시화되지 않더라도 AI 투자를 지속하겠다고 응답했습니다.</div></div>
+          <div class="stat-one"><div class="v">90%</div><div class="l">2026년 내에 AI 에이전트가 측정 가능한 ROI를 창출할 것으로 기대했습니다.</div></div>
+        </div>
+        <div class="dist-h">CEO 유형 분포 (BCG 자체 분류)</div>
+        <div class="dist">
+          <div class="seg s1">15%</div>
+          <div class="seg s2">70%</div>
+          <div class="seg s3">15%</div>
+        </div>
+        <div class="dist-legend">
+          <div><strong>Trailblazers · 선도형 (15%)</strong>선제적 투자, 전사 업스킬링, 강한 확신으로 전환을 주도합니다.</div>
+          <div><strong>Pragmatists · 실용형 (70%)</strong>잠재력엔 동의하나, 가치가 명확하고 위험이 통제 가능한 영역에 한해 투자합니다.</div>
+          <div><strong>Followers · 추종형 (15%)</strong>중요성은 인지하나 확신이 부족해 소규모 파일럿에 머무릅니다.</div>
+        </div>
+        <p class="cap"><strong>핵심 메시지.</strong> 2026년의 AI는 IT 부서 프로젝트가 아니라 CEO 직속 어젠다로 격상됐습니다. 기업들은 평균 매출의 1.7%를 AI에 투자할 계획이며, 전년 대비 두 배 수준입니다.
+          <span class="cite">표본. 전 세계 1,803명 경영진 응답 · 출처. BCG "AI Radar 2026", 2026년 1월.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== 17. Q2-2 다섯 함정 ===== -->
+    <section class="slide slide--content" data-tone="light">
+      <div class="s-head">
+        <div class="s-eyebrow"><span class="qbadge">Q2-2</span>100곳 중 94곳이 6%에 들지 못하는 이유</div>
+        <div class="s-titlerow">
+          <h2 class="s-title">흔히 빠지는 다섯 개의 함정</h2>
+          <div class="s-meta">Five Pitfalls</div>
+        </div>
+      </div>
+      <div class="s-body">
+        <div class="five">
+          <div class="five-cell">
+            <div class="five-num">P° 1 · 도구부터 논의</div>
+            <h4 class="five-h">도구부터 논의하는 함정</h4>
+            <ul>
+              <li>회의의 첫 의제는 도구 선택입니다. "ChatGPT냐, Claude냐, Gemini냐."</li>
+              <li>두 달 동안 도구 벤치마크, 라이선스 협상, 보안 심사가 이어집니다.</li>
+              <li>일하는 방식은 그대로인 채, 도구 도입을 AX 추진으로 착각합니다.</li>
+            </ul>
+          </div>
+          <div class="five-cell">
+            <div class="five-num">P° 2 · PoC 범람</div>
+            <h4 class="five-h">PoC 범람 함정</h4>
+            <ul>
+              <li>분기마다 "AI로 ○○를 시도하겠다"는 신청서가 수십 건 올라옵니다.</li>
+              <li>전부 승인되면 한정된 인력·예산이 30~50갈래로 분산됩니다.</li>
+              <li>1년 뒤 "진척 한 줄 요약" 요청에 누구도 답하지 못합니다.</li>
+            </ul>
+          </div>
+          <div class="five-cell">
+            <div class="five-num">P° 3 · 환각 맹신</div>
+            <h4 class="five-h">환각 맹신 함정</h4>
+            <ul>
+              <li>단정적 어조로 내놓은 답을 그대로 보고서에 옮깁니다.</li>
+              <li>매끄러운 문장이 정확한 사실의 보증은 아닙니다.</li>
+              <li>사고가 드러난 뒤에야 출처 규정을 만들고, 그땐 이미 누적됐습니다.</li>
+            </ul>
+          </div>
+          <div class="five-cell">
+            <div class="five-num">P° 4 · 시간 비효율</div>
+            <h4 class="five-h">시간 비효율 함정</h4>
+            <ul>
+              <li>직원 50명의 보고서 시간이 각각 두 시간씩 단축됩니다.</li>
+              <li>그러나 그 시간은 메신저 대화와 즉흥 회의로 곧 채워집니다.</li>
+              <li>재배치 장치가 없어 재무 효과는 측정 직전에 소실됩니다.</li>
+            </ul>
+          </div>
+          <div class="five-cell">
+            <div class="five-num">P° 5 · 거버넌스 누수</div>
+            <h4 class="five-h">거버넌스 누수 함정</h4>
+            <ul>
+              <li>분기 매출 데이터를 ChatGPT 무료 버전에 입력한 사실이 외부 감사에서 드러납니다.</li>
+              <li>사후에 비로소 사용 지침이 마련됩니다.</li>
+              <li>지침이 공유될 무렵이면 유사 사례가 이미 수십 건 누적됐습니다.</li>
+            </ul>
+          </div>
+        </div>
+        <p class="cap" style="border:none; padding-top:10px;">* PoC (Proof of Concept). 본격 도입 전, 아이디어가 실제로 작동하는지 작게 시험해 보는 단계입니다.</p>
+      </div>
+    </section>
+
+    <!-- ===== 18. Q2-3 COMPANY BRAIN OS ===== -->
+    <section class="slide slide--content" data-tone="light">
+      <div class="s-head">
+        <div class="s-eyebrow"><span class="qbadge">Q2-3</span>AX의 도착지 · 복제 불가능한 운영체계</div>
+        <div class="s-titlerow">
+          <h2 class="s-title">COMPANY BRAIN OS, 도구가 아니라 회사의 두뇌</h2>
+          <div class="s-meta">Destination</div>
+        </div>
+      </div>
+      <div class="s-body">
+        <p class="intro">회사의 암묵지를 구조화된 지식으로 저장하고, 그 지식 위에서 에이전트가 일하며, 사람과 에이전트가 함께 도는 협업 루프가 자산을 분기마다 두껍게 만드는 운영체계입니다. <strong>AX의 도착지는 더 나은 도구의 도입이 아니라 이 두뇌의 구축에 있습니다.</strong></p>
+        <div class="pillars">
+          <div class="pillar">
+            <div class="pillar-num">01 · 지식</div>
+            <div class="pillar-h">구조화된 조직 지식</div>
+            <p class="pillar-body">베테랑의 머릿속에만 있던 암묵지를 용어·맥락·규칙·행동 네 계층으로 구조화해 저장합니다. 도구는 사 올 수 있어도, 우리 회사의 지식은 사 올 수 없습니다.</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar-num">02 · 실행</div>
+            <div class="pillar-h">지식 위에서 일하는 에이전트</div>
+            <p class="pillar-body">에이전트가 그 지식을 바탕으로 실제 업무를 수행합니다. 같은 모델이라도 우리 지식을 얹은 에이전트만이 우리 방식으로 일합니다.</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar-num">03 · 순환</div>
+            <div class="pillar-h">사람과 에이전트의 협업 루프</div>
+            <p class="pillar-body">사람과 에이전트가 한 팀으로 일하며, 에이전트가 아직 못 하는 부분이 다음 지식으로 다시 쌓입니다. 루프를 돌릴수록 두뇌는 더 두꺼워집니다.</p>
+          </div>
+        </div>
+        <p class="os-build">5단계 로드맵은 이 두뇌를 짓는 공사 일정입니다. <strong>각 단계가 한 층씩 올립니다.</strong> 운영 주체를 세우고, 첫 모듈을 만들고, 우선 적재할 자산을 고르고, 전사로 확장한 뒤, 지속 운영으로 굳힙니다.</p>
+      </div>
+    </section>
+
+    <!-- ===== 19. Q2-4 AI-Native 조직 7영역 ===== -->
+    <section class="slide slide--content" data-tone="light">
+      <div class="s-head">
+        <div class="s-eyebrow"><span class="qbadge">Q2-4</span>두뇌가 만드는 일상 · 7개 영역 비교</div>
+        <div class="s-titlerow">
+          <h2 class="s-title">두뇌가 자리 잡으면, 회사의 하루가 이렇게 달라집니다</h2>
+          <div class="s-meta">AI-aware → AI-Native</div>
+        </div>
+      </div>
+      <div class="s-body">
+        <div class="cmp">
+          <div class="cmp-head">
+            <div>업무 영역</div>
+            <div>이전 방식 · AI-aware</div>
+            <div>AI-Native 조직 방식</div>
+          </div>
+          <div class="cmp-row"><div class="cmp-lbl">AI의 위치</div><div class="cmp-before">ChatGPT로 이메일 초안을 다듬는 정도, 업무의 한쪽 구석에 머뭅니다.</div><div class="cmp-after">고객 문의가 들어오면 Claude가 분류부터 응대 초안 작성, <strong>거버넌스 체크까지 한 번에</strong> 처리합니다.</div></div>
+          <div class="cmp-row"><div class="cmp-lbl">도입 단위</div><div class="cmp-before">마케터는 ChatGPT, 개발자는 Claude, 경영진은 Gemini를 각자 알아서 씁니다.</div><div class="cmp-after">리뷰 응대, 견적 작성, 미팅 노트 같은 <strong>업무 자체가 AI를 전제로 새로 짜여</strong> 있습니다.</div></div>
+          <div class="cmp-row"><div class="cmp-lbl">Use case 운영</div><div class="cmp-before">PoC로 챗봇·요약기·이미지 생성기 수십 개가 돌다 절반은 반년 뒤 사라집니다.</div><div class="cmp-after">가장 큰 가치를 만드는 <strong>3~5건에만 자원을 집중</strong>합니다.</div></div>
+          <div class="cmp-row"><div class="cmp-lbl">절감된 시간</div><div class="cmp-before">보고서를 2시간 일찍 끝냈지만, 그 시간을 그대로 카톡 대화와 회의에 써 버립니다.</div><div class="cmp-after">그 시간을 <strong>고객 인터뷰나 신제품 기획에 다시</strong> 씁니다.</div></div>
+          <div class="cmp-row"><div class="cmp-lbl">AI와의 관계</div><div class="cmp-before">답변을 그대로 붙여 보고하거나, 환각 뒤 "AI 못 믿는다"며 닫아 버립니다.</div><div class="cmp-after">검증이 필요한 일은 출처를 요구하고, 발상은 풀어 줍니다. <strong>맡기는 강도를 업무에 따라</strong> 다르게 잡습니다.</div></div>
+          <div class="cmp-row"><div class="cmp-lbl">거버넌스</div><div class="cmp-before">고객 데이터를 ChatGPT에 붙여 넣은 사고가 터진 뒤에야 가이드라인을 만듭니다.</div><div class="cmp-after">어떤 데이터를 어디까지 보낼지, <strong>처음부터 규정·로그·승인 절차</strong>를 깔아 둡니다.</div></div>
+          <div class="cmp-row"><div class="cmp-lbl">에이전트</div><div class="cmp-before">GPT로 이메일만 요약, Claude로 코드만 리뷰. 한 번에 한 가지 일만 시킵니다.</div><div class="cmp-after">주문이 오면 재고 확인·고객 안내·배송 예약이 <strong>한 흐름으로 끝까지</strong> 이어집니다.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 20. Q2-5 다섯 원칙 ===== -->
+    <section class="slide slide--content" data-tone="light">
+      <div class="s-head">
+        <div class="s-eyebrow"><span class="qbadge">Q2-5</span>5% 고성과 그룹이 공통으로 지키는 규칙</div>
+        <div class="s-titlerow">
+          <h2 class="s-title">AX 추진 다섯 가지 원칙</h2>
+          <div class="s-meta">Five Principles</div>
+        </div>
+      </div>
+      <div class="s-body">
+        <div class="five">
+          <div class="five-cell">
+            <div class="five-num">N° 1 · 업무 재설계</div>
+            <h4 class="five-h">업무 자체를 다시 짜는 회의를 엽니다</h4>
+            <ul>
+              <li>"어떤 AI를 살까" 회의에 두 시간을 쓰지 않습니다.</li>
+              <li>업무 단계를 먼저 화이트보드에 분해합니다.</li>
+              <li>도구는 분해가 끝난 다음에 고릅니다.</li>
+            </ul>
+          </div>
+          <div class="five-cell">
+            <div class="five-num">N° 2 · 예산 배분</div>
+            <h4 class="five-h">예산의 70%를 사람과 프로세스에 씁니다</h4>
+            <ul>
+              <li>라이선스 5천만 + 교육 5백만 → "쓸 줄 아는 사람이 없다".</li>
+              <li>같은 라이선스 + 교육 1억 → "토큰이 모자라다".</li>
+              <li>알고리즘 10%, 데이터·기술 20%, 사람 70%가 기준선.</li>
+            </ul>
+          </div>
+          <div class="five-cell">
+            <div class="five-num">N° 3 · 집중 투자</div>
+            <h4 class="five-h">수십 건 시도 대신 굵직한 서너 건만</h4>
+            <ul>
+              <li>분기마다 올라오는 PoC 30~50건을 전부 승인하지 않습니다.</li>
+              <li>경영진이 직접 3~5건만 통과시킵니다.</li>
+              <li>통과한 과제에 인력의 30%를 우선 붙입니다.</li>
+            </ul>
+          </div>
+          <div class="five-cell">
+            <div class="five-num">N° 4 · 검증 강도</div>
+            <h4 class="five-h">업무마다 검증 강도를 다르게 둡니다</h4>
+            <ul>
+              <li>마케팅 카피: 한 번 읽고 게재합니다.</li>
+              <li>분기 재무 코멘트: 두 명 대조 + CFO 결재.</li>
+              <li>같은 도구라도 업무가 다르면 검증도 달라집니다.</li>
+            </ul>
+          </div>
+          <div class="five-cell">
+            <div class="five-num">N° 5 · 선제 거버넌스</div>
+            <h4 class="five-h">사고가 터지기 전에 거버넌스를 먼저</h4>
+            <ul>
+              <li>도입 첫 주에 데이터 반출 매트릭스를 게시합니다.</li>
+              <li>책임자·승인 절차·감사 기록을 함께 정합니다.</li>
+              <li>외부 감사에서 사고가 드러난 뒤에 만들지 않습니다.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 21. DIVIDER 3 ===== -->
+    <section class="slide slide--dark" data-tone="dark">
+      <div class="div-wrap">
+        <div class="div-num">03</div>
+        <div>
+          <div class="div-eyebrow">Part 3 · AX 캔버스</div>
+          <h2 class="div-q">첫 한 걸음은 무엇인가?</h2>
+          <ul class="div-subs">
+            <li><span class="n">3-1</span>왜 한 직무를 10칸으로 해부하는가?</li>
+            <li><span class="n">3-2</span>캔버스는 어떻게 생겼는가?</li>
+            <li><span class="n">3-3</span>좌측 T·C·R·A · <span class="n">3-4</span>우측 Human-Agent Team</li>
+            <li><span class="n">3-5</span>가드레일·성장 · <span class="n">3-6</span>작성 순서 · <span class="n">3-7</span>작동 4조건</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 22. Q3-1 왜 직무 단위 ===== -->
+    <section class="slide slide--content" data-tone="light">
+      <div class="s-head">
+        <div class="s-eyebrow"><span class="qbadge">Q3-1</span>캔버스의 위치와 단위</div>
+        <div class="s-titlerow">
+          <h2 class="s-title">왜 한 직무를 10칸으로 해부하는가</h2>
+          <div class="s-meta">4단계 · 분석 단위</div>
+        </div>
+      </div>
+      <div class="s-body">
+        <p class="intro">3단계까지는 후보 전략 과제를 점수로 선별했습니다. 4단계는 분석 단위가 다릅니다. <strong>전략 과제를 실행하려면 해당 직무를 끝에서 끝까지 분해해야 합니다.</strong></p>
+        <div class="qcard">
+          <div class="qtag">캔버스가 답하는 한 가지 질문</div>
+          <div class="qtext">"이 직무가 창출하는 가치는 무엇이며, 인간과 에이전트가 어떻게 함께 그 가치를 만들 것인가."</div>
+          <div class="qnote">1번 핵심 가치, 좌측 2·3·4번 업무 구조, 우측 5·6·7번 역할 분담, 8번 기술 매핑, 9·10번 통제와 재투입. <strong>동일한 양식이 직무 단위로 누적되어 전사 지식 자산이 됩니다.</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 23. Q3-2 10칸 지도 ===== -->
+    <section class="slide slide--content" data-tone="light">
+      <div class="s-head">
+        <div class="s-eyebrow"><span class="qbadge">Q3-2</span>중심 1 · What 2·3·4 · Why 5·6·7 · 8 · 9·10</div>
+        <div class="s-titlerow">
+          <h2 class="s-title">AX 캔버스 한눈에 보기</h2>
+          <div class="s-meta">10칸 지도</div>
+        </div>
+      </div>
+      <div class="s-body">
+        <p class="intro" style="margin-bottom:16px;">윗줄 일곱 칸은 현황 진단, 아랫줄 세 칸은 AI 전환 실행입니다. 좌우 축은 업무 구조(What)와 AI 전환(Why). <strong>좌우는 일의 모양과 분업, 위아래는 진단과 실행입니다.</strong></p>
+        <div class="canvas-axis">
+          <div>업무 구조 (What)<span class="as">현황 진단 · 좌측</span></div>
+          <div>AI 전환 (Why)<span class="as">현황 진단 · 우측</span></div>
+        </div>
+        <div class="cgrid">
+          <div class="ccell"><div class="cc-n">04</div><div class="cc-name">업무 입출력 구조</div><div class="cc-d">필요 정보와 결과물은</div></div>
+          <div class="ccell"><div class="cc-n">03</div><div class="cc-name">시간 배분 현황</div><div class="cc-d">실제 투입 시간은</div></div>
+          <div class="ccell"><div class="cc-n">02</div><div class="cc-name">핵심 업무 목록</div><div class="cc-d">어떤 업무를 하나</div></div>
+          <div class="ccell center"><div class="cc-n">01 · 중심</div><div class="cc-name">업무 역할 정의</div><div class="cc-d">핵심 가치는 무엇인가</div></div>
+          <div class="ccell"><div class="cc-n">05</div><div class="cc-name">AI 대체 가능성</div><div class="cc-d">무엇을 AI가 대신하나</div></div>
+          <div class="ccell"><div class="cc-n">06</div><div class="cc-name">협업 구조</div><div class="cc-d">정보는 어떻게 흐르나</div></div>
+          <div class="ccell"><div class="cc-n">07</div><div class="cc-name">성과 기준</div><div class="cc-d">무엇으로 측정하나</div></div>
+        </div>
+        <div class="cgrid-bottom">
+          <div class="ccell"><div class="cc-n">09 · 통제</div><div class="cc-name">AI 가드레일</div><div class="cc-d">책임자는 누구이며 보안·통제는 어떻게</div></div>
+          <div class="ccell bridge"><div class="cc-n">08 · 연결</div><div class="cc-name">AI 기술 매핑</div><div class="cc-d">어떤 AI 기술을 연결</div></div>
+          <div class="ccell"><div class="cc-n">10 · 재투입</div><div class="cc-name">성장 방향</div><div class="cc-d">절감된 시간에 담당자는 무엇에 집중하나</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 24. Q3-3 T·C·R·A ===== -->
+    <section class="slide slide--content" data-tone="light">
+      <div class="s-head">
+        <div class="s-eyebrow"><span class="qbadge">Q3-3</span>2·3·4번 좌측 · Terminology → Context → Rule → Action</div>
+        <div class="s-titlerow">
+          <h2 class="s-title">좌측 · 암묵지의 Mark-down화</h2>
+          <div class="s-meta">예시 · 패션 커머스 A사 CS</div>
+        </div>
+      </div>
+      <div class="s-body">
+        <div class="tcra">
+          <div class="tcra-row">
+            <div class="tcra-stage"><div class="tcra-letter">T</div><div><div class="tcra-sname">Terminology</div><div class="tcra-skor">용어</div></div></div>
+            <div class="tcra-what"><strong>핵심 용어를 단일 정의로 표준화.</strong> 직무 핵심 용어 10~20개를 한 줄 정의로. 에이전트의 1차 입력값.</div>
+            <div class="tcra-ex"><span class="extag">예시</span>채널 = 자사몰·입점몰·백화점몰 · 핏 불만 = 사이즈 부적합 클레임 · 정형 = 표준 응대 가능 문의</div>
+          </div>
+          <div class="tcra-row">
+            <div class="tcra-stage"><div class="tcra-letter">C</div><div><div class="tcra-sname">Context</div><div class="tcra-skor">맥락</div></div></div>
+            <div class="tcra-what"><strong>그 단어가 작동하는 배경 조건.</strong> 정책·기한·채널 차이처럼 사람은 당연히 알지만 에이전트는 모르는 정보.</div>
+            <div class="tcra-ex"><span class="extag">예시</span>구매 14일 이내·택 미제거 시 반품. 입점몰은 D+3 자동 환불, 백화점몰은 매장 회수 후 환불.</div>
+          </div>
+          <div class="tcra-row">
+            <div class="tcra-stage"><div class="tcra-letter">R</div><div><div class="tcra-sname">Rule</div><div class="tcra-skor">규칙</div></div></div>
+            <div class="tcra-what"><strong>의사결정 기준을 라인 단위로.</strong> "특정 조건 시 특정 행동" 형식. 신규 인력과 에이전트가 같은 기준으로 운영.</div>
+            <div class="tcra-ex"><span class="extag">예시</span>① 채널 확인 ② 택·기한 점검 ③ 핏 불만은 사이즈 재추천 ④ 단순 변심은 왕복 배송비 고지 ⑤ 까다로운 어조 신호 시 규정 원문을 또박또박 읽어준다</div>
+          </div>
+          <div class="tcra-row">
+            <div class="tcra-stage"><div class="tcra-letter">A</div><div><div class="tcra-sname">Action</div><div class="tcra-skor">행동</div></div></div>
+            <div class="tcra-what"><strong>규칙을 끝에서 끝까지 이은 흐름.</strong> 첫 입력부터 마지막 산출까지 화살표로. 8번이 어느 칸을 잡을지 정함.</div>
+            <div class="tcra-ex"><span class="extag">예시</span>채널 확인 → 주문 조회 → 사유 분류 → (핏)재추천 / (변심)배송비 안내 → 접수 → 처리 결과 알림</div>
+          </div>
+        </div>
+        <p class="tcra-foot"><strong>마크다운을 채택하는 이유.</strong> 에이전트가 호출 가능한 최소 단위가 마크다운 포맷이기 때문입니다. Anthropic Skill, Custom GPT, 사내 RAG 모두 마크다운을 1차 입력으로 활용합니다. T·C·R·A 네 계층이 <strong>SKILL.md 한 건의 산출물로 직결</strong>됩니다.</p>
+      </div>
+    </section>
+
+    <!-- ===== 25. Q3-4 Human-Agent Team ===== -->
+    <section class="slide slide--content" data-tone="light">
+      <div class="s-head">
+        <div class="s-eyebrow"><span class="qbadge">Q3-4</span>5·6·7번 우측 · Human Harness + AI Harness = Meta Harness</div>
+        <div class="s-titlerow">
+          <h2 class="s-title">우측 · Human-Agent Team</h2>
+          <div class="s-meta">역할 분담</div>
+        </div>
+      </div>
+      <div class="s-body">
+        <div class="harness">
+          <div class="harness-col human">
+            <div class="harness-tag">Human Harness · 인간 영역</div>
+            <div class="harness-h">인간이 최종 책임을 갖는 의사결정과 검증 항목</div>
+            <ul>
+              <li><strong>판단 기준</strong>에이전트 산출물 수용 전 적용할 분별 기준. 4D의 분별(Discernment) 영역.</li>
+              <li><strong>최종 결재선</strong>어떤 의사결정이 사람 결재로 종결되는지. 1단계인지 2단계인지 명시.</li>
+              <li><strong>실패 시 책임</strong>사고 시 거슬러 올라갈 사람을 부서가 아니라 이름으로.</li>
+              <li><strong>예외 대응</strong>규정 바깥 사례를 어떻게 받아들일지. 사람의 재량 한도를 어디까지.</li>
+            </ul>
+          </div>
+          <div class="harness-col ai">
+            <div class="harness-tag">AI Harness · 에이전트 영역</div>
+            <div class="harness-h">에이전트가 위임받아 자율 수행하는 업무 항목</div>
+            <ul>
+              <li><strong>위임 범위</strong>T·C·R·A 중 에이전트가 수행할 구간. 4D의 위임(Delegation) 영역.</li>
+              <li><strong>호출 도구</strong>쓰는 모델·Skill·외부 API·사내 시스템 권한. 8번 매핑과 연결.</li>
+              <li><strong>입출력 형식</strong>형식을 표준화. 불안정하면 분별 비용이 매번 발생.</li>
+              <li><strong>실패 신호</strong>못 하는 사례를 어떻게 신호로 받을지. 다음 사이클 T·R 추출 대상.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="meta-merge">
+          <div class="mtag">Meta Harness</div>
+          <div class="mformula">Human Harness + AI Harness = <em>Meta Harness</em>. 인간의 결재 라인과 에이전트의 위임 범위가 동일 문서에서 정합성을 가져야 합니다. 이 산출물이 6번(협업 구조)이며 7번(성과 기준)으로 측정합니다.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 26. Q3-5 가드레일·성장 ===== -->
+    <section class="slide slide--content" data-tone="light">
+      <div class="s-head">
+        <div class="s-eyebrow"><span class="qbadge">Q3-5</span>9·10번 · 통제 항목과 다음 사이클 입력</div>
+        <div class="s-titlerow">
+          <h2 class="s-title">가드레일과 성장 방향</h2>
+          <div class="s-meta">캔버스를 운영 가능 상태로</div>
+        </div>
+      </div>
+      <div class="s-body">
+        <div class="guard">
+          <div class="guard-card">
+            <div class="gc-num">09 · 가드레일</div>
+            <div class="gc-title">AI 가드레일</div>
+            <div class="gc-q">책임자는 누구이며 보안·통제를 어떻게 할 것인가</div>
+            <p class="gc-body"><strong>책임자와 통제 정책이 동시에 정의되어야 합니다.</strong> 둘 중 하나라도 누락되면 운영 단계에서 중단됩니다.</p>
+            <ul>
+              <li>책임자 한 명. 사람 이름으로 적습니다.</li>
+              <li>데이터 권한 범위. 접근 시스템과 외부 송신 한도.</li>
+              <li>실패 통보 절차. 누구에게 몇 분 안에 알리는가.</li>
+              <li>롤백 기준. 자동 호출을 멈추는 오답 임곗값.</li>
+            </ul>
+          </div>
+          <div class="guard-card">
+            <div class="gc-num">10 · 성장 방향</div>
+            <div class="gc-title">성장 방향</div>
+            <div class="gc-q">담당자는 무엇에 집중할 것인가</div>
+            <p class="gc-body">비는 시간을 미리 정해두지 않으면, <strong>결국 잡다한 회의와 결재 처리에 다시 묻힙니다.</strong> 4D의 성실 영역이 적용됩니다.</p>
+            <ul>
+              <li>새 책임 영역. 더 높은 가치의 일이 무엇인지.</li>
+              <li>학습·재배치 신호. 절약된 시간이 흐를 경로.</li>
+              <li>다음 캔버스 입력. 에이전트가 못 한 사례 모음.</li>
+              <li>성과 재정의. 7번 기준을 어떻게 갱신할지.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 27. Q3-6 작성 순서 ===== -->
+    <section class="slide slide--content" data-tone="light">
+      <div class="s-head">
+        <div class="s-eyebrow"><span class="qbadge">Q3-6</span>작성 순서 · 1 → 2·3·4 → 5·6·7 → 8 → 9·10</div>
+        <div class="s-titlerow">
+          <h2 class="s-title">채우는 순서와 흔히 빠지는 함정</h2>
+          <div class="s-meta">Sequence</div>
+        </div>
+      </div>
+      <div class="s-body">
+        <div class="order">
+          <div class="order-row">
+            <div class="order-n">1</div>
+            <div class="order-body"><h4>1번을 단일 문장으로 정의합니다</h4><p>"핵심 가치는 무엇인가." 한 문장이 확정돼야 좌우 6칸이 같은 축으로 정렬됩니다.</p></div>
+            <div class="order-fail"><span class="ft">실패 싸인</span>"여러 가치를 만드는 종합 역할"처럼 두루뭉술하면 어느 칸이 비었는지 드러나지 않습니다.</div>
+          </div>
+          <div class="order-row">
+            <div class="order-n">2</div>
+            <div class="order-body"><h4>좌측 2·3·4번을 순차 정의 · T·C·R·A 구조</h4><p>업무 목록 → 시간 배분 → 입출력. 같은 표를 네 계층으로 재구성하면 좌측 정의가 완성됩니다.</p></div>
+            <div class="order-fail"><span class="ft">실패 싸인</span>시간 배분을 비우면 정형·비정형이 안 갈리고 5번 AI 대체 가능성을 짐작으로 채웁니다.</div>
+          </div>
+          <div class="order-row">
+            <div class="order-n">3</div>
+            <div class="order-body"><h4>우측 5·6·7번을 순차 정의 · Human → AI → Meta</h4><p>대체 비율 → Human·AI Harness 분리 정의 → 성과 기준 반영한 Meta Harness 통합.</p></div>
+            <div class="order-fail"><span class="ft">실패 싸인</span>맡은 일과 결재가 어긋나면 다음 단계에서 권한 표를 처음부터 다시 그립니다.</div>
+          </div>
+          <div class="order-row">
+            <div class="order-n">4</div>
+            <div class="order-body"><h4>8번 매핑표를 그립니다 · 좌측 Action ↔ 우측 호출 도구</h4><p>두 레이어를 1:1로 잇는 표 한 장. 비는 자리에 별표를 달아 둡니다.</p></div>
+            <div class="order-fail"><span class="ft">실패 싸인</span>빈칸 없이 100% 채워졌다면 오히려 핵심 가치를 못 짚었다는 신호. 1번으로 돌아갑니다.</div>
+          </div>
+          <div class="order-row">
+            <div class="order-n">5</div>
+            <div class="order-body"><h4>9·10번을 마지막에 확정 · 가드레일과 성장</h4><p>9번 책임자·통제 두 줄, 10번 신규 책임·다음 입력 두 줄. 그래야 다음 사이클의 입력 자산으로 전환됩니다.</p></div>
+            <div class="order-fail"><span class="ft">실패 싸인</span>책임자를 부서명으로 적으면 사고 시 책임이 안 가려지고 그사이 에이전트는 계속 작동합니다.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 28. Q3-7 작동 4조건 ===== -->
+    <section class="slide slide--content" data-tone="light">
+      <div class="s-head">
+        <div class="s-eyebrow"><span class="qbadge">Q3-7</span>Context · Connections · Capabilities · Cadence</div>
+        <div class="s-titlerow">
+          <h2 class="s-title">컴퍼니 브레인이 잘 작동하는 네 가지 조건</h2>
+          <div class="s-meta">4C</div>
+        </div>
+      </div>
+      <div class="s-body">
+        <p class="intro" style="margin-bottom:14px;">이 캔버스 한 장은 첫 조건인 맥락(Context)을 한 직무만큼 채우는 일입니다. <strong>나머지 셋이 얹힐 때 두뇌가 운영체계로 돌아갑니다.</strong> 앞의 둘은 두뇌가 무엇을 아는지, 뒤의 둘은 무엇을 하는지를 다룹니다.</p>
+        <div class="cond-band">
+          <div>세컨드 브레인 <span>· 아는 것 + 보는 것</span></div>
+          <div>운영체계 <span>· 일하는 것 + 스스로 도는 것</span></div>
+        </div>
+        <div class="cond-grid">
+          <div class="cond-card">
+            <div class="cond-num">조건 1</div>
+            <div class="cond-name">맥락<span>Context</span></div>
+            <div class="cond-desc">암묵지·규정·노하우를 에이전트가 읽게 구조화한 정적 지식. 이 캔버스가 한 직무씩 채우는 층입니다.</div>
+          </div>
+          <div class="cond-card">
+            <div class="cond-num">조건 2</div>
+            <div class="cond-name">연결<span>Connections</span></div>
+            <div class="cond-desc">메일·업무 시스템·기간계 데이터가 API로 실시간 연결돼, 두뇌가 정적 문서를 넘어 지금 상태까지 봅니다.</div>
+          </div>
+          <div class="cond-card">
+            <div class="cond-num">조건 3</div>
+            <div class="cond-name">역량<span>Capabilities</span></div>
+            <div class="cond-desc">그 지식과 데이터 위에서 실제로 일하는 스킬·에이전트·자동화가 자리 잡습니다.</div>
+          </div>
+          <div class="cond-card">
+            <div class="cond-num">조건 4</div>
+            <div class="cond-name">리듬<span>Cadence</span></div>
+            <div class="cond-desc">사람이 매번 지시하지 않아도 스케줄·이벤트 트리거로 정해진 리듬을 따라 스스로 돌아갑니다.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 29. CLOSING 요약 ===== -->
+    <section class="slide slide--dark" data-tone="dark">
+      <div class="close-wrap">
+        <div class="close-eyebrow">한 장 요약 · 세 질문, 하나의 도착지</div>
+        <h2 class="close-h">결국, 세 질문에 답하는 일입니다</h2>
+        <div class="close-row">
+          <div class="close-q">Q1</div>
+          <div class="close-a">어디로? → <strong>AI를 운영체계로 쓰는 닫힌 루프의 회사</strong>, AI 네이티브 컴퍼니로.</div>
+        </div>
+        <div class="close-row">
+          <div class="close-q">Q2</div>
+          <div class="close-a">무엇을 지키며? → <strong>다섯 함정을 피하고 다섯 원칙으로 COMPANY BRAIN OS</strong>를 짓는다.</div>
+        </div>
+        <div class="close-row">
+          <div class="close-q">Q3</div>
+          <div class="close-a">첫 걸음은? → <strong>직무 하나를 골라 AX 캔버스 한 장으로 해부</strong>한다.</div>
+        </div>
+        <div class="close-next">
+          <div class="nt">다음 한 걸음</div>
+          <div class="nb">가장 큰 가치를 만드는 직무 하나를 정해, 이번 주에 캔버스 한 장을 채웁니다.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 30. THANKS ===== -->
+    <section class="slide slide--dark" data-tone="dark">
+      <div class="thanks-wrap">
+        <div class="title-brand" style="justify-content:center; margin-bottom:34px;">
+          <img src="../assets/logos/logo1-white.png" alt="AI ROASTING">
+          <span>AX Guide to Company Brain OS</span>
+        </div>
+        <h2 class="thanks-h">감사합니다</h2>
+        <p class="thanks-sub">도구를 더 사는 회사가 아니라, AI를 운영체계로 쓰는 회사로. 그 출발은 직무 한 장입니다.</p>
+        <div class="thanks-foot"><strong>강정구 · Jayden Kang</strong> · AI ROASTING · linkedin.com/in/jayden-kang</div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<div id="hud-counter"><span class="cur">01</span> / <span class="total">30</span></div>
+<div id="hud-hint">← → 또는 Space · F 전체화면</div>
+
+<script>
+(function () {
+    'use strict';
+    var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+    var stage = document.getElementById('stage');
+    var progress = document.getElementById('hud-progress');
+    var curEl = document.querySelector('#hud-counter .cur');
+    var totalEl = document.querySelector('#hud-counter .total');
+    var i = 0;
+    var n = slides.length;
+    totalEl.textContent = ('0' + n).slice(-2);
+
+    function pad(x) { return ('0' + x).slice(-2); }
+
+    function show(idx) {
+        idx = Math.max(0, Math.min(n - 1, idx));
+        slides[i].classList.remove('active');
+        i = idx;
+        slides[i].classList.add('active');
+        curEl.textContent = pad(i + 1);
+        progress.style.width = ((i) / (n - 1) * 100) + '%';
+        document.body.classList.toggle('is-light', slides[i].getAttribute('data-tone') === 'light');
+        if (location.hash !== '#' + (i + 1)) {
+            history.replaceState(null, '', '#' + (i + 1));
+        }
+    }
+    function next() { if (i < n - 1) show(i + 1); }
+    function prev() { if (i > 0) show(i - 1); }
+
+    function fit() {
+        var s = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+        stage.style.transform = 'translate(-50%, -50%) scale(' + s + ')';
+    }
+
+    document.addEventListener('keydown', function (e) {
+        switch (e.key) {
+            case 'ArrowRight': case ' ': case 'PageDown': case 'ArrowDown':
+                e.preventDefault(); next(); break;
+            case 'ArrowLeft': case 'PageUp': case 'ArrowUp':
+                e.preventDefault(); prev(); break;
+            case 'Home': e.preventDefault(); show(0); break;
+            case 'End': e.preventDefault(); show(n - 1); break;
+            case 'f': case 'F':
+                if (!document.fullscreenElement) { document.documentElement.requestFullscreen && document.documentElement.requestFullscreen(); }
+                else { document.exitFullscreen && document.exitFullscreen(); }
+                break;
+        }
+    });
+
+    document.getElementById('viewport').addEventListener('click', function (e) {
+        var mid = window.innerWidth / 2;
+        if (e.clientX < mid * 0.6) prev(); else next();
+    });
+
+    window.addEventListener('resize', fit);
+
+    slides.forEach(function (s) { s.classList.remove('active'); });
+    var start = parseInt((location.hash || '').replace('#', ''), 10);
+    i = (start >= 1 && start <= n) ? start - 1 : 0;
+    slides[i].classList.add('active');
+    fit();
+    show(i);
+})();
+</script>
+
+</body>
+</html>

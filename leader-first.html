@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CEO가 매일 해야 할 것 · AI ROASTING</title>
+<meta name="description" content="AX 1단계의 첫 행동은 경영진 본인이 매일 직접 쓰는 것이다. 진단을 마친 리더가 2~3주 동안 매일 실천할 다섯 가지 규율을 쇼피파이·클라르나·커먼웰스은행·딜로이트 사례와 함께 정리한다.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://airoasting.github.io/claude_guide/leader-first.html">
+<meta property="og:title" content="CEO가 매일 해야 할 것 · AI ROASTING">
+<meta property="og:description" content="AX 1단계의 첫 행동은 경영진 본인이 매일 직접 쓰는 것이다. 진단을 마친 리더가 2~3주 동안 매일 실천할 다섯 가지 규율을 쇼피파이·클라르나·커먼웰스은행·딜로이트 사례와 함께 정리한다.">
+<meta property="og:site_name" content="AI ROASTING">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://airoasting.github.io/claude_guide/assets/thumbnails/thumbnail.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CEO가 매일 해야 할 것 · AI ROASTING">
+<meta name="twitter:description" content="AX 1단계의 첫 행동은 경영진 본인이 매일 직접 쓰는 것이다. 진단을 마친 리더가 2~3주 동안 매일 실천할 다섯 가지 규율을 쇼피파이·클라르나·커먼웰스은행·딜로이트 사례와 함께 정리한다.">
+<meta name="twitter:image" content="https://airoasting.github.io/claude_guide/assets/thumbnails/thumbnail.png">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+/* ================== B-1-1 Organization Page Local Styles ================== */
+/* diagnosis.html과 동일한 bp-* 시각 토큰을 그대로 차용합니다. */
+
+:root {
+    --bp-grid: rgba(14, 59, 42, 0.06);
+    --bp-grid-strong: rgba(14, 59, 42, 0.12);
+    --bp-line: #0E3B2A;
+    --bp-ink: #0F1A16;
+    --bp-paper: #F7F5EF;
+    --bp-paper-2: #FBFAF6;
+    --bp-rule: #D6D2C5;
+    --bp-accent: #1B6E4F;
+    --bp-gold: #9A7B0A;
+    --bp-red: #8B2E1F;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 64px; }
+body {
+    background:
+        linear-gradient(var(--bp-grid) 1px, transparent 1px) 0 0 / 32px 32px,
+        linear-gradient(90deg, var(--bp-grid) 1px, transparent 1px) 0 0 / 32px 32px,
+        var(--bp-paper);
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    line-break: strict;
+}
+
+/* ===== Sheet wrapper ===== */
+.bp-sheet {
+    max-width: 1320px;
+    margin: 32px auto;
+    background: var(--bp-paper-2);
+    border: 1.5px solid var(--bp-line);
+    box-shadow: 0 1px 0 var(--bp-line), 0 24px 60px -30px rgba(6, 32, 24, 0.35);
+    position: relative;
+}
+.bp-sheet::before, .bp-sheet::after {
+    content: "";
+    position: absolute;
+    width: 16px; height: 16px;
+    border: 1px solid var(--bp-line);
+}
+.bp-sheet::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+.bp-sheet::after  { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
+/* ===== Step navigation ===== */
+.bp-stepnav {
+    padding: 36px 56px 28px;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1.5px solid #062018;
+}
+.bp-stepnav::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+}
+.bp-step {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid rgba(247, 245, 239, 0.55);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--sans);
+    font-size: 11.5px;
+    font-weight: 600;
+    color: rgba(247, 245, 239, 0.85);
+    letter-spacing: 0.02em;
+    position: relative;
+    transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+.bp-step.active {
+    background: var(--bp-paper);
+    color: var(--bp-ink);
+    border-color: var(--bp-paper);
+    font-weight: 700;
+}
+.bp-step + .bp-step { margin-left: 24px; }
+.bp-step + .bp-step::before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    width: 24px;
+    height: 1px;
+    background: rgba(247, 245, 239, 0.4);
+    transform: translateY(-50%);
+}
+.bp-back {
+    display: block;
+    text-align: center;
+    margin-top: 18px;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: rgba(247, 245, 239, 0.78);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: color .15s ease, letter-spacing .15s ease;
+    position: relative;
+    z-index: 1;
+}
+.bp-back:hover { color: var(--bp-paper); letter-spacing: 0.08em; }
+
+.bp-substeps {
+    display: flex;
+    gap: 12px;
+    margin: 22px auto 0;
+    width: 100%;
+    max-width: 720px;
+    flex-wrap: nowrap;
+    position: relative;
+    z-index: 1;
+}
+.bp-substeps a, .bp-substeps span {
+    border: 1px solid rgba(247, 245, 239, 0.28);
+    background: transparent;
+    padding: 12px 24px;
+    color: rgba(247, 245, 239, 0.75);
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: background .18s ease, border-color .18s ease, color .18s ease;
+    flex: 1 1 0;
+    min-width: 0;
+    text-align: center;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.bp-substeps a:hover {
+    background: rgba(247, 245, 239, 0.08);
+    border-color: rgba(247, 245, 239, 0.6);
+    color: var(--bp-paper);
+}
+.bp-substeps span {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+.bp-substeps a.active {
+    background: linear-gradient(180deg, #14523B 0%, #0E3B2A 100%);
+    color: var(--bp-paper);
+    border: 1.5px solid var(--bp-paper);
+    font-weight: 700;
+    box-shadow:
+        0 0 0 4px rgba(14, 59, 42, 0.55),
+        0 8px 20px -8px rgba(6, 32, 24, 0.7);
+    transform: translateY(-1px);
+    cursor: default;
+    pointer-events: none;
+}
+
+@media (max-width: 600px) {
+    .bp-stepnav { padding: 24px 16px 20px; }
+    .bp-step { width: 26px; height: 26px; font-size: 10px; }
+    .bp-step + .bp-step { margin-left: 16px; }
+    .bp-step + .bp-step::before { width: 16px; }
+    .bp-substeps { gap: 8px; flex-wrap: wrap; }
+    .bp-substeps a, .bp-substeps span { min-width: 0; flex: 1 1 auto; padding: 10px 14px; font-size: 12px; }
+}
+
+/* ===== Hero block ===== */
+.bp-hero {
+    padding: 64px 56px 56px;
+    border-bottom: 1.5px solid var(--bp-line);
+    position: relative;
+    background:
+        radial-gradient(ellipse at top right, rgba(27, 110, 79, 0.06), transparent 60%),
+        var(--bp-paper-2);
+}
+.bp-hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    margin-bottom: 18px;
+}
+.bp-hero h1 {
+    font-size: 52px;
+    line-height: 1.18;
+    margin: 0 0 22px;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+}
+.bp-hero .bp-lead {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+}
+.bp-hero .bp-summary {
+    margin-top: 36px;
+    padding: 22px 26px;
+    background: rgba(14, 59, 42, 0.04);
+    border-top: 1px solid var(--bp-rule);
+    border-bottom: 1px solid var(--bp-rule);
+    font-size: 14px;
+    line-height: 1.75;
+}
+.bp-hero .bp-summary strong { color: var(--bp-line); }
+
+/* ===== Section submenu ===== */
+.bp-hero-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 12px 56px;
+    background: var(--bp-paper-2);
+    border-top: 1px solid var(--bp-line);
+    border-bottom: 1px solid var(--bp-line);
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    box-shadow: 0 2px 8px -4px rgba(6, 32, 24, 0.18);
+}
+.bp-hero-nav a {
+    flex: 1 1 0;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--bp-ink);
+    padding: 10px 16px;
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper);
+    text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    letter-spacing: -0.005em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bp-hero-nav a:hover { background: var(--bp-line); color: var(--bp-paper); }
+.bp-hero-nav a.active {
+    background: var(--bp-line);
+    color: var(--bp-paper);
+    border-color: var(--bp-line);
+    box-shadow: inset 0 -3px 0 var(--bp-accent);
+}
+
+/* ===== Section frame ===== */
+.bp-section {
+    padding: 56px 56px 64px;
+    border-bottom: 1.5px solid var(--bp-line);
+    position: relative;
+}
+.bp-section:last-of-type { border-bottom: none; }
+.bp-section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 36px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--bp-rule);
+}
+.bp-section-title {
+    font-size: 30px;
+    margin: 0;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    font-weight: 700;
+}
+.bp-section-meta {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    text-align: right;
+    line-height: 1.6;
+}
+.bp-section-intro {
+    margin: 0 0 28px;
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+}
+
+/* ===== Compare table (전담조직 vs TF) ===== */
+.bp-compare {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-compare-head {
+    display: grid;
+    grid-template-columns: 160px 1fr 1fr;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(27, 110, 79, 0.35), transparent 60%),
+        linear-gradient(90deg, #062018 0%, #0A2E22 35%, #0E3B2A 70%, #14523B 100%);
+    color: var(--bp-paper);
+    position: relative;
+}
+.bp-compare-head::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-compare-head > div {
+    padding: 14px 20px;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-right: 1px solid rgba(247, 245, 239, 0.14);
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+.bp-compare-head > div:last-child { border-right: none; }
+.bp-compare-head .pick {
+    color: #FFE9A8;
+    letter-spacing: 0.12em;
+}
+.bp-compare-head .pick::after {
+    content: "추천";
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #0E3B2A;
+    background: #FFE9A8;
+    border: 1px solid #FFE9A8;
+    letter-spacing: 0.08em;
+}
+
+.bp-compare-row {
+    display: grid;
+    grid-template-columns: 160px 1fr 1fr;
+    border-top: 1px solid var(--bp-rule);
+}
+.bp-compare-row > div {
+    padding: 16px 20px;
+    font-size: 14px;
+    line-height: 1.7;
+    border-right: 1px solid var(--bp-rule);
+    color: var(--bp-ink);
+}
+.bp-compare-row > div:last-child { border-right: none; }
+.bp-compare-head > div:first-child {
+    text-align: center;
+}
+.bp-compare-row .label {
+    font-family: var(--sans);
+    font-weight: 700;
+    color: var(--bp-line);
+    letter-spacing: 0.04em;
+    background: rgba(14, 59, 42, 0.03);
+    font-size: 13px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bp-compare-row .preferred {
+    background: rgba(27, 110, 79, 0.05);
+    color: var(--bp-ink);
+}
+.bp-compare-row .preferred strong { color: var(--bp-line); }
+
+/* ===== Principle cards ===== */
+.bp-principles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-principle {
+    padding: 28px 26px 30px;
+    border-right: 1px solid var(--bp-rule);
+    background: var(--bp-paper-2);
+    transition: background .25s ease, transform .25s ease, box-shadow .25s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.bp-principle:last-child { border-right: none; }
+.bp-principle:hover {
+    background: rgba(27, 110, 79, 0.06);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px -10px rgba(6, 32, 24, 0.25);
+    z-index: 2;
+}
+.bp-principle-num {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--bp-accent);
+    font-weight: 700;
+    margin-bottom: 10px;
+    transition: color .25s ease, letter-spacing .25s ease;
+}
+.bp-principle:hover .bp-principle-num { color: var(--bp-line); letter-spacing: 0.24em; }
+.bp-principle-name {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    margin-bottom: 14px;
+    letter-spacing: -0.005em;
+    line-height: 1.35;
+}
+.bp-principle-figure {
+    margin: 4px 0 20px;
+    padding: 16px 0;
+    border-top: 1px solid var(--bp-rule);
+    border-bottom: 1px solid var(--bp-rule);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 160px;
+}
+.bp-principle-figure svg {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    display: block;
+}
+.bp-principle-body {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+    flex: 1;
+}
+.bp-principle-body strong { color: var(--bp-ink); }
+.bp-principle-evidence {
+    padding-top: 16px;
+    border-top: 1px solid var(--bp-rule);
+    font-family: var(--sans);
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--ink-mute);
+    letter-spacing: 0.005em;
+}
+.bp-principle-evidence b {
+    display: block;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+/* ===== Composition diagram ===== */
+.bp-comp-diagram {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    padding: 32px 36px 36px;
+}
+.bp-comp-row {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px dashed var(--bp-rule);
+    align-items: flex-start;
+}
+.bp-comp-row:last-child { border-bottom: none; }
+.bp-comp-tier {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding-top: 4px;
+}
+.bp-comp-detail h4 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    margin: 0 0 8px;
+    letter-spacing: -0.005em;
+}
+.bp-comp-detail p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    margin: 0 0 8px;
+}
+.bp-comp-detail .roles {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.bp-comp-detail .role-chip {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--bp-line);
+    background: rgba(14, 59, 42, 0.06);
+    border: 1px solid var(--bp-rule);
+    padding: 5px 11px;
+    letter-spacing: 0.01em;
+}
+
+/* ===== Roles Pyramid (BCG) ===== */
+.bp-roles-block {
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--bp-rule);
+}
+.bp-roles-eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+}
+.bp-roles-heading {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    letter-spacing: -0.01em;
+    margin: 0 0 12px;
+}
+.bp-roles-intro {
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    margin: 0 0 22px;
+    max-width: 820px;
+}
+.bp-roles-table {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-roles-head {
+    display: grid;
+    grid-template-columns: 300px 160px 1fr;
+    gap: 28px;
+    padding: 14px 28px;
+    background: var(--bp-line);
+    color: var(--bp-paper);
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+.bp-roles-head > div:nth-child(2) { text-align: center; }
+.bp-role-row {
+    display: grid;
+    grid-template-columns: 300px 160px 1fr;
+    gap: 28px;
+    padding: 24px 28px;
+    border-bottom: 1px dashed var(--bp-rule);
+    align-items: center;
+    transition: background 0.3s ease;
+}
+.bp-role-row:last-child { border-bottom: none; }
+.bp-role-row:hover { background: rgba(27, 110, 79, 0.06); }
+.bp-role-id {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.bp-role-icon {
+    flex: 0 0 56px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1.5px solid var(--bp-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bp-line);
+}
+.bp-role-icon.s1 { background: rgba(27, 110, 79, 0.10); }
+.bp-role-icon.s2 { background: rgba(27, 110, 79, 0.22); }
+.bp-role-icon.s3 { background: rgba(27, 110, 79, 0.38); color: var(--bp-paper); border-color: var(--bp-line); }
+.bp-role-icon.s4 { background: var(--bp-line); color: var(--bp-paper); border-color: var(--bp-line); }
+.bp-role-icon svg { width: 26px; height: 26px; }
+.bp-role-icon { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.bp-role-row:hover .bp-role-icon {
+    transform: scale(1.06);
+    box-shadow: 0 6px 16px -6px rgba(14, 59, 42, 0.35);
+}
+.bp-role-label h4 { transition: letter-spacing 0.3s ease; }
+.bp-role-row:hover .bp-role-label h4 { letter-spacing: 0.01em; }
+.bp-role-outcome { transition: color 0.3s ease; }
+.bp-role-row:hover .bp-role-outcome { color: var(--bp-ink); }
+.bp-role-label h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--bp-line);
+    margin: 0 0 4px;
+    letter-spacing: -0.005em;
+}
+.bp-role-label span {
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+}
+.bp-role-pyramid {
+    display: grid;
+    gap: 3px;
+    justify-content: start;
+    align-content: center;
+}
+.bp-role-pyramid b {
+    display: block;
+    width: 24px;
+    height: 32px;
+    clip-path: polygon(0 0, 80% 0, 100% 100%, 0 100%);
+    transition: transform 0.3s ease;
+}
+.bp-role-row:hover .bp-role-pyramid b {
+    transform: translateY(-4px);
+}
+.bp-role-pyramid b:nth-child(1) { transition-delay: 0s; }
+.bp-role-pyramid b:nth-child(2) { transition-delay: 0.05s; }
+.bp-role-pyramid b:nth-child(3) { transition-delay: 0.10s; }
+.bp-role-pyramid b:nth-child(4) { transition-delay: 0.15s; }
+.bp-role-pyramid b:nth-child(5) { transition-delay: 0.20s; }
+.bp-role-pyramid b:nth-child(6) { transition-delay: 0.25s; }
+.bp-role-pyramid.p1 { grid-template-columns: 24px; }
+.bp-role-pyramid.p1 b { background: rgba(27, 110, 79, 0.38); }
+.bp-role-pyramid.p2 { grid-template-columns: repeat(2, 24px); }
+.bp-role-pyramid.p2 b { background: rgba(27, 110, 79, 0.58); }
+.bp-role-pyramid.p3 { grid-template-columns: repeat(3, 24px); }
+.bp-role-pyramid.p3 b { background: rgba(27, 110, 79, 0.80); }
+.bp-role-pyramid.p4 { grid-template-columns: repeat(6, 24px); }
+.bp-role-pyramid.p4 b { background: var(--bp-line); }
+.bp-role-outcome {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+}
+.bp-roles-source {
+    margin: 12px 0 0;
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    opacity: 0.78;
+    letter-spacing: 0.04em;
+}
+
+/* ===== Checklist ===== */
+.bp-checklist {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-check-row {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--bp-rule);
+    align-items: flex-start;
+    gap: 16px;
+}
+.bp-check-row:last-child { border-bottom: none; }
+.bp-check-num {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.12em;
+    padding-top: 2px;
+}
+.bp-check-body h4 {
+    font-size: 15.5px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    margin: 0 0 6px;
+    letter-spacing: -0.005em;
+}
+.bp-check-body p {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+}
+
+/* ===== Antipattern table ===== */
+.bp-anti {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+}
+.bp-anti-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(139, 46, 31, 0.35), transparent 60%),
+        linear-gradient(90deg, #2A0E0A 0%, #4A1A12 50%, #5C2218 100%);
+    color: var(--bp-paper);
+    position: relative;
+}
+.bp-anti-head > div {
+    padding: 14px 20px;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-right: 1px solid rgba(247, 245, 239, 0.14);
+    text-align: center;
+}
+.bp-anti-head > div:last-child { border-right: none; }
+.bp-anti-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--bp-rule);
+}
+.bp-anti-row > div {
+    padding: 18px 22px;
+    font-size: 14px;
+    line-height: 1.7;
+    border-right: 1px solid var(--bp-rule);
+    color: var(--ink-soft);
+}
+.bp-anti-row > div:last-child { border-right: none; }
+.bp-anti-row .bad {
+    background: rgba(139, 46, 31, 0.04);
+}
+.bp-anti-row .bad strong { color: var(--bp-red); }
+.bp-anti-row .good {
+    background: rgba(14, 59, 42, 0.04);
+}
+.bp-anti-row .good strong { color: var(--bp-line); }
+
+/* ===== Handoff box ===== */
+.bp-handoff {
+    margin-top: 28px;
+    padding: 24px 28px;
+    background: rgba(14, 59, 42, 0.05);
+    border-top: 1px solid var(--bp-line);
+    border-bottom: 1px solid var(--bp-line);
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--bp-ink);
+}
+.bp-handoff strong { color: var(--bp-line); }
+.bp-handoff .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--bp-accent);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+/* ===== Closing footer ===== */
+.bp-footer {
+    padding: 36px 56px 44px;
+    background:
+        radial-gradient(ellipse at 0% 100%, rgba(27, 110, 79, 0.35), transparent 55%),
+        linear-gradient(110deg, #14523B 0%, #0E3B2A 35%, #0A2E22 70%, #062018 100%);
+    color: rgba(247, 245, 239, 0.92);
+    font-family: var(--sans);
+    font-size: 12.5px;
+    line-height: 1.7;
+    border-top: 1.5px solid #062018;
+    position: relative;
+    overflow: hidden;
+}
+.bp-footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(247, 245, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 245, 239, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+.bp-footer > * { position: relative; z-index: 1; }
+.bp-footer strong { color: var(--bp-paper); }
+
+/* ===== leader-first 전용 디자인 (cost-output 참고 페이지와 차별) ===== */
+
+/* 리더 진술 + 인용 */
+.lf-statement {
+    margin: 0 0 0;
+    padding: 38px 42px 34px;
+    background:
+        radial-gradient(ellipse at 0% 0%, rgba(27, 110, 79, 0.07), transparent 60%),
+        var(--bp-paper-2);
+    border: 1.5px solid var(--bp-line);
+}
+.lf-mark { display: block; font-family: Georgia, serif; font-size: 52px; line-height: 0.55; color: var(--bp-accent); margin-bottom: 16px; }
+.lf-statement-ko { font-size: 25px; line-height: 1.5; font-weight: 700; color: var(--bp-ink); letter-spacing: -0.015em; margin: 0 0 14px; }
+.lf-statement-en { font-size: 13px; line-height: 1.6; color: var(--ink-mute); font-style: italic; margin: 0 0 16px; }
+.lf-statement cite { font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: 0.04em; color: var(--bp-accent); font-style: normal; }
+
+/* 사실 스트립 (3-up) */
+.lf-facts {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border: 1px solid var(--bp-rule); border-top: none;
+    background: var(--bp-paper-2); margin-bottom: 24px;
+}
+.lf-fact { padding: 22px 26px; border-right: 1px solid var(--bp-rule); }
+.lf-fact:last-child { border-right: none; }
+.lf-fact-label { font-family: var(--sans); font-size: 10.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bp-accent); margin-bottom: 8px; }
+.lf-fact-body { font-size: 14px; line-height: 1.6; color: var(--ink-soft); }
+.lf-fact-body strong { color: var(--bp-ink); font-weight: 700; }
+
+/* 무너진 약속 · 실패 사례 장부 */
+.lf-ledger { border-top: 2px solid var(--bp-line); }
+.lf-ledger-row {
+    display: grid; grid-template-columns: 210px 1fr 1.1fr; gap: 30px;
+    padding: 28px 6px; border-bottom: 1px solid var(--bp-rule); align-items: start;
+}
+.lf-ledger-row:last-child { border-bottom: 2px solid var(--bp-line); }
+.lf-ledger-co { font-size: 22px; font-weight: 700; color: var(--bp-ink); letter-spacing: -0.01em; line-height: 1.2; }
+.lf-ledger-co .yr { display: block; margin-top: 6px; font-family: var(--sans); font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); }
+.lf-ledger-cell { font-size: 13.5px; line-height: 1.65; }
+.lf-ledger-cell .k { display: block; font-family: var(--sans); font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 7px; }
+.lf-ledger-claim { color: var(--ink-mute); }
+.lf-ledger-claim .k { color: var(--ink-mute); }
+.lf-ledger-real { color: var(--ink-soft); }
+.lf-ledger-real .k { color: var(--bp-red); }
+.lf-ledger-real strong { color: var(--bp-ink); font-weight: 700; }
+
+/* 매일의 리듬 · 하루 타임라인 rail */
+.lf-day { position: relative; margin-top: 4px; }
+.lf-day::before { content: ""; position: absolute; left: 23px; top: 24px; bottom: 44px; width: 2px; background: var(--bp-rule); }
+.lf-day-item { position: relative; display: grid; grid-template-columns: 48px 1fr; gap: 24px; padding: 6px 0 26px; }
+.lf-day-item:last-child { padding-bottom: 0; }
+.lf-day-node {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: linear-gradient(160deg, #14523B 0%, #0E3B2A 100%);
+    color: var(--bp-paper); display: flex; align-items: center; justify-content: center;
+    font-family: var(--sans); font-size: 15px; font-weight: 700;
+    box-shadow: 0 0 0 4px var(--bp-paper-2), 0 0 0 5px var(--bp-rule);
+    position: relative; z-index: 1;
+}
+.lf-day-body { padding-top: 5px; }
+.lf-day-body h4 { font-size: 17px; font-weight: 700; color: var(--bp-ink); margin: 0 0 7px; letter-spacing: -0.01em; }
+.lf-day-body p { font-size: 13.5px; line-height: 1.7; color: var(--ink-soft); margin: 0; }
+.lf-day-body p strong { color: var(--bp-line); font-weight: 700; }
+
+/* 출처 한 줄 */
+.bp-srcline { margin-top: 16px; font-family: var(--sans); font-size: 11px; line-height: 1.6; color: var(--ink-mute); letter-spacing: 0.01em; }
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+    .bp-hero { padding: 48px 32px; }
+    .bp-hero h1 { font-size: 38px; }
+    .bp-section { padding: 40px 32px; }
+    .lf-statement { padding: 30px 26px 28px; }
+    .lf-statement-ko { font-size: 21px; }
+    .lf-facts { grid-template-columns: 1fr; }
+    .lf-fact { border-right: none; border-bottom: 1px solid var(--bp-rule); }
+    .lf-fact:last-child { border-bottom: none; }
+    .lf-ledger-row { grid-template-columns: 1fr; gap: 14px; }
+    .bp-compare-head, .bp-compare-row { grid-template-columns: 120px 1fr 1fr; }
+    .bp-principles { grid-template-columns: 1fr; }
+    .bp-principle { border-right: none; border-bottom: 1px solid var(--bp-rule); }
+    .bp-principle:last-child { border-bottom: none; }
+    .bp-comp-row { grid-template-columns: 1fr; gap: 8px; }
+    .bp-roles-head, .bp-role-row { grid-template-columns: 240px 150px 1fr; gap: 20px; padding: 18px 22px; }
+    .bp-role-icon { flex: 0 0 48px; width: 48px; height: 48px; }
+    .bp-role-icon svg { width: 22px; height: 22px; }
+    .bp-role-pyramid b { width: 20px; height: 28px; }
+    .bp-role-pyramid.p1 { grid-template-columns: 20px; }
+    .bp-role-pyramid.p2 { grid-template-columns: repeat(2, 20px); }
+    .bp-role-pyramid.p3 { grid-template-columns: repeat(3, 20px); }
+    .bp-role-pyramid.p4 { grid-template-columns: repeat(6, 20px); }
+    .bp-footer { padding: 32px; }
+}
+@media (max-width: 600px) {
+    .bp-sheet { margin: 12px; }
+    .bp-hero h1 { font-size: 28px; }
+    .bp-section-title { font-size: 22px; }
+    .bp-compare-head, .bp-compare-row { grid-template-columns: 1fr; }
+    .bp-compare-row .label { background: rgba(14, 59, 42, 0.08); }
+    .bp-anti-head, .bp-anti-row { grid-template-columns: 1fr; }
+    .bp-check-row { grid-template-columns: 1fr; gap: 6px; }
+    .bp-roles-head { display: none; }
+    .bp-role-row { grid-template-columns: 1fr; gap: 14px; padding: 20px 20px; }
+    .bp-role-pyramid { justify-self: start; }
+}
+</style>
+</head>
+<body>
+
+<div class="bp-sheet">
+
+
+    <!-- ========= BRAND BAR ========= -->
+    <a class="bp-brandbar" href="index.html" aria-label="목차로 이동">
+        <img class="bb-logo" src="assets/logos/logo1-transparent.png" alt="AI ROASTING">
+        <span>AI ROASTING · AX GUIDE TO COMPANY BRAIN OS</span>
+    </a>
+
+    <!-- ========= STEP NAVIGATION ========= -->
+    <nav class="bp-stepnav" aria-label="전체 단계">
+        <ol class="bp-steps">
+            <li class="bp-step"><a href="blueprint.html">진단</a></li>
+            <li class="bp-step active" aria-current="step"><a href="leader-first.html">1</a></li>
+            <li class="bp-step"><a href="pilot.html">2</a></li>
+            <li class="bp-step"><a href="criteria.html">3</a></li>
+            <li class="bp-step"><a href="resource.html">4</a></li>
+            <li class="bp-step"><a href="ainative.html">5</a></li>
+            <li class="bp-step"><a href="cost-output.html">참고</a></li>
+        </ol>
+        <a class="bp-back" href="index.html">← 목록으로</a>
+        <div class="bp-substeps" aria-label="1단계 실행체계 페이지">
+            <a href="leader-first.html" class="active" aria-current="page">리더부터 변화</a>
+            <a href="organization.html">TF 조직 세팅</a>
+            <a href="operations.html">운영 계획 수립</a>
+            <a href="capability.html">AI 부트캠프</a>
+        </div>
+    </nav>
+
+    <!-- ========= HERO ========= -->
+    <section class="bp-hero">
+        <div class="bp-hero-eyebrow">Step 1 · 실행체계 구축 · 경영진이 먼저 쓴다 · 첫 행동</div>
+        <h1>진단을 마쳤다면, 가장 먼저 바꿀 것은 당신의 하루입니다.</h1>
+        <p class="bp-lead">1단계의 첫 페이지는 조직이 아니라 경영진 본인입니다. 자기가 써본 적 없는 전환은 위임할 수 없습니다.</p>
+        <div class="bp-summary">
+            <strong>순서가 중요합니다.</strong> 위치를 쟀으면, 다음은 경영진이 먼저 매일 직접 쓰는 것입니다. 한 CEO는 "AI를 쓰는 것은 이제 모두의 기본"이라며 그 기준을 자기부터 걸었습니다. 반대로 그 손끝의 판단 없이 도구부터 조직에 푼 회사들은 "700명 몫"이라던 AI 상담을 사람으로 되돌리고, 줄였던 콜센터 인력을 다시 뽑고, AI가 지어낸 인용 탓에 받은 돈의 일부를 돌려줬습니다. 이 페이지는 그 차이를 만드는 다섯 가지 규율을 실제 사례와 함께 정리합니다.
+        </div>
+    </section>
+
+    <nav class="bp-hero-nav" aria-label="섹션 바로가기">
+        <a href="#leader">리더가 기준을 세운다</a>
+        <a href="#cost">안 써보면 생기는 일</a>
+        <a href="#why">보고서 vs 직접</a>
+        <a href="#daily">매일 해야 하는 다섯 가지</a>
+    </nav>
+
+    <!-- ========= 1. 리더가 기준을 세운다 (Shopify Lütke) ========= -->
+    <section class="bp-section" id="leader">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">리더가 먼저 기준을 세웁니다</h2>
+            </div>
+            <div class="bp-section-meta">사례 · Tobi Lütke · Shopify CEO · 2025.03</div>
+        </div>
+
+        <p class="bp-section-intro">변화를 위임으로 시작하면 조직은 그것을 또 하나의 프로젝트로 견딥니다. 쇼피파이의 토비 뤼트케는 반대로 했습니다. 2025년 3월, AI 사용을 회사의 기본 기대치로 못박은 전사 메모를 자기 손으로 써서 공개하고, 그 기준에 자신부터 포함시켰습니다. 도구를 더 산 것이 아니라, 일하는 방식의 선을 다시 그은 것입니다.</p>
+
+        <div class="lf-statement">
+            <span class="lf-mark">&ldquo;</span>
+            <p class="lf-statement-ko">AI를 자기 일에 적용하는 능력을 배우는 데서 빠지는 건 불가능하다고 봅니다. 이건 나를 포함한 모두에게 해당합니다.</p>
+            <p class="lf-statement-en">I don&rsquo;t think it&rsquo;s feasible to opt out of learning the skill of applying AI in your craft ... This goes for me as well as everyone else.</p>
+            <cite>토비 뤼트케, Shopify CEO 전사 메모 · 2025.03</cite>
+        </div>
+
+        <div class="lf-facts">
+            <div class="lf-fact">
+                <div class="lf-fact-label">기준</div>
+                <div class="lf-fact-body">"AI를 효과적으로 쓰는 것은 이제 <strong>모든 구성원의 기본 기대치</strong>"라고 선을 그었습니다.</div>
+            </div>
+            <div class="lf-fact">
+                <div class="lf-fact-label">입증 책임</div>
+                <div class="lf-fact-body">인력·예산을 늘리기 전에 "그 일을 <strong>AI로 끝낼 수 없는 이유</strong>"를 먼저 입증하게 했습니다.</div>
+            </div>
+            <div class="lf-fact">
+                <div class="lf-fact-label">자기부터</div>
+                <div class="lf-fact-body">AI 사용을 <strong>성과·동료 평가</strong>에 넣고, 같은 잣대를 자신에게도 걸었습니다.</div>
+            </div>
+        </div>
+
+        <p class="bp-section-intro" style="margin-bottom:0;">라이선스를 푼다고 행동이 바뀌지 않습니다. 리더가 "이게 기본"이라고 선을 긋고, 같은 기준을 자기에게도 걸고, "왜 사람인가"가 아니라 "왜 AI로 안 되는가"로 질문을 뒤집을 때 조직이 움직입니다. <strong>도구를 들이는 문제가 아니라, 리더가 직접 쓰고 그 사용을 조직의 기본값으로 만드는 문제입니다.</strong></p>
+    </section>
+
+    <!-- ========= 2. 안 써보면 생기는 일 · 무너진 약속 장부 ========= -->
+    <section class="bp-section" id="cost">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">직접 써보지 않으면, 약속은 이렇게 무너집니다</h2>
+            </div>
+            <div class="bp-section-meta">2025년 · Klarna · Commonwealth Bank · Deloitte</div>
+        </div>
+
+        <p class="bp-section-intro">손끝의 판단 없이 도구부터 조직에 풀면, 발표는 화려하지만 결말은 같습니다. 2025년 세 장면입니다. 왼쪽은 발표한 약속, 오른쪽은 직접 굴려 보니 드러난 현실입니다.</p>
+
+        <div class="lf-ledger">
+            <div class="lf-ledger-row">
+                <div class="lf-ledger-co">Klarna<span class="yr">핀테크 · 2024~25</span></div>
+                <div class="lf-ledger-cell lf-ledger-claim"><span class="k">약속</span>AI 어시스턴트가 출시 한 달 만에 고객 채팅의 약 3분의 2(230만 건)를 처리. "상담원 700명 몫"이라 발표.</div>
+                <div class="lf-ledger-cell lf-ledger-real"><span class="k">현실</span>CEO가 <strong>"효율과 비용에 너무 치우쳤고, 그 결과 품질이 낮아졌다"</strong>고 인정. 사람 상담원을 다시 뽑기 시작.</div>
+            </div>
+            <div class="lf-ledger-row">
+                <div class="lf-ledger-co">Commonwealth Bank<span class="yr">호주 최대 은행 · 2025</span></div>
+                <div class="lf-ledger-cell lf-ledger-claim"><span class="k">약속</span>음성봇으로 주당 통화가 2,000건 줄었다며 콜센터 <strong>45명</strong>을 감원.</div>
+                <div class="lf-ledger-cell lf-ledger-real"><span class="k">현실</span>통화량은 오히려 늘어 관리자들이 전화를 받음. 8월 정리해고가 <strong>"오류"</strong>였다고 인정하고 45명 복귀.</div>
+            </div>
+            <div class="lf-ledger-row">
+                <div class="lf-ledger-co">Deloitte<span class="yr">컨설팅 · 2025</span></div>
+                <div class="lf-ledger-cell lf-ledger-claim"><span class="k">약속</span>호주 정부에 약 <strong>44만 호주달러</strong>짜리 전문가 보고서를 납품.</div>
+                <div class="lf-ledger-cell lf-ledger-real"><span class="k">현실</span>생성형 AI(GPT-4o)가 가짜 학술 인용과 판례 인용문을 지어냄. 약 <strong>9.7만 호주달러</strong> 환불.</div>
+            </div>
+        </div>
+
+        <div class="bp-handoff">
+            <div class="tag">공통점</div>
+            세 회사 모두 <strong>"AI가 할 수 있다"를 "AI에 맡겨도 된다"로 착각</strong>했습니다. 어디서 무너지는지(공감, 통화량, 사실 검증)는 데모나 보고서가 아니라 직접 써본 손끝에서 먼저 보입니다. 그 판단이 없으면, 줄인 사람을 다시 뽑고 받은 돈을 토해냅니다.
+            <p class="bp-srcline">출처. TechCrunch·Entrepreneur(클라르나), The Register·Bloomberg(커먼웰스은행), The Register·CFO Dive(딜로이트). 2025년 보도 종합.</p>
+        </div>
+    </section>
+
+    <!-- ========= 3. 보고서 vs 직접 ========= -->
+    <section class="bp-section" id="why">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">보고서로 받는 리더와 직접 쓰는 리더</h2>
+            </div>
+            <div class="bp-section-meta">위임의 함정 · 직접 사용의 효과</div>
+        </div>
+
+        <p class="bp-section-intro">같은 도구를 두고도 직접 쓰는 리더와 보고서로 받는 리더는 다른 결론에 이릅니다. 차이는 다섯 곳에서 갈립니다.</p>
+
+        <div class="bp-compare">
+            <div class="bp-compare-head">
+                <div>비교 항목</div>
+                <div>보고서로 받는 리더</div>
+                <div class="pick">직접 쓰는 리더</div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="label">확신의 출처</div>
+                <div>남이 정리한 결론을 믿고 조직에 위임합니다. 자기에게 없는 확신을 전달하는 셈입니다.</div>
+                <div class="preferred">손끝으로 겪은 확신을 전파합니다. <strong>직접 하는 사람만이 남에게 요구할 자격</strong>을 가집니다.</div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="label">판단력</div>
+                <div>잘 만든 데모와 과장된 약속에 휘둘립니다. 무엇이 진짜인지 가릴 기준이 없습니다.</div>
+                <div class="preferred">진짜와 과장을 가릅니다. 클라르나의 "700명 몫"이 왜 공감에서 무너지는지 <strong>먼저 의심할 눈</strong>이 생깁니다.</div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="label">막히는 지점</div>
+                <div>"잘 되고 있다"는 요약만 받습니다. 어디서 멈추는지 보고서엔 적히지 않습니다.</div>
+                <div class="preferred">접근 권한·데이터·보안·규제의 벽에 직접 부딪힙니다. <strong>그 벽 목록이 곧 다음 과제</strong>가 됩니다.</div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="label">조직 신호</div>
+                <div>"여러분이 AI를 써 보세요"라는 지시가 됩니다. 정작 리더 본인은 쓰지 않습니다.</div>
+                <div class="preferred">뤼트케처럼 "나부터 포함"이라는 모범이 됩니다. <strong>리더십 정렬은 성과를 가르는 최강 예측 변수</strong>입니다.</div>
+            </div>
+            <div class="bp-compare-row">
+                <div class="label">검증의 책임</div>
+                <div>딜로이트처럼 AI가 지어낸 인용이 그대로 결과물에 실립니다. 누구도 끝까지 읽지 않습니다.</div>
+                <div class="preferred">AI 산출의 약한 곳을 먼저 의심합니다. <strong>맡기되 검증하는 습관</strong>이 사고를 미리 막습니다.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= 4. 매일의 리듬 · 하루 타임라인 ========= -->
+    <section class="bp-section" id="daily">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">경영진이 매일 해야 하는 다섯 가지</h2>
+            </div>
+            <div class="bp-section-meta">다짐이 아니라 손에 잡히는 하루 규율</div>
+        </div>
+
+        <p class="bp-section-intro">"AI를 챙기겠다"는 다짐은 행동을 바꾸지 못합니다. 아래 다섯 가지는 진단을 마친 경영진이 다음 2~3주 동안 매일 실천할 구체적인 규율입니다. 거창하지 않습니다. 다만 매일, 직접 해야 합니다.</p>
+
+        <div class="lf-day">
+            <div class="lf-day-item">
+                <div class="lf-day-node">01</div>
+                <div class="lf-day-body">
+                    <h4>매일 30분, 실제 업무 하나를 직접 AI로 합니다</h4>
+                    <p>연습용 데모가 아니라 오늘 처리해야 할 진짜 일에 붙입니다. 메일 답신, 보고서 검토, 의사결정 초안 무엇이든 하나면 됩니다. 효과를 본 사람과 못 본 사람의 차이는 재능이 아니라 매일 붙은 시간이었습니다. 한 가지 일에 하루 30분씩 2~3주, 도구가 손에 붙는 건 거기서부터입니다.</p>
+                </div>
+            </div>
+            <div class="lf-day-item">
+                <div class="lf-day-node">02</div>
+                <div class="lf-day-body">
+                    <h4>보고서로 받지 말고, 직접 초안을 씁니다</h4>
+                    <p>다음 이사회 메모, 전사 공지, 분기 발표 자료 가운데 하나를 본인 손으로 AI와 만듭니다. 남이 만든 결과만 검토하면 도구가 어디서 막히는지 끝까지 알 수 없습니다. 직접 만들어 봐야 프롬프트의 힘과 한계가 손에 잡힙니다.</p>
+                </div>
+            </div>
+            <div class="lf-day-item">
+                <div class="lf-day-node">03</div>
+                <div class="lf-day-body">
+                    <h4>위안이 아니라 반론을 시킵니다</h4>
+                    <p>동의만 하는 비서가 아니라 반박하는 참모로 씁니다. 결정문을 넣고 "이 결정의 가장 약한 곳 세 가지"를 먼저 찾게 하십시오. 딜로이트의 가짜 인용 같은 사고는, AI 산출을 의심하는 이 습관 하나로 걸러집니다.</p>
+                </div>
+            </div>
+            <div class="lf-day-item">
+                <div class="lf-day-node">04</div>
+                <div class="lf-day-body">
+                    <h4>막히는 지점을 매일 적습니다</h4>
+                    <p>접근 권한이 없어서, 데이터가 흩어져 있어서, 보안 규약 때문에, 규제가 걸려서. 개인이 부딪힌 이 벽 목록이 그대로 다음 페이지 TF에 넘길 첫 과제가 됩니다. 막히는 건 도구가 아니라 조직입니다.</p>
+                </div>
+            </div>
+            <div class="lf-day-item">
+                <div class="lf-day-node">05</div>
+                <div class="lf-day-body">
+                    <h4>주 1회, '내가 AI로 한 것'을 팀에 공유합니다</h4>
+                    <p>이번 주 직접 해 본 것 한 가지를, 잘된 것도 막힌 것도 그대로 경영진 회의나 전사 채널에 올립니다. 쇼피파이의 뤼트케는 그 기준을 자기부터 공개적으로 걸었습니다. 리더가 직접 쓴다는 신호 하나가 "다들 AI 좀 쓰라"는 지시 백 번보다 조직을 움직입니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========= 5. 다음 단계 (인계) ========= -->
+    <section class="bp-section" id="stuck">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">막히는 곳이 곧 실행체계의 출발점입니다</h2>
+            </div>
+            <div class="bp-section-meta">개인의 벽 · 조직의 과제</div>
+        </div>
+
+        <p class="bp-section-intro">경영진이 직접 2~3주 써 보면, 개인 생산성은 기대 이상으로 오릅니다. 그런데 그 성과를 회사 단위로 옮기려는 순간 벽에 부딪힙니다. 누가 어떤 데이터에 접근할지, 보안과 규제를 어떻게 통과할지, 에이전트끼리 어떻게 연결할지. 클라르나의 되돌림도, 커먼웰스은행의 오류도 이 지점에서 갈렸습니다. 이 벽은 도구를 더 산다고 풀리지 않습니다. 조직이 풀어야 합니다. 그래서 그다음이 실행체계입니다.</p>
+
+        <div class="bp-handoff">
+            <div class="tag">다음 단계</div>
+            경영진이 매일 쓰며 적어 둔 <strong>막힌 지점 목록</strong>을 들고, 이제 그것을 풀 사람을 모읍니다. CEO 직속 하이브리드 TF를 세우고, 6개월 운영 계획과 90일 부트캠프로 회사의 첫 핵심 인재를 양성합니다. <a href="organization.html">→ TF 조직 세팅으로 이어집니다.</a>
+        </div>
+    </section>
+
+    <!-- ========= FOOTER ========= -->
+    <footer class="bp-footer">
+        <p class="bp-footer-summary">진단 다음, 가장 먼저 바꿀 것은 경영진 본인의 하루입니다. 하루 30분, 2~3주의 직접 사용으로 확신과 판단력을 쌓고, 막힌 지점 목록을 TF의 첫 과제로 넘깁니다.</p>
+        <div class="bp-footer-bar">
+            <span class="bp-footer-copy">&copy; 2026 AI ROASTING. All rights reserved.</span>
+            <span class="bp-footer-author">
+                <span class="bp-footer-author-name">강정구 · Jayden Kang</span>
+                <a class="bp-footer-social bp-footer-in" href="https://www.linkedin.com/in/jayden-kang/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.4v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.59 0 4.25 2.36 4.25 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
+                <a class="bp-footer-social bp-footer-fb" href="https://www.facebook.com/jayden.kang" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V13h2.7v8h3.4z"/></svg></a>
+            </span>
+        </div>
+    </footer>
+
+</div>
+
+<script>
+(function() {
+    'use strict';
+    var navLinks = document.querySelectorAll('.bp-hero-nav a');
+    if (!navLinks.length) return;
+
+    var linkMap = {};
+    var sectionIds = [];
+    navLinks.forEach(function(link) {
+        var id = (link.getAttribute('href') || '').replace('#', '');
+        if (!id) return;
+        var el = document.getElementById(id);
+        if (!el) return;
+        linkMap[id] = { link: link, el: el };
+        sectionIds.push(id);
+    });
+    if (!sectionIds.length) return;
+
+    function setActive(id) {
+        sectionIds.forEach(function(k) {
+            if (k === id) linkMap[k].link.classList.add('active');
+            else linkMap[k].link.classList.remove('active');
+        });
+    }
+
+    function update() {
+        var nav = document.querySelector('.bp-hero-nav');
+        var navH = nav ? nav.offsetHeight : 0;
+        var trigger = navH + 60;
+        var currentId = null;
+        for (var i = 0; i < sectionIds.length; i++) {
+            var rect = linkMap[sectionIds[i]].el.getBoundingClientRect();
+            if (rect.top <= trigger) currentId = sectionIds[i];
+            else break;
+        }
+        setActive(currentId);
+    }
+
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(function() {
+            update();
+            ticking = false;
+        });
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+})();
+</script>
+
+</body>
+</html>
