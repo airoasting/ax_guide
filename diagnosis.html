@@ -172,10 +172,11 @@ body {
 
 .bp-substeps {
     display: flex;
-    justify-content: center;
     gap: 12px;
-    margin-top: 22px;
-    flex-wrap: wrap;
+    margin: 22px auto 0;
+    width: 100%;
+    max-width: 720px;
+    flex-wrap: nowrap;
     position: relative;
     z-index: 1;
 }
@@ -190,7 +191,8 @@ body {
     text-decoration: none;
     letter-spacing: 0.02em;
     transition: background .18s ease, border-color .18s ease, color .18s ease;
-    min-width: 220px;
+    flex: 1 1 0;
+    min-width: 0;
     text-align: center;
     position: relative;
 }
@@ -217,7 +219,7 @@ body {
     .bp-step { width: 26px; height: 26px; font-size: 10px; }
     .bp-step + .bp-step { margin-left: 16px; }
     .bp-step + .bp-step::before { width: 16px; }
-    .bp-substeps { gap: 8px; }
+    .bp-substeps { gap: 8px; flex-wrap: wrap; }
     .bp-substeps a { min-width: 0; flex: 1 1 auto; padding: 10px 14px; font-size: 12px; }
 }
 
@@ -771,7 +773,7 @@ body {
 .bp-ladder-cell .bp-ladder-name { transition: color .25s ease; }
 .bp-ladder-cell:not(.active):hover .bp-ladder-name { color: var(--bp-line); }
 .bp-ladder-cell.active {
-    background: linear-gradient(180deg, rgba(14, 59, 42, 0.22) 0%, rgba(27, 110, 79, 0.18) 100%);
+    background: rgba(14, 59, 42, 0.16);
     box-shadow: inset 0 4px 0 var(--bp-line), inset 0 -4px 0 var(--bp-line);
 }
 .bp-ladder-cell.active .bp-ladder-num,
@@ -968,10 +970,12 @@ body {
             <li class="bp-step"><a href="criteria.html">3</a></li>
             <li class="bp-step"><a href="resource.html">4</a></li>
             <li class="bp-step"><a href="ainative.html">5</a></li>
+            <li class="bp-step"><a href="cost-output.html">참고</a></li>
         </ol>
         <a class="bp-back" href="index.html">← 목록으로</a>
-        <div class="bp-substeps" aria-label="진단 단계 페이지">
+        <div class="bp-substeps" aria-label="강의 동선">
             <a href="blueprint.html">AX 추진 원칙</a>
+            <a href="ax-canvas.html">AX 캔버스</a>
             <a href="diagnosis.html" class="active" aria-current="page">현재 수준 진단</a>
         </div>
     </nav>
@@ -1101,7 +1105,7 @@ body {
                     <div class="bp-diag-title">AI가 전략의 한가운데에 있는가
                         <span class="sub">McKinsey Rewired · Bain Ambition · BCG AI Radar 공통 영역</span>
                     </div>
-                    <div class="bp-diag-score">영역 평균<span class="now" data-dim-score="strategy">—</span></div>
+                    <div class="bp-diag-score">영역 평균<span class="now" data-dim-score="strategy">-</span></div>
                 </div>
                 <div class="bp-diag-body">
                     <div class="bp-q" data-q="s1">
@@ -1154,7 +1158,7 @@ body {
                     <div class="bp-diag-title">전 직원이 AI와 같이 일하는 법을 배웠는가
                         <span class="sub">McKinsey 70 % 사람 투자 · KPMG 인재와 문화 · Deloitte People &amp; Culture</span>
                     </div>
-                    <div class="bp-diag-score">영역 평균<span class="now" data-dim-score="people">—</span></div>
+                    <div class="bp-diag-score">영역 평균<span class="now" data-dim-score="people">-</span></div>
                 </div>
                 <div class="bp-diag-body">
                     <div class="bp-q" data-q="p1">
@@ -1207,7 +1211,7 @@ body {
                     <div class="bp-diag-title">핵심 워크플로우를 AI 전제로 다시 짰는가
                         <span class="sub">BCG 10-20-70 · McKinsey Reshape · Deloitte Workflow</span>
                     </div>
-                    <div class="bp-diag-score">영역 평균<span class="now" data-dim-score="process">—</span></div>
+                    <div class="bp-diag-score">영역 평균<span class="now" data-dim-score="process">-</span></div>
                 </div>
                 <div class="bp-diag-body">
                     <div class="bp-q" data-q="o1">
@@ -1260,7 +1264,7 @@ body {
                     <div class="bp-diag-title">AI가 쓸 수 있는 형태의 데이터가 있는가
                         <span class="sub">Bain Data Foundation · KPMG Data · McKinsey Data</span>
                     </div>
-                    <div class="bp-diag-score">영역 평균<span class="now" data-dim-score="data">—</span></div>
+                    <div class="bp-diag-score">영역 평균<span class="now" data-dim-score="data">-</span></div>
                 </div>
                 <div class="bp-diag-body">
                     <div class="bp-q" data-q="d1">
@@ -1313,7 +1317,7 @@ body {
                     <div class="bp-diag-title">에이전트가 안전하게 부서 경계를 넘는가
                         <span class="sub">PwC Agent OS · BCG Tech Platform · McKinsey Technology</span>
                     </div>
-                    <div class="bp-diag-score">영역 평균<span class="now" data-dim-score="tech">—</span></div>
+                    <div class="bp-diag-score">영역 평균<span class="now" data-dim-score="tech">-</span></div>
                 </div>
                 <div class="bp-diag-body">
                     <div class="bp-q" data-q="t1">
@@ -1366,7 +1370,7 @@ body {
                     <div class="bp-diag-title">사고가 나기 전에 명확한 AI 사용 규칙을 만들었는가
                         <span class="sub">PwC Responsible AI · KPMG Trusted AI · Deloitte Risk</span>
                     </div>
-                    <div class="bp-diag-score">영역 평균<span class="now" data-dim-score="governance">—</span></div>
+                    <div class="bp-diag-score">영역 평균<span class="now" data-dim-score="governance">-</span></div>
                 </div>
                 <div class="bp-diag-body">
                     <div class="bp-q" data-q="g1">
@@ -1438,12 +1442,12 @@ body {
                 </div>
                 <div>
                     <div class="label">성숙도 단계</div>
-                    <div class="value" id="levelName">—</div>
+                    <div class="value" id="levelName">-</div>
                     <div class="sub" id="levelSub">레벨이 자동으로 표시됩니다.</div>
                 </div>
                 <div>
                     <div class="label">취약 영역</div>
-                    <div class="value" id="weakAxes" style="font-size:22px; line-height:1.3;">—</div>
+                    <div class="value" id="weakAxes" style="font-size:22px; line-height:1.3;">-</div>
                     <div class="sub" id="weakSub">두 영역이 다음 행동의 출발점입니다.</div>
                 </div>
             </div>
@@ -1463,36 +1467,36 @@ body {
                         <div class="bp-dim-score-row" data-row="strategy">
                             <div class="bp-dim-score-label">전략</div>
                             <div class="bp-dim-score-track"><div class="bp-dim-score-fill" style="width: 0%;"></div></div>
-                            <div class="bp-dim-score-value">—</div>
+                            <div class="bp-dim-score-value">-</div>
                         </div>
                         <div class="bp-dim-score-row" data-row="people">
                             <div class="bp-dim-score-label">인재와 문화</div>
                             <div class="bp-dim-score-track"><div class="bp-dim-score-fill" style="width: 0%;"></div></div>
-                            <div class="bp-dim-score-value">—</div>
+                            <div class="bp-dim-score-value">-</div>
                         </div>
                         <div class="bp-dim-score-row" data-row="process">
                             <div class="bp-dim-score-label">운영모델 프로세스</div>
                             <div class="bp-dim-score-track"><div class="bp-dim-score-fill" style="width: 0%;"></div></div>
-                            <div class="bp-dim-score-value">—</div>
+                            <div class="bp-dim-score-value">-</div>
                         </div>
                         <div class="bp-dim-score-row" data-row="data">
                             <div class="bp-dim-score-label">데이터</div>
                             <div class="bp-dim-score-track"><div class="bp-dim-score-fill" style="width: 0%;"></div></div>
-                            <div class="bp-dim-score-value">—</div>
+                            <div class="bp-dim-score-value">-</div>
                         </div>
                         <div class="bp-dim-score-row" data-row="tech">
                             <div class="bp-dim-score-label">AI 도구</div>
                             <div class="bp-dim-score-track"><div class="bp-dim-score-fill" style="width: 0%;"></div></div>
-                            <div class="bp-dim-score-value">—</div>
+                            <div class="bp-dim-score-value">-</div>
                         </div>
                         <div class="bp-dim-score-row" data-row="governance">
                             <div class="bp-dim-score-label">거버넌스 책임</div>
                             <div class="bp-dim-score-track"><div class="bp-dim-score-fill" style="width: 0%;"></div></div>
-                            <div class="bp-dim-score-value">—</div>
+                            <div class="bp-dim-score-value">-</div>
                         </div>
                         <div class="bp-dim-score-total">
                             <div class="bp-dim-score-total-label">총점</div>
-                            <div class="bp-dim-score-total-value" id="totalScoreInline">— / 120점</div>
+                            <div class="bp-dim-score-total-value" id="totalScoreInline">- / 120점</div>
                         </div>
                     </div>
                 </div>
@@ -1559,7 +1563,7 @@ body {
     <section class="bp-section" id="firms">
         <div class="bp-section-head">
             <div>
-                <h2 class="bp-section-title">컨설팅펌 AX 진단 프레임워크</h2>
+                <h2 class="bp-section-title">참고 자료</h2>
             </div>
             <div class="bp-section-meta">McKinsey · Bain · BCG · PwC · KPMG · Deloitte</div>
         </div>
@@ -1622,8 +1626,8 @@ body {
             <span class="bp-footer-copy">&copy; 2026 AI ROASTING. All rights reserved.</span>
             <span class="bp-footer-author">
                 <span class="bp-footer-author-name">강정구 · Jayden Kang</span>
-                <a class="bp-footer-social bp-footer-fb" href="https://www.facebook.com/jayden.kang" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V13h2.7v8h3.4z"/></svg></a>
                 <a class="bp-footer-social bp-footer-in" href="https://www.linkedin.com/in/jayden-kang/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.4v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.59 0 4.25 2.36 4.25 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
+                <a class="bp-footer-social bp-footer-fb" href="https://www.facebook.com/jayden.kang" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V13h2.7v8h3.4z"/></svg></a>
             </span>
         </div>
     </footer>
@@ -1800,7 +1804,7 @@ body {
 
         DIMENSIONS.forEach(function(d) {
             var el = form.querySelector('[data-dim-score="' + d.key + '"]');
-            if (el) el.textContent = s.dims[d.key].answered > 0 ? s.dims[d.key].avg.toFixed(2) : '—';
+            if (el) el.textContent = s.dims[d.key].answered > 0 ? s.dims[d.key].avg.toFixed(2) : '-';
         });
 
         DIMENSIONS.forEach(function(d) {
@@ -1810,7 +1814,7 @@ body {
             var val  = row.querySelector('.bp-dim-score-value');
             var pct = (s.dims[d.key].sum / 20) * 100;
             fill.style.width = pct + '%';
-            val.textContent = s.dims[d.key].answered > 0 ? (s.dims[d.key].sum + ' / 20') : '—';
+            val.textContent = s.dims[d.key].answered > 0 ? (s.dims[d.key].sum + ' / 20') : '-';
             row.classList.remove('weak');
         });
 
@@ -1832,9 +1836,9 @@ body {
             totalEl.textContent = s.totalAnswered + ' / 24 문항';
             totalSubEl.textContent = '24문항을 모두 채우면 결과가 자동으로 정리됩니다.';
             if (totalInlineEl) totalInlineEl.textContent = s.totalSum + '점 / 120점';
-            levelNameEl.textContent = '—';
+            levelNameEl.textContent = '-';
             levelSubEl.textContent = '레벨이 자동으로 표시됩니다.';
-            weakEl.textContent = '—';
+            weakEl.textContent = '-';
             weakSubEl.textContent = '두 영역이 다음 행동의 출발점입니다.';
             renderGuide(null, null);
             return;

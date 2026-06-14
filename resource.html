@@ -133,10 +133,11 @@ body {
 
 .bp-substeps {
     display: flex;
-    justify-content: center;
     gap: 12px;
-    margin-top: 22px;
-    flex-wrap: wrap;
+    margin: 22px auto 0;
+    width: 100%;
+    max-width: 720px;
+    flex-wrap: nowrap;
     position: relative;
     z-index: 1;
 }
@@ -151,7 +152,8 @@ body {
     text-decoration: none;
     letter-spacing: 0.02em;
     transition: background .18s ease, border-color .18s ease, color .18s ease;
-    min-width: 180px;
+    flex: 1 1 0;
+    min-width: 0;
     text-align: center;
     position: relative;
     display: inline-flex;
@@ -185,7 +187,7 @@ body {
     .bp-step { width: 26px; height: 26px; font-size: 10px; }
     .bp-step + .bp-step { margin-left: 16px; }
     .bp-step + .bp-step::before { width: 16px; }
-    .bp-substeps { gap: 8px; }
+    .bp-substeps { gap: 8px; flex-wrap: wrap; }
     .bp-substeps a, .bp-substeps span { min-width: 0; flex: 1 1 auto; padding: 10px 14px; font-size: 12px; }
 }
 
@@ -733,11 +735,11 @@ body {
             <li class="bp-step"><a href="criteria.html">3</a></li>
             <li class="bp-step active" aria-current="step"><a href="resource.html">4</a></li>
             <li class="bp-step"><a href="ainative.html">5</a></li>
+            <li class="bp-step"><a href="cost-output.html">참고</a></li>
         </ol>
         <a class="bp-back" href="index.html">← 목록으로</a>
         <div class="bp-substeps" aria-label="4단계 업무 방식 재설계 페이지">
             <a href="resource.html" class="active" aria-current="page">자원 재배분</a>
-            <a href="ax-canvas.html">AX 캔버스</a>
             <a href="reshape.html">업무 재설계</a>
         </div>
     </nav>
@@ -960,8 +962,8 @@ body {
             <span class="bp-footer-copy">&copy; 2026 AI ROASTING. All rights reserved.</span>
             <span class="bp-footer-author">
                 <span class="bp-footer-author-name">강정구 · Jayden Kang</span>
-                <a class="bp-footer-social bp-footer-fb" href="https://www.facebook.com/jayden.kang" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V13h2.7v8h3.4z"/></svg></a>
                 <a class="bp-footer-social bp-footer-in" href="https://www.linkedin.com/in/jayden-kang/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.4v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.59 0 4.25 2.36 4.25 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
+                <a class="bp-footer-social bp-footer-fb" href="https://www.facebook.com/jayden.kang" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V13h2.7v8h3.4z"/></svg></a>
             </span>
         </div>
     </footer>

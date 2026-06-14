@@ -138,10 +138,11 @@ body {
 
 .bp-substeps {
     display: flex;
-    justify-content: center;
     gap: 12px;
-    margin-top: 22px;
-    flex-wrap: wrap;
+    margin: 22px auto 0;
+    width: 100%;
+    max-width: 720px;
+    flex-wrap: nowrap;
     position: relative;
     z-index: 1;
 }
@@ -153,7 +154,8 @@ body {
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.02em;
-    min-width: 260px;
+    flex: 1 1 0;
+    min-width: 0;
     text-align: center;
     display: inline-flex;
     align-items: center;
@@ -185,7 +187,7 @@ body {
     .bp-step { width: 26px; height: 26px; font-size: 10px; }
     .bp-step + .bp-step { margin-left: 16px; }
     .bp-step + .bp-step::before { width: 16px; }
-    .bp-substeps { gap: 8px; }
+    .bp-substeps { gap: 8px; flex-wrap: wrap; }
     .bp-substeps span { min-width: 0; flex: 1 1 auto; padding: 10px 14px; font-size: 12px; }
 }
 
@@ -971,12 +973,13 @@ body {
             <li class="bp-step"><a href="criteria.html">3</a></li>
             <li class="bp-step"><a href="resource.html">4</a></li>
             <li class="bp-step"><a href="ainative.html">5</a></li>
+            <li class="bp-step active" aria-current="step"><a href="cost-output.html">참고</a></li>
         </ol>
         <a class="bp-back" href="index.html">← 목록으로</a>
         <div class="bp-substeps" aria-label="참고 자료">
             <a href="cost-output.html">AI 네이티브로의 여정</a>
-            <a href="ai-services.html">AI 서비스 선택</a>
             <span aria-current="page">AI 퍼스트 문제 정의력</span>
+            <a href="ai-services.html">AI 서비스 비교</a>
         </div>
     </nav>
 
@@ -984,9 +987,9 @@ body {
     <section class="bp-hero">
         <div class="bp-hero-eyebrow">참고 자료 · 5단계 본문 외 부록 · 리더 역량과 에이전트 리더십</div>
         <h1>'구현력'의 시대가 끝나고, '문제 정의력'의 시대가 시작됩니다</h1>
-        <p class="bp-lead">AI로 구현 비용이 0에 가까워지면 경쟁의 자리는 What과 Why로 이동합니다. 잘 만드는 능력만으로는 더 이상 차별되지 않으며, 리더는 사람만 이끌던 자리에서 사람과 에이전트를 함께 이끄는 자리로 옮겨갑니다.</p>
+        <p class="bp-lead">AI로 구현 비용이 0에 가까워지면 경쟁의 자리는 What과 Why로 옮겨갑니다. 잘 만드는 능력만으로는 더 이상 앞서지 못하고, 리더는 사람만 이끌던 자리에서 사람과 에이전트를 함께 이끄는 자리로 넘어갑니다.</p>
         <div class="bp-summary">
-            <strong>이 페이지는 두 가지를 정리합니다.</strong> 첫째, 시대의 전환을 케이스 한 건과 4시대 비교로 설명합니다. 둘째, 문제 정의 능력을 핵심 평가축으로 더하고, 그 전환을 견디는 인재의 5대 핵심 역량과 리더가 새로 갖춰야 할 에이전트 리더십을 피플 리더십과 한 줄씩 대비해 보여드립니다. 본문 5단계 로드맵에 들어가기 전, 또는 4단계 업무 재설계에 들어가기 직전에 함께 펼쳐두면 좋은 참고 자료입니다.
+            <strong>이 페이지는 두 가지를 정리합니다.</strong> 첫째, 시대의 전환을 케이스 한 건과 4시대 비교로 설명합니다. 둘째, 문제 정의 능력을 핵심 평가축으로 더하고, 그 전환을 견디는 인재의 5대 핵심 역량과 리더가 새로 갖춰야 할 에이전트 리더십을 피플 리더십과 한 줄씩 짝지어 보여드립니다. 본문 5단계 로드맵을 시작하기 전, 또는 4단계 업무 재설계에 들어가기 직전에 함께 펼쳐두면 좋은 참고 자료입니다.
         </div>
     </section>
 
@@ -1007,7 +1010,7 @@ body {
             <div class="bp-section-meta">사례 · Andrej Karpathy · 2026.02</div>
         </div>
 
-        <p class="bp-section-intro">한 줄로 위임한 일이 주말 풀타임 코딩을 30분으로 줄였습니다. 구현 비용이 0에 수렴하면 경쟁의 자리는 "잘 만드는 능력"에서 "잘 정의하는 능력"으로 옮겨갑니다.</p>
+        <p class="bp-section-intro">한 줄로 위임한 일이 주말 내내 매달리던 코딩을 30분으로 줄였습니다. 구현 비용이 0에 수렴하면 경쟁의 자리는 "잘 만드는 능력"에서 "잘 정의하는 능력"으로 옮겨갑니다.</p>
 
         <div class="bp-twocol">
             <div class="col-case">
@@ -1080,7 +1083,7 @@ body {
             <div class="bp-section-meta">장인 · 대량 생산 · 인터넷 모바일 · AI</div>
         </div>
 
-        <p class="bp-section-intro">시대마다 경쟁의 자리는 옮겨 왔습니다. 장인의 숙련도, 산업화의 표준화, 인터넷·모바일의 빠른 구현. 그리고 지금, AI가 구현을 가져가면서 사람에게 남은 자리는 Why를 정의하는 일뿐입니다.</p>
+        <p class="bp-section-intro">경쟁의 자리는 시대마다 옮겨 왔습니다. 장인의 숙련도, 산업화의 표준화, 인터넷·모바일의 빠른 구현. 그리고 지금, AI가 구현을 가져가면서 사람에게 남은 자리는 Why를 정의하는 일뿐입니다.</p>
 
         <div class="bp-era">
             <div class="bp-era-corner"></div>
@@ -1152,7 +1155,7 @@ body {
 
         <div class="bp-handoff">
             <div class="tag">읽는 방식</div>
-            오른쪽으로 갈수록 구현(How)의 가치는 떨어지고, 정의(Why)의 가치가 올라갑니다. 지금 우리 회사가 어느 칸에서 자원을 쓰고 있는지 점검해 볼 수 있습니다. <strong>대량 생산 시대의 전략 기획 역량과 인터넷·모바일의 그로스 해킹 역량은 그 시대를 만든 회사를 지배했지만, AI 시대의 차별점은 이미 다른 자리로 옮겨가고 있습니다.</strong>
+            오른쪽으로 갈수록 구현(How)의 가치는 떨어지고, 정의(Why)의 가치가 올라갑니다. 지금 우리 회사가 어느 칸에 자원을 쓰고 있는지 점검해 보십시오. <strong>대량 생산 시대의 전략 기획 역량과 인터넷·모바일의 그로스 해킹 역량은 그 시대를 만든 회사를 지배했지만, AI 시대의 차별점은 이미 다른 자리로 옮겨가고 있습니다.</strong>
         </div>
     </section>
 
@@ -1165,7 +1168,7 @@ body {
             <div class="bp-section-meta">AI가 바꾸는 현실 · 스스로에게 던질 질문 · 5대 핵심 역량</div>
         </div>
 
-        <p class="bp-section-intro">"문제 정의력"은 단일 능력이 아니라 다섯 가지 작업 능력의 묶음입니다. 각 역량은 AI가 만든 새 현실에 대응하며, 그 현실 앞에서 스스로에게 던져야 할 질문 하나에서 출발합니다.</p>
+        <p class="bp-section-intro">"문제 정의력"은 하나의 능력이 아니라 다섯 가지 작업 능력의 묶음입니다. 각 역량은 AI가 만든 새 현실에 대응하고, 그 현실 앞에서 스스로에게 던져야 할 질문 하나에서 출발합니다.</p>
 
         <div class="bp-flow">
             <div class="bp-flow-head">
@@ -1245,7 +1248,7 @@ body {
             <div class="bp-section-meta">자기주도성 · Limitless · Unlearn · 검증 · 1/10 데드라인</div>
         </div>
 
-        <p class="bp-section-intro">앞 절의 다섯 역량을 한 사람의 모습으로 풀면 다음과 같습니다. 각 카드 아래의 대비 박스가 "AI 이전의 일하던 방식"과 "AI 이후의 일하는 방식"의 결을 비춥니다.</p>
+        <p class="bp-section-intro">앞 절의 다섯 역량을 한 사람의 모습으로 풀면 다음처럼 됩니다. 각 카드 아래의 대비 박스가 "AI 이전에 일하던 방식"과 "AI 이후에 일하는 방식"의 결을 보여줍니다.</p>
 
         <div class="bp-cap5">
             <article class="bp-cap5-card">
@@ -1277,7 +1280,7 @@ body {
                     </svg>
                 </span>
                 <h3 class="bp-cap5-name">Limitless Mindset</h3>
-                <p class="bp-cap5-desc">AI가 실행을 대체하므로 <strong>"내 영역 밖"</strong>이라는 개념 자체가 소멸합니다.</p>
+                <p class="bp-cap5-desc">AI가 실행을 대신하면서 <strong>"내 영역 밖"</strong>이라는 경계 자체가 사라집니다.</p>
                 <div class="bp-cap5-vs">
                     <span class="bp-cap5-vs-old">"이건 못 해"</span>
                     <span class="bp-cap5-vs-sep">VS</span>
@@ -1296,7 +1299,7 @@ body {
                     </svg>
                 </span>
                 <h3 class="bp-cap5-name">Unlearn-Relearn</h3>
-                <p class="bp-cap5-desc">과거 성공 방정식이 빠르게 무효화됩니다. 경력·직급보다 <strong>학습 속도</strong>가 경쟁력입니다.</p>
+                <p class="bp-cap5-desc">과거의 성공 방정식이 빠르게 힘을 잃습니다. 경력·직급보다 <strong>학습 속도</strong>가 경쟁력입니다.</p>
                 <div class="bp-cap5-vs">
                     <span class="bp-cap5-vs-old">"내 경험상…"</span>
                     <span class="bp-cap5-vs-sep">VS</span>
@@ -1353,7 +1356,7 @@ body {
             <div class="bp-section-meta">피플 리더십 vs 에이전트 리더십 대비</div>
         </div>
 
-        <p class="bp-section-intro">리더의 일은 사람을 움직이게 하는 일에서, 사람과 에이전트를 함께 움직이게 하는 일로 확장됩니다. 채용·교육·발령·평가·승진·보상의 모든 작업 단위에서 두 가지 리더십이 동시에 요구됩니다.</p>
+        <p class="bp-section-intro">리더의 일은 사람을 움직이게 하는 데서, 사람과 에이전트를 함께 움직이게 하는 데로 넓어집니다. 채용·교육·발령·평가·승진·보상의 모든 작업 단위에서 두 가지 리더십이 동시에 필요합니다.</p>
 
         <div class="bp-leadership">
             <div class="bp-lead-head">
@@ -1436,8 +1439,8 @@ body {
             <span class="bp-footer-copy">&copy; 2026 AI ROASTING. All rights reserved.</span>
             <span class="bp-footer-author">
                 <span class="bp-footer-author-name">강정구 · Jayden Kang</span>
-                <a class="bp-footer-social bp-footer-fb" href="https://www.facebook.com/jayden.kang" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V13h2.7v8h3.4z"/></svg></a>
                 <a class="bp-footer-social bp-footer-in" href="https://www.linkedin.com/in/jayden-kang/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.4v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.59 0 4.25 2.36 4.25 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
+                <a class="bp-footer-social bp-footer-fb" href="https://www.facebook.com/jayden.kang" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V13h2.7v8h3.4z"/></svg></a>
             </span>
         </div>
     </footer>

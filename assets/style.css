@@ -753,9 +753,14 @@ a.bp-brandbar:focus-visible { outline: 2px solid rgba(247, 245, 239, 0.6); outli
     border-color: var(--bp-paper, #F7F5EF);
     background: rgba(247, 245, 239, 0.12);
 }
+.bp-steps li.bp-step.active {
+    background: var(--bp-paper, #F7F5EF);
+    color: var(--bp-ink, #0F1A16);
+    border-color: var(--bp-paper, #F7F5EF);
+    font-weight: 700;
+}
 .bp-steps li.bp-step.active > a {
-    pointer-events: none;
-    cursor: default;
+    cursor: pointer;
 }
 
 /* ================== Section title 형광펜 하이라이트 ================== */

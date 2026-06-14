@@ -138,10 +138,11 @@ body {
 
 .bp-substeps {
     display: flex;
-    justify-content: center;
     gap: 12px;
-    margin-top: 22px;
-    flex-wrap: wrap;
+    margin: 22px auto 0;
+    width: 100%;
+    max-width: 720px;
+    flex-wrap: nowrap;
     position: relative;
     z-index: 1;
 }
@@ -153,7 +154,8 @@ body {
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.02em;
-    min-width: 240px;
+    flex: 1 1 0;
+    min-width: 0;
     text-align: center;
     display: inline-flex;
     align-items: center;
@@ -185,7 +187,7 @@ body {
     .bp-step { width: 26px; height: 26px; font-size: 10px; }
     .bp-step + .bp-step { margin-left: 16px; }
     .bp-step + .bp-step::before { width: 16px; }
-    .bp-substeps { gap: 8px; }
+    .bp-substeps { gap: 8px; flex-wrap: wrap; }
     .bp-substeps span, .bp-substeps a { min-width: 0; flex: 1 1 auto; padding: 10px 14px; font-size: 12px; }
 }
 
@@ -846,12 +848,13 @@ body {
             <li class="bp-step"><a href="criteria.html">3</a></li>
             <li class="bp-step"><a href="resource.html">4</a></li>
             <li class="bp-step"><a href="ainative.html">5</a></li>
+            <li class="bp-step active" aria-current="step"><a href="cost-output.html">참고</a></li>
         </ol>
         <a class="bp-back" href="index.html">← 목록으로</a>
         <div class="bp-substeps" aria-label="참고 자료">
             <span aria-current="page">AI 네이티브로의 여정</span>
-            <a href="ai-services.html">AI 서비스 선택</a>
             <a href="problem-definition.html">AI 퍼스트 문제 정의력</a>
+            <a href="ai-services.html">AI 서비스 비교</a>
         </div>
     </nav>
 
@@ -861,7 +864,7 @@ body {
         <h1>'우리도 쓰고 있다'는 더 이상 경쟁력이 아닙니다</h1>
         <p class="bp-lead">요즘 경영 회의에서 가장 자주 나오는 말은 "우리도 쓰고 있다"입니다. 임직원에게 챗GPT 계정을 열어줬고, 개발팀엔 코딩 도구를 붙였고, 부서마다 파일럿이 돌아갑니다. 그런데 그 문장은 이제 아무것도 증명하지 못합니다. 진짜 질문은 회의실 밖에 있습니다. 누가 직접 쓰는가, 어디에 돈이 새는가, 그 돈으로 무엇이 달라졌는가.</p>
         <div class="bp-summary">
-            <strong>그래서 이 이야기로 시작합니다.</strong> "우리는 어디쯤인가"를 진단하기 전에, 먼저 시선부터 맞춰야 합니다. 사용량(입력)이 아니라 산출(출력)을 봐야 한다는 것. 1년을 직접 써본 한 CEO의 이야기, 비용 전제가 무너진 세 기업의 장면, 같은 토큰으로 정반대 결과를 낸 두 팀. 이 세 장면을 지나면 "얼마나 썼나"가 아니라 "무엇이 달라졌나"를 같은 장부에 적는다는 말이 손에 잡힙니다. 그제야 "그럼 우리는 어디쯤인가"라는 진단이 절실해집니다. 이 페이지가 진단의 출발선입니다.
+            <strong>그래서 이 이야기로 시작합니다.</strong> "우리는 어디쯤인가"를 진단하기 전에, 먼저 시선부터 맞춰야 합니다. 사용량(입력)이 아니라 산출(출력)을 봐야 한다는 것입니다. 1년을 직접 써본 한 CEO의 이야기, 비용 전제가 무너진 세 기업의 장면, 같은 토큰으로 정반대 결과를 낸 두 팀. 이 세 장면을 지나면 "얼마나 썼나"가 아니라 "무엇이 달라졌나"를 같은 장부에 적는다는 말이 손에 잡힙니다. 그제야 "그럼 우리는 어디쯤인가"라는 진단이 절실해집니다. 이 페이지가 진단의 출발선입니다.
         </div>
     </section>
 
@@ -973,7 +976,7 @@ body {
                     <div class="bp-case-label">조직 차원</div>
                     <ul>
                         <li>개인에겐 놀랍던 도구가 회사 단위로 가면 <strong>혼란스럽고 삐걱댑니다</strong></li>
-                        <li>막힌 자리는 분명합니다. 누가 접근할지, 어떤 데이터를 줄지, 보안 규약, 규제 산업이면 규제, 노조가 있으면 노조</li>
+                        <li>막힌 자리는 분명합니다. 누가 접근할지, 어떤 데이터를 줄지, 보안 규약, 규제 환경</li>
                         <li>효과를 제대로 본 사람은 <strong>1~2%뿐</strong>. 나머지는 시간을 들이지 않았기 때문입니다</li>
                     </ul>
                 </div>
@@ -991,7 +994,7 @@ body {
                     </li>
                     <li>
                         <div><span class="bp-imp-num">② 막히는 건 조직</span><span class="bp-imp-key">접근·데이터·규제의 벽</span></div>
-                        <div class="bp-imp-desc">개인은 빨라지는데, 접근 권한·데이터·보안·규제·노조 같은 현실이 회사 단위에서 길을 막습니다.</div>
+                        <div class="bp-imp-desc">개인은 빨라지는데, 접근 권한·데이터·보안·규제 같은 현실이 회사 단위에서 길을 막습니다.</div>
                     </li>
                     <li>
                         <div><span class="bp-imp-num">③ 진짜 기회</span><span class="bp-imp-key">비용 절감이 아니라 새 사업</span></div>
@@ -1022,7 +1025,7 @@ body {
             <div class="bp-section-meta">2026년 · Uber · Microsoft · Starbucks</div>
         </div>
 
-        <p class="bp-section-intro">지난 2년, 많은 회사가 같은 계산을 했습니다. AI가 사람 일을 덜어주니 비용도 줄어들 것이다. 2026년 들어 세 회사가 거의 동시에 그 계산이 틀렸다는 걸 보여줬습니다. 업종도 도구도 다르지만, 셋은 결국 같은 말을 합니다.</p>
+        <p class="bp-section-intro">지난 2년간 많은 기업이 같은 가정에서 출발했습니다. AI가 사람의 일을 덜어주면 비용도 함께 줄어든다는 것이었습니다. 그러나 2026년 들어 세 기업이 거의 동시에 그 가정이 틀렸음을 보여줬습니다. 업종도 도구도 다르지만, 세 사례는 같은 곳을 가리킵니다.</p>
 
         <div class="bp-cost">
             <article class="bp-cost-card">
@@ -1200,8 +1203,8 @@ body {
             <span class="bp-footer-copy">&copy; 2026 AI ROASTING. All rights reserved.</span>
             <span class="bp-footer-author">
                 <span class="bp-footer-author-name">강정구 · Jayden Kang</span>
-                <a class="bp-footer-social bp-footer-fb" href="https://www.facebook.com/jayden.kang" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V13h2.7v8h3.4z"/></svg></a>
                 <a class="bp-footer-social bp-footer-in" href="https://www.linkedin.com/in/jayden-kang/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.4v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.59 0 4.25 2.36 4.25 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
+                <a class="bp-footer-social bp-footer-fb" href="https://www.facebook.com/jayden.kang" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V13h2.7v8h3.4z"/></svg></a>
             </span>
         </div>
     </footer>

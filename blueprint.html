@@ -177,10 +177,11 @@ body {
 .bp-back:hover { color: var(--bp-paper); letter-spacing: 0.08em; }
 .bp-substeps {
     display: flex;
-    justify-content: center;
     gap: 12px;
-    margin-top: 22px;
-    flex-wrap: wrap;
+    margin: 22px auto 0;
+    width: 100%;
+    max-width: 720px;
+    flex-wrap: nowrap;
     position: relative;
     z-index: 1;
 }
@@ -195,7 +196,8 @@ body {
     text-decoration: none;
     letter-spacing: 0.02em;
     transition: background .18s ease, border-color .18s ease, color .18s ease;
-    min-width: 220px;
+    flex: 1 1 0;
+    min-width: 0;
     text-align: center;
     position: relative;
 }
@@ -341,6 +343,49 @@ body {
     text-align: right;
     line-height: 1.6;
 }
+
+/* ===== 강의용 재편 (A안: 비주얼 위계) ===== */
+/* 1. 강의 발문:섹션마다 발표자가 입으로 말하는 한 줄. 화면 위를 지배한다. */
+.bp-beat-lead {
+    font-size: 26px;
+    line-height: 1.42;
+    letter-spacing: -0.012em;
+    font-weight: 600;
+    color: var(--ink-soft);
+    margin: 0 0 32px;
+}
+.bp-beat-lead strong { color: var(--bp-ink); font-weight: 700; }
+/* 2. 밀도 종속화:표본·출처는 메시지·차트 뒤로 물러난다. 정보는 유지. */
+.bp-cite {
+    display: block;
+    margin-top: 10px;
+    font-size: 11px;
+    line-height: 1.6;
+    color: var(--ink-mute);
+    opacity: 0.85;
+}
+.bp-cite a { border-bottom-style: dotted; }
+/* 3. beat 리듬:sticky 네비 아래로 발문이 안착하게 점프 여백을 둔다. */
+.bp-section { scroll-margin-top: 64px; }
+
+/* ===== COMPANY BRAIN OS 명명 섹션 ===== */
+.bp-os-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 4px;
+}
+.bp-os-build {
+    margin: 28px 0 0;
+    padding: 20px 24px;
+    background: rgba(14, 59, 42, 0.04);
+    border: 1px solid var(--bp-rule);
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+}
+.bp-os-build strong { color: var(--bp-line); font-weight: 700; }
+@media (max-width: 760px) { .bp-os-grid { grid-template-columns: 1fr; } }
 
 /* ===== 5층위 지도 (Five-layer map) ===== */
 .bp-map {
@@ -696,7 +741,7 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
     margin-top: -1px;
     background: var(--bp-paper-2);
 }
-.bp-step.heart { background: linear-gradient(90deg, rgba(154, 123, 10, 0.06), var(--bp-paper-2) 30%); }
+.bp-step.heart { background: rgba(154, 123, 10, 0.04); }
 
 .bp-step-num {
     border-right: 1px solid var(--bp-rule);
@@ -971,7 +1016,7 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
 }
 .bp-kal-thesis strong { color: var(--bp-line); }
 
-/* ===== Case study (Guess Korea) ===== */
+/* ===== Case study (패션 커머스 A사) ===== */
 .bp-case {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1247,22 +1292,6 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
     grid-row: span 2;
 }
 
-/* Chart 2 / Chart 3 본문의 "읽는 법" 박스. 세로 사이즈 동일 */
-.bp-read-hint {
-    margin: 0 0 18px;
-    padding: 14px 16px;
-    background: rgba(14, 59, 42, 0.04);
-    border: 1px solid var(--bp-rule);
-    font-family: var(--sans);
-    font-size: 13px;
-    line-height: 1.65;
-    color: var(--ink-soft);
-    min-height: 78px;
-    display: flex;
-    align-items: center;
-}
-.bp-read-hint strong { color: var(--bp-ink); margin-right: 2px; white-space: nowrap; }
-
 /* Funnel chart. 88% to 39% to 6% */
 .bp-funnel {
     margin: 14px 0 8px;
@@ -1394,7 +1423,7 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
     .bp-steps li.bp-step { width: 26px; height: 26px; font-size: 10px; }
     .bp-steps li.bp-step + li.bp-step { margin-left: 16px; }
     .bp-steps li.bp-step + li.bp-step::before { width: 16px; }
-    .bp-substeps { gap: 8px; }
+    .bp-substeps { gap: 8px; flex-wrap: wrap; }
     .bp-substeps a { min-width: 0; flex: 1 1 auto; padding: 10px 14px; font-size: 12px; }
     .bp-legend { padding: 14px 32px; }
     .bp-footer { padding: 32px; }
@@ -1431,10 +1460,12 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
             <li class="bp-step"><a href="criteria.html">3</a></li>
             <li class="bp-step"><a href="resource.html">4</a></li>
             <li class="bp-step"><a href="ainative.html">5</a></li>
+            <li class="bp-step"><a href="cost-output.html">참고</a></li>
         </ol>
         <a class="bp-back" href="index.html">← 목록으로</a>
-        <div class="bp-substeps" aria-label="진단 단계 페이지">
+        <div class="bp-substeps" aria-label="강의 동선">
             <a href="blueprint.html" class="active" aria-current="page">AX 추진 원칙</a>
+            <a href="ax-canvas.html">AX 캔버스</a>
             <a href="diagnosis.html">현재 수준 진단</a>
         </div>
     </nav>
@@ -1448,7 +1479,8 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
     <nav class="bp-hero-nav" aria-label="섹션 바로가기">
         <a href="#evidence">AX 성과 분석 리포트</a>
         <a href="#pitfalls">흔히 빠지는 다섯 개의 함정</a>
-        <a href="#blueprint">우리가 가야 할 도착지, AI-Native 조직</a>
+        <a href="#brain-os">COMPANY BRAIN OS</a>
+        <a href="#blueprint">AI-Native 조직</a>
         <a href="#principles">AX 추진 다섯 가지 원칙</a>
     </nav>
 
@@ -1459,8 +1491,10 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
             <div>
                 <h2 class="bp-section-title">AX 성과 분석 리포트</h2>
             </div>
-            <div class="bp-section-meta">McKinsey · 2025년 11월<br>BCG AI Radar · 2026년 1월<br>BCG Build for the Future · 2025년 9월</div>
+            <div class="bp-section-meta">McKinsey · 2025년 11월<br>BCG Build for the Future · 2025년 9월<br>BCG AI Radar · 2026년 1월</div>
         </div>
+
+        <p class="bp-beat-lead"><strong>'AI를 쓴다'는 더 이상 답이 아닙니다.</strong> 진짜 질문은, 성과를 내는 6%에 우리가 드는가입니다.</p>
 
         <!-- 카드 1. McKinsey 깔때기 -->
         <div class="bp-source-block">
@@ -1496,9 +1530,8 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
                     <div class="bp-funnel-desc">전사 영업이익의 5% 이상을 AI가 창출한다고 응답한 'AI 고성과 그룹'은 단 6%에 불과합니다. 이들은 다른 기업 대비 에이전트 확장 속도가 약 3배 빠릅니다.</div>
                 </div>
                 <div class="bp-chart-caption">
-                    핵심 메시지. "AI를 도입했다"는 사실만으로는 더 이상 경쟁 우위가 되지 못합니다. 실질적 격차는 "AI가 전사 영업이익의 5% 이상을 창출하고 있는가"라는 한 줄에서 갈립니다.<br>
-                    표본. 전 세계 약 1,400명의 경영진 응답.<br>
-                    출처. McKinsey &amp; Company <a href="https://www.mckinsey.com/~/media/mckinsey/business%20functions/quantumblack/our%20insights/the%20state%20of%20ai/november%202025/the-state-of-ai-2025-agents-innovation_cmyk-v1.pdf" target="_blank" rel="noopener">"The State of AI 2025: Agents, innovation, and transformation"</a>, 2025년 11월 발표.
+                    핵심 메시지. "AI를 도입했다"는 사실만으로는 더 이상 경쟁 우위가 되지 못합니다. 실질적 격차는 "AI가 전사 영업이익의 5% 이상을 창출하고 있는가"라는 한 줄에서 갈립니다.
+                    <span class="bp-cite">표본. 전 세계 약 1,400명의 경영진 응답. · 출처. McKinsey &amp; Company <a href="https://www.mckinsey.com/~/media/mckinsey/business%20functions/quantumblack/our%20insights/the%20state%20of%20ai/november%202025/the-state-of-ai-2025-agents-innovation_cmyk-v1.pdf" target="_blank" rel="noopener">"The State of AI 2025: Agents, innovation, and transformation"</a>, 2025년 11월 발표.</span>
                 </div>
             </div>
         </div>
@@ -1516,10 +1549,6 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
                     </div>
                 </div>
                 <div class="bp-source-body">
-                    <div class="bp-read-hint">
-                        <strong>읽는 법.</strong> 막대 안 검정 세로선이 후발주자 평균(1배)이며, 그 선을 넘어 뻗어 나간 그린 막대 길이가 선도 기업(상위 5%)이 만들어 낸 격차입니다.
-                    </div>
-
                     <div class="bp-metric-chart">
                         <div class="bp-metric-row">
                             <div class="bp-metric-label">총주주수익률 (3년)
@@ -1573,9 +1602,8 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
                         </div>
                     </div>
                     <div class="bp-chart-caption">
-                        해석. 동일한 시장 조건에서도 AI를 운영 모델에 체계적으로 내재화한 상위 5%가 모든 지표에서 후발주자를 압도합니다.<br>
-                        표본. Future-built(상위 5%)와 Laggards(후발주자) 평균 비교.<br>
-                        출처. BCG <a href="https://media-publications.bcg.com/The-Widening-AI-Value-Gap-October-2025.pdf" target="_blank" rel="noopener">"Build for the Future 2025: The Widening AI Value Gap"</a>, 2025년 9월 발표.
+                        해석. 동일한 시장 조건에서도 AI를 운영 모델에 체계적으로 내재화한 상위 5%가 모든 지표에서 후발주자를 압도합니다.
+                        <span class="bp-cite">표본. Future-built(상위 5%)와 Laggards(후발주자) 평균 비교. · 출처. BCG <a href="https://media-publications.bcg.com/The-Widening-AI-Value-Gap-October-2025.pdf" target="_blank" rel="noopener">"Build for the Future 2025: The Widening AI Value Gap"</a>, 2025년 9월 발표.</span>
                     </div>
                 </div>
             </div>
@@ -1591,10 +1619,6 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
                     </div>
                 </div>
                 <div class="bp-source-body">
-                    <div class="bp-read-hint">
-                        <strong>읽는 법.</strong> 위쪽 세 박스는 2026년 1월 BCG가 조사한 글로벌 1,803명 CEO 응답에서 추출한 핵심 지표이며, 아래 가로 막대는 같은 조사가 분류한 CEO 세 가지 유형의 비율 분포입니다.
-                    </div>
-
                     <div class="bp-stat-trio">
                         <div class="bp-stat-mini">
                             <div class="bp-stat-mini-num">72%</div>
@@ -1631,9 +1655,8 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
                         </div>
                     </div>
                     <div class="bp-chart-caption">
-                        핵심 메시지. 2026년의 AI는 더 이상 IT 부서 단위의 프로젝트가 아니라 CEO 직속 어젠다로 격상됐습니다. 기업들은 평균 매출의 1.7%를 AI에 투자할 계획이며, 이는 전년 대비 두 배 수준입니다.<br>
-                        표본. 전 세계 1,803명 경영진 응답.<br>
-                        출처. BCG <a href="https://web-assets.bcg.com/73/8e/cc44cbc14a3b81695f8a3de28ff1/ai-radar-2026-web-jan-2026-edit.pdf" target="_blank" rel="noopener">"AI Radar 2026: As AI Investments Surge, CEOs Take the Lead"</a>, 2026년 1월.
+                        핵심 메시지. 2026년의 AI는 더 이상 IT 부서 단위의 프로젝트가 아니라 CEO 직속 어젠다로 격상됐습니다. 기업들은 평균 매출의 1.7%를 AI에 투자할 계획이며, 이는 전년 대비 두 배 수준입니다.
+                        <span class="bp-cite">표본. 전 세계 1,803명 경영진 응답. · 출처. BCG <a href="https://web-assets.bcg.com/73/8e/cc44cbc14a3b81695f8a3de28ff1/ai-radar-2026-web-jan-2026-edit.pdf" target="_blank" rel="noopener">"AI Radar 2026: As AI Investments Surge, CEOs Take the Lead"</a>, 2026년 1월.</span>
                     </div>
                 </div>
             </div>
@@ -1650,6 +1673,8 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
             </div>
             <div class="bp-section-meta">100곳 중 94곳이 6%에 들지 못하는 이유</div>
         </div>
+
+        <p class="bp-beat-lead">94곳이 6%에 들지 못하는 건 기술이 모자라서가 아닙니다. <strong>늘 같은 다섯 함정에 빠지기 때문입니다.</strong></p>
 
         <p style="margin:0 0 28px; font-size:15px; color: var(--ink-soft); line-height:1.75;">100곳 중 94곳이 6%에 들지 못하는 데에는 이유가 있습니다. 현장에서 가장 빈번히 반복되는 다섯 가지 함정을 정리합니다.</p>
 
@@ -1789,14 +1814,56 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
     </section>
 
 
-    <!-- ========= A. 청사진 ========= -->
+    <!-- ========= COMPANY BRAIN OS 명명 (도착지) ========= -->
+    <section class="bp-section" id="brain-os">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">COMPANY BRAIN OS, 도구가 아니라 회사의 두뇌</h2>
+            </div>
+            <div class="bp-section-meta">AX의 도착지 · 복제 불가능한 운영체계</div>
+        </div>
+
+        <p class="bp-beat-lead">도구는 누구나 살 수 있습니다. <strong>그러나 경쟁사가 복제할 수 없는 자산은, 회사의 두뇌를 운영체계로 만든 COMPANY BRAIN OS 하나뿐입니다.</strong></p>
+
+        <p class="bp-section-intro">COMPANY BRAIN OS는 회사의 암묵지를 구조화된 지식으로 저장하고, 그 지식 위에서 에이전트가 일하며, 사람과 에이전트가 함께 도는 협업 루프가 자산을 분기마다 두껍게 만드는 운영체계입니다. AX의 도착지는 더 나은 도구의 도입이 아니라 이 두뇌의 구축에 있습니다.</p>
+
+        <div class="bp-os-grid">
+            <div class="bp-principle">
+                <div class="bp-principle-num">01 · 지식</div>
+                <h4 class="bp-principle-title">구조화된 조직 지식</h4>
+                <div class="bp-principle-body">
+                    베테랑의 머릿속에만 있던 암묵지를 용어, 맥락, 규칙, 행동의 네 계층으로 구조화해 저장합니다. 도구는 사 올 수 있어도, 우리 회사의 지식은 사 올 수 없습니다.
+                </div>
+            </div>
+            <div class="bp-principle">
+                <div class="bp-principle-num">02 · 실행</div>
+                <h4 class="bp-principle-title">지식 위에서 일하는 에이전트</h4>
+                <div class="bp-principle-body">
+                    에이전트가 그 지식을 바탕으로 실제 업무를 수행합니다. 같은 모델이라도 우리 지식을 얹은 에이전트만이 우리 방식으로 일합니다.
+                </div>
+            </div>
+            <div class="bp-principle">
+                <div class="bp-principle-num">03 · 순환</div>
+                <h4 class="bp-principle-title">사람과 에이전트의 협업 루프</h4>
+                <div class="bp-principle-body">
+                    사람과 에이전트가 한 팀으로 일하며, 에이전트가 아직 못 하는 부분이 다음 지식으로 다시 쌓입니다. 루프를 돌릴수록 두뇌는 더 두꺼워집니다.
+                </div>
+            </div>
+        </div>
+
+        <p class="bp-os-build">5단계 로드맵은 이 두뇌를 짓는 공사 일정입니다. <strong>각 단계가 한 층씩 올립니다.</strong> 운영 주체를 세우고, 첫 모듈을 만들고, 우선 적재할 자산을 고르고, 전사로 확장한 뒤, 지속 운영으로 굳힙니다.</p>
+    </section>
+
+    <!-- ========= AI-Native 조직 (도착지의 일상) ========= -->
     <section class="bp-section" id="blueprint">
         <div class="bp-section-head">
             <div>
-                <h2 class="bp-section-title">우리가 가야 할 도착지, AI-Native 조직</h2>
+                <h2 class="bp-section-title">AI-Native 조직</h2>
             </div>
-            <div class="bp-section-meta">AI-aware vs AI-Native · 7개 영역 비교</div>
+            <div class="bp-section-meta">두뇌가 만드는 일상 · 7개 영역 비교</div>
         </div>
+
+        <p class="bp-beat-lead">이 두뇌가 자리 잡으면, <strong>회사의 하루가 이렇게 달라집니다.</strong></p>
 
         <div class="bp-compare">
             <div class="bp-compare-head">
@@ -1827,7 +1894,7 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
             <div class="bp-compare-row">
                 <div class="bp-label">AI와의 관계</div>
                 <div class="bp-before">ChatGPT 답변을 그대로 붙여 보고하거나, 환각을 심각하게 경험한 뒤 "AI 못 믿는다"며 닫아 버립니다.</div>
-                <div class="bp-after">사실 검증이 필요한 일은 출처를 요구하고, 창의 발상 영역은 자유롭게 풀어 줍니다. 작업별로 신뢰 수준이 다릅니다.</div>
+                <div class="bp-after">사실 검증이 필요한 일은 출처를 요구하고, 발상이 필요한 일은 자유롭게 풀어 줍니다. 일을 맡기는 강도를 업무 성격에 따라 다르게 잡습니다.</div>
             </div>
             <div class="bp-compare-row">
                 <div class="bp-label">거버넌스</div>
@@ -1837,7 +1904,7 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
             <div class="bp-compare-row">
                 <div class="bp-label">에이전트</div>
                 <div class="bp-before">GPT로 이메일만 요약, Claude로 코드만 리뷰. 한 번에 한 가지 일만 시킵니다.</div>
-                <div class="bp-after">주문이 오면 Claude가 재고를 보고, GPT가 고객 안내를 작성하고, Gemini가 배송을 잡습니다. 여러 에이전트가 한 작업을 이어서 처리합니다.</div>
+                <div class="bp-after">주문이 오면 재고 확인, 고객 안내, 배송 예약이 한 흐름으로 이어집니다. 사람이 단계마다 끼어들지 않아도 업무 한 건이 끝까지 굴러갑니다.</div>
             </div>
         </div>
 
@@ -1851,6 +1918,8 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
             </div>
             <div class="bp-section-meta">5% 고성과 그룹이 공통으로 지키는 규칙</div>
         </div>
+
+        <p class="bp-beat-lead">그 6%가 공통으로 지키는 규칙은 <strong>다섯 개로 좁혀집니다.</strong></p>
 
         <div class="bp-principles bp-principles--illustrated">
             <div class="bp-principle">
@@ -1980,25 +2049,27 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
     </section>
 
     <!-- ========= B. 진단 게이트 ========= -->
-    <section class="bp-section" id="diagnosis">
+    <section class="bp-section" id="to-canvas">
         <div class="bp-section-head">
             <div>
-                <h2 class="bp-section-title">AI 성숙도 자가 진단</h2>
+                <h2 class="bp-section-title">다음 한 걸음, AX 캔버스</h2>
             </div>
-            <div class="bp-section-meta">McKinsey Rewired 6차원 진단 · 5점 척도</div>
+            <div class="bp-section-meta">직무 1개를 10칸으로 해부</div>
         </div>
 
-        <p style="margin:0 0 28px; font-size:15px; color: var(--ink-soft); line-height:1.75;">본격적으로 AX를 추진하기 전, 현재 위치를 정량적으로 점검하는 단계입니다.</p>
+        <p class="bp-beat-lead">그래서 첫 한 걸음은 거창하지 않습니다. <strong>직무 하나를 골라 캔버스 한 장으로 해부하는 데서 시작합니다.</strong></p>
+
+        <p style="margin:0 0 28px; font-size:15px; color: var(--ink-soft); line-height:1.75;">거대한 두뇌도 한 직무에서 출발합니다. 한 직무의 암묵지와 사람·에이전트 협업을 캔버스 한 장에 설계하는 것이 그 시작입니다.</p>
 
         <div class="bp-roadmap">
 
-            <a class="bp-roadmap-gate" href="diagnosis.html" aria-label="AI 성숙도 자가 진단 시작">
+            <a class="bp-roadmap-gate" href="ax-canvas.html" aria-label="AX 캔버스로 이동">
                 <div class="bp-roadmap-gate-tag">NEXT STEP</div>
                 <div>
-                    <div class="bp-roadmap-gate-title">현재 위치와 목표 도착지 사이의 격차를 정량화합니다</div>
-                    <div style="font-size:13px; color: var(--ink-soft); margin-top:6px; line-height:1.65;">McKinsey Rewired 6차원 진단 도구로 전략, 인재, 운영모델, 기술, 데이터, 도입 여섯 축을 5점 척도로 평가합니다. 가장 취약한 두 축이 본격 로드맵의 우선 착수 지점이 됩니다.</div>
+                    <div class="bp-roadmap-gate-title">한 직무를 10칸 캔버스로 해부해 사람과 에이전트의 협업을 한 장에 설계합니다</div>
+                    <div style="font-size:13px; color: var(--ink-soft); margin-top:6px; line-height:1.65;">좌측은 암묵지를 T·C·R·A로 구조화하고, 우측은 사람과 에이전트의 역할을 나눕니다. 이 캔버스가 BRAIN OS의 지식을 한 직무씩 채우는 양식입니다.</div>
                 </div>
-                <div class="bp-roadmap-gate-cta">진단 시작 →</div>
+                <div class="bp-roadmap-gate-cta">AX 캔버스로 →</div>
             </a>
 
         </div>
@@ -2011,8 +2082,8 @@ a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
             <span class="bp-footer-copy">&copy; 2026 AI ROASTING. All rights reserved.</span>
             <span class="bp-footer-author">
                 <span class="bp-footer-author-name">강정구 · Jayden Kang</span>
-                <a class="bp-footer-social bp-footer-fb" href="https://www.facebook.com/jayden.kang" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V13h2.7v8h3.4z"/></svg></a>
                 <a class="bp-footer-social bp-footer-in" href="https://www.linkedin.com/in/jayden-kang/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.4v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.59 0 4.25 2.36 4.25 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
+                <a class="bp-footer-social bp-footer-fb" href="https://www.facebook.com/jayden.kang" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V13h2.7v8h3.4z"/></svg></a>
             </span>
         </div>
     </footer>

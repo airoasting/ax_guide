@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI 서비스 선택 · AI ROASTING</title>
-<meta name="description" content="ChatGPT·Claude·Gemini 빅3 비교, OpenRouter로 저가 모델 활용, 모델 오케스트레이터, Enterprise 요금제 보안, 자체 LLM 구축까지 한 페이지에 정리한 AI 서비스 선택 가이드입니다.">
+<title>AI 서비스 비교 · AI ROASTING</title>
+<meta name="description" content="ChatGPT·Claude·Gemini 빅3 비교, OpenRouter로 저가 모델 활용, 모델 오케스트레이터, Enterprise 요금제 보안, 자체 LLM 구축까지 한 페이지에 정리한 AI 서비스 비교 가이드입니다.">
 <meta name="author" content="AI ROASTING">
 <meta name="theme-color" content="#0E3B2A">
 <link rel="icon" type="image/png" href="assets/logos/logo1.png">
 <link rel="stylesheet" href="assets/style.css">
 <style>
-/* ================== 참고 · AI 서비스 선택 Local Styles ================== */
+/* ================== 참고 · AI 서비스 비교 Local Styles ================== */
 /* ainative.html과 동일한 bp-* 시각 토큰을 그대로 차용합니다. */
 
 :root {
@@ -129,10 +129,11 @@ body {
 
 .bp-substeps {
     display: flex;
-    justify-content: center;
     gap: 12px;
-    margin-top: 22px;
-    flex-wrap: wrap;
+    margin: 22px auto 0;
+    width: 100%;
+    max-width: 720px;
+    flex-wrap: nowrap;
     position: relative;
     z-index: 1;
 }
@@ -144,7 +145,8 @@ body {
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.02em;
-    min-width: 260px;
+    flex: 1 1 0;
+    min-width: 0;
     text-align: center;
     display: inline-flex;
     align-items: center;
@@ -176,7 +178,7 @@ body {
     .bp-step { width: 26px; height: 26px; font-size: 10px; }
     .bp-step + .bp-step { margin-left: 16px; }
     .bp-step + .bp-step::before { width: 16px; }
-    .bp-substeps { gap: 8px; }
+    .bp-substeps { gap: 8px; flex-wrap: wrap; }
     .bp-substeps span { min-width: 0; flex: 1 1 auto; padding: 10px 14px; font-size: 12px; }
 }
 
@@ -761,20 +763,21 @@ body {
             <li class="bp-step"><a href="criteria.html">3</a></li>
             <li class="bp-step"><a href="resource.html">4</a></li>
             <li class="bp-step"><a href="ainative.html">5</a></li>
+            <li class="bp-step active" aria-current="step"><a href="cost-output.html">참고</a></li>
         </ol>
         <a class="bp-back" href="index.html">← 목록으로</a>
         <div class="bp-substeps" aria-label="참고 자료">
             <a href="cost-output.html">AI 네이티브로의 여정</a>
-            <span aria-current="page">AI 서비스 선택</span>
             <a href="problem-definition.html">AI 퍼스트 문제 정의력</a>
+            <span aria-current="page">AI 서비스 비교</span>
         </div>
     </nav>
 
     <!-- ========= HERO ========= -->
     <section class="bp-hero">
-        <div class="bp-hero-eyebrow">참고 자료 · 5단계 본문 외 부록 · AI 서비스 선택 가이드</div>
+        <div class="bp-hero-eyebrow">참고 자료 · 5단계 본문 외 부록 · AI 서비스 비교 가이드</div>
         <h1>AI 서비스, 통일이 아니라 분담입니다</h1>
-        <p class="bp-lead">첫 분기의 비용·속도·보안을 가르는 네 가지 결정 — 빅3 분담, OpenRouter 활용, 자체 LLM 검토, Enterprise 도입 시점 — 을 한 장에 정리합니다.</p>
+        <p class="bp-lead">첫 분기의 비용·속도·보안을 가르는 네 가지 결정, 곧 빅3 분담, OpenRouter 활용, 자체 LLM 검토, Enterprise 도입 시점을 한 장에 정리합니다.</p>
         <div class="bp-summary">
             <strong>결론부터 말씀드립니다.</strong> 빅3는 셋 다 도입합니다. 작업에 맞는 모델은 사용자가 직접 고르도록 자율을 줍니다. 분류·요약·검색처럼 정형화된 대량 작업은 OpenRouter로 저가 모델에 보내 단가를 낮춥니다. 보안 등급이 높은 업무는 빅3의 Enterprise 요금제로 올리고, 외부 송신 자체가 부담스러운 데이터는 AWS Bedrock, GCP Vertex AI, Azure OpenAI의 VPC 직접 호출로 한 단계 더 격리합니다. 자체 LLM은 두 조건 중 하나가 충족될 때만 검토합니다. 데이터의 외부 송신이 원천 금지된 경우, 월 토큰 비용이 자체 서빙의 손익분기점을 넘긴 경우입니다. <strong>한 모델로 통일하려는 결정은 대부분 답이 아닙니다.</strong>
         </div>
@@ -792,9 +795,9 @@ body {
     <section class="bp-section" id="big3">
         <div class="bp-section-head">
             <div>
-                <h2 class="bp-section-title">ChatGPT · Claude · Gemini, 세 모델은 같은 종(種)이 아닙니다</h2>
+                <h2 class="bp-section-title">Claude · ChatGPT · Gemini, 세 모델은 같은 종(種)이 아닙니다</h2>
             </div>
-            <div class="bp-section-meta">OpenAI · Anthropic · Google · 2026년 1분기 기준</div>
+            <div class="bp-section-meta">Anthropic · OpenAI · Google · 2026년 1분기 기준</div>
         </div>
 
         <p class="bp-section-intro">세 모델 모두 범용 대화형 모델이지만, 잘하는 영역과 약한 영역이 분명히 갈립니다. 한 사람에게 한 모델만 쥐어 주면 그 모델의 약점이 곧 결과물의 한계가 됩니다. 경영진이 던져야 할 질문은 "어느 모델이 가장 똑똑한가"가 아니라 "어느 자리에 어느 모델을 배치할 것인가"입니다.</p>
@@ -802,16 +805,6 @@ body {
         <div class="bp-big3">
             <article class="bp-big3-card">
                 <div class="bp-big3-tag">No. 1</div>
-                <h3 class="bp-big3-name">ChatGPT</h3>
-                <div class="bp-big3-maker">OpenAI · GPT-5 계열 (5.1, 5.1 mini, o-시리즈 추론)</div>
-                <div class="bp-big3-row"><div class="k">강점</div><div class="v">범용성이 가장 높습니다. <strong>이미지 생성, 음성, 실시간 대화, 코드 인터프리터</strong>가 한 화면에 모여 있습니다. Custom GPT와 GPTs 마켓을 함께 쓸 수 있어 비전문가의 진입 장벽이 가장 낮습니다.</div></div>
-                <div class="bp-big3-row"><div class="k">약점</div><div class="v">긴 문서의 일관성과 한국어 자연스러움이 Claude보다 약합니다. 내부 모델이 자동으로 바뀌면서 같은 질문에 답이 달라질 때가 있습니다.</div></div>
-                <div class="bp-big3-row"><div class="k">요금</div><div class="v">Free / Plus 월 20달러 / Pro 월 200달러 / Team 사용자당 / <strong>Enterprise</strong> 별도 계약 / API</div></div>
-                <div class="bp-big3-row"><div class="k">권장 활용처</div><div class="v">멀티모달 워크플로우, 마케팅·디자인 시안 작업, 비전공자의 첫 도구, GPTs로 만드는 사내 챗봇 시제품.</div></div>
-            </article>
-
-            <article class="bp-big3-card">
-                <div class="bp-big3-tag">No. 2</div>
                 <h3 class="bp-big3-name">Claude</h3>
                 <div class="bp-big3-maker">Anthropic · Claude 4 계열 (Opus 4.7, Sonnet 4.6, Haiku 4.5)</div>
                 <div class="bp-big3-row"><div class="k">강점</div><div class="v"><strong>긴 문서 처리, 한국어 글쓰기, 코딩</strong>이 가장 안정적입니다. 200K 토큰 컨텍스트를 끝까지 일관되게 끌고 갑니다. Claude Code, Skills, Agent SDK가 함께 와 에이전트 운영에 적합합니다.</div></div>
@@ -821,11 +814,21 @@ body {
             </article>
 
             <article class="bp-big3-card">
+                <div class="bp-big3-tag">No. 2</div>
+                <h3 class="bp-big3-name">ChatGPT</h3>
+                <div class="bp-big3-maker">OpenAI · GPT-5 계열 (5.1, 5.1 mini, o-시리즈 추론)</div>
+                <div class="bp-big3-row"><div class="k">강점</div><div class="v">범용성이 가장 높습니다. <strong>이미지 생성, 음성, 실시간 대화, 코드 인터프리터</strong>가 한 화면에 모여 있습니다. Custom GPT와 GPTs 마켓을 함께 써서, 비전문가도 가장 쉽게 시작합니다.</div></div>
+                <div class="bp-big3-row"><div class="k">약점</div><div class="v">긴 문서의 일관성과 한국어 자연스러움이 Claude보다 약합니다. 내부 모델이 자동으로 바뀌면서 같은 질문에 답이 달라질 때가 있습니다.</div></div>
+                <div class="bp-big3-row"><div class="k">요금</div><div class="v">Free / Plus 월 20달러 / Pro 월 200달러 / Team 사용자당 / <strong>Enterprise</strong> 별도 계약 / API</div></div>
+                <div class="bp-big3-row"><div class="k">권장 활용처</div><div class="v">멀티모달 워크플로우, 마케팅·디자인 시안 작업, 비전공자의 첫 도구, GPTs로 만드는 사내 챗봇 시제품.</div></div>
+            </article>
+
+            <article class="bp-big3-card">
                 <div class="bp-big3-tag">No. 3</div>
                 <h3 class="bp-big3-name">Gemini</h3>
                 <div class="bp-big3-maker">Google · Gemini 3 계열 (Pro, Flash, Nano)</div>
                 <div class="bp-big3-row"><div class="k">강점</div><div class="v"><strong>100만 토큰 컨텍스트와 멀티모달 처리</strong>가 빅3 중 가장 깊습니다. Workspace(Docs, Sheets, Meet, Gmail) 통합이 가장 강하고, Google 검색 연동으로 최신 정보 처리도 강합니다.</div></div>
-                <div class="bp-big3-row"><div class="k">약점</div><div class="v">한국어 표현이 기계적이고 추론의 일관성에 편차가 있습니다. 독립 제품보다 Workspace 부가 기능으로 자리잡고 있어, 단독 사용 경험이 약합니다.</div></div>
+                <div class="bp-big3-row"><div class="k">약점</div><div class="v">한국어 표현이 기계적이고 추론의 일관성에 편차가 있습니다. 독립 제품이라기보다 Workspace 부가 기능으로 자리잡아, 단독으로 쓰는 경험은 약합니다.</div></div>
                 <div class="bp-big3-row"><div class="k">요금</div><div class="v">Free / AI Pro 월 약 30달러 / AI Ultra 월 약 250달러 / <strong>Workspace 기본 포함</strong> / Vertex AI Enterprise</div></div>
                 <div class="bp-big3-row"><div class="k">권장 활용처</div><div class="v">긴 영상·PDF 분석, 사내 Workspace 기반 자동화, 시장 조사와 뉴스 큐레이션, 영상·이미지 멀티모달 분석.</div></div>
             </article>
@@ -833,7 +836,7 @@ body {
 
         <div class="bp-handoff">
             <div class="tag">"통일"이 아니라 "역할 분담"이 답입니다</div>
-            한 사람에게 한 모델만 쥐어 주면 그 모델의 약점이 곧 사용자의 한계가 됩니다. 경영진·기획·법무·엔지니어가 같은 모델 하나로 일하면, 가장 비싼 자리에서도 가장 싼 모델 수준의 정확도밖에 얻지 못합니다. <strong>권장안은 빅3를 모두 도입하고, 작업 성격에 따라 사용자가 직접 모델을 고르도록 자율을 주는 것입니다.</strong> 1인당 월 60달러 안팎의 추가 비용은 한 번의 의사결정 품질 개선으로 회수됩니다. 본격 운영 단계에서는 OpenRouter로 모델 라우팅을 자동화해, 사용자가 매번 고르지 않아도 되도록 구성합니다.
+            한 사람에게 한 모델만 쥐어 주면 그 모델의 약점이 곧 사용자의 한계가 됩니다. 경영진·기획·법무·엔지니어가 같은 모델 하나로 일하면, 가장 비싼 자리에서도 가장 싼 모델 수준의 정확도밖에 얻지 못합니다. <strong>권장안은 빅3를 모두 도입하고, 작업 성격에 따라 사용자가 직접 모델을 고르게 자율을 주는 것입니다.</strong> 1인당 월 60달러 안팎의 추가 비용은 의사결정 품질이 한 번만 좋아져도 회수됩니다. 본격 운영 단계에서는 OpenRouter로 모델 라우팅을 자동화해, 사용자가 매번 고르지 않아도 되게 합니다.
         </div>
     </section>
 
@@ -846,7 +849,7 @@ body {
             <div class="bp-section-meta">멀티 프로바이더 · 가격 비교 · 자동 폴백</div>
         </div>
 
-        <p class="bp-section-intro">OpenAI, Anthropic, Google은 물론 Mistral·DeepSeek·Qwen·Llama 계열의 오픈웨이트 모델, xAI와 Cohere의 자체 모델까지 단일 엔드포인트로 호출하는 라우팅 서비스입니다. 운영 관점의 장점은 네 가지로 정리됩니다.</p>
+        <p class="bp-section-intro">OpenAI, Anthropic, Google은 물론 Mistral·DeepSeek·Qwen·Llama 계열의 오픈웨이트 모델, xAI와 Cohere의 자체 모델까지 단일 엔드포인트로 호출하는 라우팅 서비스입니다. 운영 관점의 장점은 네 가지입니다.</p>
 
         <table class="bp-table">
             <thead>
@@ -860,7 +863,7 @@ body {
                 </tr>
                 <tr>
                     <td>가격 가시화</td>
-                    <td>모델별 입력·출력 토큰 단가가 한 화면에 떠 있어, 모델 선택을 즉석에서 결정합니다.</td>
+                    <td>모델별 입력·출력 토큰 단가가 한 화면에 떠 있어, 어느 모델을 쓸지 즉석에서 결정합니다.</td>
                     <td>분류·요약 작업은 <strong>Llama 3.3 70B, DeepSeek V3, Qwen 2.5</strong>처럼 약 1/10 가격대의 모델로 대체합니다.</td>
                 </tr>
                 <tr>
@@ -878,7 +881,7 @@ body {
 
         <div class="bp-handoff">
             <div class="tag">한 가지 유의 사항 · 데이터 흐름</div>
-            OpenRouter는 게이트웨이입니다. 모든 요청이 OpenRouter 인프라를 한 번 거칩니다. 회사 데이터를 외부로 반출할 수 없는 업무에는 적용하기 어렵습니다. <strong>이런 업무는 뒤에서 다룰 Enterprise 요금제, 또는 Bedrock·Vertex AI·Azure OpenAI 직접 호출로 전환합니다.</strong> OpenRouter는 보안 등급이 낮은 일반 업무, 외부 정보 처리, 실험·시제품 단계에 적합합니다.
+            OpenRouter는 게이트웨이입니다. 모든 요청이 OpenRouter 인프라를 한 번 거칩니다. 그래서 회사 데이터를 외부로 반출할 수 없는 업무에는 쓰기 어렵습니다. <strong>이런 업무는 뒤에서 다룰 Enterprise 요금제, 또는 Bedrock·Vertex AI·Azure OpenAI 직접 호출로 돌립니다.</strong> OpenRouter는 보안 등급이 낮은 일반 업무, 외부 정보 처리, 실험·시제품 단계에 맞습니다.
         </div>
     </section>
 
@@ -886,12 +889,12 @@ body {
     <section class="bp-section" id="selfhost">
         <div class="bp-section-head">
             <div>
-                <h2 class="bp-section-title">자체 LLM 구축은 언제 진지하게 검토하는가</h2>
+                <h2 class="bp-section-title">자체 LLM 구축은 언제 진지하게 검토해야 하는가</h2>
             </div>
             <div class="bp-section-meta">Llama · Qwen · Mistral · vLLM · NVIDIA NIM · H100</div>
         </div>
 
-        <p class="bp-section-intro">"우리 회사만의 AI를 만들고 싶다"는 요구는 대부분 외부 모델로 풀립니다. 다만 아래 조건 중 두 가지 이상이 동시에 걸리는 경우는 예외입니다. 이 지점부터는 외부 모델로 해결되지 않습니다. 자체 서빙을 본격 검토할 단계입니다.</p>
+        <p class="bp-section-intro">"우리 회사만의 AI를 만들고 싶다"는 요구는 대부분 외부 모델로 풀립니다. 다만 아래 조건 중 두 가지 이상이 동시에 걸리면 예외입니다. 이 지점부터는 외부 모델로 해결되지 않으니, 자체 서빙을 본격 검토할 단계입니다.</p>
 
         <div class="bp-vs">
             <div class="bp-vs-row">
@@ -902,7 +905,7 @@ body {
                         <li><strong>월 토큰 사용량이 수억 원 이하인 회사.</strong> 자체 서빙의 고정비(GPU·인력·인프라)가 외부 API의 변동비를 회수하지 못합니다.</li>
                         <li><strong>Enterprise 요금제와 VPC 호출로 보안 요건이 풀리는 회사.</strong> 학습 미사용·SSO·VPC만 확보해도 대부분의 요건이 충족됩니다.</li>
                         <li><strong>최신 모델의 추론 성능을 분기마다 반영해야 하는 회사.</strong> 자체 모델로는 빅3의 분기 단위 업그레이드 속도를 따라잡지 못합니다.</li>
-                        <li><strong>고품질 도메인 데이터가 충분하지 않은 회사.</strong> 데이터가 부족한 상태의 fine-tuning은 성능을 오히려 떨어뜨립니다.</li>
+                        <li><strong>고품질 도메인 데이터가 충분하지 않은 회사.</strong> 데이터가 부족한 상태에서 fine-tuning을 하면 성능이 오히려 떨어집니다.</li>
                         <li><strong>GPU 운영과 MLOps 인력이 부족한 회사.</strong> 모델 배포는 시작입니다. 패치·평가·롤백을 주 단위로 돌려야 합니다.</li>
                     </ul>
                 </div>
@@ -920,14 +923,14 @@ body {
             </div>
         </div>
 
-        <p class="bp-section-intro" style="margin-top: 28px;">자체 서빙으로 방향을 잡았다면, 표준 스택은 다음과 같습니다. 모든 옵션을 동시에 검토하기보다 한 가지를 깊이 가져가는 편이 효율적입니다.</p>
+        <p class="bp-section-intro" style="margin-top: 28px;">자체 서빙으로 방향을 잡았다면, 표준 스택은 다음과 같습니다. 모든 옵션을 동시에 검토하기보다 한 가지를 깊이 파고드는 편이 효율적입니다.</p>
 
         <div class="bp-layers">
             <div class="bp-layers-head">자체 LLM 운영 스택의 표준 조합</div>
             <div class="bp-layer-row">
                 <div class="layer-tag">모델</div>
                 <div class="layer-name">오픈웨이트 베이스</div>
-                <div class="layer-desc"><strong>Llama 3·4, Qwen 2.5·3, Mistral, DeepSeek V3</strong>가 1차 후보군입니다. 한국어 처리는 Qwen·DeepSeek 계열이 강하고, 라이선스 안정성은 Llama가 가장 검증됐습니다. 베이스 모델을 정한 뒤 자사 데이터로 LoRA 또는 QLoRA fine-tuning을 돌립니다.</div>
+                <div class="layer-desc"><strong>Llama 3·4, Qwen 2.5·3, Mistral, DeepSeek V3</strong>가 1차 후보군입니다. 한국어 처리는 Qwen·DeepSeek 계열이 강하고, 라이선스 안정성은 Llama가 가장 많이 검증됐습니다. 베이스 모델을 정한 뒤 자사 데이터로 LoRA 또는 QLoRA fine-tuning을 돌립니다.</div>
             </div>
             <div class="bp-layer-row">
                 <div class="layer-tag">서빙</div>
@@ -937,12 +940,12 @@ body {
             <div class="bp-layer-row">
                 <div class="layer-tag">인프라</div>
                 <div class="layer-name">H100·H200 GPU 클러스터</div>
-                <div class="layer-desc">70B 클래스 모델 1대 추론에 H100 4~8장이 필요합니다. 자체 데이터센터 구축은 12~18개월이 걸리므로, 통상 <strong>AWS·GCP·Azure의 GPU 임대</strong> 또는 <strong>CoreWeave·Lambda 같은 GPU 전문 클라우드</strong>로 시작합니다.</div>
+                <div class="layer-desc">70B 클래스 모델 1대를 추론하려면 H100 4~8장이 필요합니다. 자체 데이터센터 구축은 12~18개월이 걸리므로, 통상 <strong>AWS·GCP·Azure의 GPU 임대</strong> 또는 <strong>CoreWeave·Lambda 같은 GPU 전문 클라우드</strong>로 시작합니다.</div>
             </div>
             <div class="bp-layer-row">
                 <div class="layer-tag">운영</div>
                 <div class="layer-name">평가·관측·재학습 루프</div>
-                <div class="layer-desc"><strong>자체 평가 데이터셋(eval set) 확보</strong>가 모델 학습 자체보다 중요합니다. 회사 도메인의 정답 기준이 없으면 성능 개선 여부를 판단할 수 없습니다. 관측 도구는 LangSmith·Langfuse·Arize·WhyLabs가 표준 후보군입니다.</div>
+                <div class="layer-desc"><strong>자체 평가 데이터셋(eval set) 확보</strong>가 모델 학습 자체보다 중요합니다. 회사 도메인의 정답 기준이 없으면 성능이 나아졌는지 판단할 수 없습니다. 관측 도구는 LangSmith·Langfuse·Arize·WhyLabs가 표준 후보군입니다.</div>
             </div>
         </div>
 
@@ -984,7 +987,7 @@ body {
                     <td>Gemini for Workspace · AI Ultra</td>
                     <td><strong>기본 미사용</strong></td>
                     <td>Google Workspace 관리 콘솔, DLP, Vault</td>
-                    <td>Workspace를 이미 도입한 회사라면 추가 도입 비용이 거의 들지 않습니다.</td>
+                    <td>Workspace를 이미 쓰는 회사라면 추가 도입 비용이 거의 들지 않습니다.</td>
                 </tr>
                 <tr>
                     <td>AWS Bedrock</td>
@@ -1009,7 +1012,7 @@ body {
 
         <div class="bp-handoff">
             <div class="tag">의사결정 순서</div>
-            먼저 <strong>실험과 시제품은 일반 요금제</strong>로 빠르게 돌립니다. 다음으로 <strong>팀 단위 운영이 시작되는 시점에 Team 또는 Enterprise 요금제</strong>로 전환해 학습 미사용·SSO·감사 로그를 확보합니다. 마지막으로 <strong>고객·재무·계약처럼 외부 반출이 허용되지 않는 데이터</strong>는 Bedrock·Vertex AI·Azure OpenAI의 VPC 호출로 한 단계 더 격리합니다. 이 단계를 건너뛰면, 사고가 나기 전까지는 비용만 늘어나고, 사고가 난 뒤에야 그 비용이 정당화됩니다.
+            먼저 <strong>실험과 시제품은 일반 요금제</strong>로 빠르게 돌립니다. 다음으로 <strong>팀 단위 운영이 시작되면 Team 또는 Enterprise 요금제</strong>로 전환해 학습 미사용·SSO·감사 로그를 확보합니다. 마지막으로 <strong>고객·재무·계약처럼 외부 반출이 허용되지 않는 데이터</strong>는 Bedrock·Vertex AI·Azure OpenAI의 VPC 호출로 한 단계 더 격리합니다. 이 순서를 건너뛰면 사고가 나기 전까지는 비용만 늘고, 사고가 난 뒤에야 그 비용이 정당화됩니다.
         </div>
     </section>
 
@@ -1043,7 +1046,7 @@ body {
             <div class="bp-matrix-row">
                 <div class="who">중견·대기업 · 일반 업무</div>
                 <div class="stack"><strong>두 Enterprise 요금제</strong>(ChatGPT Enterprise + Claude Enterprise)에 <strong>Gemini for Workspace</strong>를 결합합니다.</div>
-                <div class="why">SSO·감사 로그·학습 미사용이 기본 요건입니다. <strong>Workspace를 이미 도입한 회사라면 Gemini는 추가 비용 없이</strong> 씁니다.</div>
+                <div class="why">SSO·감사 로그·학습 미사용이 기본 요건입니다. <strong>Workspace를 이미 쓰는 회사라면 Gemini는 추가 비용 없이</strong> 씁니다.</div>
             </div>
             <div class="bp-matrix-row">
                 <div class="who">대기업 · 보안 민감 업무</div>
@@ -1053,7 +1056,7 @@ body {
             <div class="bp-matrix-row">
                 <div class="who">데이터 외부 송신 금지</div>
                 <div class="stack"><strong>자체 서빙</strong>(Llama·Qwen·Mistral) 위에 <strong>vLLM 또는 NIM</strong>, 그리고 <strong>자체 평가셋</strong>을 얹습니다.</div>
-                <div class="why">규제·계약상의 이유로 외부 호출 자체가 불가능한 경우입니다. <strong>모델 자주권</strong>이 운영의 전제가 되는 환경이며, 빅3는 비공식 정보 조회 용도로만 씁니다.</div>
+                <div class="why">규제나 계약 때문에 외부 호출 자체가 불가능한 경우입니다. <strong>모델 자주권</strong>이 운영의 전제가 되는 환경이며, 빅3는 비공식 정보 조회 용도로만 씁니다.</div>
             </div>
         </div>
 
@@ -1144,8 +1147,8 @@ body {
             <span class="bp-footer-copy">&copy; 2026 AI ROASTING. All rights reserved.</span>
             <span class="bp-footer-author">
                 <span class="bp-footer-author-name">강정구 · Jayden Kang</span>
-                <a class="bp-footer-social bp-footer-fb" href="https://www.facebook.com/jayden.kang" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V13h2.7v8h3.4z"/></svg></a>
                 <a class="bp-footer-social bp-footer-in" href="https://www.linkedin.com/in/jayden-kang/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.4v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.59 0 4.25 2.36 4.25 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
+                <a class="bp-footer-social bp-footer-fb" href="https://www.facebook.com/jayden.kang" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V13h2.7v8h3.4z"/></svg></a>
             </span>
         </div>
     </footer>

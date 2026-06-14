@@ -120,7 +120,7 @@ CSS 클래스명·SVG ID 같은 비가시 식별자(`.bp-liner`, `.bp-kal`, `#li
 #### E. 검증 사례 · 실무 (3개)
 | 페이지 | 성격 | 핵심 시각 요소 | 출처(plan.md) |
 |---|---|---|---|
-| `e1-casestudy.html` | 게스코리아 CS 검증 사례 | K1~K4 단계별 산출물, ROI 추정 표 | E 전체 |
+| `e1-casestudy.html` | 패션 커머스 A사 CS 검증 사례 | K1~K4 단계별 산출물, ROI 추정 표 | E 전체 |
 | `e2-templates.html` | 실전 템플릿 (인터랙티브) | 진단 점수·DRI 매트릭스·BRAIN OS 워크시트 입력 폼 | 부록(템플릿) |
 | `e3-playbook.html` | 운영 매뉴얼 | 암묵지 추출 질문지, IT 적용 체크리스트, 공수 산정표 | 부록(운영 매뉴얼) |
 
@@ -724,38 +724,46 @@ html { scroll-behavior: smooth; scroll-padding-top: 50px; }
 
 ### 10.13 상단 단계 네비게이션 (`.bp-stepnav`)
 
-페이지 최상단에 6칸 원형 단계 인디케이터를 배치한다. 임원이 "진단 → 1 → 2 → 3 → 4 → 5" 흐름에서 자기가 어디 있는지 즉시 파악하도록 한다.
+페이지 최상단에 7칸 원형 단계 인디케이터를 배치한다. 임원이 "진단 → 1 → 2 → 3 → 4 → 5 → 참고" 흐름에서 자기가 어디 있는지 즉시 파악하도록 한다. 마지막 "참고" 칸은 본문 5단계 밖의 읽을거리(참고 페이지) 그룹으로 들어가는 입구다.
 
 ```html
 <nav class="bp-stepnav" aria-label="전체 단계">
     <ol class="bp-steps">
-        <li class="bp-step active" aria-current="step">진단</li>
-        <li class="bp-step">1</li>
-        <li class="bp-step">2</li>
-        <li class="bp-step">3</li>
-        <li class="bp-step">4</li>
-        <li class="bp-step">5</li>
+        <li class="bp-step active" aria-current="step"><a href="blueprint.html">진단</a></li>
+        <li class="bp-step"><a href="organization.html">1</a></li>
+        <li class="bp-step"><a href="pilot.html">2</a></li>
+        <li class="bp-step"><a href="criteria.html">3</a></li>
+        <li class="bp-step"><a href="resource.html">4</a></li>
+        <li class="bp-step"><a href="ainative.html">5</a></li>
+        <li class="bp-step"><a href="cost-output.html">참고</a></li>
     </ol>
     <a class="bp-back" href="index.html">← 목록으로</a>
-    <div class="bp-substeps" aria-label="현재 단계의 페이지">
+    <div class="bp-substeps" aria-label="강의 동선">
         <a href="blueprint.html">AX 추진 원칙</a>
+        <a href="ax-canvas.html">AX 캔버스</a>
         <a href="diagnosis.html" class="active" aria-current="page">현재 수준 진단</a>
     </div>
 </nav>
 ```
 
+- **참고 칸**은 참고 페이지 그룹(`cost-output.html`·`ai-services.html`·`problem-definition.html`)의 대표 페이지 `cost-output.html`로 링크한다. 세 참고 페이지 위에서는 이 칸이 `active`가 되고, 1~5 칸은 어느 것도 active가 아니다. 나머지 모든 페이지에서는 자기 단계 칸만 active다 (페이지당 active 원은 항상 정확히 1개).
+
 스타일 규약:
 
 - 배경: `.bp-titleblock`과 동일한 딥 그린 그라데이션(`#062018 → #14523B`) + 미세 그리드 오버레이. 페이지 진입 영역의 일관된 톤을 유지한다.
 - 원: **36×36**, 폰트 11.5px, 1.5px 페이퍼 톤 보더, 비활성은 투명 배경. 활성(`.active`)은 페이퍼 채움 + 잉크 글자. (52→40→36으로 단계적 축소된 최종값.)
+- **원의 클릭 동작과 활성 채움은 공통 `assets/style.css` 한 곳에서 관리한다** (페이지 인라인에 중복 정의하지 않는다). 핵심 규약:
+  - `.bp-steps li.bp-step > a`가 원 전체(`width/height: 100%`)를 덮어, 텍스트가 아니라 원 어디를 눌러도 링크가 잡힌다.
+  - `.bp-steps li.bp-step.active`가 페이퍼 채움 + 잉크 글자 + 페이퍼 보더를 준다 (모든 페이지 공통, 참고 페이지 포함).
+  - **활성 원도 클릭된다.** 활성 원에 `pointer-events: none`을 걸지 않는다. 활성 원은 자기 단계 그룹의 대표 페이지로 링크하므로, 같은 그룹의 다른 페이지에서 대표 페이지로 돌아갈 수 있다 (대표 페이지 위에서는 자기 자신 링크라 새로고침이 된다). 커서는 `pointer`.
 - 연결선: 1px solid `rgba(247,245,239,0.4)` 가로선이 원 사이를 잇는다 (`.bp-step + .bp-step::before`). 폭 24px.
-- 6칸 라벨: 첫 칸은 영역 명(여기서는 "진단"). 나머지는 1~5 숫자. 같은 시리즈의 다른 페이지는 자기 위치에 맞게 active 칸을 옮긴다.
+- 7칸 라벨: 첫 칸은 영역 명("진단"), 가운데 다섯 칸은 1~5 숫자, 마지막 칸은 "참고"(2글자, "진단"과 같은 폭에 들어간다). 같은 시리즈의 다른 페이지는 자기 위치에 맞게 active 칸을 옮긴다.
 - "← 목록으로": 페이퍼 톤 12.5px 산세리프, 호버 시 자간 0.04em → 0.08em으로 살짝 벌어진다. 위 여백 18px.
-- **하위 페이지 칩(`.bp-substeps`)**: 단계 안 페이지 2~3개를 항상 보이게 펼친다. `min-width: 220px` 사각 칩, 위 여백 22px, 칩 사이 gap 12px.
+- **하위 페이지 칩(`.bp-substeps`)**: 단계 안 페이지 2~3개를 항상 보이게 펼친다. **칩 줄 전체 가로폭은 전 페이지 공통 720px로 통일한다.** 컨테이너는 `width: 100%; max-width: 720px; margin: 22px auto 0; flex-wrap: nowrap`로 가운데 정렬하고, 칩은 `flex: 1 1 0; min-width: 0`로 그 폭을 균등 분배한다. 칩 개수(2개·3개)가 달라도 줄 폭은 같고, 칩 하나의 폭만 달라진다. 칩 사이 gap 12px. 칩별 `min-width: 220px` 같은 고정값은 두지 않는다 (페이지마다 폭이 어긋난다).
   - 비활성: 투명 배경, 보더 알파 0.28, 글자 알파 0.75 → 활성과 대비 폭을 의도적으로 키운다.
   - 호버: `rgba(247,245,239,0.08)` 배경 + 보더 알파 0.6 + 페이퍼 글자.
   - **활성(`.active`)**: 단색 채움이 아닌 **딥 그린 그라데이션**(`linear-gradient(180deg, #14523B 0%, #0E3B2A 100%)`) + **1.5px 페이퍼 보더** + **이중 그림자**(외부 4px 페이퍼-그린 헤일로 `rgba(14,59,42,0.55)` + 8px 잉크 드롭 `rgba(6,32,24,0.7)`) + `translateY(-1px)`로 살짝 들림. 활성 칩은 `pointer-events: none; cursor: default;`로 같은 페이지 재클릭 방지.
-- 모바일(`≤600px`): 원 26×26, 폰트 10px, 연결선 16px, 칩은 `flex: 1 1 auto`로 가로 폭 분배.
+- 모바일(`≤600px`): 원 26×26, 폰트 10px, 연결선 16px, 칩 줄은 `flex-wrap: wrap`으로 되돌리고 칩은 `flex: 1 1 auto`로 화면 폭에 맞춰 분배·줄바꿈한다 (긴 라벨이 잘리지 않게).
 
 세로 간격: 단계 원 → "← 목록으로" → 하위 칩 사이가 모두 18~22px로 균일하게 호흡한다.
 
@@ -765,7 +773,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 50px; }
 - 단계 칸은 의미를 가진 라벨이 있어야 한다. 빈 원이나 "TBD"는 두지 않는다.
 - 미구현 페이지로 가는 칸은 `<a>` 대신 `<li>` 단독으로 둔다. 페이지가 생기면 `<a>`로 감싼다.
 - `aria-current="step"`을 활성 단계 원에, `aria-current="page"`를 활성 하위 칩에 둔다.
-- 하위 칩은 단계 안 페이지 수만큼 둔다. 한 페이지뿐이면 `.bp-substeps` 영역을 생략한다.
+- 하위 칩은 단계 안 페이지 수만큼 둔다. 한 페이지뿐이면 `.bp-substeps` 영역을 생략한다. 진단 그룹은 블루프린트·AX 캔버스·진단 3칩(`aria-label="강의 동선"`)으로 묶고, 4단계는 자원 재배분·업무 재설계 2칩이다. `ax-canvas.html`은 진단 그룹 전속이며 4단계 동선에 넣지 않는다.
 - 활성 하위 칩은 단순 색 반전이 아니라 "선택된 카드"로 다뤄 그라데이션·보더·이중 그림자·미세 들림을 모두 적용한다. 단색 페이퍼 채움은 비교 대상으로 사용했다가 폐기됐다 (대비가 약하다는 사용자 피드백).
 
 ### 10.12 컨설팅펌 참고자료 섹션
@@ -803,3 +811,42 @@ URL은 사실 검증된 공식 페이지만 쓴다. 인스턴스가 부정확하
 - [ ] 입력값은 `localStorage`만 사용한다. 외부 전송 코드가 없다.
 - [ ] em dash가 본문에 0개다.
 - [ ] 평어와 경어가 섞이지 않았다 (페이지 본문은 경어 합쇼체).
+
+---
+
+## 12. 강의용 재편 패턴 (Lecture Pattern)
+
+이 가이드는 빔으로 띄워 강의하기에 적합해야 한다. 모든 본문 페이지는 강의장에서 설명하기 좋게 재편한다. 별도 슬라이드 덱이나 발표자 모드를 만들지 않고 페이지 자체를 고친다. 상세 패턴과 전 페이지 롤아웃 절차는 [lecture-blueprint.md](lecture-blueprint.md)에 있다. **강의용으로 페이지를 만들거나 고칠 때는 이 절과 그 문서를 반드시 먼저 읽는다.**
+
+기준 구현은 `blueprint.html`이다. 새 페이지나 재편은 이 페이지를 본보기로 삼는다.
+
+### 12.1 세 요소
+
+| 요소 | 클래스 | 역할 |
+|---|---|---|
+| 강의 발문 | `.bp-beat-lead` | 섹션 head 바로 아래, 발표자가 입으로 말하는 한 줄. 화면을 지배하는 단 하나의 메시지 |
+| 밀도 종속화 | `.bp-cite` | 표본·출처 같은 읽기 전용 디테일을 작고 흐리게 분리. 빔에서 메시지·차트가 먼저 읽힘. 정보는 유지 |
+| beat 리듬 | `.bp-section { scroll-margin-top }` | sticky 네비 아래로 발문이 안착하게 점프 여백 |
+
+발문 박스와 요약 박스(`.bp-os-build` 등)는 §4.7-A에 따라 좌측 컬러 바를 쓰지 않는다. 강조는 큰 글자, 미세 배경 톤, 가로선으로 준다.
+
+### 12.2 발문 작성 원칙
+
+- 긴장을 먼저, 답을 나중에. 질문이나 통념을 깨는 문장으로 연다.
+- 페이지에 이미 있는 사실만 재구성한다. 새 숫자나 새 주장을 넣지 않는다 (Rule 1, SSOT 보호).
+- 한 섹션에 한 메시지. 핵심 어구만 `<strong>`으로 강조한다.
+- 말하는 문장으로 쓴다. 짧고 단정하게, em dash 없이 (§5).
+
+### 12.3 도착지 구조 (MECE 두 축)
+
+AX의 도착지는 직교하는 두 축으로 설명한다. 두 축은 같은 어휘를 재진술하지 않는다.
+
+| 축 | 섹션 | 질문 | 구성 |
+|---|---|---|---|
+| 자산 구조 (엔진) | COMPANY BRAIN OS | 무엇을 짓는가 | 지식 → 실행 → 순환 (3기둥) |
+| 운영 행동 (겉모습) | AI-Native 조직 | 어떻게 일하는가 | 7개 영역 before/after |
+
+- 순서는 엔진(BRAIN OS)을 먼저, 겉모습(AI-Native)을 나중에 둔다.
+- "도착지"라는 명명은 COMPANY BRAIN OS만 쓴다. AI-Native 조직은 "그 두뇌가 만드는 일상"으로 둔다.
+- 두 섹션을 잇는 다리 문장을 둔다. 예: "이 두뇌가 자리 잡으면, 회사의 하루가 이렇게 달라집니다."
+- 자산 구조의 어휘(에이전트가 실행한다·신뢰 수준)를 운영 행동 표에서 다시 쓰지 않는다. 행동 표는 결과 톤으로 적는다.

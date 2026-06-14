@@ -133,10 +133,11 @@ body {
 
 .bp-substeps {
     display: flex;
-    justify-content: center;
     gap: 12px;
-    margin-top: 22px;
-    flex-wrap: wrap;
+    margin: 22px auto 0;
+    width: 100%;
+    max-width: 720px;
+    flex-wrap: nowrap;
     position: relative;
     z-index: 1;
 }
@@ -151,7 +152,8 @@ body {
     text-decoration: none;
     letter-spacing: 0.02em;
     transition: background .18s ease, border-color .18s ease, color .18s ease;
-    min-width: 180px;
+    flex: 1 1 0;
+    min-width: 0;
     text-align: center;
     position: relative;
     display: inline-flex;
@@ -181,7 +183,7 @@ body {
     .bp-step { width: 26px; height: 26px; font-size: 10px; }
     .bp-step + .bp-step { margin-left: 16px; }
     .bp-step + .bp-step::before { width: 16px; }
-    .bp-substeps { gap: 8px; }
+    .bp-substeps { gap: 8px; flex-wrap: wrap; }
     .bp-substeps a, .bp-substeps span { min-width: 0; flex: 1 1 auto; padding: 10px 14px; font-size: 12px; }
 }
 
@@ -302,6 +304,138 @@ body {
     font-size: 15px;
     color: var(--ink-soft);
     line-height: 1.75;
+}
+
+/* 강의 발문 (AGENTS.md §12 · 좌측 컬러 바 금지 §4.7-A) */
+.bp-beat-lead {
+    font-size: 26px;
+    line-height: 1.42;
+    letter-spacing: -0.012em;
+    font-weight: 600;
+    color: var(--ink-soft);
+    margin: 0 0 32px;
+}
+.bp-beat-lead strong { color: var(--bp-ink); font-weight: 700; }
+
+/* NEXT STEP 게이트 (blueprint .bp-roadmap-gate 이식) */
+.bp-roadmap { position: relative; margin-top: 12px; }
+.bp-roadmap-gate {
+    border: 1.5px dashed var(--bp-line);
+    padding: 18px 24px;
+    margin-bottom: 18px;
+    background: rgba(14, 59, 42, 0.025);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 24px;
+}
+.bp-roadmap-gate-tag {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--bp-red);
+    font-weight: 700;
+    padding: 4px 10px;
+    border: 1px solid var(--bp-red);
+}
+.bp-roadmap-gate-title { font-weight: 700; font-size: 16px; color: var(--bp-ink); letter-spacing: -0.005em; }
+a.bp-roadmap-gate {
+    text-decoration: none;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    color: inherit;
+}
+a.bp-roadmap-gate:hover {
+    background: rgba(14, 59, 42, 0.07);
+    border-style: solid;
+    border-color: var(--bp-line);
+    transform: translateY(-1px);
+}
+.bp-roadmap-gate-cta {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--bp-paper);
+    background: var(--bp-line);
+    padding: 12px 20px;
+    border: 1px solid var(--bp-line);
+    white-space: nowrap;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    text-align: center;
+}
+a.bp-roadmap-gate:hover .bp-roadmap-gate-cta {
+    background: var(--bp-accent);
+    border-color: var(--bp-accent);
+}
+@media (max-width: 640px) {
+    .bp-roadmap-gate { grid-template-columns: 1fr; gap: 14px; }
+}
+
+/* 컴퍼니 브레인 작동 4조건 (Context·Connections·Capabilities·Cadence) */
+.bp-cond-band {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+.bp-cond-band > div {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--bp-accent);
+    font-weight: 700;
+    padding: 8px 2px;
+    border-bottom: 1px solid var(--bp-rule);
+}
+.bp-cond-band > div span { color: var(--ink-mute); letter-spacing: 0.04em; }
+.bp-cond-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+.bp-cond-card {
+    border: 1px solid var(--bp-line);
+    background: var(--bp-paper-2);
+    padding: 20px 18px;
+    display: flex;
+    flex-direction: column;
+    min-height: 196px;
+}
+.bp-cond-num {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--bp-accent);
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.bp-cond-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--bp-ink);
+    margin: 0 0 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--bp-rule);
+}
+.bp-cond-name span {
+    display: block;
+    font-family: var(--sans);
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    color: var(--ink-mute);
+    font-weight: 600;
+    margin-top: 4px;
+    text-transform: uppercase;
+}
+.bp-cond-desc { font-size: 13px; line-height: 1.65; color: var(--ink-soft); }
+@media (max-width: 760px) {
+    .bp-cond-grid { grid-template-columns: 1fr 1fr; }
+    .bp-cond-band { display: none; }
+}
+@media (max-width: 480px) {
+    .bp-cond-grid { grid-template-columns: 1fr; }
 }
 
 /* ===== Canvas Map (10칸 다이어그램) ===== */
@@ -1124,24 +1258,25 @@ body {
     <!-- ========= STEP NAVIGATION ========= -->
     <nav class="bp-stepnav" aria-label="전체 단계">
         <ol class="bp-steps">
-            <li class="bp-step"><a href="blueprint.html">진단</a></li>
+            <li class="bp-step active" aria-current="step"><a href="blueprint.html">진단</a></li>
             <li class="bp-step"><a href="organization.html">1</a></li>
             <li class="bp-step"><a href="pilot.html">2</a></li>
             <li class="bp-step"><a href="criteria.html">3</a></li>
-            <li class="bp-step active" aria-current="step"><a href="resource.html">4</a></li>
+            <li class="bp-step"><a href="resource.html">4</a></li>
             <li class="bp-step"><a href="ainative.html">5</a></li>
+            <li class="bp-step"><a href="cost-output.html">참고</a></li>
         </ol>
         <a class="bp-back" href="index.html">← 목록으로</a>
-        <div class="bp-substeps" aria-label="4단계 업무 방식 재설계 페이지">
-            <a href="resource.html">자원 재배분</a>
+        <div class="bp-substeps" aria-label="강의 동선">
+            <a href="blueprint.html">AX 추진 원칙</a>
             <a href="ax-canvas.html" class="active" aria-current="page">AX 캔버스</a>
-            <a href="reshape.html">업무 재설계</a>
+            <a href="diagnosis.html">현재 수준 진단</a>
         </div>
     </nav>
 
     <!-- ========= HERO ========= -->
     <section class="bp-hero">
-        <div class="bp-hero-eyebrow">Step 4 · 두 번째 작업 · 직무를 10칸으로 해부합니다 · BRAIN OS 전사 확장</div>
+        <div class="bp-hero-eyebrow">AX Canvas · 직무를 10칸으로 해부하는 표준 양식</div>
         <h1>하나의 직무를 상세하게 해부하여, 사람과 에이전트의 협업 구조를 한 장에 그릴 수 있어야 합니다.</h1>
         <p class="bp-lead">AX 캔버스는 직무를 10칸 프레임으로 해부해 인간과 에이전트의 역할 분담을 한 장에 그리는 표준 양식입니다.</p>
         <div class="bp-summary">
@@ -1156,6 +1291,7 @@ body {
         <a href="#harness">Human-Agent Team</a>
         <a href="#guard">가드레일과 성장</a>
         <a href="#order">작성 순서</a>
+        <a href="#conditions">작동 4조건</a>
     </nav>
 
     <!-- ========= 1. 왜 직무 단위인가 ========= -->
@@ -1166,6 +1302,8 @@ body {
             </div>
             <div class="bp-section-meta">캔버스의 위치와 단위</div>
         </div>
+
+        <p class="bp-beat-lead">전략 과제를 골랐다고 일이 바뀌지는 않습니다. <strong>직무 하나를 끝에서 끝까지 해부해야 사람과 에이전트의 자리가 잡힙니다.</strong></p>
 
         <p class="bp-section-intro">3단계까지는 후보 전략 과제를 점수로 선별했습니다. 4단계는 분석 단위가 다릅니다. 전략 과제를 실행하려면 해당 직무를 끝에서 끝까지 분해해야 합니다.</p>
 
@@ -1183,6 +1321,8 @@ body {
             </div>
             <div class="bp-section-meta">중심 1번 · What 2·3·4 · Why 5·6·7 · 8 · 9·10</div>
         </div>
+
+        <p class="bp-beat-lead">칸이 열 개라 복잡해 보이지만 규칙은 둘입니다. <strong>좌우는 일의 모양과 분업, 위아래는 진단과 실행입니다.</strong></p>
 
         <p class="bp-section-intro">윗줄 일곱 칸은 현황 진단, 아랫줄 세 칸은 AI 전환 실행입니다. 좌우 축은 업무 구조(What)와 AI 전환(Why). 1번과 5번을 점선으로 묶은 자리가 "좁은 의미의 AX"입니다.</p>
 
@@ -1340,6 +1480,8 @@ body {
             <div class="bp-section-meta">2·3·4번 · Terminology → Context → Rule → Action</div>
         </div>
 
+        <p class="bp-beat-lead">베테랑의 노하우는 머릿속에 있는 한 자산이 아닙니다. <strong>용어·맥락·규칙·행동 네 계층으로 적어야 에이전트가 씁니다.</strong></p>
+
         <p class="bp-section-intro">좌측 세 칸은 개인에게 축적된 암묵지를 형식지로 전환하는 영역입니다. T·C·R·A 네 계층으로 구조화해야 에이전트가 학습·호출할 수 있습니다.</p>
 
         <div class="bp-tcra">
@@ -1353,8 +1495,8 @@ body {
                     <strong>핵심 용어를 단일 정의로 표준화합니다.</strong> 직무 내 핵심 용어 10~20개를 한 줄 정의로 정렬합니다. 에이전트가 학습할 1차 입력값입니다.
                 </div>
                 <div class="example">
-                    <span class="ex-tag">예시 · 게스코리아 CS</span>
-                    채널 = 자사몰·무신사·백화점몰 · 택 = 상품 라벨 · 핏 불만 = 사이즈 부적합 클레임 · 정형 = 채널·기한·표준 응대로 처리 가능한 문의 · 비정형 = 어조와 재량이 필요한 문의
+                    <span class="ex-tag">예시 · 패션 커머스 A사 CS</span>
+                    채널 = 자사몰·입점몰·백화점몰 · 택 = 상품 라벨 · 핏 불만 = 사이즈 부적합 클레임 · 정형 = 채널·기한·표준 응대로 처리 가능한 문의 · 비정형 = 어조와 재량이 필요한 문의
                 </div>
             </div>
             <div class="bp-tcra-row">
@@ -1367,8 +1509,8 @@ body {
                     <strong>그 단어가 작동하는 배경 조건을 적습니다.</strong> 정책·기한·채널 차이·계약 조건처럼 사람은 당연하게 알지만 에이전트는 모르는 정보입니다.
                 </div>
                 <div class="example">
-                    <span class="ex-tag">예시 · 게스코리아 CS</span>
-                    구매 14일 이내·택 미제거 시 반품 가능. 채널마다 환불 주체와 기간이 다름. 무신사는 D+3 자동 환불, 백화점몰은 매장 회수 후 환불.
+                    <span class="ex-tag">예시 · 패션 커머스 A사 CS</span>
+                    구매 14일 이내·택 미제거 시 반품 가능. 채널마다 환불 주체와 기간이 다름. 입점몰은 D+3 자동 환불, 백화점몰은 매장 회수 후 환불.
                 </div>
             </div>
             <div class="bp-tcra-row">
@@ -1381,7 +1523,7 @@ body {
                     <strong>의사결정 기준을 라인 단위로 정의합니다.</strong> "특정 조건 시 특정 행동" 형식. 신규 인력과 에이전트가 동일한 기준으로 운영되는 토대입니다.
                 </div>
                 <div class="example">
-                    <span class="ex-tag">예시 · 게스코리아 CS</span>
+                    <span class="ex-tag">예시 · 패션 커머스 A사 CS</span>
                     ① 채널을 먼저 확인한다 ② 택·기한을 점검한다 ③ 핏 불만은 사이즈 재추천을 우선한다 ④ 단순 변심은 왕복 배송비를 고지한다 ⑤ 까다로운 어조 신호가 잡히면 규정 원문을 또박또박 읽어준다
                 </div>
             </div>
@@ -1395,7 +1537,7 @@ body {
                     <strong>규칙을 끝에서 끝까지 이은 행동 흐름입니다.</strong> 첫 입력부터 마지막 산출까지 화살표로 잇습니다. 8번이 이 화살표의 어느 칸을 잡을지를 정합니다.
                 </div>
                 <div class="example">
-                    <span class="ex-tag">예시 · 게스코리아 CS</span>
+                    <span class="ex-tag">예시 · 패션 커머스 A사 CS</span>
                     채널 확인 → 주문 조회 → 사유 분류 → (핏)재추천 / (변심)배송비 안내 → 접수 → 처리 결과 알림
                 </div>
             </div>
@@ -1415,6 +1557,8 @@ body {
             </div>
             <div class="bp-section-meta">5·6·7번 · Human Harness + AI Harness = Meta Harness</div>
         </div>
+
+        <p class="bp-beat-lead">누가 무엇을 맡을지 느낌으로 가르지 않습니다. <strong>사람의 몫과 에이전트의 몫을 한 장에 나눠 그립니다.</strong></p>
 
         <p class="bp-section-intro">우측 세 칸은 역할 분담을 정의합니다. 5번 AI 대체 범위, 6번 협업 구조, 7번 성과 기준. 세 칸을 개별 작성하지 않고, 인간 영역과 에이전트 영역을 각각 묶어 정의한 후 Meta Harness 한 장으로 통합합니다.</p>
 
@@ -1481,6 +1625,8 @@ body {
             <div class="bp-section-meta">캔버스의 통제 항목과 다음 사이클 입력</div>
         </div>
 
+        <p class="bp-beat-lead">자동화가 끝이 아닙니다. <strong>누가 책임지고, 사람은 어디로 올라설지를 같은 칸에 적습니다.</strong></p>
+
         <p class="bp-section-intro">아랫줄 두 칸이 캔버스를 운영 가능한 상태로 완성합니다. 9번은 사고 발생 시 책임 라인, 10번은 절감 시간의 재투입 경로. 비어 있으면 캔버스는 일회성 산출물에 그칩니다.</p>
 
         <div class="bp-guard">
@@ -1519,6 +1665,8 @@ body {
             </div>
             <div class="bp-section-meta">1 → 2·3·4 → 5·6·7 → 8 → 9·10</div>
         </div>
+
+        <p class="bp-beat-lead">아무 칸이나 채우면 캔버스가 무너집니다. <strong>중심 1번부터 정해진 순서로 채웁니다.</strong></p>
 
         <p class="bp-section-intro">10칸은 순서가 있습니다. 1번 → 좌측 → 우측 → 8번 → 9·10번. 순서를 바꾸면 같은 칸을 두 번 채우게 됩니다.</p>
 
@@ -1582,14 +1730,81 @@ body {
     </section>
 
     <!-- ========= FOOTER ========= -->
+    <!-- ========= 컴퍼니 브레인 작동 4조건 ========= -->
+    <section class="bp-section" id="conditions">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">컴퍼니 브레인이 잘 작동하는 네 가지 조건</h2>
+            </div>
+            <div class="bp-section-meta">Context · Connections · Capabilities · Cadence</div>
+        </div>
+
+        <p class="bp-beat-lead">두뇌를 짓는다고 저절로 돌지는 않습니다. <strong>네 가지 조건이 차례로 갖춰질 때 비로소 운영체계가 됩니다.</strong></p>
+
+        <p class="bp-section-intro">이 캔버스 한 장은 첫 조건인 맥락(Context)을 한 직무만큼 채우는 일입니다. 나머지 셋이 얹힐 때 두뇌가 운영체계로 돌아갑니다. 앞의 둘은 두뇌가 무엇을 아는지, 뒤의 둘은 무엇을 하는지를 다룹니다.</p>
+
+        <div class="bp-cond-band">
+            <div>세컨드 브레인 <span>· 아는 것 + 보는 것</span></div>
+            <div>운영체계 <span>· 일하는 것 + 스스로 도는 것</span></div>
+        </div>
+
+        <div class="bp-cond-grid">
+            <div class="bp-cond-card">
+                <div class="bp-cond-num">조건 1</div>
+                <h4 class="bp-cond-name">맥락<span>Context</span></h4>
+                <div class="bp-cond-desc">회사의 암묵지·규정·노하우를 에이전트가 읽을 수 있게 구조화한 정적 지식입니다. 이 캔버스가 한 직무씩 채워 나가는 층입니다.</div>
+            </div>
+            <div class="bp-cond-card">
+                <div class="bp-cond-num">조건 2</div>
+                <h4 class="bp-cond-name">연결<span>Connections</span></h4>
+                <div class="bp-cond-desc">메일·업무 시스템·기간계 데이터가 API로 실시간 연결돼, 두뇌가 정적 문서를 넘어 지금 상태까지 봅니다.</div>
+            </div>
+            <div class="bp-cond-card">
+                <div class="bp-cond-num">조건 3</div>
+                <h4 class="bp-cond-name">역량<span>Capabilities</span></h4>
+                <div class="bp-cond-desc">그 지식과 데이터 위에서 실제로 일하는 스킬·에이전트·자동화가 자리 잡습니다.</div>
+            </div>
+            <div class="bp-cond-card">
+                <div class="bp-cond-num">조건 4</div>
+                <h4 class="bp-cond-name">리듬<span>Cadence</span></h4>
+                <div class="bp-cond-desc">사람이 매번 지시하지 않아도 스케줄과 이벤트 트리거로 두뇌가 정해진 리듬을 따라 스스로 돌아갑니다.</div>
+            </div>
+        </div>
+
+        <p class="bp-section-intro" style="margin: 24px 0 0;">이 네 조건은 컴퍼니 브레인을 '무엇으로 이뤄졌느냐'가 아니라 '무엇이 갖춰져야 도느냐'로 본 것입니다. 지식은 맥락과 연결 두 층으로 나뉘고, 실행은 역량, 순환은 리듬에 대응합니다.</p>
+    </section>
+
+    <!-- ========= NEXT STEP · 진단 ========= -->
+    <section class="bp-section" id="to-diagnosis">
+        <div class="bp-section-head">
+            <div>
+                <h2 class="bp-section-title">이제, 우리는 어디쯤인가</h2>
+            </div>
+            <div class="bp-section-meta">현재 수준 진단 · 6차원</div>
+        </div>
+
+        <p class="bp-beat-lead">도착지도 봤고 도구도 손에 쥐었습니다. <strong>이제 우리가 어디에 서 있는지부터 잽니다.</strong></p>
+
+        <div class="bp-roadmap">
+            <a class="bp-roadmap-gate" href="diagnosis.html" aria-label="현재 수준 진단 시작">
+                <div class="bp-roadmap-gate-tag">NEXT STEP</div>
+                <div>
+                    <div class="bp-roadmap-gate-title">현재 위치와 목표 도착지 사이의 격차를 정량화합니다</div>
+                    <div style="font-size:13px; color: var(--ink-soft); margin-top:6px; line-height:1.65;">McKinsey Rewired 6차원 진단 도구로 전략, 인재, 운영모델, 기술, 데이터, 도입 여섯 축을 5점 척도로 평가합니다. 가장 취약한 두 축이 우선 착수 지점이 됩니다.</div>
+                </div>
+                <div class="bp-roadmap-gate-cta">진단 시작 →</div>
+            </a>
+        </div>
+    </section>
+
     <footer class="bp-footer">
         <p class="bp-footer-summary">한 직무를 10칸 캔버스로 분해하고, 암묵지를 T·C·R·A 마크다운으로 구조화해 Human-Agent Team의 역할 분담을 한 장에 설계합니다.</p>
         <div class="bp-footer-bar">
             <span class="bp-footer-copy">&copy; 2026 AI ROASTING. All rights reserved.</span>
             <span class="bp-footer-author">
                 <span class="bp-footer-author-name">강정구 · Jayden Kang</span>
-                <a class="bp-footer-social bp-footer-fb" href="https://www.facebook.com/jayden.kang" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V13h2.7v8h3.4z"/></svg></a>
                 <a class="bp-footer-social bp-footer-in" href="https://www.linkedin.com/in/jayden-kang/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.4v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.59 0 4.25 2.36 4.25 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
+                <a class="bp-footer-social bp-footer-fb" href="https://www.facebook.com/jayden.kang" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V13h2.7v8h3.4z"/></svg></a>
             </span>
         </div>
     </footer>
