@@ -1512,5 +1512,161 @@ body {
 })();
 </script>
 
+<!-- ## SM-HAMBURGER START ## -->
+<!-- 전 페이지 공통 모바일 햄버거. 한 페이지에서 고치면 21개 전체에 동일 반영(AGENTS.md Rule 7). -->
+<button class="sm-menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="smDrawer">
+    <svg class="sm-ico sm-ico-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    <svg class="sm-ico sm-ico-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+</button>
+<div class="sm-menu-backdrop" data-sm-close></div>
+<aside class="sm-drawer" id="smDrawer" aria-label="가이드 메뉴" aria-hidden="true">
+    <div class="sm-drawer-head">
+        <span class="sm-head-title">AX 가이드</span>
+    </div>
+    <nav class="sm-drawer-list" id="smDrawerList" aria-label="가이드 네비게이션"></nav>
+</aside>
+<script>
+(function () {
+    var SITEMAP = [
+        { stage: '진단 게이트', pages: [
+            { href: 'blueprint.html', label: 'AX 추진 원칙' },
+            { href: 'ax-canvas.html', label: 'AX 캔버스' },
+            { href: 'diagnosis.html', label: '현재 수준 진단' }
+        ]},
+        { stage: '1단계 · AX 실행 조직', pages: [
+            { href: 'leader-first.html', label: 'CEO가 매일 해야 할 것' },
+            { href: 'organization.html', label: '조직 세팅' },
+            { href: 'operations.html', label: '운영 계획 수립' },
+            { href: 'capability.html', label: 'AI 부트캠프' }
+        ]},
+        { stage: '2단계 · 파일럿 실행', pages: [
+            { href: 'pilot.html', label: '대상 선정과 실행' },
+            { href: 'insights.html', label: '핵심 시사점 도출' }
+        ]},
+        { stage: '3단계 · 과제 우선순위화', pages: [
+            { href: 'criteria.html', label: '우선순위 기준 설정' },
+            { href: 'evaluation.html', label: '후보 평가' },
+            { href: 'bets.html', label: '전략 과제 선정' }
+        ]},
+        { stage: '4단계 · 업무 방식 재설계', pages: [
+            { href: 'resource.html', label: '자원 재배분' },
+            { href: 'reshape.html', label: '업무 재설계' }
+        ]},
+        { stage: '5단계 · AI 네이티브 컴퍼니', pages: [
+            { href: 'ainative.html', label: 'AI 네이티브의 모습' },
+            { href: 'brainos.html', label: 'BRAIN OS 완성도' },
+            { href: 'perpetual.html', label: '지속 운영과 출발선' }
+        ]},
+        { stage: '참고', pages: [
+            { href: 'cost-output.html', label: 'AI 네이티브로의 여정' },
+            { href: 'problem-definition.html', label: 'AI 퍼스트 문제 정의력' },
+            { href: 'ai-services.html', label: 'AI 서비스 비교' }
+        ]}
+    ];
+
+    var toggle = document.querySelector('.sm-menu-toggle');
+    var drawer = document.getElementById('smDrawer');
+    var list = document.getElementById('smDrawerList');
+    if (!toggle || !drawer || !list) return;
+
+    var file = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+    var onIndex = (file === '' || file === 'index.html');
+
+    function el(tag, cls, text) {
+        var e = document.createElement(tag);
+        if (cls) e.className = cls;
+        if (text != null) e.textContent = text;
+        return e;
+    }
+
+    function openAbout() {
+        var opener = document.querySelector('[data-about-open]');
+        if (opener) { opener.click(); return true; }
+        return false;
+    }
+
+    function build() {
+        list.innerHTML = '';
+
+        // 상단 1차 항목
+        if (onIndex) {
+            var about = el('a', 'sm-item is-primary', '가이드 소개');
+            about.href = '#';
+            about.addEventListener('click', function (e) {
+                e.preventDefault();
+                closeMenu();
+                openAbout();
+            });
+            list.appendChild(about);
+        } else {
+            var home = el('a', 'sm-item is-primary', '메인으로');
+            home.href = 'index.html';
+            home.innerHTML = '메인으로<span class="sm-arrow" aria-hidden="true">↗</span>';
+            list.appendChild(home);
+        }
+
+        // 이 페이지 안의 섹션 (콘텐츠 페이지 한정)
+        if (!onIndex) {
+            var anchors = document.querySelectorAll('.bp-hero-nav a[href^="#"]');
+            if (anchors.length) {
+                list.appendChild(el('p', 'sm-group-label', '이 페이지 안에서'));
+                Array.prototype.forEach.call(anchors, function (a) {
+                    var item = el('a', 'sm-item sm-sub', a.textContent.trim());
+                    item.href = a.getAttribute('href');
+                    item.addEventListener('click', closeMenu);
+                    list.appendChild(item);
+                });
+            }
+        }
+
+        // 전체 가이드 사이트맵
+        list.appendChild(el('p', 'sm-group-label', '전체 가이드'));
+        SITEMAP.forEach(function (group) {
+            list.appendChild(el('p', 'sm-stage-label', group.stage));
+            group.pages.forEach(function (p) {
+                var item = el('a', 'sm-item sm-sub', p.label);
+                item.href = p.href;
+                if (p.href.toLowerCase() === file) {
+                    item.classList.add('active');
+                    item.setAttribute('aria-current', 'page');
+                }
+                list.appendChild(item);
+            });
+        });
+
+        // 하단 가이드 소개 (콘텐츠 페이지 한정)
+        if (!onIndex) {
+            list.appendChild(el('hr', 'sm-divider'));
+            var aboutBottom = el('a', 'sm-item', '가이드 소개');
+            aboutBottom.href = 'index.html#about';
+            list.appendChild(aboutBottom);
+        }
+    }
+
+    function openMenu() {
+        document.body.classList.add('sm-menu-open');
+        toggle.setAttribute('aria-expanded', 'true');
+        toggle.setAttribute('aria-label', '메뉴 닫기');
+        drawer.setAttribute('aria-hidden', 'false');
+    }
+    function closeMenu() {
+        document.body.classList.remove('sm-menu-open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', '메뉴 열기');
+        drawer.setAttribute('aria-hidden', 'true');
+    }
+    function isOpen() { return document.body.classList.contains('sm-menu-open'); }
+
+    toggle.addEventListener('click', function () { isOpen() ? closeMenu() : openMenu(); });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-sm-close]'), function (b) {
+        b.addEventListener('click', closeMenu);
+    });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && isOpen()) closeMenu(); });
+
+    build();
+})();
+</script>
+<!-- ## SM-HAMBURGER END ## -->
+
 </body>
 </html>

@@ -20,7 +20,23 @@
 
 ## 최근 세션 변경 로그
 
-### 2026-06-14 (현재 세션) — md 문서 전면 현행화 (plan·AGENTS·MEMORY를 21페이지 단계 구조로 정렬)
+### 2026-06-15 — 모바일 햄버거 메뉴 신설 + 전 페이지 모바일 가로 넘침 제거
+
+기존엔 어떤 페이지에도 햄버거가 없었다(AGENTS.md §4.5는 옛 `nav.sub-menu`골격용 명세였고 HTML/JS는 부재, style.css에 죽은 CSS만 있었다). 21개 페이지가 모두 `bp-sheet` 시스템으로 옮겨간 상태라, bp 시스템 위에서 도는 새 공통 햄버거를 설계해 일괄 이식했다.
+
+| # | 대상 | 변경 |
+|---|---|---|
+| 1 | `assets/style.css` | 옛 SM-HAMBURGER CSS(`nav.sub-menu`골격용 死 코드)를 bp용 새 컴포넌트로 교체. 우상단 고정 토글(열리면 X), 우측 드로어(84% / max 330px), `body.am-open` 시 토글 숨김. `@media(≤768px)`에서 `.bp-hero-nav`·`.bp-substeps`·`.bp-back` 숨기고 토글 노출, `.bp-brandbar` 우측 패딩 |
+| 2 | `backups/sm-hamburger.snippet.html` | 햄버거 정본 블록(HTML+JS) 신설. `SITEMAP` 배열 1벌로 진단·1~5단계·참고를 드로어에 렌더. 현재 페이지 `.active` 자동 강조 |
+| 3 | `backups/inject-hamburger.py` | 정본 스니펫을 마커(`<!-- ## SM-HAMBURGER START/END ## -->`) 기준으로 전 페이지에 주입·교체하는 스크립트 신설 |
+| 4 | 21개 페이지(index 포함) | 햄버거 블록 인라인 주입. `slide.html`은 네비 미연결이라 제외 |
+| 5 | `index.html` | about IIFE에 `location.hash === '#about'` 자동 오픈 추가. 콘텐츠 페이지의 하단 `가이드 소개`(→`index.html#about`)에서 소개 모달이 열린다 |
+| 6 | `blueprint.html` | 모바일 가로 넘침 제거. 퍼널 차트(`bp-funnel-step`)의 고정 200px 컬럼을 막대 한 줄 + 값·라벨 한 줄로 접고, 캡션·출처 긴 URL에 줄바꿈 허용 |
+| 7 | `pilot.html` | 600px 단일 컬럼 스택을 덮어쓰던 후행 `@media(≤1024px)` 중복 블록의 `bp-refs-row` 3컬럼 규칙을 첫 1024 블록으로 이동. 모바일에서 refs가 정상 스택 |
+
+드로어 구성: 콘텐츠 페이지는 `메인으로` → 이 페이지 섹션 → 전체 가이드(현재 강조) → `가이드 소개`. 메인은 `가이드 소개`(소개 모달) → 전체 가이드. 검증: 21개 페이지 390px에서 가로 넘침 0, 데스크톱(>768px)은 토글 숨김·가로 메뉴 유지로 무변경, 콘솔 에러 없음. 상세 명세는 AGENTS.md §4.5.
+
+### 2026-06-14 — md 문서 전면 현행화 (plan·AGENTS·MEMORY를 21페이지 단계 구조로 정렬)
 
 운영 3문서가 실제 사이트(21페이지 단계 구조)보다 뒤처져 있던 것을 현재 기준으로 맞췄다. 사이트·AGENTS·MEMORY는 이미 '파일럿 먼저 → 우선순위화 나중' 순서였고 plan.md만 옛 순서(우선순위화→파일럿)였는데, **사용자 결정에 따라 plan.md를 사이트 기준으로 재배열**해 전 문서를 한 방향으로 통일했다. [[ax-stage-order-divergence]] 해소.
 

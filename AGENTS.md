@@ -225,41 +225,48 @@ CSS 클래스명·SVG ID 같은 비가시 식별자(`.bp-liner`, `.bp-kal`, `#li
 
 ### 4.5 모바일 햄버거 메뉴 (SM-HAMBURGER)
 
-원칙: 햄버거는 사이트 공통의 단일 패턴이다. 페이지별로 다르게 만들지 않는다.
+원칙: 햄버거는 사이트 공통의 단일 패턴이다. 페이지별로 다르게 만들지 않는다. 현재 페이지는 모두 `bp-sheet` 시스템(`bp-brandbar → bp-stepnav → bp-hero-nav → bp-section → bp-footer`)을 쓰며, 옛 `nav.sub-menu`/`header-pages`골격은 더 이상 없다. 햄버거는 이 bp 시스템 위에서 동작한다.
 
-적용 범위:
-- 21개 콘텐츠 페이지 전부에 동일한 코드가 인라인으로 들어 있다 (공통 블록은 일괄 수정한다 — Rule 7).
-- 마커 주석으로 구역을 명확히 한다. `<!-- ## SM-HAMBURGER START ## -->`와 `<!-- ## SM-HAMBURGER END ## -->` 사이만 수정하거나 교체한다.
+정본 소스와 일괄 적용:
+- 정본은 21개 페이지에 인라인된 블록 그 자체다(Rule 1: 라이브 사이트가 정본). CSS는 `assets/style.css`의 `/* ==== SM-HAMBURGER ==== */` 절에만 둔다.
+- 21개 콘텐츠 페이지(index 포함) 전부에 같은 블록이 인라인으로 들어 있다. `<!-- ## SM-HAMBURGER START ## -->`와 `<!-- ## SM-HAMBURGER END ## -->` 사이만 수정하거나 교체한다.
+- 편의를 위해 같은 블록과 주입 스크립트를 `backups/sm-hamburger.snippet.html`·`backups/inject-hamburger.py`에 둔다(`backups/`는 git 추적 제외, 로컬 도구). 블록을 고칠 때는 스니펫을 먼저 고치고 `python3 backups/inject-hamburger.py <파일들...>`로 전 페이지에 다시 주입한다. 스크립트는 기존 마커 블록이 있으면 교체하고, 없으면 `</body>` 직전에 삽입한다 (Rule 7). 도구가 없으면 마커 구간을 직접 같은 내용으로 맞춘다.
+- `slide.html`은 네비게이션 미연결 독립 페이지라 햄버거 대상이 아니다.
 
 브레이크포인트와 동작 전환:
-- 데스크톱(`>768px`)에서는 상단 sticky `nav.sub-menu`가 보이고 햄버거 버튼은 숨겨진다.
+- 데스크톱(`>768px`)에서는 가로 sticky `.bp-hero-nav`가 보이고 햄버거 버튼은 숨겨진다.
 - 모바일(`≤768px`)에서는 다음이 동시에 일어난다.
-  - `nav.sub-menu { display: none !important; }` (가로 sub-menu 숨김)
+  - `.bp-hero-nav { display: none !important; }` (가로 섹션 메뉴 숨김)
+  - `.bp-substeps, .bp-back { display: none !important; }` (단계 보조 링크 숨김)
   - `.sm-menu-toggle { display: inline-flex; }` (우상단 햄버거 버튼 노출)
-  - `.header-pages`가 세로 스택으로 바뀐다.
+  - `.bp-brandbar`에 우측 패딩을 줘 브랜드바 텍스트가 고정 버튼 밑으로 들어가지 않게 한다.
 
 햄버거 UI 구성:
 
 | 요소 | 역할 | 핵심 스펙 |
 |---|---|---|
-| `.sm-menu-toggle` | 토글 버튼 | `position: fixed; top: 14px; right: 14px; 44×44; border-radius: 12px;` z-index 1200 |
-| `.sm-menu-backdrop` | 배경 오버레이 | 전체 화면, `rgba(0,0,0,0.45)`, z-index 1150 |
-| `.sm-drawer` | 우측 드로어 | `width: 78%; max-width: 320px;` 100dvh, 우측에서 슬라이드 인, z-index 1160 |
-| `.sm-drawer-heading` | 현재 페이지 제목 | active 메뉴 텍스트 > `h1` > `document.title` 순서 |
-| `.sm-drawer-back` | "← 목록으로" | 항상 `index.html`로 이동한다 |
-| `.sm-drawer-list` | 섹션 메뉴 | `nav.sub-menu`의 `<a>`를 JS가 복제해 렌더한다 |
+| `.sm-menu-toggle` | 토글 버튼 | `position: fixed; top: 14px; right: 14px; 44×44; border-radius: 12px;` z-index 1200. 열리면 아이콘이 X로 바뀐다(`.sm-ico-open`/`.sm-ico-close`) |
+| `.sm-menu-backdrop` | 배경 오버레이 | 전체 화면, `rgba(6,32,24,0.55)`, z-index 1150 |
+| `.sm-drawer` | 우측 드로어 | `width: 84%; max-width: 330px;` 100dvh, 우측에서 슬라이드 인, z-index 1160 |
+| `.sm-drawer-head` | 드로어 헤더 | 딥 그린 그라데이션 + "AX 가이드" 라벨. 닫기는 고정 토글(X)이 겸한다 |
+| `.sm-drawer-list` | 메뉴 본문 | JS가 사이트맵과 현재 페이지 섹션을 렌더한다 |
+
+드로어 내용 구성 (위 → 아래):
+- 콘텐츠 페이지: ① `메인으로`(→`index.html`) ② "이 페이지 안에서"(현 페이지 `.bp-hero-nav a[href^="#"]` 섹션 앵커 복제) ③ "전체 가이드"(아래 사이트맵, 현재 페이지 `.active` 강조) ④ `가이드 소개`(→`index.html#about`)
+- 메인(`index.html`): ① `가이드 소개`(상단, `[data-about-open]` 클릭으로 소개 모달 오픈) ② "전체 가이드" 사이트맵. "이 페이지 안에서"와 하단 가이드 소개는 넣지 않는다.
 
 JS 동작 (단일 IIFE, 외부 의존 없음):
-1. `nav.sub-menu`의 모든 `<a>`를 `.sm-drawer-list`에 1:1로 복제한다.
-2. 드로어 항목을 클릭하면 드로어가 자동으로 닫힌다.
-3. `body.sm-menu-open` 클래스로 상태를 토글한다 (`overflow: hidden` 동반).
-4. 닫기 트리거는 토글 버튼·배경·ESC 키 세 가지다.
-5. MutationObserver로 `nav.sub-menu`의 active 변경을 드로어에 동기화한다.
-6. 접근성을 위해 `aria-label`과 `aria-expanded`를 토글한다.
+1. 사이트맵은 스니펫 안 `SITEMAP` 배열 1벌이다. 진단 게이트·1~5단계·참고를 단계별로 묶는다. 메뉴를 바꾸면 이 배열만 고친다.
+2. 현재 페이지는 `location.pathname`의 파일명으로 판별해 사이트맵 항목에 `.active`와 `aria-current="page"`를 준다.
+3. 섹션 앵커·사이트맵 링크를 클릭하면 드로어가 닫힌다.
+4. `body.sm-menu-open` 클래스로 상태를 토글한다 (`overflow: hidden` 동반).
+5. 닫기 트리거는 토글 버튼·배경·ESC 키 세 가지다.
+6. `aria-label`·`aria-expanded`·`aria-hidden`을 토글한다.
+7. 소개 모달은 `index.html`에만 있다. 콘텐츠 페이지의 `가이드 소개`는 `index.html#about`으로 보내고, index의 about IIFE가 `location.hash === '#about'`이면 자동으로 모달을 연다. 소개 모달이 열린 동안(`body.am-open`)은 고정 토글을 숨긴다.
 
 유지보수 규칙:
-- 햄버거 블록은 사이트 공통 블록이다. 한 페이지에서 수정하면 21개 전체에 동일하게 반영해야 한다.
-- 드로어 폭(320px), 버튼 위치(top 14, right 14), 브레이크포인트(768px)는 변경하지 않는다.
+- 햄버거 블록은 사이트 공통 블록이다. 정본 스니펫을 고치고 주입 스크립트로 전 페이지에 반영한다.
+- 드로어 폭(330px), 버튼 위치(top 14, right 14), 브레이크포인트(768px)는 변경하지 않는다.
 
 ### 4.6 중간 분기 (`≤1160px`, 비-모바일 축소)
 - `.header-page-link`의 폰트는 12px, padding은 8px 14px, border-radius는 12px로 줄어든다.

@@ -508,7 +508,8 @@ li::marker { color: var(--green); }
 }
 .page-footer-nav .next { text-align: right; }
 
-/* ==== SM-HAMBURGER ==== */
+/* ==== SM-HAMBURGER (전 페이지 공통 모바일 네비) ==== */
+/* 데스크톱에선 숨김. 모바일(<=768px)에서만 우상단 고정 버튼으로 노출된다. */
 .sm-menu-toggle {
     display: none;
     position: fixed;
@@ -526,9 +527,13 @@ li::marker { color: var(--green); }
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    box-shadow: 0 4px 14px -4px rgba(6, 32, 24, 0.5);
 }
 .sm-menu-toggle:hover { background: var(--green); }
-.sm-menu-toggle svg { width: 22px; height: 22px; }
+.sm-menu-toggle .sm-ico { width: 22px; height: 22px; display: block; }
+.sm-menu-toggle .sm-ico-close { display: none; }
+body.sm-menu-open .sm-menu-toggle .sm-ico-open { display: none; }
+body.sm-menu-open .sm-menu-toggle .sm-ico-close { display: block; }
 .sm-menu-backdrop {
     display: none;
     position: fixed;
@@ -542,8 +547,8 @@ li::marker { color: var(--green); }
     top: 0;
     right: 0;
     height: 100dvh;
-    width: 78%;
-    max-width: 320px;
+    width: 84%;
+    max-width: 330px;
     background: var(--bg);
     z-index: 1160;
     transform: translateX(100%);
@@ -553,73 +558,103 @@ li::marker { color: var(--green); }
     border-left: 1px solid var(--line);
     box-shadow: -8px 0 32px rgba(6, 32, 24, 0.18);
 }
-.sm-drawer-heading {
-    font-family: var(--serif);
-    font-size: 17px;
-    font-weight: 600;
-    padding: 22px 22px 18px;
-    color: var(--green);
-    border-bottom: 1px solid var(--line);
-}
-.sm-drawer-back {
-    font-family: var(--sans);
-    font-size: 13px;
-    color: var(--ink-soft);
-    padding: 14px 22px;
-    display: block;
-    border-bottom: 1px solid var(--line-soft);
-}
-.sm-drawer-back:hover { color: var(--green); background: var(--green-soft); border-bottom-color: var(--line-soft); }
-.sm-drawer-list {
-    flex: 1;
-    overflow-y: auto;
-    padding: 12px 12px 24px;
-}
-.sm-drawer-item {
+.sm-drawer-head {
     display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 12px 12px;
-    border-radius: 8px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 16px 15px 20px;
+    background: linear-gradient(150deg, var(--green) 0%, var(--green-deep) 100%);
+    color: #fff;
+    flex: 0 0 auto;
+}
+.sm-drawer-head .sm-head-title {
     font-family: var(--sans);
     font-size: 14px;
-    color: var(--ink);
-    cursor: pointer;
-    border-bottom: none;
-}
-.sm-drawer-item:hover { background: var(--green-soft); border-bottom-color: transparent; }
-.sm-drawer-item.active {
-    background: var(--green-soft);
-    color: var(--green);
     font-weight: 600;
+    letter-spacing: 0.02em;
+    color: rgba(255,255,255,0.95);
 }
-.sm-drawer-num {
-    flex: 0 0 24px;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: var(--green);
-    color: #fff;
-    font-size: 11px;
+.sm-drawer-close {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.85);
+    cursor: pointer;
+    width: 34px;
+    height: 34px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--sans);
-    font-weight: 700;
-    margin-top: 2px;
+    border-radius: 8px;
 }
-.sm-drawer-title { font-weight: 500; line-height: 1.4; flex: 1; }
-.sm-drawer-sub {
+.sm-drawer-close:hover { background: rgba(255,255,255,0.12); color: #fff; }
+.sm-drawer-close svg { width: 18px; height: 18px; display: block; }
+.sm-drawer-list {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 10px 12px 32px;
+}
+.sm-item {
     display: block;
-    font-size: 12px;
-    color: var(--ink-mute);
-    margin-top: 2px;
-    font-weight: 400;
+    padding: 12px 14px;
+    border-radius: 9px;
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: none;
 }
+.sm-item:hover { background: var(--green-soft); border-bottom-color: transparent; }
+.sm-item.active { background: var(--green); color: #fff; font-weight: 600; }
+.sm-item.active:hover { background: var(--green); color: #fff; }
+.sm-item.is-primary {
+    background: var(--green-soft);
+    color: var(--green);
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+.sm-item .sm-arrow { float: right; opacity: 0.45; font-weight: 400; }
+.sm-item.sm-sub {
+    font-size: 13.5px;
+    padding: 10px 14px 10px 24px;
+    color: var(--ink-soft);
+}
+.sm-item.sm-sub.active { color: #fff; }
+.sm-group-label {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    padding: 18px 14px 6px;
+    margin: 0;
+}
+.sm-stage-label {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--green);
+    padding: 13px 14px 3px;
+    margin: 0;
+}
+.sm-divider { height: 1px; background: var(--line); margin: 12px 8px; border: none; }
 
 body.sm-menu-open { overflow: hidden; }
 body.sm-menu-open .sm-menu-backdrop { display: block; }
 body.sm-menu-open .sm-drawer { transform: translateX(0); }
+/* 소개 모달이 열려 있을 땐 고정 햄버거를 숨겨 모달 닫기 버튼과 겹치지 않게 한다. */
+body.am-open .sm-menu-toggle { display: none !important; }
+
+/* 모바일에선 페이지 내 가로 서브메뉴와 단계 보조 링크를 숨기고 햄버거로 모은다. */
+@media (max-width: 768px) {
+    .sm-menu-toggle { display: inline-flex; }
+    .bp-hero-nav { display: none !important; }
+    .bp-substeps, .bp-back { display: none !important; }
+    /* 상단 브랜드바 텍스트가 고정 햄버거 밑으로 들어가지 않게 우측 여백 확보. */
+    .bp-brandbar { padding-right: 64px; }
+}
 
 /* ==== Middle breakpoint ==== */
 @media (max-width: 1160px) {
@@ -732,7 +767,7 @@ a.bp-brandbar:focus-visible { outline: 2px solid rgba(247, 245, 239, 0.6); outli
     will-change: transform;
 }
 @media (max-width: 600px) {
-    .bp-brandbar { padding: 12px 16px; font-size: 11px; letter-spacing: 0.16em; gap: 8px; }
+    .bp-brandbar { padding: 12px 60px 12px 16px; font-size: 11px; letter-spacing: 0.16em; gap: 8px; }
     .bp-brandbar .bb-logo { height: 14px; }
 }
 
